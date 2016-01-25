@@ -1,0 +1,59 @@
+<<<<<<< HEAD
+<?xml version="1.0"?>
+<!DOCTYPE window >
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<window id="appchoose"
+		xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" 
+		title="FH Complete Application Chooser" 
+  	>
+<vbox flex="1" align="center">
+<spacer flex="1"/>
+<description style="font-weight: bold">Bitte wählen Sie die gewünschte Applikation</description>
+<spacer flex="1" />
+<button label="FAS" orient="vertical" oncommand="window.parent.LoadApp('fas')" style="width: 300px">
+<image src="../skin/fasonline.png" width="64"/>
+<description>Fachhochschul Administrationssystem</description>
+</button>
+<spacer flex="1"/>
+<button label="Tempus" orient="vertical" oncommand="window.parent.LoadApp('tempus')" style="width: 300px">
+<image src="../skin/tempus.png" width="64"/>
+<description>Tempus LV-Planung</description>
+</button>
+<spacer flex="1"/>
+<button label="Planner" orient="vertical" oncommand="window.parent.LoadApp('planner')" style="width: 300px">
+<image src="../skin/planner.png" width="64"/>
+<description>Planner - Projektverwaltung</description>
+</button>
+<spacer flex="1" />
+</vbox>
+</window>
+=======
+<?xml version="1.0"?>
+<!DOCTYPE window >
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<window id="appchoose"
+		xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" 
+		title="FH Complete Application Chooser" 
+  	>
+<vbox flex="1" align="center">
+<spacer flex="1"/>
+<description style="font-weight: bold">Bitte wählen Sie die gewünschte Applikation</description>
+<spacer flex="1" />
+<button label="FAS" orient="vertical" oncommand="window.parent.LoadApp('fas')" style="width: 300px">
+<image src="../skin/fasonline.png" width="64"/>
+<description>Fachhochschul Administrationssystem</description>
+</button>
+<spacer flex="1"/>
+<button label="Tempus" orient="vertical" oncommand="window.parent.LoadApp('tempus')" style="width: 300px">
+<image src="../skin/tempus.png" width="64"/>
+<description>Tempus LV-Planung</description>
+</button>
+<spacer flex="1"/>
+<button label="Planner" orient="vertical" oncommand="window.parent.LoadApp('planner')" style="width: 300px">
+<image src="../skin/planner.png" width="64"/>
+<description>Planner - Projektverwaltung</description>
+</button>
+<spacer flex="1" />
+</vbox>
+</window>
+>>>>>>> fee287127566cd5d18c55b556d178b661711c694

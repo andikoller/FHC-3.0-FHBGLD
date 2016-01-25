@@ -1,0 +1,151 @@
+/* Copyright (C) 2010 Technikum-Wien
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
+ *
+ * Authors: Christian Paminger <christian.paminger@technikum-wien.at>,
+ *          Andreas Oesterreicher <andreas.oesterreicher@technikum-wien.at> and
+ *          Karl Burkhart <burkhart@technikum-wien.at>.
+ */
+@charset "utf-8";
+
+img
+{
+	border:0;
+}
+
+A:link 
+{
+	text-decoration: none;
+	color: blue;
+}
+		
+A:visited 
+{
+	text-decoration: none;
+	color: blue;
+}
+
+A:focus
+{
+	cursor:hand; 
+}
+A:hover
+{
+	text-decoration: underline;
+	color: black;
+	cursor:hand;
+}
+A:active 
+{
+	text-decoration: underline;
+	color: blue;
+}
+
+.cursor:hover
+{
+	cursor: pointer;
+	text-decoration: underline; 
+	
+}
+
+BODY,H1,H2,H3,H4,H5,H6,P,I,TD,TH 
+{
+	font-family: Verdana,Lucida,Helvetica,Arial;
+	color:black;
+}
+
+H1
+{
+	font-size: 14pt;
+}
+
+body.menue
+{
+	background-color: #D0DCE0;
+	font-size: 9pt;
+}
+
+INPUT, SELECT    
+{
+	font-family: Courier New,Arial,TimesNewRoman;
+	font-size: 9pt;
+	border: 1px solid #ccc;
+}
+
+BODY 
+{  
+	background-color:#F5F5F5;
+	margin-left:5pt;
+}
+
+ul 
+{
+	padding-left: 10px;
+}
+
+table.aufteilung 
+{
+	background:lightgray;
+}
+table.dark td
+{
+	background:lightgray;
+}
+
+.number
+{
+	text-align: right;
+}
+.number_negative
+{
+	text-align: right;
+	color: red;
+}
+.number_positive
+{
+	text-align: right;
+	color: green;
+}
+
+option.rechnung_nichtfreigegeben
+{
+	background-color: lightpink;
+}
+
+option.rechnung_freigegebenvorhanden
+{
+	background-color: lightyellow;
+}
+
+option.rechnung_freigegeben
+{
+	background-color: lightgreen;
+}
+
+p.freigegeben
+{
+	color:green; 
+}
+
+input[type="submit"],input[type="button"]
+{
+	cursor: pointer;
+}
+
+.inaktiv
+{
+	text-decoration: line-through;
+}
+	

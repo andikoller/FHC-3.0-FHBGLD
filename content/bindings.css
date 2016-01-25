@@ -1,0 +1,79 @@
+<<<<<<< HEAD
+box.Datum 
+{
+    -moz-binding: url('bindings.xml.php#Datum');
+}
+
+hbox.StyleBox
+{
+    -moz-binding: url('bindings.xml.php#StyleBox');
+}
+vbox.StyleBox
+{
+    -moz-binding: url('bindings.xml.php#StyleBox');
+}
+
+box.Standort
+{
+    -moz-binding: url('bindings.xml.php#Standort');
+}
+
+box.Firma
+{
+    -moz-binding: url('bindings.xml.php#Firma');
+}
+
+box.Notiz
+{
+	-moz-binding: url('notiz.xml.php#Notiz');
+}
+
+box.Ressource
+{
+	-moz-binding: url('projekt/ressource.xml.php#Ressource');
+}
+
+box.WYSIWYG
+{
+	-moz-binding: url('bindings.xml.php#wysiwyg');
+}
+=======
+box.Datum 
+{
+    -moz-binding: url('bindings.xml.php#Datum');
+}
+
+hbox.StyleBox
+{
+    -moz-binding: url('bindings.xml.php#StyleBox');
+}
+vbox.StyleBox
+{
+    -moz-binding: url('bindings.xml.php#StyleBox');
+}
+
+box.Standort
+{
+    -moz-binding: url('bindings.xml.php#Standort');
+}
+
+box.Firma
+{
+    -moz-binding: url('bindings.xml.php#Firma');
+}
+
+box.Notiz
+{
+	-moz-binding: url('notiz.xml.php#Notiz');
+}
+
+box.Ressource
+{
+	-moz-binding: url('projekt/ressource.xml.php#Ressource');
+}
+
+box.WYSIWYG
+{
+	-moz-binding: url('bindings.xml.php#wysiwyg');
+}
+>>>>>>> fee287127566cd5d18c55b556d178b661711c694

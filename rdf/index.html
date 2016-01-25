@@ -1,0 +1,594 @@
+<<<<<<< HEAD
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>RDF-Spezifikationen FHComplete</title>
+</head>
+<body>
+<h1 style="text-align: center;">RDF-Spezifikationen - FHComplete</h1>
+<br>
+Diese Seite beschreibt den Inhalt und die Verwendung aller vorhandenen
+RDF-Files des FHComplete Systems. Die gesamte RDF-Struktur ist gerade im
+Aufbau und kann sich deshalb jederzeit &auml;ndern. Es sei darauf
+hingewiesen, dass die RDF-Files von heute, morgen vielleicht gar nicht
+mehr oder anders zu verwenden sind.<br>
+Um die Last auf unseren Servern zu minimieren, empfehlen wir, die Daten
+1x pro Monat/Woche/Nacht in ihr eigenes System zu syncronisieren.<br>
+<br>
+Ein Beispiel wie sie die RDFs per PHP auslesen k&ouml;nnen finden Sie <a
+ href="PHPRequest.txt">hier</a><br>
+<br>
+<h2>Student</h2>
+<span style="font-weight: bold;">Aufruf:</span>
+student.rdf.php?studiengang_kz=...&amp;semester=...&amp;verband=...&amp;gruppe=...&amp;gruppe_kurzbz=...&amp;uid=...&amp;studiensemester_kurzbz=...<br>
+Beispiel: <a target="_blank"
+ href="student.rdf.php?studiengang_kz=227&amp;semester=1&amp;studiensemester_kurzbz=WS2008&amp;typ=student">student.rdf.php?studiengang_kz=227&amp;semester=1&amp;studiensemester_kurzbz=WS2008&amp;typ=student</a><br>
+<span style="font-weight: bold;"><br>
+Parameter</span>: <br>
+<ul>
+  <li>studiengang_kz: Studiengangskennzahl<br>
+  </li>
+  <li>studiensemester_kurzbz: Studiensemester (WS2008, SS2009,
+WS2009,...)<br>
+  </li>
+  <li>semester: Semester (optional)<br>
+  </li>
+  <li>verband: Verband (optional)</li>
+  <li>gruppe: Gruppe (optional)</li>
+  <li>gruppe_kurzbz: Spezialgruppen, Module, ... (optional)</li>
+  <li>uid: UID eines bestimmten Studenten (Wenn gesetzt werden alle
+anderen Parameter nicht verwendet)</li>
+  <li>typ: Typ der gelieferten Personen (student, prestudent,
+interressent, bewerber, aufgenommen, warteliste, absage, zgv,
+reihungstestangeledet, reihungstestnichtangemeldet, absolvent,
+diplomand)</li>
+  <li>prestudent_id: Prestudent_id</li>
+  <li>xmlformat: Wenn xmlformat=xml dann wird ein XML statt dem RDF
+geliefert</li>
+  <li>filter: Alle Personen die filter im Nachnamen enthalten</li>
+</ul>
+<span style="font-weight: bold;"><br>
+Attribute:</span><br>
+<ul>
+</ul>
+<ul>
+  <li>person_id</li>
+  <li>titelpre</li>
+  <li>titelpost</li>
+  <li>vornamen</li>
+  <li>vorname</li>
+  <li>nachname</li>
+  <li>geburtsdatum</li>
+  <li>geburtsdatum_iso</li>
+  <li>homepage</li>
+  <li>gebort</li>
+  <li>gebzeit</li>
+  <li>anmerkungen</li>
+  <li>anrede</li>
+  <li>svnr</li>
+  <li>ersatzkennzeichen</li>
+  <li>familienstand</li>
+  <li>geschlecht</li>
+  <li>anzahlkinder</li>
+  <li>staatsbuergerschaft</li>
+  <li>geburtsnation</li>
+  <li>sprache</li>
+  <li>status</li>
+  <li>orgform</li>
+  <li>mail_privat</li>
+  <li>mail_intern</li>
+  <li>aktiv</li>
+  <li>uid</li>
+  <li>matrikelnummer</li>
+  <li>alias</li>
+  <li>semester</li>
+  <li>verband</li>
+  <li>gruppe</li>
+  <li>studiengang_kz_student</li>
+  <li>prestudent_id</li>
+  <li>studiengang_kz_prestudent</li>
+  <li>studiengang_kz</li>
+  <li>aufmerksamdurch_kurzbz</li>
+  <li>studiengang</li>
+  <li>berufstaetigkeit_code</li>
+  <li>ausbildungcode</li>
+  <li>zgv_code</li>
+  <li>zgvort</li>
+  <li>zgvdatum</li>
+  <li>zgvdatum_iso</li>
+  <li>zgvmas_code</li>
+  <li>zgvmaort</li>
+  <li>zgvmadatum</li>
+  <li>zgvmadatum_iso</li>
+  <li>aufnahmeschluessel</li>
+  <li>facheinschlberuf</li>
+  <li>reihungstest_id</li>
+  <li>anmeldungreihungstest</li>
+  <li>anmeldungreihungstest_iso</li>
+  <li>reihungstestangetreten</li>
+  <li>punkte</li>
+  <li>punkte1</li>
+  <li>punkte2</li>
+  <li>bismelden</li>
+  <li>dual</li>
+  <li>dual_bezeichnung</li>
+  <li>anmerkungpre</li>
+</ul>
+<h2>Lehrstunde</h2>
+<span style="font-weight: bold;">Aufruf:</span>
+lehrstunde.rdf.php?datum=...&amp;datum_bis=...stg_kz=...&amp;sem=...&amp;ver=...&amp;grp=...&amp;einheit=...<br>
+Beispiel: <a target="_blank"
+ href="lehrstunde.rdf.php?datum=2006-03-20&amp;type=verband&amp;stg_kz=258">lehrstunde.rdf.php?datum=2006-03-20&amp;type=verband&amp;stg_kz=258</a><span
+ style="font-weight: bold;"><br>
+<br>
+Parameter</span>: <br>
+<ul>
+  <li>datum</li>
+  <li>datum_bis: Endedatum (optional)<br>
+  </li>
+  <li>stunde</li>
+  <li>type</li>
+  <li>stg_kz</li>
+  <li>sem</li>
+  <li>ver</li>
+  <li>grp</li>
+  <li>einheit</li>
+  <li>pers_uid</li>
+  <li>ort_kurzbz<br>
+  </li>
+</ul>
+<span style="font-weight: bold;"><br>
+Attribute:</span><br>
+<ul>
+  <li>datum</li>
+  <li>stunde</li>
+  <li>unr</li>
+  <li>ort_kurzbz</li>
+  <li>lehrfach</li>
+  <li>lehrfach_bez</li>
+  <li>lehrform</li>
+  <li>lektor</li>
+  <li>semester</li>
+  <li>verband</li>
+  <li>gruppe</li>
+  <li>einheit</li>
+  <li>lehrform</li>
+  <li>studiengang</li>
+  <li>farbe</li>
+  <li>anmerkung</li>
+</ul>
+<br>
+<h2>LVInfo</h2>
+Liefert das RDF fuer die Lehrveranstaltungsinformationen<br>
+<span style="font-weight: bold;">Aufruf:</span>
+lvinfo.rdf.php?stg_kz=...&amp;semester=...<br><br>
+<strong>Beispiele:</strong>
+<ul>
+	<li><a target="_blank" href="lvinfo.rdf.php?stg_kz=258&amp;semester=2">lvinfo.rdf.php?stg_kz=258&amp;semester=2</a></li>
+	<li><a target="_blank" href="lvinfo.rdf.php?stg_kz=258&amp;semester=2">lvinfo.rdf.php?mitarbeiter_uid=pam&amp;studiensemester_kurzbz=WS2014</a></li>
+</ul>
+<span style="font-weight: bold;">Parameter</span>: <br>
+<ul>
+  <li>stg_kz - Studiengangskennzahl</li>
+  <li>semester - Semester (optional)</li>
+</ul>
+<span style="font-weight: bold;">
+Attribute:</span><br>
+<ul>
+  <li>lehrveranstaltung_id</li>
+  <li>kurzbz</li>
+  <li>bezeichnung</li>
+  <li>studiengang_kz</li>
+  <li>semester</li>
+  <li>lehreverzeichnis</li>
+  <li>unterrichtssprache</li>
+  <li>ects</li>
+  <li>semesterstunden</li>
+  <li>sprache</li>
+  <li>titel</li>
+  <li>lehrziele</li>
+  <li>lehrinhalte</li>
+  <li>methodik</li>
+  <li>voraussetzungen</li>
+  <li>unterlagen</li>
+  <li>pruefungsordnung</li>
+  <li>anmerkungen</li>
+  <li>kurzbeschreibung</li>
+  <li>orgform_kurzbz</li>
+  <li>incoming</li>
+</ul>
+<br>
+<h2>Kontakt</h2>
+Liefert die Kontaktdaten von Personen<br>
+<span style="font-weight: bold;">Aufruf:</span> <br>
+&nbsp;&nbsp;&nbsp; kontakt.rdf.php?person_id=...<br>
+&nbsp;&nbsp;&nbsp; kontakt.rdf.php?kontakt_id=...<br>
+Beispiel: <a target="_blank" href="kontakt.rdf.php?person_id=5">kontakt.rdf.php?person_id=5</a><span
+ style="font-weight: bold;"><br>
+<br>
+Parameter</span>: <br>
+<ul>
+  <li>person_id oder<br>
+  </li>
+  <li>kontakt_id</li>
+</ul>
+<span style="font-weight: bold;">
+Attribute:</span><br>
+<ul>
+  <li>kontakt_id</li>
+  <li>person_id</li>
+  <li>firma_id</li>
+  <li>firma_name</li>
+  <li>kontakttyp</li>
+  <li>anmerkung</li>
+  <li>kontakt</li>
+  <li>zustellung</li>
+  <li>updateamum</li>
+</ul>
+<h2>Adressen</h2>
+Liefert die Adressen von Personen<br>
+<span style="font-weight: bold;">Aufruf:</span> <br>
+&nbsp;&nbsp;&nbsp; adresse.rdf.php?person_id=...<br>
+&nbsp;&nbsp;&nbsp; adresse.rdf.php?adresse_id=...<br>
+Beispiel: <a target="_blank" href="adresse.rdf.php?person_id=5">adresse.rdf.php?person_id=5</a><span
+ style="font-weight: bold;"><br>
+<br>
+Parameter</span>: <br>
+<ul>
+  <li>person_id oder<br>
+  </li>
+  <li>kontakt_id</li>
+</ul>
+<span style="font-weight: bold;">
+Attribute:</span><br>
+<ul>
+  <li>adresse_id</li>
+  <li>person_id</li>
+  <li>name</li>
+  <li>strasse</li>
+  <li>plz</li>
+  <li>ort</li>
+  <li>gemeinde</li>
+  <li>nation</li>
+  <li>typ</li>
+  <li>typ_name</li>
+  <li>heimatadresse</li>
+  <li>zustelladresse</li>
+  <li>firma_id</li>
+  <li>firma_name</li>
+  <li>updateamum</li>
+</ul>
+<h2>Lektoren</h2>
+Liefert die Zuordnung von Mitarbeitern zu Organisationseinheiten (Fachbereich/ Studiengang)<br>
+Ein Mitarbeiter ist immer nur einer Organisationseinheit zugeordnet<br>
+<span style="font-weight: bold;">Aufruf:</span> <br>
+&nbsp;&nbsp;&nbsp; lektoren.rdf.php?studiengang_kz=...<br>
+&nbsp;&nbsp;&nbsp; lektoren.rdf.php?institut=...<br>
+Beispiel: <a target="_blank" href="lektoren.rdf.php?institut=Mechatronics">institut.rdf.php?institut=Mechatronics</a>
+<span style="font-weight: bold;"><br><br>Parameter</span>: 
+<br>
+<ul>
+  <li>studiengang_kz oder<br>
+  </li>
+  <li>institut</li>
+</ul>
+<span style="font-weight: bold;">
+Attribute:</span><br>
+<ul>
+  <li>uid</li>
+  <li>person_id</li>
+  <li>anrede</li>
+  <li>titelpre</li>
+  <li>vorname</li>
+  <li>nachname</li>
+  <li>titelpost</li>
+  <li>email</li>
+  <li>fixangestellt</li>
+</ul>
+</body>
+</html>
+=======
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>RDF-Spezifikationen FHComplete</title>
+</head>
+<body>
+<h1 style="text-align: center;">RDF-Spezifikationen - FHComplete</h1>
+<br>
+Diese Seite beschreibt den Inhalt und die Verwendung aller vorhandenen
+RDF-Files des FHComplete Systems. Die gesamte RDF-Struktur ist gerade im
+Aufbau und kann sich deshalb jederzeit &auml;ndern. Es sei darauf
+hingewiesen, dass die RDF-Files von heute, morgen vielleicht gar nicht
+mehr oder anders zu verwenden sind.<br>
+Um die Last auf unseren Servern zu minimieren, empfehlen wir, die Daten
+1x pro Monat/Woche/Nacht in ihr eigenes System zu syncronisieren.<br>
+<br>
+Ein Beispiel wie sie die RDFs per PHP auslesen k&ouml;nnen finden Sie <a
+ href="PHPRequest.txt">hier</a><br>
+<br>
+<h2>Student</h2>
+<span style="font-weight: bold;">Aufruf:</span>
+student.rdf.php?studiengang_kz=...&amp;semester=...&amp;verband=...&amp;gruppe=...&amp;gruppe_kurzbz=...&amp;uid=...&amp;studiensemester_kurzbz=...<br>
+Beispiel: <a target="_blank"
+ href="student.rdf.php?studiengang_kz=227&amp;semester=1&amp;studiensemester_kurzbz=WS2008&amp;typ=student">student.rdf.php?studiengang_kz=227&amp;semester=1&amp;studiensemester_kurzbz=WS2008&amp;typ=student</a><br>
+<span style="font-weight: bold;"><br>
+Parameter</span>: <br>
+<ul>
+  <li>studiengang_kz: Studiengangskennzahl<br>
+  </li>
+  <li>studiensemester_kurzbz: Studiensemester (WS2008, SS2009,
+WS2009,...)<br>
+  </li>
+  <li>semester: Semester (optional)<br>
+  </li>
+  <li>verband: Verband (optional)</li>
+  <li>gruppe: Gruppe (optional)</li>
+  <li>gruppe_kurzbz: Spezialgruppen, Module, ... (optional)</li>
+  <li>uid: UID eines bestimmten Studenten (Wenn gesetzt werden alle
+anderen Parameter nicht verwendet)</li>
+  <li>typ: Typ der gelieferten Personen (student, prestudent,
+interressent, bewerber, aufgenommen, warteliste, absage, zgv,
+reihungstestangeledet, reihungstestnichtangemeldet, absolvent,
+diplomand)</li>
+  <li>prestudent_id: Prestudent_id</li>
+  <li>xmlformat: Wenn xmlformat=xml dann wird ein XML statt dem RDF
+geliefert</li>
+  <li>filter: Alle Personen die filter im Nachnamen enthalten</li>
+</ul>
+<span style="font-weight: bold;"><br>
+Attribute:</span><br>
+<ul>
+</ul>
+<ul>
+  <li>person_id</li>
+  <li>titelpre</li>
+  <li>titelpost</li>
+  <li>vornamen</li>
+  <li>vorname</li>
+  <li>nachname</li>
+  <li>geburtsdatum</li>
+  <li>geburtsdatum_iso</li>
+  <li>homepage</li>
+  <li>gebort</li>
+  <li>gebzeit</li>
+  <li>anmerkungen</li>
+  <li>anrede</li>
+  <li>svnr</li>
+  <li>ersatzkennzeichen</li>
+  <li>familienstand</li>
+  <li>geschlecht</li>
+  <li>anzahlkinder</li>
+  <li>staatsbuergerschaft</li>
+  <li>geburtsnation</li>
+  <li>sprache</li>
+  <li>status</li>
+  <li>orgform</li>
+  <li>mail_privat</li>
+  <li>mail_intern</li>
+  <li>aktiv</li>
+  <li>uid</li>
+  <li>matrikelnummer</li>
+  <li>alias</li>
+  <li>semester</li>
+  <li>verband</li>
+  <li>gruppe</li>
+  <li>studiengang_kz_student</li>
+  <li>prestudent_id</li>
+  <li>studiengang_kz_prestudent</li>
+  <li>studiengang_kz</li>
+  <li>aufmerksamdurch_kurzbz</li>
+  <li>studiengang</li>
+  <li>berufstaetigkeit_code</li>
+  <li>ausbildungcode</li>
+  <li>zgv_code</li>
+  <li>zgvort</li>
+  <li>zgvdatum</li>
+  <li>zgvdatum_iso</li>
+  <li>zgvmas_code</li>
+  <li>zgvmaort</li>
+  <li>zgvmadatum</li>
+  <li>zgvmadatum_iso</li>
+  <li>aufnahmeschluessel</li>
+  <li>facheinschlberuf</li>
+  <li>reihungstest_id</li>
+  <li>anmeldungreihungstest</li>
+  <li>anmeldungreihungstest_iso</li>
+  <li>reihungstestangetreten</li>
+  <li>punkte</li>
+  <li>punkte1</li>
+  <li>punkte2</li>
+  <li>bismelden</li>
+  <li>dual</li>
+  <li>dual_bezeichnung</li>
+  <li>anmerkungpre</li>
+</ul>
+<h2>Lehrstunde</h2>
+<span style="font-weight: bold;">Aufruf:</span>
+lehrstunde.rdf.php?datum=...&amp;datum_bis=...stg_kz=...&amp;sem=...&amp;ver=...&amp;grp=...&amp;einheit=...<br>
+Beispiel: <a target="_blank"
+ href="lehrstunde.rdf.php?datum=2006-03-20&amp;type=verband&amp;stg_kz=258">lehrstunde.rdf.php?datum=2006-03-20&amp;type=verband&amp;stg_kz=258</a><span
+ style="font-weight: bold;"><br>
+<br>
+Parameter</span>: <br>
+<ul>
+  <li>datum</li>
+  <li>datum_bis: Endedatum (optional)<br>
+  </li>
+  <li>stunde</li>
+  <li>type</li>
+  <li>stg_kz</li>
+  <li>sem</li>
+  <li>ver</li>
+  <li>grp</li>
+  <li>einheit</li>
+  <li>pers_uid</li>
+  <li>ort_kurzbz<br>
+  </li>
+</ul>
+<span style="font-weight: bold;"><br>
+Attribute:</span><br>
+<ul>
+  <li>datum</li>
+  <li>stunde</li>
+  <li>unr</li>
+  <li>ort_kurzbz</li>
+  <li>lehrfach</li>
+  <li>lehrfach_bez</li>
+  <li>lehrform</li>
+  <li>lektor</li>
+  <li>semester</li>
+  <li>verband</li>
+  <li>gruppe</li>
+  <li>einheit</li>
+  <li>lehrform</li>
+  <li>studiengang</li>
+  <li>farbe</li>
+  <li>anmerkung</li>
+</ul>
+<br>
+
+<h2>LVInfo</h2>
+Liefert das RDF fuer die Lehrveranstaltungsinformationen.<br>
+<br>
+<span style="font-weight: bold;">Aufruf:</span>
+lvinfo.rdf.php?stg_kz=...&amp;semester=...<br><br>
+<strong>Beispiele:</strong>
+<ul>
+	<li><a target="_blank" href="lvinfo.rdf.php?stg_kz=258&amp;semester=2">lvinfo.rdf.php?stg_kz=258&amp;semester=2</a></li>
+	<li><a target="_blank" href="lvinfo.rdf.php?stg_kz=258&amp;studiensemester_kurzbz=WS2014">lvinfo.rdf.php?stg_kz=258&amp;studiensemester_kurzbz=WS2014</a></li>
+	<li><a target="_blank" href="lvinfo.rdf.php?mitarbeiter_uid=pam&studiensemester_kurzbz=WS2014">lvinfo.rdf.php?mitarbeiter_uid=pam&amp;studiensemester_kurzbz=WS2014</a></li>
+</ul>
+<strong>Standardfilter:</strong><br>
+<ul>
+	<li>tbl_lehrveranstaltung.aktiv=true</li>
+	<li>tbl_lehrveranstaltung.lehre=true</li>
+	<li>tbl_lvinfo.aktiv=true</li>
+	<li>tbl_lvinfo.genehmigt=true</li
+	<li>tbl_lehreinheitmitarbeiter muss gesetzt sein</li>
+</ul> 
+<span style="font-weight: bold;">Parameter</span>: <br>
+<ul>
+  <li>stg_kz - Studiengangskennzahl (optional wenn Mitarbeiter gesetzt)</li>
+  <li>studiensemester_kurzbz - Studiensemester (optional)</li>
+  <li>mitarbeiter_uid - Lehrbeauftragter (optional wenn Studiengang gesetzt)</li>
+  <li>semester - Semester (optional)</li>
+</ul>
+<span style="font-weight: bold;">
+Attribute:</span><br>
+<ul>
+  <li>lehrveranstaltung_id</li>
+  <li>kurzbz</li>
+  <li>bezeichnung</li>
+  <li>studiengang_kz</li>
+  <li>semester</li>
+  <li>lehreverzeichnis</li>
+  <li>unterrichtssprache</li>
+  <li>ects</li>
+  <li>semesterstunden</li>
+  <li>sprache</li>
+  <li>titel</li>
+  <li>lehrziele</li>
+  <li>lehrinhalte</li>
+  <li>methodik</li>
+  <li>voraussetzungen</li>
+  <li>unterlagen</li>
+  <li>pruefungsordnung</li>
+  <li>anmerkungen</li>
+  <li>kurzbeschreibung</li>
+  <li>orgform_kurzbz</li>
+  <li>incoming</li>
+</ul>
+<br>
+<h2>Kontakt</h2>
+Liefert die Kontaktdaten von Personen<br>
+<span style="font-weight: bold;">Aufruf:</span> <br>
+&nbsp;&nbsp;&nbsp; kontakt.rdf.php?person_id=...<br>
+&nbsp;&nbsp;&nbsp; kontakt.rdf.php?kontakt_id=...<br>
+Beispiel: <a target="_blank" href="kontakt.rdf.php?person_id=5">kontakt.rdf.php?person_id=5</a><span
+ style="font-weight: bold;"><br>
+<br>
+Parameter</span>: <br>
+<ul>
+  <li>person_id oder<br>
+  </li>
+  <li>kontakt_id</li>
+</ul>
+<span style="font-weight: bold;">
+Attribute:</span><br>
+<ul>
+  <li>kontakt_id</li>
+  <li>person_id</li>
+  <li>firma_id</li>
+  <li>firma_name</li>
+  <li>kontakttyp</li>
+  <li>anmerkung</li>
+  <li>kontakt</li>
+  <li>zustellung</li>
+  <li>updateamum</li>
+</ul>
+<h2>Adressen</h2>
+Liefert die Adressen von Personen<br>
+<span style="font-weight: bold;">Aufruf:</span> <br>
+&nbsp;&nbsp;&nbsp; adresse.rdf.php?person_id=...<br>
+&nbsp;&nbsp;&nbsp; adresse.rdf.php?adresse_id=...<br>
+Beispiel: <a target="_blank" href="adresse.rdf.php?person_id=5">adresse.rdf.php?person_id=5</a><span
+ style="font-weight: bold;"><br>
+<br>
+Parameter</span>: <br>
+<ul>
+  <li>person_id oder<br>
+  </li>
+  <li>kontakt_id</li>
+</ul>
+<span style="font-weight: bold;">
+Attribute:</span><br>
+<ul>
+  <li>adresse_id</li>
+  <li>person_id</li>
+  <li>name</li>
+  <li>strasse</li>
+  <li>plz</li>
+  <li>ort</li>
+  <li>gemeinde</li>
+  <li>nation</li>
+  <li>typ</li>
+  <li>typ_name</li>
+  <li>heimatadresse</li>
+  <li>zustelladresse</li>
+  <li>firma_id</li>
+  <li>firma_name</li>
+  <li>updateamum</li>
+</ul>
+<h2>Lektoren</h2>
+Liefert die Zuordnung von Mitarbeitern zu Organisationseinheiten (Fachbereich/ Studiengang)<br>
+Ein Mitarbeiter ist immer nur einer Organisationseinheit zugeordnet<br>
+<span style="font-weight: bold;">Aufruf:</span> <br>
+&nbsp;&nbsp;&nbsp; lektoren.rdf.php?studiengang_kz=...<br>
+&nbsp;&nbsp;&nbsp; lektoren.rdf.php?institut=...<br>
+Beispiel: <a target="_blank" href="lektoren.rdf.php?institut=Mechatronics">institut.rdf.php?institut=Mechatronics</a>
+<span style="font-weight: bold;"><br><br>Parameter</span>: 
+<br>
+<ul>
+  <li>studiengang_kz oder<br>
+  </li>
+  <li>institut</li>
+</ul>
+<span style="font-weight: bold;">
+Attribute:</span><br>
+<ul>
+  <li>uid</li>
+  <li>person_id</li>
+  <li>anrede</li>
+  <li>titelpre</li>
+  <li>vorname</li>
+  <li>nachname</li>
+  <li>titelpost</li>
+  <li>email</li>
+  <li>fixangestellt</li>
+</ul>
+</body>
+</html>
+>>>>>>> fee287127566cd5d18c55b556d178b661711c694

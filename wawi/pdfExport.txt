@@ -1,0 +1,12 @@
+<<<<<<< HEAD
+In diesem Verzeichnis muss ein symbolischer Link angelegt werden!
+
+ln -s ../content/pdfExport.php pdfExport.php
+
+=======
+In diesem Verzeichnis muss ein symbolischer Link angelegt werden!
+
+ln -s ../content/pdfExport.php pdfExport.php
+
+>>>>>>> fee287127566cd5d18c55b556d178b661711c694
+Dies ist eine vorübergehende Lösung um die .htaccess Authentifizierung zu umgehen
