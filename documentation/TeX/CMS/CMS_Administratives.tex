@@ -1,0 +1,17 @@
+\chapter{Administratives}
+\section{DMS}
+Die Dateien werden im DMS\_PATH abgelegt. Die Berechtigung wird für die Gruppe
+"dms" gesetzt! Diese Gruppe muss am Server vorhanden sein, da es sonst 
+möglicherweise zu problemen beim Zugriff kommt.\\
+\section{Import}
+Ist die Datei größer als 15 MB (PHP upload\_max\_filesize) kann sie über den
+Import Ordner hochgeladen werden. Die Datei wird vorher per WinSCP etc in den
+Import Ordner (siehe Config) kopiert. Die Dateien des Import Ordners werden unterhalb des Formulars angezeigt und 
+können mittels ''Hochladen'' ins DMS übernommen werden
+\section{Menü Addons}
+Include Addons befinden sich unter /cms/menu/. Pro Addon gibt es ein eigenes
+File. Darin befindet sich eine Klasse die von der Klasse menu\_addon abgeleitet
+ist. Diese Klasse befüllt Variablen der Basisklasse welche dann ausgegeben werden.
+\section{Startpunkt des CMS}
+Der Content bei dem das Menü im CIS beginnt kann über eine Config Variable
+definiert werden.

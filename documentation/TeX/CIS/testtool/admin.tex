@@ -1,0 +1,72 @@
+\chapter {Administrationsseite}
+
+Die Administrationsseite des Testtools kann unter /cis/testttool/admin/index.php erreicht werden. Auf dieser Seite können die Gebiete und Fragen für den Reihungstest verwaltet werden.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.75\textwidth]{testtool_admin.png}
+	\caption{Testtool-Administration}
+	\label{Testtool-Administration}
+\end{figure}
+
+\section {Gebiete}
+
+Die Reihungstests können in unterschiedliche Gebiet aufgeteilt werden (z.B. Algebra, Physik, Englisch, ...)\\
+\\
+Die folgenden Einstellungen können bei den Gebieten vorgenommen werden:\\
+\\
+\begin{itemize}
+\item \textbf{Zeit:} Zeit die für die Abarbeitung dieses Gebietes zur Verfügung steht. Format der Eingabe: hh:mm:ss
+\item \textbf{Multiple Response:} Wenn diese Option gesetzt ist, können pro Frage mehrere Antworten gegeben werden.
+\item \textbf{Kategorien:} Gibt an ob für dieses Gebiet Kategorien vorgesehen sind (nur Persönlichkeits-Test)
+\item \textbf{Zufällige Fragereihenfolge:} Wenn gesetzt, dann werden die Fragen in zufälliger Reihenfolge geliefert
+\item \textbf{Zufällige Vorschlagreihenfolge:} Wenn gesetzt, dann werden die Vorschläge in zufälliger Reihenfolge geliefert
+\item \textbf{Levelgleichverteilung:} Wenn gesetzt, dann wird das Verhältnis an Fragen/Level gleich verteilt. Beispiel: sind 6 Fragen des Levels 1 vorhanden und 3 Fragen des Levels 2 und die maximale Fragenanzahl ist 3, dann kommen 2 Fragen mit Level 1 und 1 Frage mit Level 2.
+\item \textbf{Maximale Punkteanzahl:} maximal erreichbare Punkte fuer dieses Gebiet. 
+\item \textbf{Maximale Fragenanzahl:} maximale Anzahl an erscheinenden Fragen.
+\item \textbf{Start Level:} Wenn dieser Wert gesetzt ist, findet ein gelevelter Ablauf statt. 
+\item \textbf{Richtige Fragen bis Levelaufstieg:} nur wenn Start Level gesetzt ist; gibt an wie viele Fragen richtig beantwortet werden müssen bis der Student einen Level aufsteigt.
+\item \textbf{Falsche Fragen bis Levelabstieg:} nur wenn Start Level gesetzt ist; gibt an wie viele Fragen falsch beantwortet werden müssen bis der Student einen Level absteigt.
+\end{itemize}
+
+\subsection {Einschränkungen / Checks:}
+\begin{itemize}
+\item Wenn ein StartLevel eingetragen wurde, muss eine maximale Fragenanzahl eingetragen werden
+\item	Levelgleichverteilung ist nur dann erlaubt, wenn StartLevel nicht gesetzt wurde
+\item	Wenn StartLevel gesetzt wurde, muessen von jedem Level mindestens so viele Fragen vorhanden sein wie die "Maximale Fragenanzahl"
+\item	Wenn StartLevel gesetzt ist, muessen mindestens 2 unterschiedliche Level vorhanden sein
+\item	Wenn Levelgleichverteilung aktiviert ist, muss die maximale Fragenanzahl mindestens so gross sein wie die Anzahl der verschiedenen Level
+\item	Wenn Zufallsfrage gesetzt ist und StartLevel oder Levelgleichverteilung gesetzt ist, darf sich die Punkteanzahl pro Level/Frage nicht unterscheiden.
+\item	Wenn StartLevel gesetzt ist, darf Multipleresponse nicht gesetzt sein
+\item	die Maximale Punkteanzahl muss bei jedem Gebiet eingetragen sein
+\end{itemize}
+\\
+Nachdem ein Gebiet erstellt und mit Fragen befüllt wurde, kann dieses geprüft werden. Dies geschieht über den Link 'Prüfen'. Gebiete können nur dann im Testtool verwendet werden, wenn das Gebiet Fehlerfrei überprüft werden kann. Ansonsten erscheint das Gebiet während der Prüfung in roter Schrift und kann nicht ausgewählt werden.\\
+\\
+Es ist auch möglich für Einsteiger ins 3. Semester eigene Gebiete zu definieren.\\
+\\
+Eine Zuordnung für welchen Studiengang/Semester welches Gebiet angezeigt wird, kann derzeit nur in der Datenbank vorgenommen werden.\\
+
+\section{Fragen}
+
+Wenn ein Gebiet angelegt wurde, können zu diesem neue Fragen hinzugefügt werden. Dies geschieht über den Punkte 'neue Frage hinzufügen'. Die folgenden Attribute können bei einer Frage eintragen werden:\\
+
+\begin{itemize}
+\item \textbf{Bild:} Hier kann ein Bild zu einer Frage hochgeladen werden
+\item \textbf{Audio:} Es kann ein Audiofile zu einer Frage hinzugefügt werden. Die Audio-Files sind als MP3 Mono 11khz 16 Bit hochzuladen.
+\item \textbf{Text:} in diesem Fenster kann der Text eingetragen werden der bei der Frage angezeigt wird. Hier können sowohl Mathematische Formeln mit Hilfe von MathML als auch HTML-Code eingetragen werden. Nähere Informationen über MathML finden Sie unter http://en.wikipedia.org/wiki/MathML
+Im Unteren Teil des Fensters befindet sich ein Vorschaufenster. Dieses zeigt die Vorschau des Textes in Echtzeit an.
+\item \textbf{Demo:} Wenn dieses Feld angeklickt wird, erscheint diese Frage vor dem Starten des Gebiets als Demonstrationsbeispiel.
+\item \textbf{Level:} gibt den Schwierigkeitsgrad der Frage an. (1=leicht; 5=schwer)
+\item \textbf{Nummer:} über dieses Attribut wird die Reihenfolge (Sortierung)
+ der Fragen bestimmt. Die Nummer von Demo-Fragen sollte kleiner als 0 sein. Die Seite mit der Nummer 0 ist die Startseite für das jeweilige Gebiet und sollte eine Kurzbeschreibung oder ein Beispiel des Gebiets enthalten.
+\end{itemize}
+
+Die Fragen können in verschiedene Sprachen übersetzt werden. Um eine Übersetzung einer Frage anzulegen, klicken Sie einfach auf die entsprechende Sprache im rechten oberen Teil des Fensters.\\
+
+\section{Vorschläge}
+
+Pro Frage müssen mindestens 2 Vorschläge (Antworten) eingetragen werden. Für jede Antwortmöglichkeit können Punkte vergeben werden. Es können auch negative Punkte eingetragen werden, um so einen Punkteabzug bei falschen Antworten zu ermöglichen. \\
+\\
+Wie bei den Fragen können auch an die Vorschläge Texte, Bilder- und Audio-Dateien angehängt werden.\\
+Es muss mindestens eine Frage vorhanden sein, bei der die Punkteanzahl größer 0 ist.\\

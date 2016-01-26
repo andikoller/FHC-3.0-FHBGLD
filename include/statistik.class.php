@@ -25,11 +25,7 @@ class statistik extends basis_db
 {
 	public $new;
 	public $statistik_obj=array();
-<<<<<<< HEAD
 	public $result=array();
-=======
-	public $result;
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 
 	public $statistik_kurzbz;
 	public $content_id;
@@ -56,11 +52,7 @@ class statistik extends basis_db
 	public $anzahl; //Hilfsvariable fuer Group BY Abfragen
 	
 	// Daten der Statistik
-<<<<<<< HEAD
 	public $data;
-=======
-	public $data; // DB ressource
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	public $html;
 	public $csv;
 	public $json;
@@ -68,20 +60,9 @@ class statistik extends basis_db
 	/**
 	 * Konstruktor
 	 */
-<<<<<<< HEAD
 	public function __construct($studiengang_kz=null)
 	{
 		parent::__construct();		
-=======
-	public function __construct($statistik_kurzbz=null)
-	{
-		parent::__construct();	
-		
-		if(!is_null($statistik_kurzbz))
-			$this->load($statistik_kurzbz);
-		else
-			$this->new=true;	
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	}
 
 	/**
@@ -141,14 +122,9 @@ class statistik extends basis_db
 	{
 		$qry = 'SELECT * FROM public.tbl_statistik';
 
-<<<<<<< HEAD
 		if($order) {
 			$qry .= ' ORDER BY ' . $order;
 		}
-=======
-		if($order) 
-			$qry .= ' ORDER BY ' . $order;
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 		
 		if($result = $this->db_query($qry))
 		{
@@ -266,11 +242,7 @@ class statistik extends basis_db
 		{
 			$this->errormsg = 'Fehler beim Laden der Daten';
 			return false;
-<<<<<<< HEAD
 		}			
-=======
-		}		
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	}
 	/**
 	 * Speichert einen Statistik Datensatz
@@ -281,12 +253,6 @@ class statistik extends basis_db
 	{
 		if(is_null($new))
 			$new = $this->new;
-
-		/* Da derzeit die statistik_kurzbz der primary key in der DB ist,
-		 * darf er vorerst nur [a-zA-Z0-9_] (\w) enthalten. (bis auf autoincrement
-		 * integer umgestellt ist)
-		 */
-		$this->statistik_kurzbz = preg_replace('/\W/', '', $this->statistik_kurzbz);
 			
 		if($new)
 		{
@@ -567,11 +533,7 @@ class statistik extends basis_db
 				$anzahl_spalten = $this->db_num_fields($this->data);
 				for($spalte=0;$spalte<$anzahl_spalten;$spalte++)
 				{
-<<<<<<< HEAD
 					$this->html.= '<th>'.$this->db_field_name($this->data,$spalte).'</th>';
-=======
-					$this->html.= '<th>'.$this->convert_html_chars($this->db_field_name($this->data,$spalte)).'</th>';
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 					$this->csv.='"'.$this->db_field_name($this->data,$spalte).'",';
 				}
 				$this->html.= '</tr></thead><tbody>';
@@ -584,11 +546,7 @@ class statistik extends basis_db
 					for($spalte=0;$spalte<$anzahl_spalten;$spalte++)
 					{
 						$name = $this->db_field_name($this->data,$spalte);
-<<<<<<< HEAD
 						$this->html.= '<td>'.$row->$name.'</td>';
-=======
-						$this->html.= '<td>'.$this->convert_html_chars($row->$name).'</td>';
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 						$this->csv.= '"'.$row->$name.'",';
 					}
 
@@ -602,11 +560,7 @@ class statistik extends basis_db
 		}
 		else
 		{
-<<<<<<< HEAD
 			$this->error_msg= 'Zu dieser Statistik gibt es keine SQL Abfrage';
-=======
-			$this->errormsg= 'Zu dieser Statistik gibt es keine SQL Abfrage';
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 			return false;
 		}
 	}
@@ -622,36 +576,10 @@ class statistik extends basis_db
 		return $this->csv;
 	}
 	
-<<<<<<< HEAD
-=======
-	function writeCSV($filename, $delimiter=',', $enclosure='"')
-	{
-		$fh=fopen($filename,'w');
-		
-		$fieldnames=array();
-		for ($i=0; $i < $this->db_num_fields($this->data); $i++)
-			$fieldnames[]=$this->db_field_name($this->data,$i);
-		fputcsv($fh, $fieldnames, $delimiter, $enclosure);
-		$this->db_result_seek($this->data,0);
-		while ($row = $this->db_fetch_row($this->data))
-			fputcsv($fh, $row, $delimiter, $enclosure);
-		fclose($fh);
-		return true;
-	}
-	
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	function getJSON()
 	{
 		return json_encode($this->json);
 	}
-<<<<<<< HEAD
-=======
-	
-	function getArray()
-	{
-		return $this->json;
-	}
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 
 	/**
 	 * 

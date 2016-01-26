@@ -31,6 +31,17 @@ require_once('../../include/benutzerberechtigung.class.php');
 require_once('../../include/functions.inc.php');
 require_once('../../include/fachbereich.class.php');
 
+//Andreas Koller
+$user = get_uid();
+loadVariables($user);
+
+$rechte = new benutzerberechtigung();
+$rechte->getBerechtigungen($user);
+
+if(!$rechte->isBerechtigt('basis/vilesci'))
+	die('Sie haben keine Berechtigung fuer diese Seite');
+	
+
 $db = new basis_db();
 
 echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">

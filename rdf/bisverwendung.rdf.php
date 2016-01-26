@@ -35,20 +35,12 @@ require_once('../include/datum.class.php');
 
 if(isset($_GET['uid']))
 	$uid = $_GET['uid'];
-<<<<<<< HEAD
 else 
-=======
-else
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	$uid = '';
 
 if(isset($_GET['bisverwendung_id']) && is_numeric($_GET['bisverwendung_id']))
 	$bisverwendung_id = $_GET['bisverwendung_id'];
-<<<<<<< HEAD
 else 
-=======
-else
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	$bisverwendung_id = '';
 
 $datum = new datum();
@@ -76,17 +68,10 @@ elseif($bisverwendung_id!='')
 {
 	if($verwendung_obj->load($bisverwendung_id))
 		draw_row($verwendung_obj);
-<<<<<<< HEAD
 	else 
 		die($verwendung_obj->errormsg);
 }
 else 
-=======
-	else
-		die($verwendung_obj->errormsg);
-}
-else
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	die('Falsche Parameteruebergabe');
 
 
@@ -94,21 +79,12 @@ else
 function draw_row($row)
 {
 	global $rdf_url, $datum;
-<<<<<<< HEAD
 	
 	if(is_bool($row->hauptberuflich))
 		$hauptberuflich = $row->hauptberuflich?'Ja':'Nein';
 	else 
 		$hauptberuflich = '';
 		
-=======
-
-	if(is_bool($row->hauptberuflich))
-		$hauptberuflich = $row->hauptberuflich?'Ja':'Nein';
-	else
-		$hauptberuflich = '';
-
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	echo '
       <RDF:li>
          <RDF:Description  id="'.$row->bisverwendung_id.'"  about="'.$rdf_url.'/'.$row->bisverwendung_id.'" >
@@ -122,11 +98,7 @@ function draw_row($row)
             <VERWENDUNG:hauptberuflich><![CDATA['.$hauptberuflich.']]></VERWENDUNG:hauptberuflich>
             <VERWENDUNG:habilitation><![CDATA['.($row->habilitation?'Ja':'Nein').']]></VERWENDUNG:habilitation>
             <VERWENDUNG:beginn><![CDATA['.$datum->convertISODate($row->beginn).']]></VERWENDUNG:beginn>
-<<<<<<< HEAD
             <VERWENDUNG:beginn_iso><![CDATA['.$row->beginn.']]></VERWENDUNG:beginn_iso>            
-=======
-            <VERWENDUNG:beginn_iso><![CDATA['.$row->beginn.']]></VERWENDUNG:beginn_iso>
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
             <VERWENDUNG:ende><![CDATA['.$datum->convertISODate($row->ende).']]></VERWENDUNG:ende>
             <VERWENDUNG:ende_iso><![CDATA['.$row->ende.']]></VERWENDUNG:ende_iso>
             <VERWENDUNG:ba1bez><![CDATA['.$row->ba1bez.']]></VERWENDUNG:ba1bez>
@@ -139,11 +111,6 @@ function draw_row($row)
             <VERWENDUNG:updatevon><![CDATA['.$row->updatevon.']]></VERWENDUNG:updatevon>
             <VERWENDUNG:insertamum><![CDATA['.$row->insertamum.']]></VERWENDUNG:insertamum>
             <VERWENDUNG:insertvon><![CDATA['.$row->insertvon.']]></VERWENDUNG:insertvon>
-			<VERWENDUNG:dv_art><![CDATA['.$row->dv_art.']]></VERWENDUNG:dv_art>
-<<<<<<< HEAD
-=======
-			<VERWENDUNG:inkludierte_lehre><![CDATA['.$row->inkludierte_lehre.']]></VERWENDUNG:inkludierte_lehre>
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
          </RDF:Description>
       </RDF:li>
       ';

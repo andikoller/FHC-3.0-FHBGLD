@@ -1,0 +1,31 @@
+\chapter{Installation von Tempus}
+\label{Installation}
+
+Tempus benötigt einen XUL-Unterstützenden Browser im Hintergrund.
+
+Es wird empfohlen, SeaMonkey oder Firefox von Mozilla zu installieren, da TEMPUS\raisebox{1ex}{\tiny \copyright} speziell dafür konzipiert wurde.
+Die Software erhalten Sie als Freeware auf www.mozilla.org.\\
+
+\begin{itemize}
+\item Installieren Sie den Browser und starten Sie diesen.
+\item Ändern Sie im Menüpunkt ''Ansicht'' das Theme auf \textit{Modern}
+\item Geben Sie in der Adressenleise \textit{about:config} ein und setzen Sie den Eintrag \textit{signed.applets.codebase\_principal\_support} auf \textbf{true}.
+\item Schließen Sie anschließend den Browser und legen Sie eine Verknüpfung zu der .exe-datei des Browsers auf Ihrem Desktop oder in Ihrem Startmenü an.
+\item Klicken Sie diese Verknüpfung mit der rechten Maustaste an, wählen Sie \textit{Eigenschaften} und fügen Sie dem Link-Ziel die Erweiterung \textit{-chrome} gefolgt von der ULR auf dem Webserver hinzu. Das Ziel könnte also Beispielsweise \textit{C:/Programme/mozilla.org/SeaMonkey/seamonkey.exe -chrome http://domain.at/tempus.xul.php} lauten.
+\item Zuletzt bearbeiten Sie die Datei \textit{prefs.js}, die sich in den Anwendungsdaten Ihres Users unter Mozilla/Profiles/default/px5g6kxi.slt/prefs.js befindet. Der Pfad könnte also beispielsweise \textit{ C:/Dokumente und Einstellungen/username/Anwendungsdaten/Mozilla/Profiles/default/px5g6kxi.slt/prefs.js} lauten.\\
+\end{itemize}
+
+Ändern Sie dort die folgenden Einträge, bzw. fügen Sie sie hinzu:\\ 
+
+user\_pref(''capability.principal.codebase.p0.granted'', ''UniversalXPConnect'');\\
+user\_pref(''capability.principal.codebase.p0.id'', ''http://vilesci.technikum-wien.at'');\\
+user\_pref(''capability.principal.codebase.p1.granted'', ''UniversalXPConnect'');\\
+user\_pref(''capability.principal.codebase.p1.id'', ''https://vilesci.technikum-wien.at'');\\
+user\_pref(''capability.principal.codebase.p2.granted'', ''UniversalXPConnect'');\\
+user\_pref(''capability.principal.codebase.p2.id'', ''http://dav.technikum-wien.at'');\\
+
+
+Zuletzt können Sie noch das Icon der Verknüpfung und des Programmsymbols ändern.
+Das Icon der Verknüpfung können Sie einfach mit der rechten Maustaste, Eigenschaften, Anderes Symbol ändern.\\
+Das Programmicon ändert sich, wenn Sie die Datei Tempus.ico in den Ordner C:/Programme/mozilla.org/SeaMonkey/chrome/icons/default kopieren.
+Eventuell unterscheidet sich Ihr Zielordner geringfügig von diesem Beispiel.

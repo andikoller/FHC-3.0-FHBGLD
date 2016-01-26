@@ -1,0 +1,7 @@
+AuthBasicProvider ldap
+AuthType Basic
+AuthName "FHComplete VileSci"
+AuthLDAPURL ldap://fhs-thetis/dc=fhe,dc=intern?sAMAccountName?sub
+AuthLDAPBindDN "CN=fhcomplete,OU=MM,OU=User,OU=Technik,DC=fhe,DC=intern"
+AuthLDAPBindPassword "Jg%72Qa=hb4W"
+require valid-user

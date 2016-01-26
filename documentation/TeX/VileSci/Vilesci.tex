@@ -1,0 +1,170 @@
+\documentclass{scrbook}
+
+\usepackage{ifpdf} 
+\newif\ifpdf
+\ifx\pdfoutput\undefined
+	\pdffalse              	%normales LaTeX wird ausgefuehrt
+\else
+	\pdfoutput=1           
+	\pdftrue               	%pdfLaTeX wird ausgefuehrt
+\fi
+
+
+\ifpdf
+	%\usepackage{ae}        % Benutzen Sie nur
+	%\usepackage{zefonts}  	% eines dieser Pakete
+\else
+	%%Normales LaTeX - keine speziellen Fontpackages notwendig
+\fi
+
+\ifpdf %%Einbindung von Grafiken mittels \includegraphics{datei}
+	\usepackage[pdftex]{graphicx} %%Grafiken in pdfLaTeX
+\else
+	\usepackage[dvips]{graphicx} %%Grafiken und normales LaTeX
+\fi
+
+
+\ifpdf
+	\pdfinfo
+	{
+    /Author (Andreas Österreicher)                                
+    /Title (Vilesci)     
+    /Subject (Vilesci Handbuch)                                    
+    /Keywords (Vilesci FH-Complete FH Technikum-Wien)
+	}
+\else			
+\fi
+
+\usepackage[pdftex,colorlinks=true,urlcolor=blue,linkcolor=blue]{hyperref}
+\usepackage[ngerman]{babel} %Deutsche Worttrennung		
+\usepackage[T1]{fontenc} % T1-Kodierung damit Umlaute richtig dargestellt werden
+\usepackage[latin9]{inputenc} % latin9 Encoding
+\usepackage{makeidx} % Stichwortverzeichnis erstellen aus \index{} Einträgen
+\usepackage{float}
+\usepackage[small,bf]{caption}
+\usepackage{fancyhdr} % Paket zur Manipulation von Kopf und Fusszeile
+\usepackage{import} % fuer subimport
+\addtokomafont{chapter}{\color[rgb]{0.0,0.376,0.584}}
+\addtokomafont{section}{\color[rgb]{0.0,0.376,0.584}}
+\addtokomafont{subsection}{\color[rgb]{0.0,0.376,0.584}}
+
+\renewcommand{\rmdefault}{phv} % Arial
+\renewcommand{\sfdefault}{phv} % Arial
+
+\makeindex
+
+\graphicspath{{../../images/}}
+
+\setlength{\tolerance}{2000} % Steuerung von Zeilenumbruch
+\setlength{\parindent}{0pt} % Einrücktiefe für Absätze
+\setlength{\parskip}{1ex plus 0.5ex minus 0.2ex}
+\addtolength{\textheight}{2cm}
+\addtolength{\headheight}{2pt}
+\setlength{\captionmargin}{20pt}
+\floatstyle{plain}
+\floatname{example}{Example}
+
+\newfloat{example}{hbtp}{loe}[chapter]
+\floatplacement{figure}{hbtp}
+\floatplacement{table}{htbp}
+
+\newcommand{\dollar}{\char36}
+
+% Hinweisbox mit Rufzeichen
+\newenvironment{info}[1]{
+    \hspace{-10mm}
+    \fbox{
+        \begin{minipage}{1cm}
+        \includegraphics[width=1cm]{icon_info}
+        \end{minipage}
+        \begin{minipage}{14.5cm}
+        #1
+        \end{minipage}
+    }
+}
+
+% Hinweisbox mit Warndreieck
+\newenvironment{achtung}[1]{
+    \hspace{-10mm}
+    \fbox{
+        \begin{minipage}{1cm}
+        \includegraphics[width=1cm]{icon_achtung}
+        \end{minipage}
+        \begin{minipage}{14.5cm}
+        #1
+        \end{minipage}
+    }
+}
+
+% Hinweisbox mit Stoptafel
+\newenvironment{halt}[1]{
+    \hspace{-10mm}
+    \fbox{
+        \begin{minipage}{1cm}
+        \includegraphics[width=1cm]{icon_halt}
+        \end{minipage}
+        \begin{minipage}{14.5cm}
+        #1
+        \end{minipage}
+    }
+}
+
+% Hinweisbox mit Glühbirne
+\newenvironment{idee}[1]{
+    \hspace{-10mm}
+    \fbox{
+        \begin{minipage}{1cm}
+        \includegraphics[width=1cm]{icon_idee}
+        \end{minipage}
+        \begin{minipage}{14.5cm}
+        #1
+        \end{minipage}
+    }
+}
+
+
+\setlength{\unitlength}{1mm}
+
+% Marker für Bilder
+\newenvironment{markier}[5]{
+    
+    \thicklines \put(#2,#3){\vector(#4,#5){5}} \thinlines
+    \put(#2,#3){\circle*{5}}
+    \put(#2,#3){\textcolor{black}{\circle{5}}\makebox(-10,0){\textcolor{white}{#1}}}
+}
+
+\begin{document}
+
+\ifpdf
+	\DeclareGraphicsExtensions{.pdf,.jpg,.png}
+\else
+	\DeclareGraphicsExtensions{.eps}
+\fi
+
+\pagestyle{fancyplain}
+% Titelseite einbinden
+\include{Vilesci_Titel}
+
+\tableofcontents			% Inhaltsverzeichnis
+\frontmatter				% Vorspann
+\chapter{Einleitung}
+\mainmatter					% Hauptteil
+
+%% Kapitel Anfang %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\include{Vilesci_Statistik}
+\include{Vilesci_Wiederholer}
+\include{Vilesci_DoppeltePersonen}
+\include{Vilesci_Vorrueckung}
+\include{Vilesci_Gruppenverwaltung}
+\subimport{../FAS/}{FASo_Lehrveranstaltung.tex}
+\include{Vilesci_Lehrveranstaltung}
+\include{Vilesci_Ampel}
+\include{Vilesci_Infoscreen}
+
+
+%% Kapitel Ende   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\appendix					% Beginn des Anhangs
+\chapter{Schluss}
+\listoftables				% Tabellenverzeichnis
+\listoffigures				% Abbildungsverzeichnis
+\end{document}

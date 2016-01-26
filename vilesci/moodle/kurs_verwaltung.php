@@ -1,5 +1,5 @@
 <?php 
-//@version $Id$
+//@version $Id: kurs_verwaltung.php 5771 2013-03-15 11:34:57Z oesi $
 /* Copyright (C) 2008 Technikum-Wien
  *
  * This program is free software; you can redistribute it and/or modify
@@ -34,21 +34,16 @@
 // ***********************************************************************************************
 #	require_once('../config.inc.php');
 // ---------------- Vilesci Include Dateien einbinden
-require_once('../../config/vilesci.config.inc.php');	
-require_once('../../include/functions.inc.php');
-require_once('../../include/globals.inc.php');
-include_once('../../include/moodle19_course.class.php');
-require_once('../../include/studiensemester.class.php');
-require_once('../../include/studiengang.class.php');	
-require_once('../../include/benutzerberechtigung.class.php');
+	require_once('../../config/vilesci.config.inc.php');	
+		
+// ---------------- Standart Include Dateien einbinden
+	require_once('../../include/functions.inc.php');
+	require_once('../../include/globals.inc.php');
+// ---------------- Moodle Daten Classe
+	include_once('../../include/moodle19_course.class.php');
 
-$user = get_uid();
-
-$rechte = new benutzerberechtigung();
-$rechte->getBerechtigungen($user);
-
-if(!$rechte->isBerechtigt('basis/moodle'))
-	die('Sie haben keine Berechtigung für diese Seite');
+	require_once('../../include/studiensemester.class.php');
+	require_once('../../include/studiengang.class.php');	
 
 
 // ***********************************************************************************************	

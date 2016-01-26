@@ -49,19 +49,11 @@ abstract class db extends basis
 	abstract function db_fetch_array($result=null);
 	abstract function db_fetch_row($result=null, $i=null);
 	abstract function db_fetch_assoc($result=null, $i=null);
-<<<<<<< HEAD
 	abstract function db_result($result = null, $i,$item);
-=======
-	abstract function db_result($result = null, $i, $item);
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	abstract function db_num_rows($result=null);
 	abstract function db_num_fields($result=null);
 	abstract function db_field_name($result=null, $i);
 	abstract function db_affected_rows($result=null);
-<<<<<<< HEAD
-=======
-	abstract function db_result_seek($result=null, $offset);
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	abstract function db_last_error();
 	abstract function db_free_result($result=null);	
 	abstract function db_version();
@@ -72,10 +64,6 @@ abstract class db extends basis
 	abstract function db_parse_bool($var);
 	abstract function db_implode4SQL($var);
 	abstract function db_getResultJSON($result = null);
-<<<<<<< HEAD
-=======
-	abstract function db_parse_array($var);
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 
 	
 	/**

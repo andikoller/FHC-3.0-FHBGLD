@@ -1,0 +1,33 @@
+\chapter{Einleitung}
+\label{Kapitel Einleitung}
+
+
+Dieses Handbuch erläutert detailliert die Funktionen des Programms TEMPUS\raisebox{1ex}{\tiny \copyright} Version 2.0.
+
+Das Programm wurde von Christian Paminger basierend auf XML entwickelt und programmiert.
+
+TEMPUS\raisebox{1ex}{\tiny \copyright} ist ein Werkzeug zur Erstellung, Wartung und Modifikation von Stundenplänen an Hochschulen, insbesondere an Fachhochschulen und erlaubt es mehreren Usern gleichzeitig, an der selben Datenbank und dem selben Stundenplan zu arbeiten.
+Die Bearbeitung erfolgt wochenweise basierend auf Kalenderwochen.
+Die Steuerung geschieht hauptsächlich per Drag\&Drop.
+
+Es ist darauf zu achten, dass derzeit noch keine vollständige ''Rückgängig-Funktion'' in das Programm integriert wurde. Alle Änderungen werden sofort in die Datenbank übernommen und können nur schwer rekonstruiert werden.
+
+TEMPUS\raisebox{1ex}{\tiny \copyright}  arbeitet mit zwei Datenbanktabellen, die sich in regelmäßigen Abständen synchronisieren.
+Gearbeitet wird in erster Linie auf der Tabelle ''Stundenplandev'' (Entwicklungsoberfläche), die jede Nacht in die Tabelle ''Stundenplan'' kopiert wird.
+Die Tabelle ''Stundenplan'' ist die Onlinetabelle, die von Studenten und Lektoren abgerufen wird.
+Bis zu einem gewissen Grad erlaubt diese Absicherung ein Wiederherstellen von gelöschten Daten.
+Dennoch sollte die Stundenplanung sorgfältig und überlegt  durchgeführt werden, da eine Rekonstruktion der Daten schwierig ist. Gerade beim Löschen von Daten ist dies ratsam.
+Dieser Aufbau ist darüber hinaus die Basis für die automatische Infomail, die beim Synchronisieren alle Änderungen an die betroffenen Studenten und Lektoren kommuniziert.
+
+
+\begin {figure}
+	\centering
+	\includegraphics[width=1.0\textwidth]{SynchroSchema}
+	%\caption{LE-Eigenschaften}
+	\label{Schema}
+\end {figure}
+
+\achtung{Änderungen in der Onlinetabelle werden nicht in die Entwicklungsoberfläche übernommen. Deshalb müssen Sie dringende Änderungen immer in beiden Tabellen durchführen.
+Es werden jede Nacht nur die Daten der Tabelle ''Stundenplandev'' übernommen!}
+
+\info{Auf Grund von unterschiedlichen Berechtigungen sind eventuell nicht alle in diesem Handbuch beschriebenen Features verfügbar}

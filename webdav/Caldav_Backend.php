@@ -5,7 +5,7 @@ require_once(dirname(__FILE__).'/../include/mitarbeiter.class.php');
 /**
  * CalDAV backend
  */
-class MySabre_CalDAV_Backend extends \Sabre\CalDAV\Backend\AbstractBackend 
+class MySabre_CalDAV_Backend extends Sabre_CalDAV_Backend_Abstract 
 {
     /**
      * Creates the backend 
@@ -52,8 +52,8 @@ class MySabre_CalDAV_Backend extends \Sabre\CalDAV\Backend\AbstractBackend
                 'id' => $user,
                 'uri' => 'LVPlan-'.$user,
                 'principaluri' => 'principals/'.$user,
-                '{' . \Sabre\CalDAV\Plugin::NS_CALENDARSERVER . '}getctag' => 'LVPlan-'.$user.'-'.time(),
-                '{' . \Sabre\CalDAV\Plugin::NS_CALDAV . '}supported-calendar-component-set' => new \Sabre\CalDAV\Property\SupportedCalendarComponentSet(array('VEVENT','VTODO')),
+                '{' . Sabre_CalDAV_Plugin::NS_CALENDARSERVER . '}getctag' => 'LVPlan-'.$user.'-'.time(),
+                '{' . Sabre_CalDAV_Plugin::NS_CALDAV . '}supported-calendar-component-set' => new Sabre_CalDAV_Property_SupportedCalendarComponentSet(array('VEVENT','VTODO')),
 				'{DAV:}displayname'                          => 'LVPlan',
 		        '{urn:ietf:params:xml:ns:caldav}calendar-description' => 'description comes here',
 		        '{urn:ietf:params:xml:ns:caldav}calendar-timezone'    => 'Europe/Vienna',
@@ -77,7 +77,7 @@ class MySabre_CalDAV_Backend extends \Sabre\CalDAV\Backend\AbstractBackend
      */
     public function createCalendar($principalUri,$calendarUri, array $properties) 
 	{
-		throw new \Sabre\DAV\Exception('Not Implemented');
+		throw new Sabre_DAV_Exception('Not Implemented');
     }
 
     /**
@@ -129,7 +129,7 @@ class MySabre_CalDAV_Backend extends \Sabre\CalDAV\Backend\AbstractBackend
      */
     public function deleteCalendar($calendarId) 
 	{
-		throw new \Sabre\DAV\Exception('Not Implemented');
+		throw new Sabre_DAV_Exception('Not Implemented');
     }
 
 	
@@ -211,11 +211,7 @@ class MySabre_CalDAV_Backend extends \Sabre\CalDAV\Backend\AbstractBackend
 				foreach($val as $row)
 				{
 					//einzelnen Eintrag holen
-<<<<<<< HEAD
 					if($row['dtstart']==$dtstart && $row['unr'][0]==$unr)
-=======
-					if($row['dtstart']==$dtstart && ($row['unr'][0]==$unr) || $unr=='R'.$row['reservierung_id'])
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 					{
 						return $row;
 					}
@@ -225,10 +221,6 @@ class MySabre_CalDAV_Backend extends \Sabre\CalDAV\Backend\AbstractBackend
 				$data=array_merge($data, $val);
 		}
 		$endtime = microtime(true);
-<<<<<<< HEAD
-=======
-		//error_log("\n\nDATA".print_r($data,true));
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 		//error_log("getCalendarData time:".($endtime-$starttime));
 		//$data.="\nEND:VCALENDAR";
 		return $data;	
@@ -288,22 +280,9 @@ END:VTIMEZONE\n".$event."\nEND:VCALENDAR";
 		$return  = array();
 		foreach($data as $row)
 		{
-<<<<<<< HEAD
 			$return[] = array("id"=>$row['UID'],
 			"calendardata"=>$this->makeCal($row['data']),
 			"uri"=>$row['dtstart'].'-'.$row['unr'][0],
-=======
-			// Reservierungen werden mit einem R markiert und mit der ReservierungID da sonst
-			// Termine verloren gehen koennen wenn zur selben Zeit eine Reservierung und ein LVPlan Eintrag vorhanden ist
-			if($row['reservierung'])
-				$uri = $row['dtstart'].'-R'.$row['reservierung_id'];
-			else
-				$uri = $row['dtstart'].'-'.$row['unr'][0];
-
-			$return[] = array("id"=>$row['UID'],
-			"calendardata"=>$this->makeCal($row['data']),
-			"uri"=>$uri,
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 			"lastmodified"=>$row['updateamum'],
 			"etag"=>'"'.$row['UID'].'"',
 			"calendarid"=>$calendarId);
@@ -361,7 +340,7 @@ END:VTIMEZONE\n".$event."\nEND:VCALENDAR";
      */
     public function createCalendarObject($calendarId,$objectUri,$calendarData) 
 	{
-		throw new \Sabre\DAV\Exception('Not Implemented');
+		throw new Sabre_DAV_Exception('Not Implemented');
     }
 
     /**
@@ -374,7 +353,7 @@ END:VTIMEZONE\n".$event."\nEND:VCALENDAR";
      */
     public function updateCalendarObject($calendarId,$objectUri,$calendarData) 
 	{
-		throw new \Sabre\DAV\Exception('Not Implemented');
+		throw new Sabre_DAV_Exception('Not Implemented');
     }
 
     /**
@@ -386,6 +365,6 @@ END:VTIMEZONE\n".$event."\nEND:VCALENDAR";
      */
     public function deleteCalendarObject($calendarId,$objectUri) 
 	{
-		throw new Sabre\DAV\Exception('Not Implemented');
+		throw new Sabre_DAV_Exception('Not Implemented');
     }
 }

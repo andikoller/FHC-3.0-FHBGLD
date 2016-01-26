@@ -1,0 +1,140 @@
+
+% Last update: Sun Dec  8 21:33:02 CST 2002
+
+%\documentclass[12pt,titlepage,draft]{article} %or: scrartcl
+\documentclass[10pt,titlepage]{article} %or: scrartcl
+\usepackage[latin1]{inputenc}
+
+%\usepackage{hyperlatex}    
+%\htmltitle{Benotungstool}
+%\htmladdress{gerald.raab@technikum-wien.at}
+
+\usepackage{a4,german}
+\usepackage{natbib}
+\usepackage{setspace}
+\usepackage{graphicx}
+\usepackage{rotating}
+\usepackage{rotate}
+\usepackage[pdftex,colorlinks=true,urlcolor=blue,linkcolor=blue]{hyperref}
+%\usepackage{palatino}
+\graphicspath{{../../../images/}}
+\renewcommand{\refname}{Literaturverzeichnis}
+\newcommand{\bq}{\small \singlespacing \begin{quote}}
+\newcommand{\eq}{\end{quote} \onehalfspacing \normalsize} 
+\newcommand{\bc}{\small \singlespacing \hspace{72mm}\parbox{63mm}}
+\newcommand{\ec}{\onehalfspacing \normalsize} 
+
+%\linespread{1.3}
+\setlength{\hoffset}{7mm}
+\setlength{\tolerance}{2000}
+
+\newenvironment{info}[1]{
+    \hspace{-10mm}
+    \fbox{
+        \begin{minipage}{1cm}
+        \includegraphics[width=1cm]{icon_info}
+        \end{minipage}
+        \begin{minipage}{14.5cm}
+        #1
+        \end{minipage}
+    }
+}
+
+\newenvironment{achtung}[1]{
+    \hspace{-10mm}
+    \fbox{
+        \begin{minipage}{1cm}
+        \includegraphics[width=1cm]{icon_achtung}
+        \end{minipage}
+        \begin{minipage}{14.5cm}
+        #1
+        \end{minipage}
+    }
+}
+
+\newenvironment{halt}[1]{
+    \hspace{-10mm}
+    \fbox{
+        \begin{minipage}{1cm}
+        \includegraphics[width=1cm]{icon_halt}
+        \end{minipage}
+        \begin{minipage}{14.5cm}
+        #1
+        \end{minipage}
+    }
+}
+
+\newenvironment{idee}[1]{
+    \hspace{-10mm}
+    \fbox{
+        \begin{minipage}{1cm}
+        \includegraphics[width=1cm]{icon_idee}
+        \end{minipage}
+        \begin{minipage}{14.5cm}
+        #1
+        \end{minipage}
+    }
+}
+
+\begin{document}
+\begin{titlepage}
+\onehalfspacing
+\begin{center}
+\vspace*{30mm}
+%{\Large \textsf {\textbf{Gerald Raab\\}}}
+\vspace{20mm}
+{\LARGE \textsf {\textbf{Handbuch Benotungstool}}}
+\vspace{50mm}
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=0.5\textwidth]{benotungstool_logo_3d.png}
+\end{center}
+\end{figure}
+\today
+
+
+\end{center}
+\end{titlepage}
+
+
+\onehalfspacing
+%\maketitle
+%\newpage
+
+\pagestyle{plain}
+\setcounter{page}{1}
+\pagenumbering{roman}
+
+
+\tableofcontents
+\newpage
+\listoffigures
+\addcontentsline{toc}{section}{Abbildungsverzeichnis}
+\newpage
+
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+\input{news.tex}
+\newpage
+
+\input{quickstart}
+
+\newpage
+
+\input{uebungen}
+\newpage
+
+\input{benotung}
+\newpage
+
+\input{anwesenheit}
+
+\input{statistik}
+\newpage
+
+\input{annex}
+\newpage
+
+\end{document}

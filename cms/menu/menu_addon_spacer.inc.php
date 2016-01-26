@@ -22,7 +22,6 @@
  */
 require_once(dirname(__FILE__).'/menu_addon.class.php');
 
-<<<<<<< HEAD
 class menu_addon_spacer extends menu_addon
 {
 	public function __construct()
@@ -41,25 +40,3 @@ class menu_addon_spacer extends menu_addon
 
 new menu_addon_spacer();
 ?>
-=======
-if(!class_exists('menu_addon_spacer'))
-{
-	class menu_addon_spacer extends menu_addon
-	{
-		public function __construct()
-		{
-			parent::__construct();
-		
-			$this->link=false;
-		
-			$this->block='
-				<br /><br />
-				';
-		
-			$this->output();
-		}	
-	}
-}
-new menu_addon_spacer();
-?>
->>>>>>> fee287127566cd5d18c55b556d178b661711c694

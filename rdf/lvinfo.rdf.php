@@ -34,44 +34,19 @@ require_once('../include/basis_db.class.php');
 require_once('../include/functions.inc.php');
 
 $rdf_url='http://www.technikum-wien.at/lvinfo';
-<<<<<<< HEAD
 
 ?>
 
-=======
-$request=false;
-
-?>
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 <RDF:RDF
 	xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 	xmlns:LVINFO="<?php echo $rdf_url; ?>/rdf#"
 >
-<<<<<<< HEAD
 
 <?php
 if(isset($_GET['stg_kz']) && is_numeric($_GET['stg_kz']))
 	$stg_kz=$_GET['stg_kz'];
 else 
 	unset($stg_kz);
-=======
-<?php
-if(isset($_GET['stg_kz']) && is_numeric($_GET['stg_kz']))
-	{
-		$stg_kz=$_GET['stg_kz'];
-		$request=true;
-	}
-else 
-	unset($stg_kz);
-	
-if(isset($_GET['mitarbeiter_uid']))
-	{
-		$mitarbeiter_uid=$_GET['mitarbeiter_uid'];
-		$request=true;
-	}
-else 
-	unset($mitarbeiter_uid);
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 
 if(isset($_GET['semester']))
 	if(is_numeric($_GET['semester']))
@@ -80,7 +55,6 @@ if(isset($_GET['semester']))
 		die('Semester muss eine gueltige Zahl sein');
 else 
 	unset($sem);
-<<<<<<< HEAD
 
 $qry = "
 SELECT 
@@ -91,23 +65,6 @@ tbl_lehrveranstaltung.bezeichnung as lv_bezeichnung,
 tbl_lehrveranstaltung.bezeichnung_english as lv_bezeichnung_english,
 tbl_lehrveranstaltung.studiengang_kz as lv_studiengang_kz,
 tbl_lehrveranstaltung.semester as lv_semester,
-=======
-	
-if(isset($_GET['studiensemester_kurzbz']))
-	$studiensemester_kurzbz=$_GET['studiensemester_kurzbz'];
-else 
-	unset($studiensemester_kurzbz);
-$db = new basis_db();
-$qry = "
-SELECT DISTINCT
-tbl_lehrveranstaltung.lehrveranstaltung_id as lv_lehrveranstaltung_id, 
-tbl_lehrveranstaltung.kurzbz as lv_kurzbz, 
-tbl_lehrveranstaltung.lehreverzeichnis as lv_lehrevz, 
-tbl_lehrveranstaltung.bezeichnung as lv_bezeichnung, 
-tbl_lehrveranstaltung.bezeichnung_english as lv_bezeichnung_english, 
-tbl_lehrveranstaltung.studiengang_kz as lv_studiengang_kz, 
-tbl_lehrveranstaltung.semester as lv_semester, 
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 tbl_lehrveranstaltung.sprache as unterrichtssprache,
 tbl_lehrveranstaltung.ects as ects,
 tbl_lehrveranstaltung.semesterstunden as lv_semesterstunden,
@@ -115,25 +72,14 @@ tbl_lehrveranstaltung.orgform_kurzbz as orgform_kurzbz,
 tbl_lehrveranstaltung.incoming as incoming,
 lower(tbl_studiengang.typ::varchar(1) || tbl_studiengang.kurzbz) as stg_kuerzel,
 tbl_lvinfo.*
-<<<<<<< HEAD
 FROM (lehre.tbl_lehrveranstaltung JOIN campus.tbl_lvinfo USING(lehrveranstaltung_id)) JOIN public.tbl_studiengang USING(studiengang_kz)
 WHERE 
-=======
-FROM (lehre.tbl_lehrveranstaltung JOIN campus.tbl_lvinfo USING (lehrveranstaltung_id)) 
-JOIN public.tbl_studiengang USING (studiengang_kz)";
-if(isset($mitarbeiter_uid) || isset($studiensemester_kurzbz))
-	$qry.= " JOIN lehre.tbl_lehreinheit USING (lehrveranstaltung_id) ";
-if(isset($mitarbeiter_uid))
-	$qry.= " JOIN lehre.tbl_lehreinheitmitarbeiter USING (lehreinheit_id) ";
-$qry.="WHERE 
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 tbl_lehrveranstaltung.aktiv=true AND
 tbl_lehrveranstaltung.lehre=true AND
 tbl_lvinfo.aktiv=true AND
 tbl_lvinfo.genehmigt=true ";
 
 if(isset($stg_kz))
-<<<<<<< HEAD
 	$qry.= " AND tbl_lehrveranstaltung.studiengang_kz='".addslashes($stg_kz)."'";
 
 if(isset($sem))
@@ -141,24 +87,6 @@ if(isset($sem))
 
 $qry .= "ORDER BY lv_studiengang_kz, lv_semester, lv_kurzbz, sprache";
 $db = new basis_db();
-=======
-	$qry.= " AND tbl_lehrveranstaltung.studiengang_kz=".$db->db_add_param($stg_kz);
-	
-if(isset($mitarbeiter_uid))
-	$qry.= " AND tbl_lehreinheitmitarbeiter.mitarbeiter_uid=".$db->db_add_param($mitarbeiter_uid);
-	
-if(isset($studiensemester_kurzbz))
-	$qry.= " AND tbl_lehreinheit.studiensemester_kurzbz=".$db->db_add_param($studiensemester_kurzbz);
-	
-if(isset($sem))
-	$qry .= " AND tbl_lehrveranstaltung.semester=".$db->db_add_param($sem);
-
-$qry .= " ORDER BY lv_studiengang_kz, lv_semester, lv_kurzbz, sprache";
-//echo $qry;
-if (!$request)
-	$qry='SELECT 1 WHERE 1=2;';
-
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 
 if($db->db_query($qry))
 {
@@ -188,10 +116,6 @@ if($db->db_query($qry))
 			<LVINFO:kurzbeschreibung><![CDATA[<?php echo xmlclean($row->kurzbeschreibung); ?>]]></LVINFO:kurzbeschreibung>
 			<LVINFO:orgform_kurzbz><![CDATA[<?php echo xmlclean($row->orgform_kurzbz); ?>]]></LVINFO:orgform_kurzbz>
 			<LVINFO:incoming><![CDATA[<?php echo xmlclean($row->incoming); ?>]]></LVINFO:incoming>
-<<<<<<< HEAD
-=======
-			<LVINFO:anwesenheit><![CDATA[<?php echo xmlclean($row->anwesenheit); ?>]]></LVINFO:anwesenheit>
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
       	</RDF:Description>
 
 <?php
@@ -221,8 +145,4 @@ if($db->db_query($qry))
 	echo "</RDF:Seq>\n";
 }
 ?>
-<<<<<<< HEAD
 </RDF:RDF>
-=======
-</RDF:RDF>
->>>>>>> fee287127566cd5d18c55b556d178b661711c694

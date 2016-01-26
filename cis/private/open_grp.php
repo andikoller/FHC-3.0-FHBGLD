@@ -105,11 +105,7 @@ if(isset($_REQUEST['token']) && isset($_REQUEST['grp']))
 	$mail_id=mail_id_generator();
 
 	/* call the shellpart at polyxena */
-<<<<<<< HEAD
 	$command = "ssh -p 22022 polyxena sudo /root/bin/mlistin.sh " . $_REQUEST['grp'] . " " . $mail_id . " 2>&1";
-=======
-	$command = "ssh -p 22022 root@polyxena sudo /root/bin/mlistin.sh " . $_REQUEST['grp'] . " " . $mail_id . " 2>&1";
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	exec($command);
 
 	/* ffe, 20051020 - do a little logging */

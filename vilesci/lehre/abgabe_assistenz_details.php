@@ -34,7 +34,6 @@ require_once('../../include/benutzerberechtigung.class.php');
 require_once('../../include/datum.class.php');
 require_once('../../include/mail.class.php');
 require_once('../../include/projektarbeit.class.php');
-require_once('../../include/benutzer.class.php');
 
 $user = get_uid();
 $datum_obj = new datum();
@@ -50,11 +49,7 @@ if(isset($_GET['id']) && isset($_GET['uid']) && isset($_GET['pdfread']))
 	//PDF-Ausgabe vom Aufruf Zeile 689
 	if(!is_numeric($_GET['id']) || $_GET['id']=='')
 		die('Fehler bei Parameteruebergabe');
-
-	$benutzer = new benutzer();
-	if(!$benutzer->load($_GET['uid']))
-		die('User existiert nicht');
-
+	
 	$file = $_GET['id'].'_'.$_GET['uid'].'.pdf';
 	$filename = PAABGABE_PATH.$file;
 
@@ -166,21 +161,6 @@ echo '
 		{
 			return confirm("Wollen Sie diesen Eintrag wirklich loeschen");
 		}
-
-		function checksubmit(id)
-		{
-			if(typeof(id)=="undefined")
-				var datum = document.getElementById("datum").value;
-			else
-				var datum = document.getElementById("datum_"+id).value;
-
-			if(!datum.match(/^(\d{1,2})\.(\d{1,2})\.(\d{4})$/))
-			{
-				alert("Datum muss im Format dd.mm.YYYY eingegeben werden");
-				return false;
-			}
-			return true;
-		}
 	</script>
 </head>
 <body class="Background_main"  style="background-color:#eeeeee;">
@@ -270,28 +250,21 @@ if(isset($_POST["schick"]))
 							{
 								if($row_betr=$db->db_fetch_object($betr))
 								{
-									if($row_betr->mitarbeiter_uid!='')
+									$mail = new mail($row_betr->mitarbeiter_uid."@".DOMAIN, "no-reply@".DOMAIN, "Neuer Termin Bachelor-/Masterarbeitsbetreuung bei Studiengang $stgbez",
+									"Sehr geehrte".($row_betr->anrede=="Herr"?"r":"")." ".$row_betr->anrede." ".$row_betr->first."!\n\nDer Studiengang $stgbez hat einen neuen Termin angelegt für Ihre Betreuung von ".($row_std->anrede=="Herr"?"Herrn":$row_std->anrede)." ".trim($row_std->titelpre." ".$row_std->vorname." ".$row_std->nachname." ".$row_std->titelpost).":\n".($fixtermin==1?'Fixer Termin':'Variabler Termin').", ".$datum_obj->formatDatum($datum,'d.m.Y').", ".$row_typ->bezeichnung.", ".$kurzbz."\n\nMfG\nDie Studiengangsassistenz\n\n--------------------------------------------------------------------------\nDies ist ein vom Bachelor-/Masterarbeitsabgabesystem generiertes Info-Mail\ncis->Mein CIS->Bachelor- und Masterarbeitsabgabe\n--------------------------------------------------------------------------");
+									$mail->setReplyTo($user."@".DOMAIN);
+									if(!$mail->send())
 									{
-										$mail = new mail($row_betr->mitarbeiter_uid."@".DOMAIN, "no-reply@".DOMAIN, "Neuer Termin Bachelor-/Masterarbeitsbetreuung bei Studiengang $stgbez",
-										"Sehr geehrte".($row_betr->anrede=="Herr"?"r":"")." ".$row_betr->anrede." ".$row_betr->first."!\n\nDer Studiengang $stgbez hat einen neuen Termin angelegt für Ihre Betreuung von ".($row_std->anrede=="Herr"?"Herrn":$row_std->anrede)." ".trim($row_std->titelpre." ".$row_std->vorname." ".$row_std->nachname." ".$row_std->titelpost).":\n".($fixtermin==1?'Fixer Termin':'Variabler Termin').", ".$datum_obj->formatDatum($datum,'d.m.Y').", ".$row_typ->bezeichnung.", ".$kurzbz."\n\nMfG\nDie Studiengangsassistenz\n\n--------------------------------------------------------------------------\nDies ist ein vom Bachelor-/Masterarbeitsabgabesystem generiertes Info-Mail\ncis->Mein CIS->Bachelor- und Masterarbeitsabgabe\n--------------------------------------------------------------------------");
-										$mail->setReplyTo($user."@".DOMAIN);
-										if(!$mail->send())
-										{
-											echo "<font color=\"#FF0000\">Fehler beim Versenden des Mails an den (Erst-)Begutachter! ($row_betr->first)</font><br>";	
-										}
-										else 
-										{
-											echo "Mail verschickt an Erstbegutachter: ".$row_betr->first."<br>";
-										}
+										echo "<font color=\"#FF0000\">Fehler beim Versenden des Mails an den (Erst-)Begutachter! ($erst)</font><br>";	
 									}
-									else
+									else 
 									{
-										echo "<font color=\"#FF0000\">Fehler beim Versenden des Mails an den (Erst-)Begutachter(in)! ($row_betr->first ist kein Mitarbeiter)</font><br>&nbsp;<br>";	
+										echo "Mail verschickt an Erstbegutachter: ".$row_betr->first."<br>";
 									}
 								}
 								else 
 								{
-									echo "<font color=\"#FF0000\">Erstbegutachter nicht gefunden. Kein Mail verschickt!</font><br>;";
+									echo "<font color=\"#FF0000\">Erstbegutachter nicht gefunden. Kein Mail verschickt! ($erst)</font><br>;";
 								}
 							}
 							//Mail an Zweitbegutachter
@@ -661,7 +634,7 @@ $htmlstr .= "<tr><td>fix</td><td>Datum</td><td>Abgabetyp</td><td>Kurzbeschreibun
 	$result=$db->db_query($qry);
 	while ($result && $row=$db->db_fetch_object($result))
 	{
-		$htmlstr .= '<form action="'.htmlspecialchars($_SERVER['PHP_SELF']).'" onsubmit="return checksubmit('.$row->paabgabe_id.')" method="POST" name="'.$row->projektarbeit_id.'">'."\n";
+		$htmlstr .= '<form action="'.htmlspecialchars($_SERVER['PHP_SELF']).'" method="POST" name="'.$row->projektarbeit_id.'">'."\n";
 		$htmlstr .= '<input type="hidden" name="projektarbeit_id" value="'.$row->projektarbeit_id.'">'."\n";
 		$htmlstr .= '<input type="hidden" name="paabgabe_id" value="'.$row->paabgabe_id.'">'."\n";
 		$htmlstr .= '<input type="hidden" name="uid" value="'.$db->convert_html_chars($uid).'">'."\n";
@@ -709,7 +682,7 @@ $htmlstr .= "<tr><td>fix</td><td>Datum</td><td>Abgabetyp</td><td>Kurzbeschreibun
 		}
 		$htmlstr .= "<td><input type='checkbox' name='fixtermin' ".($row->fixtermin=='t'?'checked=\"checked\"':'')." >";
 		$htmlstr .= "		</td>\n";
-		$htmlstr .= "		<td><input  type='text' name='datum' id='datum_".$row->paabgabe_id."' style='background-color:".$bgcol.";font-weight:bold; color:".$fcol." ' value='".$datum_obj->formatDatum($row->datum,'d.m.Y')."' size='10' maxlegth='10'></td>\n";
+		$htmlstr .= "		<td><input  type='text' name='datum' style='background-color:".$bgcol.";font-weight:bold; color:".$fcol." ' value='".$datum_obj->formatDatum($row->datum,'d.m.Y')."' size='10' maxlegth='10'></td>\n";
 		$htmlstr .= "		<td><select name='paabgabetyp_kurzbz'>\n";
 		$htmlstr .= "			<option value=''>&nbsp;</option>";
 		$qry_typ="SELECT * FROM campus.tbl_paabgabetyp";
@@ -772,7 +745,7 @@ $htmlstr .= "<tr><td>fix</td><td>Datum</td><td>Abgabetyp</td><td>Kurzbeschreibun
 	}	
 	
 //Eingabezeile für neuen Termin
-$htmlstr .= '<form action="'.htmlspecialchars($_SERVER['PHP_SELF']).'" method="POST" onsubmit="return checksubmit()" name="'.$db->convert_html_chars($projektarbeit_id).'">'."\n";
+$htmlstr .= '<form action="'.htmlspecialchars($_SERVER['PHP_SELF']).'" method="POST" name="'.$db->convert_html_chars($projektarbeit_id).'">'."\n";
 $htmlstr .= '<input type="hidden" name="projektarbeit_id" value="'.$db->convert_html_chars($projektarbeit_id).'">'."\n";
 $htmlstr .= '<input type="hidden" name="paabgabe_id" value="'.$db->convert_html_chars($paabgabe_id).'">'."\n";
 $htmlstr .= '<input type="hidden" name="uid" value="'.$db->convert_html_chars($uid).'">'."\n";
@@ -785,7 +758,7 @@ $htmlstr .= '<tr id="'.$db->convert_html_chars($projektarbeit_id).'">'."\n";
 
 $htmlstr .='<td><input type="checkbox" name="fixtermin"></td>';
 
-$htmlstr .= "		<td><input id='datum' type='text' name='datum' size='10' maxlegth='10' style='font-weight:bold'></td>\n";
+$htmlstr .= "		<td><input  type='text' name='datum' size='10' maxlegth='10' style='font-weight:bold'></td>\n";
 
 $htmlstr .= "		<td><select name='paabgabetyp_kurzbz'>\n";
 $qry_typ = "SELECT * FROM campus.tbl_paabgabetyp";
@@ -796,9 +769,9 @@ while ($result_typ && $row_typ=$db->db_fetch_object($result_typ))
 }		
 $htmlstr .= "		</select></td>\n";
 
-$htmlstr .= "		<td><input type='text' name='kurzbz' size='60' maxlegth='256'></td>\n";		
+$htmlstr .= "		<td><input  type='text' name='kurzbz' size='60' maxlegth='256'></td>\n";		
 $htmlstr .= "		<td>&nbsp;</td>\n";		
-$htmlstr .= "		<td><input type='submit' name='schick'  value='speichern' title='neuen Termin speichern'></td>";
+$htmlstr .= "		<td><input type='submit' name='schick' value='speichern' title='neuen Termin speichern'></td>";
 
 $htmlstr .= "</tr>\n";
 $htmlstr .= "</form>\n";

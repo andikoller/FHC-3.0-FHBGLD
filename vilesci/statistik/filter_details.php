@@ -30,8 +30,8 @@
 	$rechte = new benutzerberechtigung();
 	$rechte->getBerechtigungen($user);
 	
-	if(!$rechte->isBerechtigt('basis/statistik'))
-		die('Sie haben keine Berechtigung fuer diese Seite!');
+	if(!$rechte->isBerechtigt('addon/reports'))
+		die('Sie haben keine Berechtigung fuer dieses AddOn!');
 	
 	
 	$reloadstr = '';  // neuladen der liste im oberen frame
@@ -41,40 +41,34 @@
 	$chk = '';
 
 	$filter = new filter();
-	$filter->filter_id		= '';
+	$filter->filter_id		= 0;
 	$filter->kurzbz			= 'NewFilter';
-	$filter->sql			= 'SELECT foo AS value, bar AS name FROM foobar WHERE ... ORDER BY name';
+	$filter->sql			= '';
 	$filter->valuename		= '';
 	$filter->showvalue		= true;
-	$filter->type			= 'select';
+	$filter->type			= '';
 	$filter->htmlattr		= '';
 	$filter->insertvon		= $user;
 	$filter->updatevon		= $user;
 	
-	if(isset($_POST["action"]) && isset($_REQUEST["filter_id"]))
+	if(isset($_REQUEST["action"]) && isset($_REQUEST["filter_id"]))
 	{
-		if(!$rechte->isBerechtigt('basis/statistik', null, 'suid'))
+		if(!$rechte->isBerechtigt('addon/reports', null, 'suid'))
 			die('Sie haben keine Berechtigung fuer diese Aktion');
 	
-		if ($_POST["action"]=='save')
+		// echo 'DI_ID: '.var_dump((int)$_POST["filter_id"]);
+		// Wenn id > 0 ist -> Neuer Datensatz; ansonsten load und update
+		if ( ((int)$_REQUEST["filter_id"]) > 0)
+			$filter->load((int)$_REQUEST["filter_id"]);
+		if ($_REQUEST["action"]=='save')
 		{
-			if ($_REQUEST["filter_id"]!='')
-			{
-				if($filter->load($_REQUEST["filter_id"]))
-				{
-					$filter->updatevon=$user;					
-				}
-				else
-					die('Fehlgeschlagen:'.$filter->errormsg);
-			}
-
 			$filter->kurzbz = $_POST["kurzbz"];
 			$filter->valuename = $_POST["valuename"];
 			$filter->sql = $_POST["sql"];
 			$filter->showvalue = isset($_POST["showvalue"]);
 			$filter->type = $_POST["type"];
 			$filter->htmlattr = $_POST["htmlattr"];
-
+			
 			if(!$filter->save())
 			{
 				$errorstr .= $filter->errormsg;
@@ -87,8 +81,9 @@
 		}
 	}
 
-	if ((isset($_REQUEST['filter_id'])) && ((!isset($_REQUEST['neu'])) || ($_REQUEST['neu']!= "true")) && is_numeric($_REQUEST['filter_id']))
+	if ((isset($_REQUEST['filter_id'])) && ((!isset($_REQUEST['neu'])) || ($_REQUEST['neu']!= "true")))
 	{
+		//echo 'loadFilter';
 		$filter->load($_REQUEST["filter_id"]);
 		if ($filter->errormsg!='')
 			die($filter->errormsg);
@@ -132,53 +127,54 @@
 	$htmlstr .= "</form>";
 	$htmlstr .= "<div class='inserterror'>".$errorstr."</div>"
 ?>
-<!DOCTYPE HTML>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
-	<head>
-	<title>Filter - Details</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<link rel="stylesheet" href="../../skin/vilesci.css" type="text/css">
-	<script type="text/javascript">
-	function unchanged()
-	{
-			document.filterform.reset();
-			document.filterform.schick.disabled = true;
-			document.getElementById("submsg").style.visibility="hidden";
-			checkrequired(document.filterform.filter_id);
-	}
+<head>
+<title>Filter - Details</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../../skin/vilesci.css" type="text/css">
+<script type="text/javascript">
+function unchanged()
+{
+		document.filterform.reset();
+		document.filterform.schick.disabled = true;
+		document.getElementById("submsg").style.visibility="hidden";
+		checkrequired(document.filterform.filter_id);
+}
 
-	function checkrequired(feld)
+function checkrequired(feld)
+{
+	if(feld.value == '')
 	{
-		if(feld.value == '')
-		{
-			feld.className = "input_error";
-			return false;
-		}
-		else
-		{
-			feld.className = "input_ok";
-			return true;
-		}
+		feld.className = "input_error";
+		return false;
 	}
-
-	function submitable()
+	else
 	{
-		required1 = checkrequired(document.filterform.filter_id);
-
-		if(!required1)
-		{
-			document.filterform.schick.disabled = true;
-			document.getElementById("submsg").style.visibility="hidden";
-		}
-		else
-		{
-			document.filterform.schick.disabled = false;
-			document.getElementById("submsg").style.visibility="visible";
-		}
+		feld.className = "input_ok";
+		return true;
 	}
+}
+
+function submitable()
+{
+	required1 = checkrequired(document.filterform.filter_id);
+
+	if(!required1)
+	{
+		document.filterform.schick.disabled = true;
+		document.getElementById("submsg").style.visibility="hidden";
+	}
+	else
+	{
+		document.filterform.schick.disabled = false;
+		document.getElementById("submsg").style.visibility="visible";
+	}
+}
 </script>
 </head>
-<body>
+<body style="background-color:#eeeeee;">
 
 <?php
 	echo $htmlstr;

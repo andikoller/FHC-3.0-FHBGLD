@@ -32,10 +32,6 @@ require_once('../../../../include/student.class.php');
 
 
 $uid = get_uid();
-<<<<<<< HEAD
-=======
-
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 $db = new basis_db();
 $rechte = new benutzerberechtigung();
 $rechte->getBerechtigungen($uid);
@@ -146,11 +142,7 @@ $studiensemester->getAll();
 		$("#saveDialog").dialog({
 		    modal: true,
 		    autoOpen: false,
-<<<<<<< HEAD
 		    width: "400px"
-=======
-		    width: "auto"
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 		});
 		$("#dialog").dialog({ autoOpen: false });
 		
@@ -293,15 +285,6 @@ $studiensemester->getAll();
 			</td>
 		    </tr>
 		    <tr>
-<<<<<<< HEAD
-=======
-			<td style="vertical-align: top; font-weight: bold;">Studienverpflichtung:* </td>
-			<td>
-			    <select id="studienverpflichtung"></select>
-			</td>
-		    </tr>
-		    <tr>
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 			<td style="vertical-align: top; font-weight: bold;">Bemerkung: </td>
 			<td>
 			    <textarea id="anmeldungBemerkung" rows="10" cols="20"></textarea>

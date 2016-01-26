@@ -92,10 +92,6 @@
   	$hoehe=isset($_REQUEST['hoehe'])?$_REQUEST['hoehe']:'';
 	$breite=isset($_REQUEST['breite'])?$_REQUEST['breite']:'';
 	$tiefe=isset($_REQUEST['tiefe'])?$_REQUEST['tiefe']:'';
-<<<<<<< HEAD
-=======
-	$verplanen=isset($_REQUEST['verplanen'])?$_REQUEST['verplanen']:false;
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	
 	$jahr_monat=trim(isset($_REQUEST['jahr_monat']) ? $_REQUEST['jahr_monat']:'');
   	$inventur_jahr=trim(isset($_REQUEST['inventur_jahr']) ? $_REQUEST['inventur_jahr']:'');
@@ -159,7 +155,7 @@
 
 	$oBetriebsmittelstatus = new betriebsmittelstatus();
 	$oBetriebsmittelstatus->result=array();
-	//$oBetriebsmittelstatus->debug=$debug;
+	$oBetriebsmittelstatus->debug=$debug;
 	$oBetriebsmittelstatus->errormsg='';
 
 	$oBetriebsmittel_betriebsmittelstatus = new betriebsmittel_betriebsmittelstatus();
@@ -169,7 +165,7 @@
 
 	$oBetriebsmittelperson = new betriebsmittelperson();
 	$oBetriebsmittelperson->result=array();
-	//$oBetriebsmittelperson->debug=$debug;
+	$oBetriebsmittelperson->debug=$debug;
 	$oBetriebsmittelperson->errormsg='';
 
 // ------------------------------------------------------------------------------------------
@@ -240,10 +236,6 @@
 			$hoehe = $oBetriebsmittel->hoehe;
 			$breite = $oBetriebsmittel->breite;
 			$tiefe = $oBetriebsmittel->tiefe;
-<<<<<<< HEAD
-=======
-			$verplanen = $oBetriebsmittel->verplanen;
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 
 			$bestellung_id_old=$bestellung_id;
 			$bestelldetail_id_old=$bestelldetail_id;
@@ -837,13 +829,6 @@ if($betriebsmittel_id!='' || $anzahl_lock)
 							<td>
 								<input id="tiefe" name="tiefe" size="4" maxlength="8" value="<?php echo $tiefe;?>">
 							</td>
-<<<<<<< HEAD
-=======
-							<td>&nbsp;<label for="tiefe">Verplanen</label>&nbsp;</td>
-							<td>
-								<input type="checkbox" id="verplanen" name="verplanen" <?php echo ($verplanen?'checked=checked':'');?>>
-							</td>
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 						</tr>
 					</table>
 				</td>
@@ -919,10 +904,6 @@ $anschaffungswert_array=(isset($_REQUEST['anschaffungswert_array'])?$_REQUEST['a
 $hoehe_array=(isset($_REQUEST['hoehe_array'])?$_REQUEST['hoehe_array']:array());
 $breite_array=(isset($_REQUEST['breite_array'])?$_REQUEST['breite_array']:array());
 $tiefe_array=(isset($_REQUEST['tiefe_array'])?$_REQUEST['tiefe_array']:array());
-<<<<<<< HEAD
-=======
-$verplanen_array=(isset($_REQUEST['verplanen_array'])?$_REQUEST['verplanen_array']:array());
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 
 for ($pos=0;$pos<$anzahl;$pos++) 
 {
@@ -952,10 +933,6 @@ for ($pos=0;$pos<$anzahl;$pos++)
 	$hoehe_array[$pos]=isset($hoehe_array[$pos]) && $work=='save' ?trim($hoehe_array[$pos]):$hoehe;
 	$breite_array[$pos]=isset($breite_array[$pos]) && $work=='save' ?trim($breite_array[$pos]):$breite;
 	$tiefe_array[$pos]=isset($tiefe_array[$pos]) && $work=='save' ?trim($tiefe_array[$pos]):$tiefe;
-<<<<<<< HEAD
-=======
-	//$verplanen_array[$pos]=isset($verplanen_array[$pos]) && $work=='save' ?trim($verplanen_array[$pos]):$verplanen;
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	
 	if ($work=='save')
 	{
@@ -1035,14 +1012,6 @@ for ($pos=0;$pos<$anzahl;$pos++)
 				$oBetriebsmittel->tiefe = number_format(str_replace(',','.',$tiefe_array[$pos]),2,'.','');
 			else
 				$oBetriebsmittel->tiefe = '';
-<<<<<<< HEAD
-=======
-
-			if(!isset($verplanen_array[$pos]))
-				$oBetriebsmittel->verplanen = false;
-			else
-				$oBetriebsmittel->verplanen = true;
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 			
 			if ($oBetriebsmittel->save())
 			{
@@ -1613,13 +1582,6 @@ for ($pos=0;$pos<$anzahl;$pos++)
 									<td>
 										<input id="tiefe_array<?php echo $pos; ?>" name="tiefe_array[]" size="4" maxlength="8" value="<?php echo $tiefe_array[$pos];?>">
 									</td>
-<<<<<<< HEAD
-=======
-									<td>&nbsp;<label for="tiefe">Verplanbar</label>&nbsp;</td>
-									<td>
-										<input type="checkbox" id="verplanen_array<?php echo $pos; ?>" name="verplanen_array[]" <?php echo (isset($verplanen_array[$pos]) && $verplanen_array[$pos]?'checked=checked':'');?>>
-									</td>
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 								</tr>
 							</table>
 						</td>

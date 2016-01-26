@@ -1,0 +1,53 @@
+\chapter{Funktionen}
+\label{funktionen}
+Abbildung \ref{Funktionen1} zeigt den Aufbau der Karteikarte \textsl{Funktionen}:
+\begin{itemize}
+	\item Listenfeld: Zeigt die Funktionen der Person an. 
+	\item Details: 	Im Details-bereich können die Funktionen-Daten eingegeben und verändert werden.
+	\begin{itemize}
+		\item Funktion: Funktion, die die Person ausübt.	
+		\item Organisationseinheit: Organisationseinheit in dem die Funktion gültig ist.
+		\item Institut: In einigen Situationen ist es nötig, dass sowohl ein Studiengang (Organisationseinheit) und ein Institut zugeordnet werden muss. 
+		\item Semester: Semester in dem die Funktion gültig ist.
+		\item Bezeichnung: Standardmässig wird die Bezeichnung von der Funktion übernommen
+		\item Gültig von: Datum ab dem die Funktion gültig ist.
+		\item Gültig bis: Datum bis wann die Funktion gültig ist.
+	\end{itemize}
+	\item Button \textsl{Neu}: Start der Eingabe einer Funktion.
+	\item Button \textsl{Loeschen}: Löschen eines markierten Eintrags.
+\end{itemize}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.75\textwidth]{FAS_Funktionen1.png}
+	\caption{Die Karteikarte Funktionen}
+	\label{Funktionen1}
+\end{figure}
+\section{Anlegen von Funktionen}
+\underline{Institutsleiter eintragen:}\\
+Folgende Eingaben sind vorzunehmen:
+\begin{itemize}
+	\item Funktion = Leitung
+	\item Organisationseinheit =  Institut/Bereich, der geleitet wird.
+\end{itemize}
+Abschließend \textbf{Speichern} klicken.\\
+\underline{Institutskoordinator eintragen:}\\
+Es gibt 2 Möglichkeiten Koordinatoren zuzuweisen. 
+\begin{itemize}
+	\item 1.über die Lehrveranstaltung:
+	\begin{itemize}
+		\item Für spezielle Lehrveranstaltungen kann ein eigener Koordinator angegeben werden. Diese werden immer Vorrangig angezeigt. Wenn zu einer LV kein Koordinator zugeteilt ist, wird jener Koordinator angezeigt der die Zuteilung über die Funktion hat. Nähere Information unter \ref{lehrveranstaltung} (Lehrveranstaltung).
+	\end{itemize}
+	\item 2.über die Funktionen
+	\begin{itemize}
+		\item Funktion = Koordinator
+		\item Organisationseinheit = Studiengang der Koordinatorfunktion
+		\item Institut = Institut der Koordination
+	\end{itemize}
+\end{itemize}
+\underline{OE-Zuordnung eintragen:}\\
+Die Zuordnung zur Organisationseinheit wird benötigt um die Hierarchie der Mitarbeiter darzustellen. (Um zB die Freigaben des Urlaubes auf der CIS-Seite verwalten zu können). Wenn keine OE-Zuordnung eingetragen ist, dann werden beim Eintragen von Urlauben auf der CIS keine Freigabemails versendet.
+Folgende Eingaben sind vozunemen:
+\begin{itemize}
+	\item Funktion = OE-Zuordnung
+	\item Organisationseinheit = Organisationseinheit, der die Person zugeordnet werden soll
+\end{itemize}

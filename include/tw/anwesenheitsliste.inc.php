@@ -78,12 +78,7 @@ if(strlen($gruppen)>50)
 	$linebreak="\n";
 else 
 	$linebreak=' ';
-<<<<<<< HEAD
 $pdf->MultiCell(0,15,'Gruppe: '.$gruppen.$linebreak.'Studiensemester: '.$stsem);
-=======
-$semester = new studiensemester($stsem);
-$pdf->MultiCell(0,15,'Gruppe: '.$gruppen.$linebreak.'Studiensemester: '.(($semester->beschreibung != NULL) ? $semester->beschreibung : $stsem));
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	
 $maxY=$pdf->GetY();
 $maxY=getmax($maxY,$pdf->GetY());
@@ -227,7 +222,7 @@ $pdf->SetFont('Arial','',8);
 		$maxX +=20;
 		$pdf->SetXY($maxX,$maxY);
 		$pdf->SetFont('Arial','B',8);
-		$pdf->MultiCell(130,$lineheight,mb_convert_encoding('Hörer/Name','ISO-8859-15','UTF-8'),1,'L',0);
+		$pdf->MultiCell(130,$lineheight,'Hörer/Name',1,'L',0);
 		$maxX +=130;
 		$pdf->SetXY($maxX,$maxY);
 		$pdf->MultiCell(65,$lineheight,'Kennzeichen',1,'C',0);

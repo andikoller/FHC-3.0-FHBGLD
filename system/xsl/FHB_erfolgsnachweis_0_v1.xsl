@@ -20,13 +20,13 @@ xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0" xmlns:style="urn
       <style:table-properties style:width="17.006cm" fo:margin-left="0cm" table:align="left"/>
     </style:style>
     <style:style style:name="Lehrveranstaltungen.A" style:family="table-column">
-      <style:table-column-properties style:column-width="3.000cm"/>
+      <style:table-column-properties style:column-width="2.200cm"/>
     </style:style>
     <style:style style:name="Lehrveranstaltungen.B" style:family="table-column">
-      <style:table-column-properties style:column-width="0.026cm"/>
+      <style:table-column-properties style:column-width="0.326cm"/>
     </style:style>
     <style:style style:name="Lehrveranstaltungen.C" style:family="table-column">
-      <style:table-column-properties style:column-width="7.049cm"/>
+      <style:table-column-properties style:column-width="7.549cm"/>
     </style:style>
     <style:style style:name="Lehrveranstaltungen.D" style:family="table-column">
       <style:table-column-properties style:column-width="1.362cm"/>
@@ -50,12 +50,12 @@ xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0" xmlns:style="urn
       <style:table-row-properties style:min-row-height="0.4cm"/>
     </style:style>
     <style:style style:name="Lehrveranstaltungen.A1" style:family="table-cell">
-      <style:table-cell-properties fo:background-color="#b3b3b3" fo:padding="0.097cm" fo:border-left="0.30pt solid #000000" fo:border-right="none" fo:border-top="0.30pt solid #000000" fo:border-bottom="0.30pt solid #000000">
+      <style:table-cell-properties fo:background-color="#b3b3b3" fo:padding="0.097cm" fo:border-left="0.05pt solid #000000" fo:border-right="none" fo:border-top="0.05pt solid #000000" fo:border-bottom="0.05pt solid #000000">
         <style:background-image/>
       </style:table-cell-properties>
     </style:style>
     <style:style style:name="Lehrveranstaltungen.I1" style:family="table-cell">
-      <style:table-cell-properties fo:background-color="#b3b3b3" fo:padding="0.097cm" fo:border="0.30pt solid #000000">
+      <style:table-cell-properties fo:background-color="#b3b3b3" fo:padding="0.097cm" fo:border="0.05pt solid #000000">
         <style:background-image/>
       </style:table-cell-properties>
     </style:style>
@@ -63,22 +63,22 @@ xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0" xmlns:style="urn
       <style:table-row-properties style:min-row-height="0.6cm"/>
     </style:style>
     <style:style style:name="Lehrveranstaltungen.A2" style:family="table-cell">
-      <style:table-cell-properties style:vertical-align="middle" fo:background-color="#e6e6e6" fo:padding="0.097cm" fo:border-left="0.30pt solid #000000" fo:border-right="none" fo:border-top="0.30pt solid #000000" fo:border-bottom="0.30pt solid #000000">
+      <style:table-cell-properties style:vertical-align="middle" fo:background-color="#e6e6e6" fo:padding="0.097cm" fo:border-left="0.05pt solid #000000" fo:border-right="none" fo:border-top="0.05pt solid #000000" fo:border-bottom="0.05pt solid #000000">
         <style:background-image/>
       </style:table-cell-properties>
     </style:style>
     <style:style style:name="Lehrveranstaltungen.D2" style:family="table-cell">
-      <style:table-cell-properties style:vertical-align="middle" fo:background-color="#e6e6e6" fo:padding="0.097cm" fo:border-left="none" fo:border-right="none" fo:border-top="0.30pt solid #000000" fo:border-bottom="0.30pt solid #000000">
+      <style:table-cell-properties style:vertical-align="middle" fo:background-color="#e6e6e6" fo:padding="0.097cm" fo:border-left="none" fo:border-right="none" fo:border-top="0.05pt solid #000000" fo:border-bottom="0.05pt solid #000000">
         <style:background-image/>
       </style:table-cell-properties>
     </style:style>
     <style:style style:name="Lehrveranstaltungen.I2" style:family="table-cell">
-      <style:table-cell-properties style:vertical-align="middle" fo:background-color="#e6e6e6" fo:padding="0.097cm" fo:border-left="none" fo:border-right="0.30pt solid #000000" fo:border-top="0.30pt solid #000000" fo:border-bottom="0.30pt solid #000000">
+      <style:table-cell-properties style:vertical-align="middle" fo:background-color="#e6e6e6" fo:padding="0.097cm" fo:border-left="none" fo:border-right="0.05pt solid #000000" fo:border-top="0.05pt solid #000000" fo:border-bottom="0.05pt solid #000000">
         <style:background-image/>
       </style:table-cell-properties>
     </style:style>
     <style:style style:name="Lehrveranstaltungen.A3" style:family="table-cell">
-      <style:table-cell-properties fo:padding="0.147cm" fo:border-left="0.30pt solid #000000" fo:border-right="none" fo:border-top="none" fo:border-bottom="none"/>
+      <style:table-cell-properties fo:padding="0.147cm" fo:border="none"/>
     </style:style>
     <style:style style:name="Lehrveranstaltungen.B3" style:family="table-cell">
       <style:table-cell-properties fo:padding="0.097cm" fo:border="none"/>
@@ -87,25 +87,25 @@ xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0" xmlns:style="urn
       <style:table-cell-properties fo:padding="0.097cm" fo:border="none"/>
     </style:style>
     <style:style style:name="Lehrveranstaltungen.D3" style:family="table-cell">
-      <style:table-cell-properties fo:padding="0.097cm" fo:border-left="0.30pt solid #000000" fo:border-right="none" fo:border-top="0.30pt solid #000000" fo:border-bottom="0.30pt solid #000000"/>
+      <style:table-cell-properties fo:padding="0.097cm" fo:border-left="0.05pt solid #000000" fo:border-right="none" fo:border-top="0.05pt solid #000000" fo:border-bottom="0.05pt solid #000000"/>
     </style:style>
     <style:style style:name="Lehrveranstaltungen.E3" style:family="table-cell">
-      <style:table-cell-properties fo:padding="0.097cm" fo:border-left="0.30pt solid #000000" fo:border-right="none" fo:border-top="0.30pt solid #000000" fo:border-bottom="0.30pt solid #000000"/>
+      <style:table-cell-properties fo:padding="0.097cm" fo:border-left="0.05pt solid #000000" fo:border-right="none" fo:border-top="0.05pt solid #000000" fo:border-bottom="0.05pt solid #000000"/>
     </style:style>
     <style:style style:name="Lehrveranstaltungen.F3" style:family="table-cell">
-      <style:table-cell-properties fo:padding="0.097cm" fo:border-left="0.30pt solid #000000" fo:border-right="none" fo:border-top="0.30pt solid #000000" fo:border-bottom="0.30pt solid #000000"/>
+      <style:table-cell-properties fo:padding="0.097cm" fo:border-left="0.05pt solid #000000" fo:border-right="none" fo:border-top="0.05pt solid #000000" fo:border-bottom="0.05pt solid #000000"/>
     </style:style>
     <style:style style:name="Lehrveranstaltungen.G3" style:family="table-cell">
-      <style:table-cell-properties fo:padding="0.097cm" fo:border-left="0.30pt solid #000000" fo:border-right="none" fo:border-top="0.30pt solid #000000" fo:border-bottom="0.30pt solid #000000"/>
+      <style:table-cell-properties fo:padding="0.097cm" fo:border-left="0.05pt solid #000000" fo:border-right="none" fo:border-top="0.05pt solid #000000" fo:border-bottom="0.05pt solid #000000"/>
     </style:style>
     <style:style style:name="Lehrveranstaltungen.H3" style:family="table-cell">
-      <style:table-cell-properties fo:padding="0.097cm" fo:border-left="0.30pt solid #000000" fo:border-right="none" fo:border-top="0.30pt solid #000000" fo:border-bottom="0.30pt solid #000000"/>
+      <style:table-cell-properties fo:padding="0.097cm" fo:border-left="0.05pt solid #000000" fo:border-right="none" fo:border-top="0.05pt solid #000000" fo:border-bottom="0.05pt solid #000000"/>
     </style:style>
     <style:style style:name="Lehrveranstaltungen.I3" style:family="table-cell">
-      <style:table-cell-properties fo:padding="0.097cm" fo:border="0.30pt solid #000000"/>
+      <style:table-cell-properties fo:padding="0.097cm" fo:border="0.05pt solid #000000"/>
     </style:style>
     <style:style style:name="Lehrveranstaltungen.A4" style:family="table-cell">
-      <style:table-cell-properties fo:padding="0.097cm" fo:border-left="0.30pt solid #000000" fo:border-right="none" fo:border-top="none" fo:border-bottom="none"/>
+      <style:table-cell-properties fo:padding="0.097cm" fo:border="none"/>
     </style:style>
     <style:style style:name="Lehrveranstaltungen.B4" style:family="table-cell">
       <style:table-cell-properties fo:padding="0.097cm" fo:border="none"/>
@@ -114,28 +114,28 @@ xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0" xmlns:style="urn
       <style:table-cell-properties fo:padding="0.097cm" fo:border="none"/>
     </style:style>
     <style:style style:name="Lehrveranstaltungen.D4" style:family="table-cell">
-      <style:table-cell-properties fo:padding="0.097cm" fo:border-left="0.30pt solid #000000" fo:border-right="none" fo:border-top="none" fo:border-bottom="0.30pt solid #000000"/>
+      <style:table-cell-properties fo:padding="0.097cm" fo:border-left="0.05pt solid #000000" fo:border-right="none" fo:border-top="none" fo:border-bottom="0.05pt solid #000000"/>
     </style:style>
     <style:style style:name="Lehrveranstaltungen.E4" style:family="table-cell">
-      <style:table-cell-properties fo:padding="0.097cm" fo:border-left="0.30pt solid #000000" fo:border-right="none" fo:border-top="none" fo:border-bottom="0.30pt solid #000000"/>
+      <style:table-cell-properties fo:padding="0.097cm" fo:border-left="0.05pt solid #000000" fo:border-right="none" fo:border-top="none" fo:border-bottom="0.05pt solid #000000"/>
     </style:style>
     <style:style style:name="Lehrveranstaltungen.F4" style:family="table-cell">
-      <style:table-cell-properties fo:padding="0.097cm" fo:border-left="0.30pt solid #000000" fo:border-right="none" fo:border-top="none" fo:border-bottom="0.30pt solid #000000"/>
+      <style:table-cell-properties fo:padding="0.097cm" fo:border-left="0.05pt solid #000000" fo:border-right="none" fo:border-top="none" fo:border-bottom="0.05pt solid #000000"/>
     </style:style>
     <style:style style:name="Lehrveranstaltungen.G4" style:family="table-cell">
-      <style:table-cell-properties fo:padding="0.097cm" fo:border-left="0.30pt solid #000000" fo:border-right="none" fo:border-top="none" fo:border-bottom="0.30pt solid #000000"/>
+      <style:table-cell-properties fo:padding="0.097cm" fo:border-left="0.05pt solid #000000" fo:border-right="none" fo:border-top="none" fo:border-bottom="0.05pt solid #000000"/>
     </style:style>
     <style:style style:name="Lehrveranstaltungen.H4" style:family="table-cell">
-      <style:table-cell-properties fo:padding="0.097cm" fo:border-left="0.30pt solid #000000" fo:border-right="none" fo:border-top="none" fo:border-bottom="0.30pt solid #000000"/>
+      <style:table-cell-properties fo:padding="0.097cm" fo:border-left="0.05pt solid #000000" fo:border-right="none" fo:border-top="none" fo:border-bottom="0.05pt solid #000000"/>
     </style:style>
     <style:style style:name="Lehrveranstaltungen.I4" style:family="table-cell">
-      <style:table-cell-properties fo:padding="0.097cm" fo:border-left="0.30pt solid #000000" fo:border-right="0.30pt solid #000000" fo:border-top="none" fo:border-bottom="0.30pt solid #000000"/>
+      <style:table-cell-properties fo:padding="0.097cm" fo:border-left="0.05pt solid #000000" fo:border-right="0.05pt solid #000000" fo:border-top="none" fo:border-bottom="0.05pt solid #000000"/>
     </style:style>
     <style:style style:name="Lehrveranstaltungen.5" style:family="table-row">
       <style:table-row-properties style:row-height="0.527cm"/>
     </style:style>
     <style:style style:name="Lehrveranstaltungen.A5" style:family="table-cell">
-      <style:table-cell-properties style:vertical-align="middle" fo:background-color="#b3b3b3" fo:padding="0.097cm" fo:border-left="0.30pt solid #000000" fo:border-right="none" fo:border-top="0.30pt solid #000000" fo:border-bottom="0.30pt solid #000000">
+      <style:table-cell-properties style:vertical-align="middle" fo:background-color="#b3b3b3" fo:padding="0.097cm" fo:border-left="0.05pt solid #000000" fo:border-right="none" fo:border-top="0.05pt solid #000000" fo:border-bottom="0.05pt solid #000000">
         <style:background-image/>
       </style:table-cell-properties>
     </style:style>
@@ -399,21 +399,12 @@ xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0" xmlns:style="urn
       <text:p text:style-name="P3"/>
       <text:p text:style-name="PLegend"><text:soft-page-break/>Legende: WS=Wintersemester, SS=Sommersemester, SWS=Semesterwochenstunden, LV-Art=Lehrveranstaltungsart, VO=Vorlesung, UE=Übung, BP=Praktikum, SE=Seminar, EX=Exkursion, PT=Projekt, AWPF=Wahlpflichtfach, RU=Rechenübung, ILV=integr. LV, LB=Laborübung, PS=Proseminar, WK=Workshop, WA=Wiss. Arbeit, WP=Wirtschaftspraktikum, MT=Managementtechniken, MODUL=gemeinsame Bewertung mehrerer Lehrveranstaltungen mit einer Modulnote</text:p>
       <text:p text:style-name="PLegend"/>
-      <text:p text:style-name="PLegend">1 SWS=15 Lehrveranstaltungsstunden, m.E.tg.=mit Erfolg teilgenommen, o.E.tg.=ohne Erfolg teilgenommen, an=anerkannt</text:p>
+      <text:p text:style-name="PLegend">1 SWS=15 Lehrveranstaltungsstunden, m.E.tg.=mit Erfolg teilgenommen, o.E.tg.=ohne Erfolg teilgenommen</text:p>
       <text:p text:style-name="PLegend">Nationale Beurteilung: 1=Sehr Gut, 2=Gut, 3=Befriedigend, 4=Genügend, 5=Nicht Genügend</text:p>
       <text:p text:style-name="PLegend">Internationale Beurteilung (ECTS Notenskala): A/B=Sehr Gut, C=Gut, D=Befriedigend, E=Genügend, F=Nicht Genügend</text:p>
       <text:p text:style-name="PLegendEmpty"/>
       <text:p text:style-name="PLegendEmpty"/>
-         
-      <xsl:choose>
-		<xsl:when test="studiengang_kz=265 or studiengang_kz=268 or studiengang_kz=761 or studiengang_kz=760 or studiengang_kz=266 or studiengang_kz=267 or studiengang_kz=764 or studiengang_kz=269 or studiengang_kz=400">
-			<text:p text:style-name="PDatumOrt">Pinkafeld, am <xsl:value-of select="datum_aktuell"/></text:p>
-		</xsl:when>
-		<xsl:otherwise>
-			<text:p text:style-name="PDatumOrt">Eisenstadt, am <xsl:value-of select="datum_aktuell"/></text:p>
-		</xsl:otherwise>
-      </xsl:choose>
-      
+      <text:p text:style-name="PDatumOrt">Pinkafeld, am <xsl:value-of select="datum_aktuell"/></text:p>
       <table:table table:name="Tabelle2" table:style-name="Tabelle2">
         <table:table-column table:style-name="Tabelle2.A"/>
         <table:table-column table:style-name="Tabelle2.B"/>
@@ -498,16 +489,7 @@ xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0" xmlns:style="urn
 			</text:p>
           </table:table-cell>
           <table:table-cell table:style-name="Lehrveranstaltungen.H3" office:value-type="string">
-            <text:p text:style-name="P17">
-				<xsl:choose>
-					<xsl:when test="noteidx=9"> <!-- noch nicht eingetragen nicht anzeigen -->
-						<xsl:text></xsl:text>
-					</xsl:when>
-					<xsl:otherwise>
-	         			<xsl:value-of select="note"/>
-	         		</xsl:otherwise>
-            	</xsl:choose>						
-			</text:p>
+            <text:p text:style-name="P17"><xsl:value-of select="note"/></text:p>
           </table:table-cell>
           <table:table-cell table:style-name="Lehrveranstaltungen.I3" office:value-type="string">
             <text:p text:style-name="P17">
@@ -538,9 +520,6 @@ xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0" xmlns:style="urn
             		</xsl:when>
             		<xsl:when test="noteidx=8">
             			<xsl:text>p.wo.s.</xsl:text>
-            		</xsl:when>
-					<xsl:when test="noteidx=9">
-            			<xsl:text></xsl:text>
             		</xsl:when>
             		<xsl:otherwise>
 	         			<xsl:value-of select="noteidx" />
@@ -584,16 +563,7 @@ xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0" xmlns:style="urn
 			</text:p>
           </table:table-cell>
           <table:table-cell table:style-name="Lehrveranstaltungen.H3" office:value-type="string">
-            <text:p text:style-name="P17">
-				<xsl:choose>
-					<xsl:when test="noteidx=9"> <!-- noch nicht eingetragen nicht anzeigen -->
-						<xsl:text></xsl:text>
-					</xsl:when>
-					<xsl:otherwise>
-	         			<xsl:value-of select="note"/>
-	         		</xsl:otherwise>
-            	</xsl:choose>			
-			</text:p>
+            <text:p text:style-name="P17"><xsl:value-of select="note"/></text:p>
           </table:table-cell>
           <table:table-cell table:style-name="Lehrveranstaltungen.I3" office:value-type="string">
             <text:p text:style-name="P17">
@@ -624,9 +594,6 @@ xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0" xmlns:style="urn
             		</xsl:when>
             		<xsl:when test="noteidx=8">
             			<xsl:text>p.wo.s.</xsl:text>
-            		</xsl:when>
-					<xsl:when test="noteidx=9">
-            			<xsl:text></xsl:text>
             		</xsl:when>
             		<xsl:otherwise>
          				<xsl:value-of select="noteidx" />
@@ -662,26 +629,16 @@ xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0" xmlns:style="urn
       </table:table-cell>
       <table:table-cell table:style-name="Lehrveranstaltungen.G4" office:value-type="string">
         <text:p text:style-name="P17">
-			<!-- keine ECTS in 3. Ebene sondern nur einen Strich
 			<xsl:if test="positiv='Ja'">
 				<xsl:value-of select="ects"/>
 			</xsl:if>
-			-->
-			<xsl:text>-</xsl:text>
 		</text:p>
       </table:table-cell>
       <table:table-cell table:style-name="Lehrveranstaltungen.H4" office:value-type="string">
-        <text:p text:style-name="P17">
-			<!--
-			Keine Note in 3. Ebene anzeigen sondern nur einen Strich
-			<xsl:value-of select="note"/>
-			-->
-			<xsl:text>-</xsl:text>
-		</text:p>
+        <text:p text:style-name="P17"><xsl:value-of select="note"/></text:p>
       </table:table-cell>
       <table:table-cell table:style-name="Lehrveranstaltungen.I4" office:value-type="string">
         <text:p text:style-name="P17">
-		<!-- Keine Note in 3. Ebene anzeigen sondern nur einen Strich
       	 <xsl:choose>
          		<xsl:when test="noteidx=0">
          			<xsl:text>A</xsl:text>
@@ -714,8 +671,6 @@ xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0" xmlns:style="urn
          			<xsl:value-of select="noteidx" />
          		</xsl:otherwise>
          	</xsl:choose>
-		-->
-		<xsl:text>-</xsl:text>
         </text:p>
       </table:table-cell>
     </table:table-row>

@@ -32,14 +32,7 @@ class local_fhcompletews_external extends external_api
 	public static function get_course_grades_parameters() 
 	{
         return new external_function_parameters(
-<<<<<<< HEAD
                 array('courseid' => new external_value(PARAM_INT, 'CourseID')), 'ID of the Course'
-=======
-                array(
-					'courseid' => new external_value(PARAM_INT, 'Moodle CourseID'),
-					'type' => new external_value(PARAM_INT,'Type 1=Punkte, 2=Prozent, 3=Endnote lt Skala')
-				), 'Get Course Grades'
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
         );
     }
 
@@ -48,11 +41,7 @@ class local_fhcompletews_external extends external_api
      * @param int courseid
      * @return array
      */
-<<<<<<< HEAD
     public static function get_course_grades($courseid) 
-=======
-    public static function get_course_grades($courseid, $type) 
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	{
         global $CFG, $DB;
         require_once($CFG->dirroot . "/course/lib.php");
@@ -60,16 +49,9 @@ class local_fhcompletews_external extends external_api
 
         //validate parameter
         $params = self::validate_parameters(self::get_course_grades_parameters(),
-<<<<<<< HEAD
                         array('courseid' => $courseid));
 
 		$notenart=3; // 2=Prozent; 3=Endnote nach Skala
-=======
-                        array('courseid' => $courseid, 'type'=>$type));
-
-		$notenart = $type;
-		//$notenart=3; // 1=Punkte, 2=Prozent; 3=Endnote nach Skala
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 		$gui=array();	  
 		$final_id='';
 		$data = array();
@@ -139,13 +121,6 @@ class local_fhcompletews_external extends external_api
 			  	$gradestr = $export->format_grade($userdata->grades[$final_id]);
 		     	$user_item['note']=$gradestr;
 
-<<<<<<< HEAD
-=======
-				// Wenn Prozent dann Prozentzeichen entfernen
-				if(strpos($user_item['note'],'%')!==false)
-			     	$user_item['note']=trim(str_replace('%','',$user_item['note']));
-
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 				// nur zurueckliefern wenn eine Note gefunden wurde und diese nicht '-' ist
 				if($user_item['note']!='-')
 					$data[]=$user_item;

@@ -1,0 +1,13 @@
+Order deny,allow
+Deny from all
+Allow from 192.168.9.13
+
+AuthBasicProvider ldap
+AuthType Basic
+AuthName "FH-Burgenland"
+AuthLDAPURL ldap://fhs-thetis:3268/dc=fhe,dc=intern?sAMAccountName?sub
+AuthLDAPBindDN "CN=fhcomplete,OU=MM,OU=User,OU=Technik,DC=fhe,DC=intern"
+AuthLDAPBindPassword "Jg%72Qa=hb4W"
+require valid-user
+
+satisfy any

@@ -1,0 +1,45 @@
+\chapter{Kollisionen}
+\label{Kapitel Kollisionen}
+
+TEMPUS\raisebox{1ex}{\tiny \copyright} 2.0 überprüft bei Eintragungen und Verschiebungen im LV-Plan die Verfügbarkeit von Lektoren, Studenten und Räumen, sowie Zeitsperren der Lektoren und Reservierungen. Sollte es zu einer Terminkollision mit einem der drei Pläne kommen, erscheint eine Fehlermeldung und die Aktion wird abgebrochen.
+Durch Deaktivieren der Kollisionsüberprüfungen kann dies umgangen werden.\\
+Im folgenden werden die Möglichkeiten beschrieben, wie dies möglich ist.
+
+\info{Dieses Feature ist möglicherweise wegen eingeschränkter Berechtigungen nicht verfügbar}
+\info{In TEMPUS\raisebox{1ex}{\tiny \copyright} wird eine Kollision durch einen blinkenden Eintrag angezeigt.}
+
+\section{Die Arten der Kollsionen}
+
+Im wesentlichen wird zwischen 3 Kollisionsarten unterschieden:
+
+\begin{itemize}
+\item Kollision mit eingetragenen Terminen des Lektors, der Studenten oder des Raumes
+\item Kollision mit einer Reservierung
+\item Kollision mit einer Zeitsperre
+\end{itemize}
+
+\section{Kollisionen erzwingen}
+
+Sie haben im Quellmenü bei den Einstellungen die Möglichkeit, diese drei verschiedene Kollisionsüberprüfungen zu deaktivieren, bzw. zu aktivieren.
+
+Nach anklicken einer Option signalisiert ein Häkchen, ob die Überprüfung aktiv ist, oder nicht. Außerdem stoppt das Blinken der kollidierenden Eintragungen im LV-Plan.\\
+Eine aktivierte ''ignore\_kollision'' deaktiviert jedoch nur einen Teil der Überprüfung. Es ist danach NICHT möglich, eine bereits verplante Einheit, auf einen kollidierenden Termin zu schieben.
+Jedoch können Sie eine Lehreinheit ohne Kollision aus der LFVT in den Plan ziehen und so eine Doppelbelegung erzwingen.\\
+
+\achtung{SEIN SIE BEIM PLANEN OHNE KOLLISIONSÜBERPRÜFUNG VORSICHTIG UND AKTIVIEREN SIE DIESE WIEDER NACH GEBRAUCH.
+SIE VERMEIDEN DAMIT FEHLER UND UNBEABSICHTIGTE FEHLPLANUNGEN.}\\
+
+Eine zweite Möglichkeit eine Kollision zu erzwingen ist über das Detailfeld.
+Klicken Sie eine Lehreinheit an. Im Detailfenster wird die Einheit nun genau aufgeschlüsselt.
+Durch das Anklicken mit der rechten Maustaste können Sie nun einzelne Einträge im Kontextmenü durch Auswählen von ''Bearbeiten'' editieren.
+Im erscheinenden Formularfeld können Sie nun \textbf{OHNE KOLLISIONSÜBERPRÜFUNG} verschiedene Attribute wie den Ort und das Datum der LV verändern.
+Drücken Sie anschließend auf \fbox{Speichern}
+
+\section{Kollisionen auf Studentenebene}
+Die normale Kollisionsprüfung prüft die Kollisionen anhand der Gruppen. Bei der Verwendung von mehreren Spezial- oder Modulgruppen ist dies nicht immer optimal.
+Unter dem Menü Einstellungen kann die Option kollision\_student aktiviert werden. Wenn diese Einstellung aktiv ist, dann werden die Kollisionen nicht anhand der Gruppen geprüft sondern pro Student.\\
+Bitte beachten Sie, dass diese Art der Kollisionsprüfung erst dann sinnvoll ist, wenn bereits Studenten zu den Gruppen zugeordnet wurden.\\
+\\
+\achtung{Diese Art der Kollisionsprüfung ist sehr Rechenintensiv und führt zu längeren Wartezeiten beim Verplanen.}\\
+
+Alternativ dazu können Sie die Kollisionsprüfung auf Studentenebene auch nach der Erstellung des Planes prüfen. Dies geschieht über den Menüpunkt Extras->Kollision Student.

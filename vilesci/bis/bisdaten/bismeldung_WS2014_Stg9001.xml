@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Erhalter>
+  <ErhKz>001</ErhKz>
+  <MeldeDatum>15112014</MeldeDatum>
+  <StudierendenBewerberMeldung>
+    <Studiengang>
+      <StgKz>9001</StgKz>
+		<StudentIn>
+			<PersKz>1419001001</PersKz>
+			<GeburtsDatum>12081966</GeburtsDatum>
+			<Geschlecht>W</Geschlecht>
+			<Vorname>Vesna</Vorname>
+			<Familienname>Kotarski</Familienname>
+			<ErsKz>GTEX120866</ErsKz>
+			<StaatsangehoerigkeitCode>CRO</StaatsangehoerigkeitCode>
+			<HeimatPLZ>10000</HeimatPLZ>
+			<HeimatGemeinde>Zagreb</HeimatGemeinde>
+			<HeimatStrasse><![CDATA[Svetog Mateja 43]]></HeimatStrasse>
+			<HeimatNation>CRO</HeimatNation>
+			<StudStatusCode>1</StudStatusCode>
+				<BMWFWfoerderrelevant>N</BMWFWfoerderrelevant>
+		</StudentIn>
+		<StudentIn>
+			<PersKz>1419001002</PersKz>
+			<GeburtsDatum>18051973</GeburtsDatum>
+			<Geschlecht>M</Geschlecht>
+			<SVNR>4321180573</SVNR>
+			<StaatsangehoerigkeitCode>A</StaatsangehoerigkeitCode>
+			<HeimatPLZ>1050</HeimatPLZ>
+			<HeimatGemeinde>Wien</HeimatGemeinde>
+			<HeimatStrasse><![CDATA[Stolberggasse 31-33/2/17]]></HeimatStrasse>
+			<HeimatNation>A</HeimatNation>
+			<StudStatusCode>1</StudStatusCode>
+				<BMWFWfoerderrelevant>N</BMWFWfoerderrelevant>
+		</StudentIn>
+		<StudentIn>
+			<PersKz>1419001003</PersKz>
+			<GeburtsDatum>23111978</GeburtsDatum>
+			<Geschlecht>W</Geschlecht>
+			<SVNR>1122231178</SVNR>
+			<StaatsangehoerigkeitCode>A</StaatsangehoerigkeitCode>
+			<HeimatPLZ>7202</HeimatPLZ>
+			<HeimatGemeinde>Bad Sauerbrunn</HeimatGemeinde>
+			<HeimatStrasse><![CDATA[Wr. Neustädter Straße 20 a]]></HeimatStrasse>
+			<HeimatNation>A</HeimatNation>
+			<StudStatusCode>1</StudStatusCode>
+				<BMWFWfoerderrelevant>N</BMWFWfoerderrelevant>
+		</StudentIn>
+		<StudentIn>
+			<PersKz>1419001004</PersKz>
+			<GeburtsDatum>16091963</GeburtsDatum>
+			<Geschlecht>M</Geschlecht>
+			<SVNR>5190160963</SVNR>
+			<StaatsangehoerigkeitCode>A</StaatsangehoerigkeitCode>
+			<HeimatPLZ>2523</HeimatPLZ>
+			<HeimatGemeinde>Tattendorf</HeimatGemeinde>
+			<HeimatStrasse><![CDATA[Ludwig Wenger Straße 3 a]]></HeimatStrasse>
+			<HeimatNation>A</HeimatNation>
+			<StudStatusCode>1</StudStatusCode>
+				<BMWFWfoerderrelevant>N</BMWFWfoerderrelevant>
+		</StudentIn>
+		<StudentIn>
+			<PersKz>1419001005</PersKz>
+			<GeburtsDatum>06111979</GeburtsDatum>
+			<Geschlecht>W</Geschlecht>
+			<SVNR>1876061179</SVNR>
+			<StaatsangehoerigkeitCode>A</StaatsangehoerigkeitCode>
+			<HeimatPLZ>1010</HeimatPLZ>
+			<HeimatGemeinde>Wien</HeimatGemeinde>
+			<HeimatStrasse><![CDATA[Hofburg, Schweizer Trakt, Top 65]]></HeimatStrasse>
+			<HeimatNation>A</HeimatNation>
+			<StudStatusCode>1</StudStatusCode>
+				<BMWFWfoerderrelevant>N</BMWFWfoerderrelevant>
+		</StudentIn>
+		<StudentIn>
+			<PersKz>1419001006</PersKz>
+			<GeburtsDatum>06111965</GeburtsDatum>
+			<Geschlecht>W</Geschlecht>
+			<SVNR>3940061165</SVNR>
+			<StaatsangehoerigkeitCode>A</StaatsangehoerigkeitCode>
+			<HeimatPLZ>7062</HeimatPLZ>
+			<HeimatGemeinde>Sankt Margarethen im Burgenland</HeimatGemeinde>
+			<HeimatStrasse><![CDATA[Lerchengasse 20]]></HeimatStrasse>
+			<HeimatNation>A</HeimatNation>
+			<StudStatusCode>1</StudStatusCode>
+				<BMWFWfoerderrelevant>N</BMWFWfoerderrelevant>
+		</StudentIn>
+		<StudentIn>
+			<PersKz>1419001007</PersKz>
+			<GeburtsDatum>04021985</GeburtsDatum>
+			<Geschlecht>M</Geschlecht>
+			<SVNR>1529040285</SVNR>
+			<StaatsangehoerigkeitCode>A</StaatsangehoerigkeitCode>
+			<HeimatPLZ>7035</HeimatPLZ>
+			<HeimatGemeinde>Steinbrunn</HeimatGemeinde>
+			<HeimatStrasse><![CDATA[Bachzeile 3/3/1]]></HeimatStrasse>
+			<HeimatNation>A</HeimatNation>
+			<StudStatusCode>1</StudStatusCode>
+				<BMWFWfoerderrelevant>N</BMWFWfoerderrelevant>
+		</StudentIn>
+		<StudentIn>
+			<PersKz>1419001008</PersKz>
+			<GeburtsDatum>12091978</GeburtsDatum>
+			<Geschlecht>W</Geschlecht>
+			<Vorname>Ivona</Vorname>
+			<Familienname>Peternel</Familienname>
+			<ErsKz>GTFW120978</ErsKz>
+			<StaatsangehoerigkeitCode>CRO</StaatsangehoerigkeitCode>
+			<HeimatPLZ>52100</HeimatPLZ>
+			<HeimatGemeinde>Pula</HeimatGemeinde>
+			<HeimatStrasse><![CDATA[Bačićev prilaz]]></HeimatStrasse>
+			<HeimatNation>CRO</HeimatNation>
+			<StudStatusCode>1</StudStatusCode>
+				<BMWFWfoerderrelevant>N</BMWFWfoerderrelevant>
+		</StudentIn>
+		<StudentIn>
+			<PersKz>1419001009</PersKz>
+			<GeburtsDatum>03071959</GeburtsDatum>
+			<Geschlecht>M</Geschlecht>
+			<SVNR>2231030759</SVNR>
+			<StaatsangehoerigkeitCode>A</StaatsangehoerigkeitCode>
+			<HeimatPLZ>2500</HeimatPLZ>
+			<HeimatGemeinde>Baden</HeimatGemeinde>
+			<HeimatStrasse><![CDATA[Kaiser Franz-Ring 12/18]]></HeimatStrasse>
+			<HeimatNation>A</HeimatNation>
+			<StudStatusCode>1</StudStatusCode>
+				<BMWFWfoerderrelevant>N</BMWFWfoerderrelevant>
+		</StudentIn>
+		<StudentIn>
+			<PersKz>1419001010</PersKz>
+			<GeburtsDatum>20011984</GeburtsDatum>
+			<Geschlecht>W</Geschlecht>
+			<SVNR>2313200184</SVNR>
+			<StaatsangehoerigkeitCode>A</StaatsangehoerigkeitCode>
+			<HeimatPLZ>2630</HeimatPLZ>
+			<HeimatGemeinde>Ternitz</HeimatGemeinde>
+			<HeimatStrasse><![CDATA[Pottschacher Straße 63]]></HeimatStrasse>
+			<HeimatNation>A</HeimatNation>
+			<StudStatusCode>1</StudStatusCode>
+				<BMWFWfoerderrelevant>N</BMWFWfoerderrelevant>
+		</StudentIn>
+		<StudentIn>
+			<PersKz>1419001011</PersKz>
+			<GeburtsDatum>23101986</GeburtsDatum>
+			<Geschlecht>M</Geschlecht>
+			<SVNR>3783231086</SVNR>
+			<StaatsangehoerigkeitCode>A</StaatsangehoerigkeitCode>
+			<HeimatPLZ>2500</HeimatPLZ>
+			<HeimatGemeinde>Baden</HeimatGemeinde>
+			<HeimatStrasse><![CDATA[Roseggerstraße 16/6]]></HeimatStrasse>
+			<HeimatNation>A</HeimatNation>
+			<StudStatusCode>1</StudStatusCode>
+				<BMWFWfoerderrelevant>N</BMWFWfoerderrelevant>
+		</StudentIn>
+		<StudentIn>
+			<PersKz>1419001013</PersKz>
+			<GeburtsDatum>28081971</GeburtsDatum>
+			<Geschlecht>W</Geschlecht>
+			<Vorname>Klaudija</Vorname>
+			<Familienname>Hašaj</Familienname>
+			<ErsKz>GTDY280871</ErsKz>
+			<StaatsangehoerigkeitCode>SLO</StaatsangehoerigkeitCode>
+			<HeimatPLZ>7063</HeimatPLZ>
+			<HeimatGemeinde>Oggau am Neusiedler See</HeimatGemeinde>
+			<HeimatStrasse><![CDATA[Blumengasse 33/1]]></HeimatStrasse>
+			<HeimatNation>A</HeimatNation>
+			<StudStatusCode>1</StudStatusCode>
+				<BMWFWfoerderrelevant>N</BMWFWfoerderrelevant>
+		</StudentIn>
+		<StudentIn>
+			<PersKz>1419001014</PersKz>
+			<GeburtsDatum>13061961</GeburtsDatum>
+			<Geschlecht>W</Geschlecht>
+			<Vorname>Zrinka</Vorname>
+			<Familienname>Gregov</Familienname>
+			<ErsKz>GTCZ130661</ErsKz>
+			<StaatsangehoerigkeitCode>CRO</StaatsangehoerigkeitCode>
+			<HeimatPLZ>10000</HeimatPLZ>
+			<HeimatGemeinde>Zagreb</HeimatGemeinde>
+			<HeimatStrasse><![CDATA[Prevoj 3 a]]></HeimatStrasse>
+			<HeimatNation>CRO</HeimatNation>
+			<StudStatusCode>1</StudStatusCode>
+				<BMWFWfoerderrelevant>N</BMWFWfoerderrelevant>
+		</StudentIn>
+    </Studiengang>
+  </StudierendenBewerberMeldung>
+</Erhalter>

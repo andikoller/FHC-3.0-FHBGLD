@@ -1,0 +1,132 @@
+\chapter{BIS-Meldung}
+Das BIS-System vereint die Studierenden-, Personal- und F\&E-Datenmeldungen, die aufgrund der Bildungsdokumentationsverordnung-Fachhochschulen des BMBWK sowie der BIS-Verordnung des FHR für die unterschiedlichen Adressaten (BMBWK, FHR, Statistik Austria, u.a.) zu erfassen sind. Dies ermöglicht die inhaltliche Überschaubarkeit, gewährleistet vor allem aber die erforderliche technische Integration des von unterschiedlicher Seite artikulierten Datenbedarfes in einem einheitlichen Meldesystem.
+(BIS Schnittstelle Version 5.1, FHR)
+\section{Die Studentenmeldung}
+Die BIS-Meldung erfolgt zwei mal im Jahr, im November sind die Studenten- und Personaldaten zu melden und im April die Studenten- und F\&E-Daten. Stichtag für die Studentenmeldung ist jeweils der 15. des betreffenden Monats. Der Meldungszeitraum für die Personalmeldung ist das vergangene Studienjahr, bei der F\&E-Meldung das vergangene Kalenderjahr. 
+\subsection{Plausibilitätsprüfung}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.75\textwidth]{FAS_BIS_Studenten1.png}
+	\caption{Aufruf des Studenten-Plausichecks}
+	\label{Plausi}
+\end{figure}
+FASonline bietet die Möglichkeit, die zu meldenden Daten schon ab Semesterbeginn und nicht erst ab Beginn des Meldemonats zu überprüfen. Dazu wird die Plausibilitätsprüfung, wie in Abbildung \ref{Plausi} gezeigt, aufgerufen. Hier werden die Daten überprüft und fehlende und fehlerhafte Eingaben angezeigt.
+\subsection{Erzeugen der XML-Datei}
+\label{Erzeugen der XML-Datei}
+Die BIS-Meldung teilt sich in zwei Teile. Der erste Teil ist die Testphase und endet am 15. des Meldemonats. Die erstellten XML-Dateien können in dieser Zeit zur Probe auf die FHR-Seite hochgeladen werden. Am Morgen des 15. sind alle Stati der Studiengänge wieder auf unbearbeitet zurückgesetzt und müssen zumindest noch einmal hochgeladen werden. Die zweite Phase beginnt mit dem 15., dem Stichtag, und endet am 30. des Meldemonats.\\
+Abbildung \ref{BIS1} zeigt, wie die Erstellung der XML-Datei gestartet wird. Dazu wird der gewünschte Studiengang im linken Fenster markiert und im Menü unter \textsl{BIS/Studenten} \textit{Meldung generieren} angeklickt.
+\begin{figure}
+	\centering
+	\includegraphics[width=0.75\textwidth]{FAS_BIS_Studenten2.png}
+	\caption{Erstellen der XML-Datei1}
+	\label{BIS1}
+\end{figure}
+Nach einigen Plausibilitätsüberprüfungen werden ev. Fehler und eine Statistik der Ergebnisse, etwa wie in Abbildung \ref{BIS2},  angezeigt. Die Tabelle zeigt den Inhalt der Meldung in tabellarischer Form an. Die erste Zeile gibt die Semester von 1 bis 8 bei allen Studiengängen an, auch wenn diese weniger Semester umfassen, sowie 50 und 60. Die letzten beiden Semesterzahlen stehen für Personen, die die Abschlußprüfung nicht in der regulären Studienzeit gemacht, sondern 1 Jahr bzw. mehrere Jahre überzogen haben. Die darauffolgenden Zeilen zeigen die aktiven Studenten, Unterbrecher, Abbrecher, Absolventen und Incoming/Outgoing (I/O) in den jeweiligen Semestern an. Die letzte Zeile beinhalten die Anzahl der Bewerber. Das sind alle Studenten, die seit der letzten BIS-Meldung einen Bewerberstatus erhalten und ein Häkchen bei \textit{Zum Reihungstest angetreten} in der Karteikarte \textsl{PreStudent} haben. Ganz rechts in der letzten Zeile scheint die Anzahl der gefundenen Fehler auf rotem Hintergrund auf. 
+
+\achtung{\textbf{Wichtig} Die Personen, bei denen Fehler aufgetreten sind, werden nicht in die XML-Datei geschrieben und somit auch \emph{\textbf{nicht gemeldet}}!}\\\\
+\begin{figure}
+	\centering
+	\includegraphics[width=0.75\textwidth]{FAS_BIS_Studenten3.png}
+	\caption{Studentenübersicht}
+	\label{BIS2}
+\end{figure}
+Unter der Tabelle befindet sich ein Link zur erzeugten XML-Datei. Diese muß mittels Rechtsklick und \textsl{Link-Ziel speichern} oder in der englischen Seamonkey-Version \textsl{Save Link Target As} auf dem eigenen Computer gespeichert werden, von wo die Datei im nächsten Schritt auf die FHR-Seite hochgeladen wird.
+\subsection{Die FHR-Seite}
+\info{Die FHR-Seite (www.fhr.ac.at) ist für den Internet Explorer® optimiert und sollte daher nur mit diesem aufgerufen werden. Verwendet man einen anderen Browser, werden manche Funktionalitäten, wie Mitteilungsfenster, nicht angezeigt.}\\\\
+Abbildung \ref{FHR1} zeigt die Startseite der Homepage vom Fachhochschulrat. Zum Einloggen muß der Login-Button unten in der Mitte angeklickt werden. Danach erscheint eine Eingabeaufforderung  (Abbildung \ref{FHR2} für die Eingabe von Benutzername und Passwort. Auf der nächsten Seite wird mit einem Klick auf den Link \textsl{Applikation starten}, in Abbildung \ref{FHR3} markiert, fortgesetzt. Es erscheint eine Liste aller Studiengänge für die der eingeloggte Anwender Berechtigungen hat (Siehe Abbildung \ref{FHR4}. Mit einem Klick auf die Taste \textsl{Upload}, rechts oben auf der Seite, gelangt man in den Bereich der FHR-Seite, wo die BIS-Meldedatei hochgeladen werden kann.\\
+\begin{figure}
+	\begin{center}
+    \begin{picture}(108,90)
+			\put(0,0){\includegraphics[height=90mm, width=108mm]{FAS_FHR1.png}}
+			\markier{!}{55}{35}{1}{-1}
+		\end{picture}
+    \caption{Die FHR-Seite}
+		\label{FHR1}
+  \end{center}
+\end{figure}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.75\textwidth]{FAS_FHR2.png}
+	\caption{Login auf der FHR-Seite}
+	\label{FHR2}
+\end{figure}
+\begin{figure}
+	\begin{center}
+    \begin{picture}(108,90)
+			\put(0,0){\includegraphics[height=90mm, width=108mm]{FAS_FHR3.png}}
+			\markier{!}{56}{52}{-1}{1}
+		\end{picture}
+    \caption{Applikation starten}
+		\label{FHR3}
+  \end{center}
+\end{figure}
+\begin{figure}
+	\begin{center}
+    \begin{picture}(108,90)
+			\put(0,0){\includegraphics[height=90mm, width=108mm]{FAS_FHR4.png}}
+			\markier{!}{90}{60}{1}{1}
+		\end{picture}
+    \caption{Upload}
+		\label{FHR4}
+  \end{center}
+\end{figure}
+\begin{figure}
+	\begin{center}
+    \begin{picture}(108,90)
+			\put(0,0){\includegraphics[height=90mm, width=108mm]{FAS_FHR5.png}}
+			\markier{1}{47}{73}{1}{-1}
+			\markier{2}{90}{73}{-1}{-1}
+			\markier{3}{65}{57}{1}{1}
+			\markier{4}{82}{57}{0}{1}
+			\markier{5}{88}{57}{0}{1}
+		\end{picture}
+    \caption{Upload der XML-Datei}
+		\label{FHR5}
+  \end{center}
+\end{figure}
+Abbildung \ref{FHR5} zeigt das Upload-Dialogfenster der BIS-Meldung. Zuerst muß angegeben werden, welche Datei hochgeladen werden soll. Dazu klickt man auf die mit 1 markierte Taste \textsl{Durchsuchen...} und wählt im Dialogfenster die Datei des gewünschten Studiengangs aus. (Anmerkung: Am Ende des Kapitels \ref{Erzeugen der XML-Datei} wurde diese Datei am lokalen PC gespeichert.) Wurde die Datei ausgewählt, erscheinen Pfad und Dateiname im Textfester links von der Taste \textsl{Durchsuchen...}. Ein Klick auf die mit 2 markierte Taste \textsl{Upload und Validierung} startet die Datenübertragung. Nach Beendigunge der Übertragung erscheint ein Hinweisfenster mit Mitteilung, daß der Upload erfolgreich war oder daß bei der Überprüfung Fehler gefunden wurden. Wurden Fehler gefunden, erscheint im rechten, kleineren Fenster der Name der Datei, die die Auflistung der Fehler beinhaltet. Diese Liste kann nun entweder im linken, großen Fenster angesehen werden oder heruntergeladen werden. In beiden Fällen muß die Datei mit einem Klick auf den Namen markiert werden. Danach wird entweder die mit 3 markierte Taste für die Anzeige im Fenster oder die mit 4 markierte Taste für den Download angeklickt. Mit der fünften Taste kann die Fehlerdatei entfernt werden. Nach der Fehlerkorrektur wird diese Prozedur wiederholt, bis der erfolgreiche Upload angezeigt wird. 
+\subsection{Fehlerkorrektur}
+\begin{figure}
+	\begin{center}
+    \begin{picture}(108,90)
+			\put(0,0){\includegraphics[height=90mm, width=108mm]{FAS_FHR6.png}}
+			\markier{1}{82}{57}{0}{1}
+			\markier{2}{65}{59}{1}{1}
+		\end{picture}
+    \caption{Fehlermeldung nach Upload}
+		\label{FHR6}
+  \end{center}
+\end{figure}
+Wenn beim Upload Fehler auftreten, werden diese in einer Datei gespeichert, deren Name im rechten Fenster angezeigt wird. Um die Fehlermeldungen anzuzeigen, wird der Dateiname (1) und dann \textsl{Inhalt anzeigen} (2) angeklickt. Dann erscheinen im linken Fenster, wie im Bild \ref{FHR6} gezeigt, die Fehlermeldungen. \\
+Zur Fehlerkorrektur kann die PersKz des Studenten (im Bild \ref{FHR6} in den Zeilen 9 und 11) aus der Meldung kopiert und mittels der Suchfunktion der Student im FAS angezeigt werden.
+\newpage
+\section{Die Mitarbeitermeldung}
+Bei der November-BIS-Meldung werden neben den Studentendaten auch die Mitarbeiterdaten gemeldet.
+\subsection{Plausibilitätsprüfung}
+\begin{itemize}
+	\item checkVerwendung:
+	Prüft die vorhanden Verwendungen auf Plausibilität. Hier werden keine Daten verändert oder gelöscht sondern nur Warnungen ausgegeben.
+	\item checkFunktion:
+	Generiert aufgrund der Lehraufträge die BIS-Funktionen. (bis.tbl\_bisfunktion)\\ Wenn bereits Einträge vorhanden sind, werden diese aktualisiert, ansonsten neu angelegt. Die Funktionseinträge zu denen es keinen Lehrauftrag gibt werden angezeigt aber NICHT automatisch gelöscht. Es wird aber der SQL Befehl angezeigt mit dem diese Funktionen dann gelöscht werden können.
+	\item Import:
+	Hier kann man die Verwendungen und Funktionen anhand der vorjährigen BIS-Meldung importieren. Dazu wird die Mitarbeiter-Meldung des Vorjahres hochgeladen:
+		\begin{itemize}
+		\item Funktionen werden ins System importiert (...wenn eine passende Verwendung gefunden wurde oder bei dieser Person keine andere Verwendung existiert. Wenn eine Verwendung gefunden wurde, diese aber nicht mit derjenigen aus der BIS-Meldung übereinstimmt, werden die zugehörigen Funktionen nicht angelegt)
+		
+		\item Verwendungen werden nur ins System importiert wenn KEINE Verwendung für die Person vorhanden ist.
+		\end{itemize}
+	Es werden nur Verwendungen/Funktionen importiert. Die anderen BIS-Daten werden hier nicht berücksichtigt.
+\end{itemize}
+\subsection{Erzeugen der XML-Datei}
+Im Menüpunkt \textsl{BIS} befindet sich unter \textsl{Mitarbeiter} mit textsl{Meldung generieren} der Aufruf zur Erzeugung der xml-Datei für die BIS-Personalmeldung. Als Ergebnis zeigt dann folgende Daten an:
+\begin{itemize}
+	\item Gesamtanzahl der Mitarbeiter
+	\item Anzahl der Mitarbeiter mit echtem Dienstvertrag
+	\item Anzahl der Mitarbeiter mit freiem Dienstvertrag
+	\item Eine Auflistung von Dateninkonstistenzen unter der Überschrift \textsl{Nicht plausieble BIS-Daten (für Meldung XXXX)}
+	\item Ein Link zur xml-Datei für die Personalmeldung. Diese Datei mit der rechten Maustaste anklicken und mit \textsl{Link-Ziel speichern unter} lokal abspeichern. Diese Datei wird dann auf der FHR-Seite wie ein Studiengang der Studentenmeldung hochgeladen.
+\end{itemize}
+\section{Die F\&E - Projektmeldung}
+\subsection{Plausibilitätsprüfung}
+\subsection{Erzeugen der XML-Datei}
+\subsection{Die FHR-Seite}

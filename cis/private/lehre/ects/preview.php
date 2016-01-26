@@ -29,78 +29,17 @@
 */
 
 require_once('../../../../config/cis.config.inc.php');
-<<<<<<< HEAD
-=======
-require_once('../../../../config/global.config.inc.php');
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 require_once('../../../../include/studiensemester.class.php');
 require_once('../../../../include/lehrveranstaltung.class.php');
 require_once('../../../../include/lvinfo.class.php');
 require_once('../../../../include/studiengang.class.php');
 require_once('../../../../include/safehtml/safehtml.class.php');
 require_once '../../../../include/phrasen.class.php';
-require_once '../../../../include/lehreinheit.class.php';
-require_once '../../../../include/lehrstunde.class.php';
-require_once '../../../../include/datum.class.php';
-require_once '../../../../include/stunde.class.php';
 
 if (!$db = new basis_db())
 			die('Fehler beim Herstellen der Datenbankverbindung');
 
 $phrasen = new phrasen();
-
-function cmp($a, $b)
-{
-    if($a->datum == $b->datum && $a->stunde == $b->stunde)
-    {
-	return 0;
-    }
-    if($a->datum == $b->datum && $a->stunde < $b->stunde)
-    {
-	return -1;
-    }
-    else if($a->datum == $b->datum && $a->stunde >= $b->stunde)
-    {
-	return 1;
-    }
-    return ($a->datum < $b->datum) ? -1 : 1;
-    
-}
-
-function getLastStundeByDatum(Array $array, $filterDatum)
-{
-    $callback = function($item) use ($filterDatum)
-		{
-		    return ($filterDatum == $item->datum);
-		};
-    return array_filter($array,$callback);
-}
-<<<<<<< HEAD
-=======
-
-$titel_de = '';
-$methodik_de = '';
-$kurzbeschreibung_de = '';
-$anwesenheit_de = '';
-$lehrziele_de = '';
-$lehrinhalte_de = '';
-$voraussetzungen_de = '';
-$unterlagen_de = '';
-$pruefungsordnung_de = '';
-$anmerkungen_de = '';
-
-$titel_en = '';
-$methodik_en = '';
-$kurzbeschreibung_en = '';
-$anwesenheit_en = '';
-$lehrziele_en = '';
-$lehrinhalte_en = '';
-$voraussetzungen_en = '';
-$unterlagen_en = '';
-$pruefungsordnung_en = '';
-$anmerkungen_en = '';
-
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -108,16 +47,11 @@ $anmerkungen_en = '';
 <title>ECTS - European Course Credit Transfer Systems (ECTS)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="../../../../skin/style.css.php" type="text/css" rel="stylesheet" />
-<<<<<<< HEAD
 <script type="text/javascript" src="../../../../include/js/flexcroll.js"></script>
 <link href="../../../../skin/flexcrollstyles.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 <div class="flexcroll" style="outline: none;">
-=======
-</head>
-<body>
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 <table align="right">
 	<tr>
 		<td>
@@ -158,10 +92,6 @@ $anmerkungen_en = '';
 		//$titel_de = mb_eregi_replace("\r\n","<br>",stripslashes($_POST['titel_de']));
 		$methodik_de = mb_eregi_replace("\r\n","<br>",stripslashes($_POST['methodik_de']));
 		$kurzbeschreibung_de = mb_eregi_replace("\r\n","<br>",stripslashes($_POST['kurzbeschreibung_de']));
-<<<<<<< HEAD
-=======
-		$anwesenheit_de = mb_eregi_replace("\r\n","<br>",stripslashes($_POST['anwesenheit_de']));
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 		$lehrziele_de = mb_eregi_replace("\r\n","<br>",stripslashes($_POST['lehrziele_de']));
 		$lehrinhalte_de = mb_eregi_replace("\r\n","<br>",stripslashes($_POST['lehrinhalte_de']));
 		$voraussetzungen_de = mb_eregi_replace("\r\n","<br>",stripslashes($_POST['voraussetzungen_de']));
@@ -184,21 +114,12 @@ $anmerkungen_en = '';
 		$parser = new SafeHTML();
 		$kurzbeschreibung_de = $parser->parse($kurzbeschreibung_de);
 		$parser = new SafeHTML();
-<<<<<<< HEAD
-=======
-		$anwesenheit_de = $parser->parse($anwesenheit_de);
-		$parser = new SafeHTML();
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 		$methodik_de = $parser->parse($methodik_de);
 		
 		// Englisch content variables
 		//$titel_en = mb_eregi_replace("\r\n","<br>",stripslashes($_POST['titel_en']));
 		$methodik_en = mb_eregi_replace("\r\n","<br>",stripslashes($_POST['methodik_en']));
 		$kurzbeschreibung_en = mb_eregi_replace("\r\n","<br>",stripslashes($_POST['kurzbeschreibung_en']));
-<<<<<<< HEAD
-=======
-		$anwesenheit_en = mb_eregi_replace("\r\n","<br>",stripslashes($_POST['anwesenheit_en']));
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 		$lehrziele_en = mb_eregi_replace("\r\n","<br>",stripslashes($_POST['lehrziele_en']));
 		$lehrinhalte_en = mb_eregi_replace("\r\n","<br>",stripslashes($_POST['lehrinhalte_en']));
 		$voraussetzungen_en = mb_eregi_replace("\r\n","<br>",stripslashes($_POST['voraussetzungen_en']));
@@ -221,11 +142,6 @@ $anmerkungen_en = '';
 		$parser = new SafeHTML();
 		$kurzbeschreibung_en = $parser->parse($kurzbeschreibung_en);
 		$parser = new SafeHTML();
-<<<<<<< HEAD
-=======
-		$anwesenheit_en = $parser->parse($anwesenheit_en);
-		$parser = new SafeHTML();
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 		$methodik_en = $parser->parse($methodik_en);
 	}
 	elseif(isset($_GET['lv'])) //LV Id wird uebergeben (zB bei Ansicht fuer alle von lesson.php)
@@ -242,10 +158,6 @@ $anmerkungen_en = '';
 			//$titel_de = $lvinfo_obj->titel;
 			$methodik_de = $lvinfo_obj->methodik;
 			$kurzbeschreibung_de = $lvinfo_obj->kurzbeschreibung;
-<<<<<<< HEAD
-=======
-			$anwesenheit_de = $lvinfo_obj->anwesenheit;
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 			$lehrziele_de = $lvinfo_obj->lehrziele;
 			$lehrinhalte_de = $lvinfo_obj->lehrinhalte;
 			$voraussetzungen_de = $lvinfo_obj->voraussetzungen;
@@ -260,10 +172,6 @@ $anmerkungen_en = '';
 			//$titel_en = $lvinfo_obj->titel;
 			$methodik_en = $lvinfo_obj->methodik;
 			$kurzbeschreibung_en = $lvinfo_obj->kurzbeschreibung;
-<<<<<<< HEAD
-=======
-			$anwesenheit_en = $lvinfo_obj->anwesenheit;
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 			$lehrziele_en = $lvinfo_obj->lehrziele;
 			$lehrinhalte_en = $lvinfo_obj->lehrinhalte;
 			$voraussetzungen_en = $lvinfo_obj->voraussetzungen;
@@ -499,67 +407,42 @@ $anmerkungen_en = '';
 
 	    if ($kurzbeschreibung_de)
 	    {
-<<<<<<< HEAD
 			echo "<tr><td align='left' valign='top'><h2>Kurzbeschreibung</h2></td></tr>";
-=======
-			echo "<tr><td align='left' valign='top'><h2>".$phrasen->t('lvinfo/kurzbeschreibung')."</h2></td></tr>";
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 			echo "<tr><td>".stripslashes($kurzbeschreibung_de)."<br /><br /></td></tr>";
 	    }
 
 	    if ($lehrziele_de)
 		{
-<<<<<<< HEAD
 	     	echo "<tr><td align='left' valign='top'><h2>Kompetenzerwerb</h2></td></tr>";
-=======
-	     	echo "<tr><td align='left' valign='top'><h2>".$phrasen->t('lvinfo/lernergebnisse')."</h2></td></tr>";
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	     	echo "<tr><td>".stripslashes($lehrziele_de)."<br /><br /></td></tr>";
 		}
 
 	    if ($lehrinhalte_de)
 		{
-<<<<<<< HEAD
 	     	echo "<tr><td align='left' valign='top'><h2>Lehrinhalte</h2></td></tr>";
-=======
-	     	echo "<tr><td align='left' valign='top'><h2>".$phrasen->t('lvinfo/lehrinhalte')."</h2></td></tr>";
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	     	echo "<tr><td>".stripslashes($lehrinhalte_de)."<br /><br /></td></tr>";
 		}
 
 	    if ($voraussetzungen_de)
 		{
-<<<<<<< HEAD
 			echo "<tr><td align='left' valign='top'><h2>Vorkenntnisse</h2></td></tr>";
-=======
-			echo "<tr><td align='left' valign='top'><h2>".$phrasen->t('lvinfo/vorkenntnisse')."</h2></td></tr>";
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 			echo "<tr><td>".stripslashes($voraussetzungen_de)."<br><br /></td></tr>";
 		}
 
 	    if ($methodik_de)
 		{
-<<<<<<< HEAD
 			echo "<tr><td align='left' valign='top'><h2>Methodik / Didaktik</h2></td></tr>";
-=======
-			echo "<tr><td align='left' valign='top'><h2>".$phrasen->t('lvinfo/methodik')."</h2></td></tr>";
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 			echo "<tr><td>".stripslashes($methodik_de)."<br><br /></td></tr>";
 		}
 
 	    if ($pruefungsordnung_de)
 	    {
-<<<<<<< HEAD
 			echo "<tr><td align='left' valign='top'><h2>Leistungsbeurteilung</h2></td></tr>";
-=======
-			echo "<tr><td align='left' valign='top'><h2>".$phrasen->t('lvinfo/leistungsbeurteilung')."</h2></td></tr>";
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 			echo "<tr><td>".stripslashes($pruefungsordnung_de)."<br /><br /></td></tr>";
 	    }
 
 		if ($unterlagen_de)
 		{
-<<<<<<< HEAD
 			echo "<tr><td align='left' valign='top'><h2>Literatur</h2></td></tr>";
 			echo "<tr><td>".stripslashes($unterlagen_de)."<br /><br /></td></tr>";
 		}
@@ -567,21 +450,6 @@ $anmerkungen_en = '';
 		if ($anmerkungen_de)
 		{
 			echo "<tr><td align='left' valign='top'><h2>Anmerkungen</h2></td></tr>";
-=======
-			echo "<tr><td align='left' valign='top'><h2>".$phrasen->t('lvinfo/literatur')."</h2></td></tr>";
-			echo "<tr><td>".stripslashes($unterlagen_de)."<br /><br /></td></tr>";
-		}
-		
-		if ($anwesenheit_de)
-		{
-			echo "<tr><td align='left' valign='top'><h2>".$phrasen->t('lvinfo/anwesenheit')."</h2></td></tr>";
-			echo "<tr><td>".stripslashes($anwesenheit_de)."<br /><br /></td></tr>";
-		}
-
-		if ($anmerkungen_de)
-		{
-			echo "<tr><td align='left' valign='top'><h2>".$phrasen->t('lvinfo/anmerkungen')."</h2></td></tr>";
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 			echo "<tr><td>".stripslashes($anmerkungen_de)."&nbsp;<br /><br /></td></tr>";
 		}
 
@@ -686,67 +554,42 @@ $anmerkungen_en = '';
 
 	    if ($kurzbeschreibung_en)
 	    {
-<<<<<<< HEAD
 			echo "<tr><td align='left' valign='top'><h2>Course Description</h2></td></tr>";
-=======
-			echo "<tr><td align='left' valign='top'><h2>".$phrasen->t('lvinfo/kurzbeschreibungEN')."</h2></td></tr>";
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 			echo "<tr><td>".stripslashes($kurzbeschreibung_en)."<br /><br /></td></tr>";
 	    }
 
 		if ($lehrziele_en)
 		{
-<<<<<<< HEAD
 			echo "<tr><td align='left' valign='top'><h2>Learning outcome</h2></td></tr>";
-=======
-			echo "<tr><td align='left' valign='top'><h2>".$phrasen->t('lvinfo/lernergebnisseEN')."</h2></td></tr>";
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 			echo "<tr><td>".stripslashes($lehrziele_en)."<br /><br /></td></tr>";
 		}
 
 		if ($lehrinhalte_en)
 		{
-<<<<<<< HEAD
 			echo "<tr><td align='left' valign='top'><h2>Course Contents</h2></td></tr>";
-=======
-			echo "<tr><td align='left' valign='top'><h2>".$phrasen->t('lvinfo/lehrinhalteEN')."</h2></td></tr>";
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 			echo "<tr><td>".stripslashes($lehrinhalte_en)."<br /><br /></td></tr>";
 		}
 
 		if ($voraussetzungen_en)
 		{
-<<<<<<< HEAD
 			echo "<tr><td align='left' valign='top'><h2>Prerequisites</h2></td></tr>";
-=======
-			echo "<tr><td align='left' valign='top'><h2>".$phrasen->t('lvinfo/vorkenntnisseEN')."</h2></td></tr>";
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 			echo "<tr><td>".stripslashes($voraussetzungen_en)."<br /><br /></td></tr>";
 		}
 
 	    if ($methodik_en)
 		{
-<<<<<<< HEAD
 			echo "<tr><td align='left' valign='top'><h2>Teaching Methods</h2></td></tr>";
-=======
-			echo "<tr><td align='left' valign='top'><h2>".$phrasen->t('lvinfo/methodikEN')."</h2></td></tr>";
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 			echo "<tr><td>".stripslashes($methodik_en)."<br><br /></td></tr>";
 		}
 
 		if ($pruefungsordnung_en)
 		{
-<<<<<<< HEAD
 			echo "<tr><td align='left' valign='top'><h2>Assessment Methods</h2></td></tr>";
-=======
-			echo "<tr><td align='left' valign='top'><h2>".$phrasen->t('lvinfo/leistungsbeurteilungEN')."</h2></td></tr>";
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 			echo "<tr><td>".stripslashes($pruefungsordnung_en)."<br /><br /></td></tr>";
 		}
 
 		if ($unterlagen_en)
 		{
-<<<<<<< HEAD
 			echo "<tr><td align='left' valign='top'><h2>Recommended Reading and Material</h2></td></tr>";
 			echo "<tr><td>".stripslashes($unterlagen_en)."<br /><br /></td></tr>";
 		}
@@ -754,137 +597,11 @@ $anmerkungen_en = '';
 		if ($anmerkungen_en)
 		{
 			echo "<tr><td align='left' valign='top'><h2>Comments</h2></td></tr>";
-=======
-			echo "<tr><td align='left' valign='top'><h2>".$phrasen->t('lvinfo/literaturEN')."</h2></td></tr>";
-			echo "<tr><td>".stripslashes($unterlagen_en)."<br /><br /></td></tr>";
-		}
-		
-		if ($anwesenheit_en)
-		{
-			echo "<tr><td align='left' valign='top'><h2>".$phrasen->t('lvinfo/anwesenheitEN')."</h2></td></tr>";
-			echo "<tr><td>".stripslashes($anwesenheit_en)."<br /><br /></td></tr>";
-		}
-
-		if ($anmerkungen_en)
-		{
-			echo "<tr><td align='left' valign='top'><h2>".$phrasen->t('lvinfo/anmerkungenEN')."</h2></td></tr>";
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 			echo "<tr><td>".stripslashes($anmerkungen_en)."&nbsp;<br /></td></tr>";
 		}
 	}
 
     echo "</table>";
-    
-    $lehreinheit = new lehreinheit();
-    $studiensemester = new studiensemester();
-<<<<<<< HEAD
-
-    $lehreinheit->load_lehreinheiten($lv, $studiensemester->getaktorNext());
-    if(!empty($lehreinheit->lehreinheiten))
-    {
-	$lehrstunde = new lehrstunde();
-	$lehrstunde->load_lehrstunden_le($lehreinheit->lehreinheiten[0]->lehreinheit_id);
-	$i = 1;
-	echo "<h2>Termine</h2><table><tr><td><ul>";
-	
-	$result = $lehrstunde->lehrstunden;
-	$last = "";
-	$bis = "";
-	usort($result, "cmp");
-	$datum = new datum();
-	$std_von = new stunde();
-	$std_bis = new stunde();
-	foreach($result as $key=>$stunde)
-	{
-	    if($last !== $stunde->datum)
-	    {
-		$temp = array_values(getLastStundeByDatum($result, $stunde->datum));
-		$size = count($temp);
-		if($size != 0)
-		{
-		    $std_von->load($temp[0]->stunde);
-		    $std_bis->load($temp[$size-1]->stunde);
-		    echo "<li>".$datum->formatDatum($temp[0]->datum,"d.m.Y")." von ".mb_substr($std_von->beginn,0,5)." bis ".mb_substr($std_bis->ende,0,5)."</li>";
-		}
-		$i++;
-	    }
-	    elseif($last == "")
-	    {
-		$temp = getLastStundeByDatum($result, $stunde->datum);
-		var_dump($temp);
-	    }
-	    else
-	    {
-		$bis = $stunde->stunde;
-	    }
-		
-	    if($i % 5 === 0)
-	    {
-//		echo "</ul></td><td><ul>";
-//		$i++;
-	    }
-	    $last = $stunde->datum;
-	}
-	echo "</ul></td></tr></table>";
-=======
-    $lehreinheit->load_lehreinheiten($lv, $studiensemester->getaktorNext());
-
-    if (CIS_LVINFO_TERMINE_ANZEIGEN == true)
-    {
-	    if(!empty($lehreinheit->lehreinheiten))
-	    {
-		echo "<h2>Termine</h2><table>";
-			foreach($lehreinheit->lehreinheiten as $lehreinheit_temp)
-			{
-			    $lehrstunde = new lehrstunde();
-			    $lehrstunde->load_lehrstunden_le($lehreinheit_temp->lehreinheit_id);
-			    $i = 1;
-			    echo "<tr><td><ul>";
-			    
-			    $result = $lehrstunde->lehrstunden;
-			    $last = "";
-			    $bis = "";
-			    usort($result, "cmp");
-			    $datum = new datum();
-			    $std_von = new stunde();
-			    $std_bis = new stunde();
-			    foreach($result as $key=>$stunde)
-			    {
-				if($last !== $stunde->datum)
-				{
-				    $temp = array_values(getLastStundeByDatum($result, $stunde->datum));
-				    $size = count($temp);
-				    if($size != 0)
-				    {
-					$std_von->load($temp[0]->stunde);
-					$std_bis->load($temp[$size-1]->stunde);
-					echo "<li>".$datum->formatDatum($temp[0]->datum,"d.m.Y")." von ".mb_substr($std_von->beginn,0,5)." bis ".mb_substr($std_bis->ende,0,5)."</li>";
-				    }
-				    $i++;
-				}
-				elseif($last == "")
-				{
-				    $temp = getLastStundeByDatum($result, $stunde->datum);
-				    var_dump($temp);
-				}
-				else
-				{
-				    $bis = $stunde->stunde;
-				}
-
-				if($i % 5 === 0)
-				{
-		    //		echo "</ul></td><td><ul>";
-		    //		$i++;
-				}
-				$last = $stunde->datum;
-			    }
-			    echo "</ul></td></tr>";
-			}
-			echo "</table>";
-	    }
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
-    }
 
     //Ein paar Zeilenumbrueche damit er beim Sprung zum Anker weit genug nach unten springt
     echo "<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
@@ -894,8 +611,5 @@ $anmerkungen_en = '';
 <td width="3%">&nbsp;</td>
 </tr>
 </table>
-<<<<<<< HEAD
 </div>
-=======
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 </body></html>

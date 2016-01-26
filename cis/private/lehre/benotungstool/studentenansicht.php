@@ -347,11 +347,7 @@ if($result = $db->db_query($qry))
 						$gruppen.=' ';
 				}
 			}
-<<<<<<< HEAD
 			echo "<OPTION value='studentenansicht.php?lvid=$lvid&stsem=$stsem&lehreinheit_id=$row->lehreinheit_id' $selected>$row->kurzbz - $gruppen $lektoren</OPTION>\n";
-=======
-			echo "<OPTION value='studentenansicht.php?lvid=$lvid&stsem=$stsem&lehreinheit_id=$row->lehreinheit_id".(isset($uid) && $uid!=''?'&uid='.$uid:'')."' $selected>$row->kurzbz - $gruppen $lektoren</OPTION>\n";
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 		}
 		echo '</SELECT> ';
 	}
@@ -921,11 +917,7 @@ if (!isset($_GET["notenuebersicht"]))
 				          		</tr>';
 						}
 						echo "</table>";
-<<<<<<< HEAD
 						echo "<br><br>".$p->t('bentotungstool/esHabenStudentenEingetragen',array($gesamt));
-=======
-						echo "<br><br>".$p->t('benotungstool/esHabenStudentenEingetragen',array($gesamt));
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 					}
 				}
 				else

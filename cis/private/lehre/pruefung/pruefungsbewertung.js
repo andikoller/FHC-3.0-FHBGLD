@@ -89,26 +89,11 @@ function showTeilnehmer(pruefungstermin_id, lehrveranstaltung_id, lehrveranstalt
 		},
 		error: loadError
 	}).success(function(data){
-<<<<<<< HEAD
 		data.result.forEach(function(d)
 		{
 			noten += "<option value="+d.note+">"+d.bezeichnung+"</option>";
 		});
 		noten += "</select>";
-=======
-		if(data.error != 'true')
-		{
-			data.result.forEach(function(d)
-			{
-				noten += "<option value="+d.note+">"+d.bezeichnung+"</option>";
-			});
-			noten += "</select>";
-		}
-		else
-		{
-			messageBox("message",data.errormsg, "red", "highlight", 1000);
-		}
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	}).complete(function(event, xhr, settings){
 		var notenSelect = noten;
 		$.ajax({
@@ -132,11 +117,11 @@ function showTeilnehmer(pruefungstermin_id, lehrveranstaltung_id, lehrveranstalt
 						var datum = d.von.split(" ");	
 						if(d.pruefung.note===null)
 						{
-							entry = "<div class='anmeldung' id="+d.student.uid+"><div>"+d.student.vorname+" "+d.student.nachname+"</div>"+notenSelect+"<input type='button' onclick='saveBeurteilung(this,\""+datum[0]+"\",\""+d.pruefungsanmeldung_id+"\",\""+d.pruefung_id+"\",\""+d.lehrveranstaltung_id+"\");' value='speichern'/></br><input id='note_anmerkung_"+d.student.uid+"' placeholder='Anmerkung' /></div>";
+							entry = "<div class='anmeldung' id="+d.student.uid+"><div>"+d.student.vorname+" "+d.student.nachname+"</div>"+notenSelect+"<input type='button' onclick='saveBeurteilung(this,\""+datum[0]+"\",\""+d.pruefungsanmeldung_id+"\",\""+d.pruefung_id+"\",\""+d.lehrveranstaltung_id+"\");' value='speichern'/></div>";
 						}
 						else
 						{
-							entry = "<div class='anmeldung' id="+d.student.uid+"><div>"+d.student.vorname+" "+d.student.nachname+"</div>"+notenSelect+"<input type='button' onclick='updateBeurteilung(this,\""+d.pruefung.pruefung_id+"\");' value='speichern'/></br><input id='note_anmerkung_"+d.student.uid+"' placeholder='Anmerkung' value='"+d.pruefung.anmerkung+"' /></div>";
+							entry = "<div class='anmeldung' id="+d.student.uid+"><div>"+d.student.vorname+" "+d.student.nachname+"</div>"+notenSelect+"<input type='button' onclick='updateBeurteilung(this,\""+d.pruefung.pruefung_id+"\");' value='speichern'/></div>";
 						}
 						$("#anmeldeDaten").append(entry);
 						if(d.pruefung.note!==null)
@@ -148,8 +133,6 @@ function showTeilnehmer(pruefungstermin_id, lehrveranstaltung_id, lehrveranstalt
 						{
 							markAsUnsaved(document.getElementById(d.student.uid).firstChild);
 						}
-						var t = $("#note_anmerkung_"+d.student.uid).parent().find('select').first().width();
-						$("#note_anmerkung_"+d.student.uid).width(t);
 					}
 				});
 				if(entry === "")
@@ -188,7 +171,7 @@ function saveBeurteilung(ele, datum, pruefungsanmeldung_id, pruefung_id, lehrver
 		messageBox("message", "Keine Note ausgewählt.", "red", "highlight", 1000);
 		return false;
 	}
-	var anmerkung = $("#note_anmerkung_"+student_uid).val();
+	var anmerkung = "";
 	
 	$.ajax({
 		dataType: 'json',
@@ -208,16 +191,8 @@ function saveBeurteilung(ele, datum, pruefungsanmeldung_id, pruefung_id, lehrver
 		},
 		error: loadError
 	}).success(function(data){
-		if(data.error != 'true')
-		{
-			markAsSaved(ele);
-			$(ele).attr("onclick", "updateBeurteilung(this,\""+data.result+"\")");
-		}
-		else
-		{
-			messageBox("message",data.errormsg, "red", "highlight", 1000);
-			$(ele).parent().find("select").val(null);
-		}
+		markAsSaved(ele);
+		$(ele).attr("onclick", "updateBeurteilung(this,\""+data.result+"\")");
 	}).complete(function(event, xhr, settings){
 		
 	});
@@ -234,7 +209,7 @@ function updateBeurteilung(ele, pruefung_id)
 	var student_uid = $(ele).parent().attr("id");
 	var mitarbeiter_uid = $("#mitarbeiter_uid").val();
 	var note = $(ele).parent().find("select").val();
-	var anmerkung = $("#note_anmerkung_"+student_uid).val();
+	var anmerkung = "";
 	if((note === "null") || (note===null))
 	{
 		messageBox("message", "Keine Note ausgewählt.", "red", "highlight", 1000);
@@ -252,20 +227,7 @@ function updateBeurteilung(ele, pruefung_id)
 		},
 		error: loadError
 	}).success(function(data){
-<<<<<<< HEAD
 		markAsSaved(ele);
-=======
-		if(data.error != 'true')
-		{
-			markAsSaved(ele);
-		}
-		else
-		{
-			messageBox("message",data.errormsg, "red", "highlight", 1000);
-		}
-		
-		
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	}).complete(function(event, xhr, settings){
 
 	});

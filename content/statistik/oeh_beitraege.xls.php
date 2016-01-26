@@ -30,7 +30,6 @@ require_once('../../include/datum.class.php');
 require_once('../../include/Excel/excel.php');
 require_once('../../include/studiengang.class.php');
 require_once('../../include/studiensemester.class.php');
-<<<<<<< HEAD
 require_once('../../include/benutzerberechtigung.class.php');
 
 
@@ -40,17 +39,6 @@ $rechte = new benutzerberechtigung();
 $rechte->getBerechtigungen($uid);
 if(!$rechte->isBerechtigt('assistenz') && !$rechte->isBerechtigt('admin'))
 	die('Sie haben keine Berechtigung fuer diese Seite');
-=======
-require_once('../../include/benutzerberechtigung.class.php');
-
-
-$uid = get_uid();
-
-$rechte = new benutzerberechtigung();
-$rechte->getBerechtigungen($uid);
-if(!$rechte->isBerechtigt('assistenz') && !$rechte->isBerechtigt('admin'))
-	die('Sie haben keine Berechtigung fuer diese Seite');
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 
 $erhalter='';
 $heute=date("d.m.Y");
@@ -513,7 +501,7 @@ if($studiensemester_kurzbz!='')
 		
 	// Daten holen
 	$qry="SELECT DISTINCT ON (matrikelnr) matrikelnr AS personenkennzahl, '005' as erhalter, tbl_student.studiengang_kz, geschlecht, vorname, nachname, gebdatum AS geburtsdatum, 
-	geburtsnation AS nation, titelpre, uid || '@technikum-wien.at' AS email, 
+	geburtsnation AS nation, titelpre, uid || '@fh-burgenland.at' AS email, 
 	(SELECT kontakt FROM public.tbl_kontakt WHERE tbl_kontakt.person_id=public.tbl_person.person_id and (kontakttyp='mobil' OR kontakttyp='telefon') LIMIT 1) AS telefon, 
 	(SELECT nation FROM public.tbl_adresse WHERE tbl_adresse.person_id=public.tbl_person.person_id ORDER BY heimatadresse ASC  LIMIT 1) AS s_nation, 
 	(SELECT plz FROM public.tbl_adresse WHERE tbl_adresse.person_id=public.tbl_person.person_id ORDER BY heimatadresse ASC  LIMIT 1) AS s_plz, 

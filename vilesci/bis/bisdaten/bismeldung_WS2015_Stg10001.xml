@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Erhalter>
+  <ErhKz>001</ErhKz>
+  <MeldeDatum>15112015</MeldeDatum>
+  <StudierendenBewerberMeldung>
+    <Studiengang>
+      <StgKz>10001</StgKz>
+    </Studiengang>
+  </StudierendenBewerberMeldung>
+</Erhalter>

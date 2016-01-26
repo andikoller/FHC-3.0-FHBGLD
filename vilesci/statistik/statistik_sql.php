@@ -80,21 +80,6 @@ switch ($outputformat)
 		echo $json;
 		return;
 }
-<<<<<<< HEAD
-=======
-
-$param='';
-foreach($_REQUEST as $name=>$value)
-{
-	if (is_array($value))
-	{
-		foreach($value as $row)
-			$param .= '&'.$name.'[]='.urlencode($row);
-	}
-	else
-		$param .= '&'.$name.'='.urlencode($value);
-}
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 ?>
 <!DOCTYPE html>
 <html>
@@ -114,14 +99,7 @@ foreach($_REQUEST as $name=>$value)
 		</script>
 	</head>
 	<body>
-<<<<<<< HEAD
 		<h2>Statistik - <?php echo $statistik->bezeichnung ?></h2>
 			<?php echo $statistik->getHtmlTable('myTable', 'tablesorter'); ?>
 	</body>
 </html>
-=======
-		<h2>Statistik - <?php echo $statistik->bezeichnung ?> - <a href="statistik_sql.php?outputformat=csv<?php echo $param;?>">CSV Download</a></h2>
-			<?php echo $statistik->getHtmlTable('myTable', 'tablesorter'); ?>
-	</body>
-</html>
->>>>>>> fee287127566cd5d18c55b556d178b661711c694

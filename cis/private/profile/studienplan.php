@@ -25,7 +25,6 @@
  * Dabei werden Regeln und Anmeldezeiträume der Lehrveranstaltungen berücksichtigt.
  */
 require_once('../../../config/cis.config.inc.php');
-require_once('../../../config/global.config.inc.php');
 require_once('../../../include/functions.inc.php');
 require_once('../../../include/studienordnung.class.php');
 require_once('../../../include/studienplan.class.php');
@@ -41,7 +40,6 @@ require_once('../../../include/note.class.php');
 require_once('../../../include/benutzerberechtigung.class.php');
 require_once('../../../include/benutzergruppe.class.php');
 require_once('../../../include/konto.class.php');
-require_once('../../../include/lvinfo.class.php');
 
 $uid = get_uid();
 
@@ -77,7 +75,6 @@ if(isset($_GET['getAnmeldung']))
 	// Die Anmeldung ist zur Lehrveranstaltung selbst und zu den dazu kompatiblen Lehrveranstaltungen moeglich
 	$kompatibel = $lehrveranstaltung->loadLVkompatibel($lehrveranstaltung_id);
 	
-	$datum = new datum();
 	$kompatibel[]=$lehrveranstaltung_id;
 	$kompatibel = array_unique($kompatibel);
 	foreach($kompatibel as $lvid)
@@ -104,7 +101,7 @@ if(isset($_GET['getAnmeldung']))
 					$konto = new konto();
 					$cp = $konto->getCreditPoints($uid, $stsem);
 					if($cp===false || $cp>=$lv->ects)
-						echo '<br><input type="radio" value="'.$lvid.'" name="lv"/>'.$lv->bezeichnung.' (Anmeldung bis '.$datum->formatDatum($angebot->anmeldefenster_ende,"d.m.Y").')';
+						echo '<br><input type="radio" value="'.$lvid.'" name="lv"/>'.$lv->bezeichnung;
 					else
 						echo '<br><input type="radio" disabled="true" value="'.$lvid.'" name="lv" /><span style="color:gray;">'.$lv->bezeichnung.'</span><img src="../../../skin/images/information.png" title="'.$p->t('studienplan/zuWenigCP').'" />';
 				}
@@ -141,7 +138,7 @@ echo '<!DOCTYPE html>
 
 	<script type="text/javascript">
 	$(document).ready(function() {
-		$("#dialog").dialog({ autoOpen: false, width: "auto" });
+		$("#dialog").dialog({ autoOpen: false });
 	});
 
 	function OpenAnmeldung(lehrveranstaltung_id, stsem)
@@ -303,13 +300,9 @@ echo '<h1>'.$p->t('studienplan/studienplan').": $studienplan->bezeichnung ($stud
 echo '<table style="border: 1px solid black">
 	<thead>
 	<tr style="border: 1px solid black" valign="top">
-		<th>'.$p->t('global/lehrveranstaltung').'</th>';
-
-if(CIS_STUDIENPLAN_SEMESTER_ANZEIGEN)
-	echo '<th>'.$p->t('global/semester').'</th>';
-  
-echo '<th>'.$p->t('studienplan/ects').'</th>
-	  <th>'.$p->t('studienplan/status').'</th>';
+		<th>'.$p->t('global/lehrveranstaltung').'</th>
+		<th>'.$p->t('studienplan/ects').'</th>
+		<th>'.$p->t('studienplan/status').'</th>';
 
 foreach($stsem_arr as $stsem)
 {
@@ -353,11 +346,9 @@ function drawTree($tree, $depth)
 			case 'modul':
 				$icon='<img src="../../../skin/images/modul.png"> ';
 				$style=' style="background-color:#CCCCCC"';
-				$termine='';
 				break;
 			case 'lv':
 				$icon='<img src="../../../skin/images/lv.png"> ';
-				$termine="<a href='../lvplan/stpl_week.php?type=lva&lva=" . $row_tree->lehrveranstaltung_id . "' target='_blank'><img src='../../../skin/images/date_magnify.png' title='Termine' alt='Termine'></a>";
 				break;
 			default:
 				$icon='';
@@ -384,28 +375,10 @@ function drawTree($tree, $depth)
 			else
 				$abgeschlossen=false;
 		}
-		$lvinfo = new lvinfo();
-		switch(getSprache())
-		{
-		    case 'German':
-			$sprache = 'de';
-			break;
-		    case 'English':
-			$sprach = 'en';
-			break;
-		    default:
-			$sprache = 'de';
-		}
-		if($lvinfo->exists($row_tree->lehrveranstaltung_id, getSprache()))
-		    echo $icon." ".$termine." <a href=\"#\" class='Item' onClick=\"javascript:window.open('../lehre/ects/preview.php?lv=$row_tree->lehrveranstaltung_id&language=$sprache','Lehrveranstaltungsinformation','width=700,height=750,resizable=yes,menuebar=no,toolbar=no,status=yes,scrollbars=yes');\">".$row_tree->kurzbz.' - '.$row_tree->bezeichnung."</a>";
-		else
+
 		// Bezeichnung der Lehrveranstaltung
-		    echo $icon." ".$termine." ".$row_tree->kurzbz.' - '.$row_tree->bezeichnung;
+		echo $icon.$row_tree->kurzbz.' - '.$row_tree->bezeichnung;
 		echo $bende.'</td>';
-		
-		// Semester
-		if(CIS_STUDIENPLAN_SEMESTER_ANZEIGEN)
-			echo '<td>'.$row_tree->semester.'</td>';
 		
 		// ECTS Punkte
 		echo '<td>'.$row_tree->ects.'</td>';
@@ -447,21 +420,12 @@ function drawTree($tree, $depth)
 			
 			$tdclass=array();
 			//Empfehlung holen
-<<<<<<< HEAD
 			if(isset($lv_arr[$row_tree->lehrveranstaltung_id]))
 			{
 				$empfohlenesSemester = $lv_arr[$row_tree->lehrveranstaltung_id]->semester;
 				if($semester==$empfohlenesSemester)
 					$tdclass[]='empfehlung';
 			}
-=======
-//			if(isset($lv_arr[$row_tree->lehrveranstaltung_id]))
-//			{
-//				$empfohlenesSemester = $lv_arr[$row_tree->lehrveranstaltung_id]->semester;
-//				if($semester==$empfohlenesSemester)
-//					$tdclass[]='empfehlung';
-//			}
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 
 			$tdinhalt='';
 
@@ -577,17 +541,10 @@ function drawTree($tree, $depth)
 echo '</table>';
 echo '<br><br>'.$p->t('studienplan/legende').':<br>
 <table>
-<<<<<<< HEAD
 <tr>
 	<td><span class="empfehlung">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td>
 	<td>'.$p->t('studienplan/legendeEmpfehlung').'</td>
 </tr>
-=======
-<!--<tr>
-	<td><span class="empfehlung">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td>
-	<td>'.$p->t('studienplan/legendeEmpfehlung').'</td>
-</tr>-->
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 <tr>
 	<td></td>
 	<td></td>

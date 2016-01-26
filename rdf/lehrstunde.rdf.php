@@ -117,15 +117,9 @@ else
 
 $error_msg='';
 $error_msg.=loadVariables($uid);
-<<<<<<< HEAD
 
 $lehrstunden=new lehrstunde();
 $anz=$lehrstunden->load_lehrstunden($type,$datum,$datum_bis,$pers_uid,$ort_kurzbz,$stg_kz,$sem,$ver,$grp,$einheit,$db_stpl_table,$idList);
-=======
-$alle_unr_mitladen=true;
-$lehrstunden=new lehrstunde();
-$anz=$lehrstunden->load_lehrstunden($type,$datum,$datum_bis,$pers_uid,$ort_kurzbz,$stg_kz,$sem,$ver,$grp,$einheit,$db_stpl_table,$idList,null, null, $alle_unr_mitladen);
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 if ($anz<0)
 {
 	$errormsg=$lehrstunden->errormsg;

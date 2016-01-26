@@ -36,10 +36,6 @@ require_once('../include/benutzer.class.php');
 require_once('../include/student.class.php');
 require_once('../include/studiengang.class.php');
 require_once('../include/lehrveranstaltung.class.php');
-<<<<<<< HEAD
-=======
-require_once('../include/benutzerberechtigung.class.php');
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 
 echo '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>';
 
@@ -47,15 +43,6 @@ $user = get_uid();
 loadVariables($user);
 $datum = new datum();
 
-<<<<<<< HEAD
-=======
-$rechte = new benutzerberechtigung();
-$rechte->getBerechtigungen($user);
-
-if(!$rechte->isBerechtigt('student/noten'))
-	die('Sie haben keine Berechtigung fuer diese Seite');
-
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 $stg_arr = array();
 $stg_obj = new studiengang();
 $stg_obj->getAll(null, false);
@@ -100,14 +87,6 @@ foreach ($obj->result as $row)
 	$lv_obj = new lehrveranstaltung();
 	$lv_obj->load($row->lehrveranstaltung_id);
 	
-<<<<<<< HEAD
-=======
-	if ($lv_obj->zeugnis==false)
-		$zeugnis=APP_ROOT.'skin/images/invisible.png';
-	else 
-		$zeugnis='';
-		
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	echo '
 		  <RDF:li>
 	         <RDF:Description  id="'.$row->lehrveranstaltung_id.'/'.$row->student_uid.'/'.$row->studiensemester_kurzbz.'"  about="'.$rdf_url.'/'.$row->lehrveranstaltung_id.'/'.$row->student_uid.'/'.$row->studiensemester_kurzbz.'" >
@@ -128,22 +107,10 @@ foreach ($obj->result as $row)
 				<NOTE:studiengang><![CDATA['.$stg_arr[$benutzer->studiengang_kz].']]></NOTE:studiengang>
 				<NOTE:studiengang_kz><![CDATA['.$benutzer->studiengang_kz.']]></NOTE:studiengang_kz>
 				<NOTE:studiengang_lv><![CDATA['.$stg_arr[$lv_obj->studiengang_kz].']]></NOTE:studiengang_lv>
-<<<<<<< HEAD
 				<NOTE:student_semester><![CDATA['.$benutzer->semester.']]></NOTE:student_semester>
-=======
-				<NOTE:semester_lv><![CDATA['.$lv_obj->semester.']]></NOTE:semester_lv>
-				<NOTE:ects_lv><![CDATA['.$lv_obj->ects.']]></NOTE:ects_lv>
-				<NOTE:student_semester><![CDATA['.$benutzer->semester.']]></NOTE:student_semester>
-				<NOTE:punkte><![CDATA['.($row->punkte!=''?(float)$row->punkte:'').']]></NOTE:punkte>
-				<NOTE:zeugnis><![CDATA['.$zeugnis.']]></NOTE:zeugnis>
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	         </RDF:Description>
 	      </RDF:li>';
 }
 ?>
    </RDF:Seq>
-<<<<<<< HEAD
 </RDF:RDF>
-=======
-</RDF:RDF>
->>>>>>> fee287127566cd5d18c55b556d178b661711c694

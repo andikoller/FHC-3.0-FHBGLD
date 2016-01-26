@@ -43,12 +43,6 @@ require_once('../include/studiensemester.class.php');
 require_once('../include/prestudent.class.php');
 require_once('../include/studiengang.class.php');
 require_once('../include/lehrveranstaltung.class.php');
-<<<<<<< HEAD
-=======
-require_once('../include/mitarbeiter.class.php');
-require_once('../include/organisationsform.class.php');
-require_once('../include/konto.class.php');
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 
 // *********** Funktionen *************************
 function convdate($date)
@@ -57,7 +51,7 @@ function convdate($date)
 	return $y.'-'.$m.'-'.$d;
 }
 
-function checkfilter($row, $filter2, $buchungstyp = null)
+function checkfilter($row, $filter2)
 {
 	global $studiensemester_kurzbz, $kontofilterstg;
 	$db = new basis_db();
@@ -80,13 +74,7 @@ function checkfilter($row, $filter2, $buchungstyp = null)
 		$qry = "SELECT sum(betrag) as summe FROM tbl_konto WHERE person_id='$row->person_id'";
 		if($kontofilterstg=='true')
 			$qry.=" AND studiengang_kz='$row->studiengang_kz'";
-		if($buchungstyp != null && $buchungstyp != "alle")
-			$qry.=" AND buchungstyp_kurzbz='$buchungstyp'";
-<<<<<<< HEAD
-		
-=======
-
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
+		//echo $qry;
 		if($db->db_query($qry))
 			if($row_filter = $db->db_fetch_object())
 				if($row_filter->summe=='0.00' || $row_filter->summe=='' || $row_filter->summe=='0')
@@ -94,7 +82,6 @@ function checkfilter($row, $filter2, $buchungstyp = null)
 	}
 	elseif($filter2=='studiengebuehr')
 	{
-<<<<<<< HEAD
 		// Alle Personen die keine Studiengebuehrbelastung haben 
 		// Incoming werden nicht beruecksichtigt
 		$prestudent = new prestudent();
@@ -103,16 +90,6 @@ function checkfilter($row, $filter2, $buchungstyp = null)
 		$qry = "SELECT count(*) as anzahl FROM public.tbl_konto WHERE 
 					studiensemester_kurzbz='".addslashes($studiensemester_kurzbz)."' AND 
 					person_id='".addslashes($row->person_id)."' AND 
-=======
-		// Alle Personen die keine Studiengebuehrbelastung haben
-		// Incoming werden nicht beruecksichtigt
-		$prestudent = new prestudent();
-		$prestudent->getLastStatus($row->prestudent_id);
-
-		$qry = "SELECT count(*) as anzahl FROM public.tbl_konto WHERE
-					studiensemester_kurzbz='".addslashes($studiensemester_kurzbz)."' AND
-					person_id='".addslashes($row->person_id)."' AND
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 					buchungstyp_kurzbz='Studiengebuehr'";
 		if($db->db_query($qry))
 			if($row_filter = $db->db_fetch_object())
@@ -121,26 +98,15 @@ function checkfilter($row, $filter2, $buchungstyp = null)
 	}
 	elseif(strstr($filter2,'buchungstyp;'))
 	{
-<<<<<<< HEAD
 		// Alle Personen die keine Belastung auf den uebergebenen Buchungstyp haben 
-=======
-		// Alle Personen die keine Belastung auf den uebergebenen Buchungstyp haben
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 		// Incoming werden nicht beruecksichtigt
 		list($filter, $buchungstyp) = explode(';',$filter2);
 		$prestudent = new prestudent();
 		$prestudent->getLastStatus($row->prestudent_id);
-<<<<<<< HEAD
 		
 		$qry = "SELECT count(*) as anzahl FROM public.tbl_konto WHERE 
 					studiensemester_kurzbz='".addslashes($studiensemester_kurzbz)."' AND 
 					person_id='".addslashes($row->person_id)."' AND 
-=======
-
-		$qry = "SELECT count(*) as anzahl FROM public.tbl_konto WHERE
-					studiensemester_kurzbz='".addslashes($studiensemester_kurzbz)."' AND
-					person_id='".addslashes($row->person_id)."' AND
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 					buchungstyp_kurzbz='$buchungstyp'";
 		if($db->db_query($qry))
 			if($row_filter = $db->db_fetch_object())
@@ -158,17 +124,10 @@ function checkfilter($row, $filter2, $buchungstyp = null)
 				if(($row_filter->zgv_code!='' && $row_filter->zgvdatum=='') ||
 				   ($row_filter->zgvmas_code!='' && $row_filter->zgvmadatum==''))
 				   	return true;
-<<<<<<< HEAD
 				else 
 					return false;
 			}
 		}			
-=======
-				else
-					return false;
-			}
-		}
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	}
 	return true;
 }
@@ -182,7 +141,6 @@ function draw_content_liste($row)
 	$prestudent->getLastStatus($row->prestudent_id);
 	$status = $prestudent->status_kurzbz;
 	$orgform = $prestudent->orgform_kurzbz;
-	$studienplan_bezeichnung=$prestudent->studienplan_bezeichnung;
 
 	echo '
 	  <RDF:li>
@@ -200,15 +158,6 @@ function draw_content_liste($row)
     		<STUDENT:ersatzkennzeichen>'.($row->ersatzkennzeichen==''?'&#xA0;':'<![CDATA['.$row->ersatzkennzeichen.']]>').'</STUDENT:ersatzkennzeichen>
     		<STUDENT:geburtsdatum><![CDATA['.$datum_obj->convertISODate($row->gebdatum).']]></STUDENT:geburtsdatum>
     		<STUDENT:geburtsdatum_iso><![CDATA['.$row->gebdatum.']]></STUDENT:geburtsdatum_iso>
-<<<<<<< HEAD
-		<STUDENT:semester><![CDATA['.(isset($row->semester)?$row->semester:'').']]></STUDENT:semester>
-    		<STUDENT:verband><![CDATA['.(isset($row->verband)?$row->verband:'').']]></STUDENT:verband>
-    		<STUDENT:gruppe><![CDATA['.(isset($row->gruppe)?$row->gruppe:'').']]></STUDENT:gruppe>
-		<STUDENT:matrikelnummer><![CDATA['.(isset($row->matrikelnr)?$row->matrikelnr:'').']]></STUDENT:matrikelnummer>
-    		<STUDENT:mail_privat><![CDATA['.$row->email_privat.']]></STUDENT:mail_privat>
-    		<STUDENT:mail_intern><![CDATA['.(isset($row->uid)?$row->uid.'@'.DOMAIN:'').']]></STUDENT:mail_intern>
-		<STUDENT:status><![CDATA['.$status.']]></STUDENT:status>
-=======
 			<STUDENT:semester><![CDATA['.(isset($row->semester)?$row->semester:'').']]></STUDENT:semester>
     		<STUDENT:verband><![CDATA['.(isset($row->verband)?$row->verband:'').']]></STUDENT:verband>
     		<STUDENT:gruppe><![CDATA['.(isset($row->gruppe)?$row->gruppe:'').']]></STUDENT:gruppe>
@@ -216,30 +165,19 @@ function draw_content_liste($row)
     		<STUDENT:mail_privat><![CDATA['.$row->email_privat.']]></STUDENT:mail_privat>
     		<STUDENT:mail_intern><![CDATA['.(isset($row->uid)?$row->uid.'@'.DOMAIN:'').']]></STUDENT:mail_intern>
 			<STUDENT:status><![CDATA['.$status.']]></STUDENT:status>
-			<STUDENT:status_datum><![CDATA['.$datum_obj->formatDatum($prestudent->datum,'d.m.Y').']]></STUDENT:status_datum>
-			<STUDENT:status_bestaetigung><![CDATA['.($prestudent->bestaetigtam!=''?$datum_obj->formatDatum($prestudent->bestaetigtam,'d.m.Y'):'-').']]></STUDENT:status_bestaetigung>
-			<STUDENT:status_datum_iso><![CDATA['.$datum_obj->formatDatum($prestudent->datum,'Y-m-d').']]></STUDENT:status_datum_iso>
-			<STUDENT:status_bestaetigung_iso><![CDATA['.($prestudent->bestaetigtam!=''?$datum_obj->formatDatum($prestudent->bestaetigtam,'Y-m-d'):'-').']]></STUDENT:status_bestaetigung_iso>
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
     		<STUDENT:anmerkungen>'.($row->anmerkungen==''?'&#xA0;':'<![CDATA['.$row->anmerkungen.']]>').'</STUDENT:anmerkungen>
     		<STUDENT:anmerkungpre>'.($row->anmerkung==''?'&#xA0;':'<![CDATA['.$row->anmerkung.']]>').'</STUDENT:anmerkungpre>
     		<STUDENT:studiengang_kz><![CDATA['.$row->studiengang_kz.']]></STUDENT:studiengang_kz>
-		<STUDENT:studiengang><![CDATA['.$stg_arr[$row->studiengang_kz].']]></STUDENT:studiengang>
-		<STUDENT:orgform><![CDATA['.$orgform.']]></STUDENT:orgform>
-    		<STUDENT:studienplan_bezeichnung><![CDATA['.$studienplan_bezeichnung.']]></STUDENT:studienplan_bezeichnung>
-		<STUDENT:aufmerksamdurch_kurzbz><![CDATA['.$row->aufmerksamdurch_kurzbz.']]></STUDENT:aufmerksamdurch_kurzbz>
-		<STUDENT:punkte><![CDATA['.$row->punkte.']]></STUDENT:punkte>
-		<STUDENT:punkte1><![CDATA['.$row->rt_punkte1.']]></STUDENT:punkte1>
-		<STUDENT:punkte2><![CDATA['.$row->rt_punkte2.']]></STUDENT:punkte2>
-		<STUDENT:punkte3><![CDATA['.$row->rt_punkte3.']]></STUDENT:punkte3>
-		<STUDENT:dual><![CDATA['.($row->dual=='t'?'true':'false').']]></STUDENT:dual>
-		<STUDENT:dual_bezeichnung><![CDATA['.($row->dual=='t'?'Ja':'Nein').']]></STUDENT:dual_bezeichnung>
-		<STUDENT:matr_nr><![CDATA['.$row->matr_nr.']]></STUDENT:matr_nr>
-		<STUDENT:mentor><![CDATA['.$row->mentor.']]></STUDENT:mentor>
-<<<<<<< HEAD
-=======
-		<STUDENT:aktiv><![CDATA['.((isset($row->bnaktiv) && $row->bnaktiv=='t')?'true':'false').']]></STUDENT:aktiv>
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
+			<STUDENT:studiengang><![CDATA['.$stg_arr[$row->studiengang_kz].']]></STUDENT:studiengang>
+			<STUDENT:orgform><![CDATA['.$orgform.']]></STUDENT:orgform>
+			<STUDENT:aufmerksamdurch_kurzbz><![CDATA['.$row->aufmerksamdurch_kurzbz.']]></STUDENT:aufmerksamdurch_kurzbz>
+			<STUDENT:punkte><![CDATA['.$row->punkte.']]></STUDENT:punkte>
+			<STUDENT:punkte1><![CDATA['.$row->rt_punkte1.']]></STUDENT:punkte1>
+			<STUDENT:punkte2><![CDATA['.$row->rt_punkte2.']]></STUDENT:punkte2>
+			<STUDENT:punkte3><![CDATA['.$row->rt_punkte3.']]></STUDENT:punkte3>
+			<STUDENT:dual><![CDATA['.($row->dual=='t'?'true':'false').']]></STUDENT:dual>
+			<STUDENT:dual_bezeichnung><![CDATA['.($row->dual=='t'?'Ja':'Nein').']]></STUDENT:dual_bezeichnung>
+			<STUDENT:matr_nr><![CDATA['.$row->matr_nr.']]></STUDENT:matr_nr>
       	</RDF:Description>
       </RDF:li>';
 }
@@ -260,54 +198,16 @@ function draw_content($row)
 		}
 	}
 
-<<<<<<< HEAD
-=======
-	$aktiv = "-";
-	if(isset($row->bnaktiv))
-	{
-	    switch($row->bnaktiv)
-	    {
-		case "t":
-		    $aktiv = "true";
-		    break;
-		case "f":
-		    $aktiv = "false";
-		    break;
-		default:
-		    $aktiv = "-";
-	    }
-	}
-
-	$studiengang = new studiengang();
-	$stgleiter = $studiengang->getLeitung($row->studiengang_kz);
-	$stgl='';
-	$i = 0;
-	foreach ($stgleiter as $stgleiter_uid)
-	{
-		$stgl_ma = new mitarbeiter($stgleiter_uid);
-		$stgl .= trim(($i>0?', ':'').$stgl_ma->titelpre.' '.$stgl_ma->vorname.' '.$stgl_ma->nachname.' '.$stgl_ma->titelpost);
-		$i++;
-	}
-
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	if($row->prestudent_id!='')
 	{
 		$prestudent = new prestudent();
 		$prestudent->getLastStatus($row->prestudent_id);
 		$status = $prestudent->status_kurzbz;
 		$orgform = $prestudent->orgform_kurzbz;
-		$studienplan_bezeichnung=$prestudent->studienplan_bezeichnung;
-<<<<<<< HEAD
 		
 		if($status=='Aufgenommener' || $status=='Bewerber' || $status=='Wartender' || $status=='Interessent')
 			$semester_prestudent = $prestudent->ausbildungssemester;
 		else 
-=======
-
-		if($status=='Aufgenommener' || $status=='Bewerber' || $status=='Wartender' || $status=='Interessent')
-			$semester_prestudent = $prestudent->ausbildungssemester;
-		else
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 			$semester_prestudent = '';
 	echo '
 	  <RDF:li>
@@ -334,23 +234,11 @@ function draw_content($row)
     		<STUDENT:geburtsnation><![CDATA['.$row->geburtsnation.']]></STUDENT:geburtsnation>
     		<STUDENT:sprache><![CDATA['.$row->sprache.']]></STUDENT:sprache>
     		<STUDENT:status><![CDATA['.$status.']]></STUDENT:status>
-<<<<<<< HEAD
-=======
-			<STUDENT:status_datum><![CDATA['.$datum_obj->formatDatum($prestudent->datum,'d.m.Y').']]></STUDENT:status_datum>
-			<STUDENT:status_datum_iso><![CDATA['.$datum_obj->formatDatum($prestudent->datum,'Y-m-d').']]></STUDENT:status_datum_iso>
-			<STUDENT:status_bestaetigung><![CDATA['.($prestudent->bestaetigtam!=''?$datum_obj->formatDatum($prestudent->bestaetigtam,'d.m.Y'):'-').']]></STUDENT:status_bestaetigung>
-			<STUDENT:status_bestaetigung_iso><![CDATA['.($prestudent->bestaetigtam!=''?$datum_obj->formatDatum($prestudent->bestaetigtam,'Y-m-d'):'-').']]></STUDENT:status_bestaetigung_iso>
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
     		<STUDENT:orgform><![CDATA['.$orgform.']]></STUDENT:orgform>
-    		<STUDENT:studienplan_bezeichnung><![CDATA['.$studienplan_bezeichnung.']]></STUDENT:studienplan_bezeichnung>
     		<STUDENT:mail_privat><![CDATA['.$mail_privat.']]></STUDENT:mail_privat>
     		<STUDENT:mail_intern><![CDATA['.(isset($row->uid)?$row->uid.'@'.DOMAIN:'').']]></STUDENT:mail_intern>
 
-<<<<<<< HEAD
     		<STUDENT:aktiv><![CDATA['.((isset($row->bnaktiv) && $row->bnaktiv)?'true':'false').']]></STUDENT:aktiv>
-=======
-    		<STUDENT:aktiv><![CDATA['.$aktiv.']]></STUDENT:aktiv>
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
     		<STUDENT:uid><![CDATA['.(isset($row->uid)?$row->uid:'').']]></STUDENT:uid>
     		<STUDENT:matrikelnummer><![CDATA['.(isset($row->matrikelnr)?$row->matrikelnr:'').']]></STUDENT:matrikelnummer>
 			<STUDENT:alias><![CDATA['.(isset($row->alias)?$row->alias:'').']]></STUDENT:alias>
@@ -359,10 +247,6 @@ function draw_content($row)
     		<STUDENT:gruppe><![CDATA['.(isset($row->gruppe)?$row->gruppe:'').']]></STUDENT:gruppe>
 			<STUDENT:studiengang_kz_student><![CDATA['.(is_a($row,'student')?$row->studiengang_kz:'').']]></STUDENT:studiengang_kz_student>
 			<STUDENT:matr_nr><![CDATA['.$row->matr_nr.']]></STUDENT:matr_nr>
-<<<<<<< HEAD
-=======
-			<STUDENT:studiengang_studiengangsleitung><![CDATA['.$stgl.']]></STUDENT:studiengang_studiengangsleitung>
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	';
 	}
 }
@@ -384,18 +268,10 @@ function draw_prestudent($row)
 			<STUDENT:zgvort><![CDATA['.$row->zgvort.']]></STUDENT:zgvort>
 			<STUDENT:zgvdatum><![CDATA['.$datum_obj->convertISODate($row->zgvdatum).']]></STUDENT:zgvdatum>
 			<STUDENT:zgvdatum_iso><![CDATA['.$row->zgvdatum.']]></STUDENT:zgvdatum_iso>
-<<<<<<< HEAD
-=======
-			<STUDENT:zgvnation><![CDATA['.$row->zgvnation.']]></STUDENT:zgvnation>
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 			<STUDENT:zgvmas_code><![CDATA['.$row->zgvmas_code.']]></STUDENT:zgvmas_code>
 			<STUDENT:zgvmaort><![CDATA['.$row->zgvmaort.']]></STUDENT:zgvmaort>
 			<STUDENT:zgvmadatum><![CDATA['.$datum_obj->convertISODate($row->zgvmadatum).']]></STUDENT:zgvmadatum>
 			<STUDENT:zgvmadatum_iso><![CDATA['.$row->zgvmadatum.']]></STUDENT:zgvmadatum_iso>
-<<<<<<< HEAD
-=======
-			<STUDENT:zgvmanation><![CDATA['.$row->zgvmanation.']]></STUDENT:zgvmanation>
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 			<STUDENT:ausstellungsstaat><![CDATA['.$row->ausstellungsstaat.']]></STUDENT:ausstellungsstaat>
 			<STUDENT:aufnahmeschluessel><![CDATA['.$row->aufnahmeschluessel.']]></STUDENT:aufnahmeschluessel>
 			<STUDENT:facheinschlberuf><![CDATA['.($row->facheinschlberuf?'true':'false').']]></STUDENT:facheinschlberuf>
@@ -411,7 +287,6 @@ function draw_prestudent($row)
 			<STUDENT:dual><![CDATA['.($row->dual?'true':'false').']]></STUDENT:dual>
 			<STUDENT:dual_bezeichnung><![CDATA['.($row->dual?'Ja':'Nein').']]></STUDENT:dual_bezeichnung>
 			<STUDENT:anmerkungpre><![CDATA['.$row->anmerkung.']]></STUDENT:anmerkungpre>
-			<STUDENT:mentor><![CDATA['.$row->mentor.']]></STUDENT:mentor>
       	</RDF:Description>
       </RDF:li>';
 	}
@@ -439,7 +314,6 @@ $filter = (isset($_GET['filter'])?$_GET['filter']:null);
 $ss = (isset($_GET['ss'])?$_GET['ss']:null);
 $filter2 = (isset($_GET['filter2'])?$_GET['filter2']:null);
 $orgform = (isset($_GET['orgform'])?$_GET['orgform']:null);
-$buchungstyp_filter = (isset($_GET['buchungstyp'])?$_GET['buchungstyp']:null);
 
 $db = new basis_db();
 
@@ -504,11 +378,7 @@ if($xmlformat=='rdf')
 				$where.=" AND tbl_studentlehrverband.verband='".$verband."'";
 			if ($gruppe!=null)
 				$where.=" AND tbl_studentlehrverband.gruppe='".$gruppe."'";
-<<<<<<< HEAD
 				
-=======
-
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 			//Wenn eine Orgform uebergeben wird nur das Semester ausgewaehlt ist, dann
 			//nach der Orgform filtern. Bei Verbaenden, Gruppen und Spezialgruppen wird auf
 			//die Orgform keine ruecksicht genommen
@@ -526,11 +396,7 @@ if($xmlformat=='rdf')
 		$sql_query="SELECT p.person_id, tbl_student.prestudent_id, tbl_benutzer.uid, titelpre, titelpost,	vorname, vornamen, geschlecht,
 						nachname, gebdatum, tbl_prestudent.anmerkung,ersatzkennzeichen,svnr, tbl_student.matrikelnr, p.anmerkung as anmerkungen,
 						tbl_studentlehrverband.semester, tbl_studentlehrverband.verband, tbl_studentlehrverband.gruppe,
-<<<<<<< HEAD
-						tbl_student.studiengang_kz, aufmerksamdurch_kurzbz, mentor,
-=======
-						tbl_student.studiengang_kz, aufmerksamdurch_kurzbz, mentor, public.tbl_benutzer.aktiv AS bnaktiv,
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
+						tbl_student.studiengang_kz, aufmerksamdurch_kurzbz, 
 						(	SELECT kontakt
 							FROM public.tbl_kontakt
 							WHERE kontakttyp='email' AND person_id=p.person_id AND zustellung
@@ -542,28 +408,19 @@ if($xmlformat=='rdf')
 						(SELECT rt_punkte2 as punkte FROM public.tbl_prestudent WHERE prestudent_id=tbl_student.prestudent_id) as rt_punkte2,
 						(SELECT rt_punkte3 as punkte FROM public.tbl_prestudent WHERE prestudent_id=tbl_student.prestudent_id) as rt_punkte3,
 						 tbl_prestudent.dual as dual, p.matr_nr
-<<<<<<< HEAD
 						FROM public.tbl_student 
-=======
-						FROM public.tbl_student
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 							JOIN public.tbl_benutzer ON (student_uid=uid) JOIN public.tbl_person p USING (person_id)  JOIN public.tbl_prestudent USING(prestudent_id) ";
 		if($gruppe_kurzbz!=null)
 			$sql_query.= "JOIN public.tbl_benutzergruppe USING (uid) ";
 		$sql_query.="LEFT JOIN public.tbl_studentlehrverband ON (tbl_studentlehrverband.student_uid=tbl_student.student_uid AND tbl_studentlehrverband.studiensemester_kurzbz='$studiensemester_kurzbz')";
 		$sql_query.="WHERE ".$where.' ORDER BY nachname, vorname';
-<<<<<<< HEAD
 		
 		
-=======
-
-
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 		if($db->db_query($sql_query))
 		{
 			while($row = $db->db_fetch_object())
 			{
-				if(checkfilter($row, $filter2, $buchungstyp_filter))
+				if(checkfilter($row, $filter2))
 					draw_content_liste($row);
 			}
 		}
@@ -580,28 +437,17 @@ if($xmlformat=='rdf')
 		{
 			$stsem_obj = new studiensemester();
 			$stsem_obj->load($studiensemester_kurzbz);
-<<<<<<< HEAD
 			$qry = "SELECT prestudent_id 
 					FROM 
 						bis.tbl_bisio JOIN public.tbl_student USING(student_uid)  
 					WHERE 
-=======
-			$qry = "SELECT prestudent_id
-					FROM
-						bis.tbl_bisio JOIN public.tbl_student USING(student_uid)
-					WHERE
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 						(
 						(tbl_bisio.von>='".$stsem_obj->start."' AND tbl_bisio.von<='".$stsem_obj->ende."')
 						OR
 						(tbl_bisio.bis>='".$stsem_obj->start."' AND tbl_bisio.bis<='".$stsem_obj->ende."')
 						)
 						AND NOT EXISTS(SELECT 1 FROM public.tbl_prestudentstatus WHERE status_kurzbz='Incoming' AND prestudent_id=tbl_student.prestudent_id)
-<<<<<<< HEAD
 					"; 
-=======
-					";
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 		}
 		if($db->db_query($qry))
 		{
@@ -677,7 +523,6 @@ if($xmlformat=='rdf')
 	{
 		if($filter!='')
 		{
-<<<<<<< HEAD
 			//$filter = utf8_decode($filter);
 			$qry = "SELECT prestudent_id 
 					FROM 
@@ -714,79 +559,6 @@ if($xmlformat=='rdf')
 					}
 				}
 			}
-=======
-		    if(substr_compare($filter, "#ref", 0, 4,true)==0)
-		    {
-			$zahlungsreferenz = explode(" ", $filter);
-			unset($zahlungsreferenz[0]);
-
-			foreach($zahlungsreferenz as $ref)
-			{
-			    $konto = new konto();
-			    $konto->loadFromZahlungsreferenz($ref);
-			    $prestudent=new prestudent();
-			    $prestudent->getPrestudenten($konto->person_id);
-			    if(!empty($prestudent->result))
-			    {
-				$prestudent_temp = new prestudent($prestudent->result[0]->prestudent_id);
-				$student = new student();
-				$uid = $student->getUid($prestudent_temp->prestudent_id);
-
-				if($uid!='' && $uid != false)
-				{
-				    if(!$student->load($uid, $studiensemester_kurzbz))
-					$student->load($uid);
-				    draw_content($student);
-				    draw_prestudent($prestudent_temp);
-				}
-				else
-				{
-				    draw_content($prestudent_temp);
-				    draw_prestudent($prestudent_temp);
-				}
-			    }
-			}
-		    }
-		    else
-		    {
-			//$filter = utf8_decode($filter);
-			$qry = "SELECT prestudent_id
-				FROM
-				    public.tbl_person JOIN tbl_prestudent USING (person_id) LEFT JOIN tbl_student using(prestudent_id)
-				WHERE
-				    COALESCE(nachname,'')||' '||COALESCE(vorname,'') ~* '".addslashes($filter)."' OR
-				    COALESCE(vorname,'')||' '||COALESCE(nachname,'') ~* '".addslashes($filter)."' OR
-				    student_uid ~* '".addslashes($filter)."' OR
-				    matrikelnr = '".addslashes($filter)."' OR
-				    svnr = '".addslashes($filter)."';";
-			if($db->db_query($qry))
-			{
-			    while($row = $db->db_fetch_object())
-			    {
-				$student=new student();
-				if($uid = $student->getUid($row->prestudent_id))
-				{
-				    //Wenn kein Eintrag fuers aktuelle Studiensemester da ist, dann
-				    //nochmal laden aber ohne studiensemester
-				    if(!$student->load($uid, $studiensemester_kurzbz))
-					$student->load($uid);
-				}
-				$prestd = new prestudent();
-				$prestd->load($row->prestudent_id);
-				if($uid!='')
-				{
-				    draw_content($student);
-				    draw_prestudent($prestd);
-				}
-				else
-				{
-				    draw_content($prestd);
-				    draw_prestudent($prestd);
-				}
-			    }
-			}
-		    }
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 		}
 		elseif(isset($prestudent_id))
 		{
@@ -833,23 +605,8 @@ else
 			$studiengang = new studiengang();
 			$studiengang->load($student->studiengang_kz);
 
-<<<<<<< HEAD
 //			$stg_typ = new studiengang(); 
 //			$stg_typ->getStudiengangTyp($studiengang->typ); 
-=======
-			$stgleiter = $studiengang->getLeitung($student->studiengang_kz);
-			$stgl='';
-			$i = 0;
-			foreach ($stgleiter as $stgleiter_uid)
-			{
-				$stgl_ma = new mitarbeiter($stgleiter_uid);
-				$stgl .= trim(($i>0?', ':'').$stgl_ma->titelpre.' '.$stgl_ma->vorname.' '.$stgl_ma->nachname.' '.$stgl_ma->titelpost);
-				$i++;
-			}
-
-//			$stg_typ = new studiengang();
-//			$stg_typ->getStudiengangTyp($studiengang->typ);
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 //			$typ=$stg_typ->bezeichnung;
 			switch($studiengang->typ)
 			{
@@ -905,11 +662,7 @@ else
 			$lv_studiengang_bezeichnung='';
 			$lv_studiengang_typ='';
 			$lv_studiengang_art='';
-<<<<<<< HEAD
 			
-=======
-
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 			$lv=new lehrveranstaltung();
 			$lv->load_lva_student($student->uid);
 			if(count($lv->lehrveranstaltungen)>0)
@@ -919,11 +672,7 @@ else
 				$lv_studiengang->load($lv_studiengang_kz);
 				$lv_studiengang_bezeichnung=$lv_studiengang->bezeichnung;
 				$lv_studiengang_typ=$lv_studiengang->typ;
-<<<<<<< HEAD
 //	            $stg_typ->getStudiengangTyp($lv_studiengang->typ); 
-=======
-//	            $stg_typ->getStudiengangTyp($lv_studiengang->typ);
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 //				$lv_studiengang_art=$stg_typ->bezeichnung;
 				switch($lv_studiengang->typ)
 				{
@@ -936,17 +685,6 @@ else
 				}
 			}
 			$prestudent = new prestudent($student->prestudent_id);
-<<<<<<< HEAD
-=======
-			$prestudent->getLastStatus($row->prestudent_id);
-
-			$orgform_bezeichnung = new organisationsform();
-			$orgform_bezeichnung->load($studiengang->orgform_kurzbz);
-
-			$orgform_student_bezeichnung = new organisationsform();
-			$orgform_student_bezeichnung->load($prestudent->orgform_kurzbz);
-
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 			echo '
 			<student>
 				<uid><![CDATA['.$student->uid.']]></uid>
@@ -962,21 +700,10 @@ else
 				<semester><![CDATA['.$semester.']]></semester>
 				<verband><![CDATA['.$student->verband.']]></verband>
 				<gruppe><![CDATA['.$student->gruppe.']]></gruppe>
-<<<<<<< HEAD
-=======
-				<student_orgform_kurzbz><![CDATA['.$prestudent->orgform_kurzbz.']]></student_orgform_kurzbz>
-                <student_orgform_bezeichnung><![CDATA['.$orgform_student_bezeichnung->bezeichnung.']]></student_orgform_bezeichnung>
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 				<studiengang_kz><![CDATA['.sprintf("%04d",abs($student->studiengang_kz)).']]></studiengang_kz>
 				<studiengang_bezeichnung><![CDATA['.$studiengang->bezeichnung.']]></studiengang_bezeichnung>
 				<studiengang_art><![CDATA['.$typ.']]></studiengang_art>
                 <studiengang_typ><![CDATA['.$studiengang->typ.']]></studiengang_typ>
-<<<<<<< HEAD
-=======
-                <studiengang_orgform_kurzbz><![CDATA['.$studiengang->orgform_kurzbz.']]></studiengang_orgform_kurzbz>
-                <studiengang_orgform_bezeichnung><![CDATA['.$orgform_bezeichnung->bezeichnung.']]></studiengang_orgform_bezeichnung>
-                <studiengang_studiengangsleitung><![CDATA['.$stgl.']]></studiengang_studiengangsleitung>
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 				<lv_studiengang_kz><![CDATA['.sprintf("%04d",abs($lv_studiengang_kz)).']]></lv_studiengang_kz>
 				<lv_studiengang_bezeichnung><![CDATA['.$lv_studiengang_bezeichnung.']]></lv_studiengang_bezeichnung>
                 <lv_studiengang_typ><![CDATA['.$lv_studiengang_typ.']]></lv_studiengang_typ>
@@ -989,18 +716,10 @@ else
 				<studienbeginn_beginn><![CDATA['.$datum_obj->convertISODate($studienbeginn).']]></studienbeginn_beginn>
 				<studiensemester_beginn><![CDATA['.$studiensemester.']]></studiensemester_beginn>
 				<studiensemester_aktuell><![CDATA['.$stsem->studiensemester_kurzbz.']]></studiensemester_aktuell>
-<<<<<<< HEAD
-=======
-				<studiensemester_aktuell_bezeichnung><![CDATA['.$stsem->bezeichnung.']]></studiensemester_aktuell_bezeichnung>
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 				<studienbeginn_aktuell><![CDATA['.$datum_obj->convertISODate($stsem->start).']]></studienbeginn_aktuell>
 				<tagesdatum><![CDATA['.date('d.m.Y').']]></tagesdatum>
 				<max_semester><![CDATA['.$studiengang->max_semester.']]></max_semester>
 				<anmerkungpre><![CDATA['.$prestudent->anmerkung.']]></anmerkungpre>
-<<<<<<< HEAD
-=======
-				<aktiv><![CDATA['.$student->aktiv.']]></aktiv>
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	    	</student>';
 		}
 	}

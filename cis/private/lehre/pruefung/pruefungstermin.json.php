@@ -58,24 +58,10 @@ switch($method)
 	{
 	    $mitarbeiter_uid = $_REQUEST["mitarbeiter_uid"];
 	}
-<<<<<<< HEAD
 	else
 	{
 	    $mitarbeiter_uid = $uid;
 	}
-=======
-	else if($rechte->isBerechtigt('lehre/pruefungstermin'))
-	{
-	    $mitarbeiter_uid = $uid;
-	}
-	else
-	{
-	    $data['result']='false';
-	    $data['error']='true';
-	    $data['errormsg']='Sie haben keine Berechtigung.';
-	    break;
-	}
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	$data = savePruefungstermin($mitarbeiter_uid, $studiensemester_kurzbz, $pruefungsfenster_id, $pruefungstyp_kurzbz, $titel, $beschreibung, $methode, $einzeln, $lehrveranstaltungen, $termine, $pruefungsintervall);
 	break;
     case 'getLehrveranstaltungenByMitarbeiter':
@@ -104,7 +90,6 @@ switch($method)
 	{
 	    $mitarbeiter_uid = $_REQUEST["mitarbeiter_uid"];
 	}
-<<<<<<< HEAD
 	else
 	{
 	    $mitarbeiter_uid = $uid;
@@ -112,58 +97,15 @@ switch($method)
 	$data = updatePruefungstermin($mitarbeiter_uid, $pruefung_id, $studiensemester_kurzbz, $pruefungsfenster_id, $pruefungstyp_kurzbz, $titel, $beschreibung, $methode, $einzeln, $lehrveranstaltungen, $termine, $termineNeu, $pruefungsintervall);
 	break;
     case 'deleteLehrveranstaltungFromPruefung':
-=======
-	else if($rechte->isBerechtigt('lehre/pruefungstermin'))
-	{
-	    $mitarbeiter_uid = $uid;
-	}
-	else
-	{
-	    $data['result']='false';
-	    $data['error']='true';
-	    $data['errormsg']='Sie haben keine Berechtigung.';
-	    break;
-	}
-	$data = updatePruefungstermin($mitarbeiter_uid, $pruefung_id, $studiensemester_kurzbz, $pruefungsfenster_id, $pruefungstyp_kurzbz, $titel, $beschreibung, $methode, $einzeln, $lehrveranstaltungen, $termine, $termineNeu, $pruefungsintervall);
-	break;
-    case 'deleteLehrveranstaltungFromPruefung':
-	if(!($rechte->isBerechtigt('lehre/pruefungsterminAdmin')) && !($rechte->isBerechtigt('lehre/pruefungstermin')))
-	{
-	    $data['result']='false';
-	    $data['error']='true';
-	    $data['errormsg']='Sie haben keine Berechtigung.';
-	    break;
-	}
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	$lvId = $_POST["lehrveranstaltung_id"];
 	$pruefung_id = $_POST["pruefung_id"];
 	$data = deleteLehrveranstaltungFromPruefung($lvId, $pruefung_id);
 	break;
     case 'stornoPruefung':
-<<<<<<< HEAD
-=======
-	if(!($rechte->isBerechtigt('lehre/pruefungsterminAdmin')) && !($rechte->isBerechtigt('lehre/pruefungstermin')))
-	{
-	    $data['result']='false';
-	    $data['error']='true';
-	    $data['errormsg']='Sie haben keine Berechtigung.';
-	    break;
-	}
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	$pruefung_id = $_REQUEST["pruefung_id"];
 	$data = stornoPruefung($pruefung_id);
 	break;
     case 'deleteTermin':
-<<<<<<< HEAD
-=======
-	if(!($rechte->isBerechtigt('lehre/pruefungsterminAdmin')) && !($rechte->isBerechtigt('lehre/pruefungstermin')))
-	{
-	    $data['result']='false';
-	    $data['error']='true';
-	    $data['errormsg']='Sie haben keine Berechtigung.';
-	    break;
-	}
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	$pruefung_id = $_REQUEST["pruefung_id"];
 	$pruefungstermin_id = $_REQUEST["pruefungstermin_id"];
 	$data = deleteTermin($pruefung_id, $pruefungstermin_id);
@@ -173,24 +115,10 @@ switch($method)
 	{
 	    $data = getAllPruefungen($_REQUEST["uid"]);
 	}
-<<<<<<< HEAD
 	else
 	{
 	    $data = getAllPruefungen($uid);
 	}
-=======
-	else if($rechte->isBerechtigt('lehre/pruefungstermin'))
-	{
-	    $data = getAllPruefungen($uid);
-	}
-	else
-	{
-	    $data['result']='false';
-	    $data['error']='true';
-	    $data['errormsg']='Sie haben keine Berechtigung.';
-	    break;
-	}
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	break;
     default:
 	break;
@@ -301,11 +229,6 @@ function savePruefungstermin($uid, $studiensemester_kurzbz, $pruefungsfenster_id
 	$termin->max = $t["max"];
 	$termin->beginn = date('Y-m-d H:i', strtotime($date." ".$beginn));
 	$termin->ende = date('Y-m-d H:i', strtotime($date." ".$ende));
-	$termin->sammelklausur = $t["sammelklausur"];
-<<<<<<< HEAD
-=======
-	//Termin soll auch außerhalb eines Prüfungsfensters angelegt werden können
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 //	if(checkTerminPruefungsfenster($pruefungsfenster_id, $date))
 //	{
 	    if(!(checkCollision($uid, $termin->beginn, $termin->ende)))
@@ -449,7 +372,6 @@ function updatePruefungstermin($uid, $pruefung_id, $studiensemester_kurzbz, $pru
 	    $termin->max = $t["max"];
 	    $termin->beginn = date('Y-m-d H:i', strtotime($date." ".$beginn));
 	    $termin->ende = date('Y-m-d H:i', strtotime($date." ".$ende));
-	    $termin->sammelklausur = $t["sammelklausur"];
 //	    if(checkTerminPruefungsfenster($pruefungsfenster_id, $date))
 //	    {
 		if(!(checkCollision($uid, $termin->beginn, $termin->ende)))
@@ -472,7 +394,7 @@ function updatePruefungstermin($uid, $pruefung_id, $studiensemester_kurzbz, $pru
 	}
 	foreach ($termineNeuArray as $t)
 	{
-	    $pruefung->saveTerminPruefung($pruefung_id, $t->beginn, $t->ende, $t->max, $t->min, $t->sammelklausur);
+	    $pruefung->saveTerminPruefung($pruefung_id, $t->beginn, $t->ende, $t->max, $t->min);
 	}
     }
     

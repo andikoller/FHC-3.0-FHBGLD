@@ -234,17 +234,10 @@ if(isset($_GET['action']))
 			$anzahl_freigegeben=0;
 			$anzahl_fehler=0;
 			$qry = "SELECT * FROM public.tbl_preinteressentstudiengang 
-<<<<<<< HEAD
-					WHERE preinteressent_id=".$this->db_add_param($_GET['id'])."
+					WHERE preinteressent_id='".addslashes($_GET['id'])."' 
 						  AND prioritaet = (SELECT max(prioritaet) 
 						  					FROM public.tbl_preinteressentstudiengang 
-						  					WHERE preinteressent_id=".$this->db_add_param($_GET['id']).")
-=======
-					WHERE preinteressent_id=".$db->db_add_param($_GET['id'])."
-						  AND prioritaet = (SELECT max(prioritaet) 
-						  					FROM public.tbl_preinteressentstudiengang 
-						  					WHERE preinteressent_id=".$db->db_add_param($_GET['id']).")
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
+						  					WHERE preinteressent_id='".addslashes($_GET['id'])."')
 						  AND freigabedatum is null";
 			//Zuordnungen holen die noch nicht freigegeben wurden und die hoechste Prioritaet haben
 			if($result = $db->db_query($qry))
@@ -252,10 +245,7 @@ if(isset($_GET['action']))
 				while($row = $db->db_fetch_object($result))
 				{
 					//Nur diejenigen nehmen die noch nicht als Prestudent vorhanden sind
-					$qry = "SELECT count(*) as anzahl FROM public.tbl_preinteressent JOIN public.tbl_prestudent USING(person_id) 
-						WHERE preinteressent_id=".$db->db_add_param($row->preinteressent_id)." 
-						AND studiengang_kz=".$db->db_add_param($row->studiengang_kz);
-
+					$qry = "SELECT count(*) as anzahl FROM public.tbl_preinteressent JOIN public.tbl_prestudent USING(person_id) WHERE preinteressent_id='$row->preinteressent_id' AND studiengang_kz='$row->studiengang_kz'";
 					if($result_std = $db->db_query($qry))
 					{
 						if($row_std = $db->db_fetch_object($result_std))
@@ -274,7 +264,7 @@ if(isset($_GET['action']))
 									//MAIL an Assistenz verschicken
 									$qry_person = "SELECT vorname, nachname 
 													FROM public.tbl_person JOIN public.tbl_preinteressent USING(person_id) 
-													WHERE preinteressent_id=".$db->db_add_param($row->preinteressent_id);
+													WHERE preinteressent_id='$row->preinteressent_id'";
 									$name='';
 									if($result_person = $db->db_query($qry_person))
 										if($row_person = $db->db_fetch_object($result_person))
@@ -282,7 +272,7 @@ if(isset($_GET['action']))
 									$stg_obj = new studiengang();
 									$stg_obj->load($row->studiengang_kz);
 									$to = $stg_obj->email;
-
+									//$to = 'oesi@technikum-wien.at';
 									$message = "Dies ist eine automatische Mail! $stg_obj->email\n\n".
 												"Der Preinteressent $name wurde zur Übernahme freigegeben. \nSie können diesen ".
 												"im FAS unter 'Extras->Preinteressenten übernehmen' oder unter folgendem Link\n\n".
@@ -352,7 +342,7 @@ if(!empty ($_GET))
 {
 	$preinteressent = new preinteressent();
 	//if($filter=='')
-	if($datum_obj->formatDatum($filter, 'Y-m-d', true) && is_numeric($filter))
+	if($datum_obj->formatDatum($filter, 'Y-m-d', true))
 		$filter = $datum_obj->formatDatum($filter, 'Y-m-d', true);
 	$preinteressent->loadPreinteressenten($studiengang_kz, ($studiensemester_kurzbz!='-1'?$studiensemester_kurzbz:null), $filter, $bool_nichtfreigegeben, $bool_uebernommen, $kontaktmedium, $bool_absage, $erfassungsdatum_von, $erfassungsdatum_bis, $bool_einverstaendnis, $bool_preinteressent);
 }
@@ -419,7 +409,7 @@ if(!empty ($_GET))
 		
 		echo "<td>$person->geschlecht</td>";
 		//EMail
-		$qry = "SELECT kontakt FROM public.tbl_kontakt WHERE person_id=".$db->db_add_param($person->person_id)." AND kontakttyp='email' 
+		$qry = "SELECT kontakt FROM public.tbl_kontakt WHERE person_id='$person->person_id' AND kontakttyp='email' 
 				ORDER BY zustellung DESC LIMIT 1";
 		echo '<td>';
 		if($result_mail = $db->db_query($qry))
@@ -459,10 +449,7 @@ if(!empty ($_GET))
 		{
 			//auch jene als freigegeben anzeigen die schon im studiengang angelegt sind 
 			//obwohl der preinteressent nicht freigegeben wurde. (bewerbung direkt beim studiengang)
-			$qry = "SELECT prestudent_id FROM public.tbl_prestudent 
-				WHERE person_id=".$db->db_add_param($row->person_id)." 
-				AND studiengang_kz=".$db->db_add_param($row_freigaben->studiengang_kz);
-
+			$qry = "SELECT prestudent_id FROM public.tbl_prestudent WHERE person_id='$row->person_id' AND studiengang_kz='$row_freigaben->studiengang_kz'";
 			$result_chkstg = $db->db_query($qry);
 			
 			if($row_freigaben->freigabedatum!='' || ($result_chkstg &&  $db->db_num_rows($result_chkstg)>0))

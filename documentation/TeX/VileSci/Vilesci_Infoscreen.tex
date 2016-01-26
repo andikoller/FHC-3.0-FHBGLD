@@ -1,0 +1,21 @@
+\chapter{Infoscreen}
+\label{Infoscreen}
+Unter dem Punkt Stammdaten->Infoscreens können die Infoscreens verwaltet werden.\\
+Infoscreens sind Bildschirme mit allgemeinen Informationen.\\
+\\
+\\
+Die Infoscreens können unterschiedlichen Content anzeigen. Dazu muss der Infoscreen in der Verwaltungsseite angelegt werden. Über die IP-Adresse wird der Infoscreen identifiziert.\\
+\\
+Sobald ein Infoscreen angelegt ist, kann diesem Content zugeordnet werden.\\
+Folgende Felder können befüllt werden:
+\begin{itemize}
+	\item InfoscreenID - ID des Infoscreens der den Content anzeigen soll. Wenn dieses Feld leer ist, dann wird die Seite auf allen Infoscreens angezeigt
+	\item ContentID - ID des Contents aus dem CMS
+	\item GueltigVon/GueltigBis - Datumsbereich innerhalb dessen der Content am Infoscreen angezeigt werden soll. Wenn dieses Feld leer ist, wird die Seite immer berücksichtigt.
+	\item Refreshzeit - Legt fest, wie viele Sekunden diese Seite sichtbar ist
+\end{itemize}
+Die Seiten werden der Reihenfolge nach abwechselnd angezeigt.\\
+Zusätzlich zu den angegebenen Seiten werden die News angezeigt. Diese müssen nicht extra eingetragen werden.\\
+\\
+\achtung{\textbf{Achtung} Damit die Infoscreens korrekt funktionieren, muss der Browser des Infoscreens Cookies erlauben.}\\
+

@@ -130,9 +130,9 @@ derzeit fuer alle Studierende der gleiche Standort
 ToDo: Standort sollte pro Student konfigurierbar sein.
 */
 $standortcode='22';
-if(in_array($stg_kz,array('265','268','761','760','266','267','764','269','400')))
+if(in_array($stg_kz,array('265','268','761','760','266','267','764','269','400','786','794','795','796')))
 	$standortcode='14'; // Pinkafeld
-elseif(in_array($stg_kz,array('639','640','263','743','364','635','402','401','725','264','271')))
+elseif(in_array($stg_kz,array('639','640','263','743','364','635','402','401','725','264','271','781')))
 	$standortcode='3'; // Eisenstadt
 
 $datumobj=new datum();
@@ -148,15 +148,12 @@ if($result = $db->db_query($qry))
 }
 
 //Studiengangsdaten auslesen
-<<<<<<< HEAD
 $qry="
 	SELECT 
 		*
 	FROM 
 		public.tbl_studiengang 
 	WHERE studiengang_kz=".$db->db_add_param($stg_kz);
-=======
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 $stg_obj = new studiengang();
 if($stg_obj->load($stg_kz))
 {
@@ -178,14 +175,6 @@ if($stg_obj->load($stg_kz))
 		default: die('<h2>Dieser Studiengangstyp kann nicht gemeldet werden. Typ muss (b, m, d oder e) sein</h2>'); break;
 	}
 
-<<<<<<< HEAD
-=======
-	// DoubleDegree Studierende werden per Default aus BB gemeldet.
-	// Wenn es ein reiner VZ Studiengang ist, dann sollen diese aber als VZ gemeldet werden.
-	if($stg_obj->orgform_kurzbz=='VZ')
-		$orgform_code_array['DDP']=$orgform_code_array['VZ'];
-
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	$orgform_code = $orgform_code_array[$stg_obj->orgform_kurzbz];
 	$orgform_kurzbz=$stg_obj->orgform_kurzbz;
 }
@@ -514,7 +503,6 @@ fclose($dateiausgabe);
 
 if(file_exists($ddd))
 {
-	echo '<a href="archiv.php?meldung='.$ddd.'&html='.$eee.'&stg='.$stg_kz.'&sem='.$ssem.'&typ=studenten&action=archivieren">BIS-Meldung Stg '.$stg_kz.' archivieren</a><br>';
 	echo '<a href="'.$ddd.'">XML-Datei f&uuml;r BIS-Meldung Stg '.$stg_kz.'</a><br>';
 }
 if(file_exists($eee))
@@ -841,11 +829,7 @@ function GenerateXMLStudentBlock($row)
 			die("\nQry Failed:".$qry_ap);
 		}
 	}
-<<<<<<< HEAD
 	if($storgform!='VZ')
-=======
-	if($orgform_code_array[$storgform]!=1) // Wenn nicht Vollzeit
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	{
 		if($row->berufstaetigkeit_code=='' || $row->berufstaetigkeit_code==null)
 		{
@@ -996,11 +980,7 @@ function GenerateXMLStudentBlock($row)
 		
 		$datei.="
 			<StudStatusCode>".$status."</StudStatusCode>";
-<<<<<<< HEAD
 		if($storgform!='VZ' && !$ausserordentlich)
-=======
-		if($orgform_code_array[$storgform]!=1 && !$ausserordentlich) // Wenn nicht Vollzeit und nicht Ausserordentlich
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 		{
 			$datei.="
 			<BerufstaetigkeitCode>".$row->berufstaetigkeit_code."</BerufstaetigkeitCode>";
@@ -1230,8 +1210,4 @@ function GenerateXMLBewerberBlock($orgformcode=null)
 	}
 	return $datei;
 }
-<<<<<<< HEAD
 ?>
-=======
-?>
->>>>>>> fee287127566cd5d18c55b556d178b661711c694

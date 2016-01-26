@@ -30,11 +30,6 @@ require_once('../../include/datum.class.php');
 require_once('../../include/lehreinheit.class.php');
 require_once('../../include/lehrveranstaltung.class.php');
 require_once('../../include/anwesenheit.class.php');
-<<<<<<< HEAD
-=======
-require_once('../../include/studiensemester.class.php');
-require_once('../../include/lehreinheitmitarbeiter.class.php');
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 
 if (!$uid = get_uid())
 	die('Keine UID gefunden!');
@@ -48,81 +43,12 @@ $datum_obj = new datum();
 if(!$rechte->isBerechtigt('basis/person', null, 'suid'))
 	die('Sie haben keine Berechtigung für diese Seite');
 
-<<<<<<< HEAD
 
-=======
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 if(isset($_REQUEST['work']))
 	$work = $_REQUEST['work'];
 else
 	$work='';
 
-<<<<<<< HEAD
-=======
-if($work=='getTermine')
-{
-	$stg = $_POST['stg'];
-	$sem = $_POST['sem'];
-	$stsem = $_POST['stsem'];
-	$lv = $_POST['lv'];
-	
-	// Daten der Lehreinheiten ermitteln
-	$qry = "SELECT 
-				le.lehreinheit_id, sp.ort_kurzbz, datum
-			FROM 
-				lehre.tbl_lehreinheit le 
-				JOIN lehre.tbl_lehrveranstaltung lv ON lv.lehrveranstaltung_id = le.lehrveranstaltung_id
-				JOIN lehre.tbl_stundenplan sp ON (sp.lehreinheit_id=le.lehreinheit_id) 
-			WHERE lv.studiengang_kz = " . $db->db_add_param($stg)."
-			AND lv.lehrveranstaltung_id = " . $db->db_add_param($lv)."
-			AND lv.semester = " . $db->db_add_param($sem)."
-			AND le.studiensemester_kurzbz=".$db->db_add_param($stsem)." ORDER BY datum, stunde";
-
-	$data = array();
-	$lektoren=array();
-	if($result = $db->db_query($qry))
-	{
-		while($row = $db->db_fetch_object($result))
-		{
-			$paddedLehreinheitId = str_pad($row->lehreinheit_id, 6, "0", STR_PAD_LEFT);
-			$id = date('ymd', strtotime($row->datum)) . $paddedLehreinheitId;
-
-			if(!isset($lektoren[$row->lehreinheit_id]))
-			{
-				$le_obj = new lehreinheitmitarbeiter();
-				$le_obj->getLehreinheitmitarbeiter($row->lehreinheit_id);
-				$lektoren[$row->lehreinheit_id]='';
-				foreach($le_obj->lehreinheitmitarbeiter as $row_lem)
-				{
-					$lektoren[$row->lehreinheit_id].=$row_lem->mitarbeiter_uid.' ';
-				}
-			}
-
-			$data[$id]=$datum_obj->formatDatum($row->datum,'d.m.Y').' '.$lektoren[$row->lehreinheit_id];
-		}
-	}
-	echo json_encode($data);
-	exit;
-}
-if($work=='getLVs')
-{
-	$stg = $_POST['stg'];
-	$sem = $_POST['sem'];
-	$stsem = $_POST['stsem'];
-	
-	$lv = new lehrveranstaltung();
-	$lv->load_lva_le($stg, $stsem, $sem);
-	
-	$data = array();
-	foreach($lv->lehrveranstaltungen as $row)
-	{
-		$data[$row->lehrveranstaltung_id]=$row->bezeichnung;
-	}
-	echo json_encode($data);
-	exit;
-}
-
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 echo '<!DOCTYPE HTML>
 <html>
 	<head>
@@ -140,37 +66,20 @@ echo '<!DOCTYPE HTML>
 				document.getElementById("usercode").focus();
 			else
 				document.getElementById("lvcode").focus();
-<<<<<<< HEAD
 		})
 
 		$(document).ready(function() 
 		{ 
 			$("#t1").tablesorter(
 			{
-				sortList: [[4,1]],
+				sortList: [[2,1]],
 				widgets: ["zebra"]
 			});
-=======
-		
-            // Tablesorter
-            $("#t1").tablesorter(
-			{
-				sortList: [[4,0]],
-				widgets: ["zebra"]
-			});
-            
-            // Enter-Taste beim Scannen abfangen
-            $("#usercode").keydown(function(event) {
-                if (event.which == 13) 
-                    event.preventDefault();
-            });
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 		});
 		
 		function inputUsercode()
 		{
 			var usercode = $("#usercode").val();
-<<<<<<< HEAD
 			if(usercode.length==13)
 			{
 				var person_id = parseInt(usercode, 10);
@@ -178,46 +87,23 @@ echo '<!DOCTYPE HTML>
 				$("#img_"+person_id).attr("src","../../skin/images/false.png");
 				var uid = $("#uid_"+person_id).val();
 				$("#anwesenheit_"+uid).val("false");
-=======
-			if(usercode.length==12)
-			{
-				var person_id = parseInt(usercode, 10);
-                person_id = person_id.toString();
-                person_id = person_id.substring(0, person_id.length - 1);
-                
-				$("#img_"+person_id).attr("src","../../skin/images/false.png");
-				var uid = $("#uid_"+person_id).val();
-				$("#anwesenheit_"+person_id).val("false");
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 				$("#usercode").val("");
 			}
 		}
 		function toggleAnwesenheit(person_id)
 		{
 			var uid = $("#uid_"+person_id).val();
-<<<<<<< HEAD
 			var wert = $("#anwesenheit_"+uid).val();
-=======
-			var wert = $("#anwesenheit_"+person_id).val();
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 
 			if(wert=="true")
 			{
 				$("#img_"+person_id).attr("src","../../skin/images/false.png");
-<<<<<<< HEAD
 				$("#anwesenheit_"+uid).val("false");
-=======
-				$("#anwesenheit_"+person_id).val("false");
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 			}
 			else
 			{
 				$("#img_"+person_id).attr("src","../../skin/images/true.png");
-<<<<<<< HEAD
 				$("#anwesenheit_"+uid).val("true");
-=======
-				$("#anwesenheit_"+person_id).val("true");
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 			}
 			return false;
 		}
@@ -230,21 +116,12 @@ if($work=='save')
 {
 	foreach($_POST as $key=>$value)
 	{
-<<<<<<< HEAD
 		if(strstr($key, 'anwesenheit_'))
 		{
 			$user = mb_substr($key, mb_strlen('anwesenheit_'));
 
 			$anwesenheit_id=$_POST['anwesenheitid_'.$user];
 
-=======
-		if(strstr($key, 'uid_'))
-		{
-			$person_id = mb_substr($key, mb_strlen('uid_'));
-			$user = $_POST['uid_'.$person_id];
-			$anwesend = $_POST['anwesenheit_'.$person_id];
-			$anwesenheit_id=$_POST['anwesenheitid_'.$person_id];
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 			$anwesenheit = new anwesenheit();			
 
 			if($anwesenheit_id!='')
@@ -256,13 +133,8 @@ if($work=='save')
 			$anwesenheit->einheiten = $_POST['einheiten'];
 			$anwesenheit->lehreinheit_id = $_POST['lehreinheit_id'];
 			$anwesenheit->datum = $_POST['datum'];
-<<<<<<< HEAD
 			$anwesenheit->anwesend=($value=='true'?true:false);
 			$anwesenheit->anmerkung = $_POST['anmerkung_'.$user];
-=======
-			$anwesenheit->anwesend=($anwesend=='true'?true:false);
-			$anwesenheit->anmerkung = $_POST['anmerkung_'.$person_id];
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 			$anwesenheit->save();
 		}
 	}
@@ -373,22 +245,13 @@ if($work=='loadAnwesenheit')
 							<a href="#Toggle" onclick="toggleAnwesenheit(\''.$row->person_id.'\')">
 								<img id="img_'.$row->person_id.'" src="../../skin/images/'.($anwesend?'true':'false').'.png">
 							</a>
-<<<<<<< HEAD
 							<input type="hidden" name="anwesenheitid_'.$row->uid.'" value="'.$anwesenheit_id.'" />
 							<input type="hidden" name="anwesenheit_'.$row->uid.'" id="anwesenheit_'.$row->uid.'" value="'.($anwesend?'true':'false').'" />
-=======
-							<input type="hidden" name="anwesenheitid_'.$row->person_id.'" value="'.$anwesenheit_id.'" />
-							<input type="hidden" name="anwesenheit_'.$row->person_id.'" id="anwesenheit_'.$row->person_id.'" value="'.($anwesend?'true':'false').'" />
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 							<input type="hidden" name="uid_'.$row->person_id.'" id="uid_'.$row->person_id.'" value="'.$row->uid.'" />
 						</td>';
 					echo '<td>'.$row->person_id.'</td>';
 					echo '<td>'.$row->uid.'</td><td>'.$row->vorname.'</td><td>'.$row->nachname.'</td>';
-<<<<<<< HEAD
 					echo '<td><input type="text" name="anmerkung_'.$row->uid.'" value="'.$db->convert_html_chars($anmerkung).'" /></td>';
-=======
-					echo '<td><input type="text" name="anmerkung_'.$row->person_id.'" value="'.$db->convert_html_chars($anmerkung).'" /></td>';
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 					echo '</tr>';
 				}
 
@@ -411,148 +274,9 @@ if($work=='')
 
 	echo '<form name="sendform" action="'.$_SERVER["PHP_SELF"].'" method="post">
 	Bitte scannen Sie den Lehreinheiten Barcode<br>
-	<input type="text" id="lvcode" name="lvcode" value="" size="13"/>
+	<input type="text" id="lvcode" name="lvcode" value="" size="13"/> (ID zum Testen: 140918056945 )
 	<input type="hidden" name="work" value="loadAnwesenheit" />
-<<<<<<< HEAD
 	</form>';
-=======
-	</form>
-	';
-
-
-	$studiengang_kz='';
-	$semester='';
-	$studiensemester_kurzbz='';
-	$lv_id='';
-
-	echo '<br><hr><br>
-	<form name="sendform" action="'.$_SERVER["PHP_SELF"].'" method="post">
-	<input type="hidden" name="work" value="loadAnwesenheit" />';
-	$studiengang = new studiengang();
-	$studiengang->getAll('typ,kurzbz');
-	echo 'Studiengang <select name="studiengang" id="studiengang" style="width:250px"  onchange="loadListe()">';
-	foreach($studiengang->result as $row)
-	{
-		if($studiengang_kz=='')
-			$studiengang_kz=$row->studiengang_kz;
-
-		echo '<option value="'.$row->studiengang_kz.'">'.$row->kuerzel.' -'.$row->bezeichnung.'</option>';
-	}
-	echo '</select>';
-
-	echo 'Semester <select name="semester" id="semester"  onchange="loadListe()">';
-	for($i=1;$i<=10;$i++)
-	{
-		if($semester=='')
-			$semester = $i;
-		echo '<option value="'.$i.'">'.$i.'</option>';
-	}
-	echo '</select>';
-
-	$stsem = new studiensemester();
-	$akt = $stsem->getAktOrNext();
-	$stsem->getAll();
-	echo 'Studiensemester <select name="stsem" id="stsem" onchange="loadListe()">';
-	foreach($stsem->studiensemester as $row)
-	{
-		if($studiensemester_kurzbz=='')
-			$studiensemester_kurzbz=$row->studiensemester_kurzbz;
-
-		if($row->studiensemester_kurzbz==$akt)
-			$selected='selected';
-		else
-			$selected='';
-		echo '<option value="'.$row->studiensemester_kurzbz.'" '.$selected.'>'.$row->studiensemester_kurzbz.'</option>';
-	}
-	echo '</select>';
-
-	$lv = new lehrveranstaltung();
-	$lv->load_lva_le($studiengang_kz, $studiensemester_kurzbz, $semester);
-	echo 'LV <select name="lv" id="lv" onchange="loadListe(\'lv\')">
-		<option value="">--Auswahl--</option>';
-	foreach($lv->lehrveranstaltungen as $row)
-	{
-		if($lv_id=='')
-			$lv_id=$row->lehrveranstaltung_id;
-		echo '<option value="'.$row->lehrveranstaltung_id.'">'.$row->bezeichnung.'</option>';
-	}
-	echo '</select>';
-
-	echo 'Termin <select name="lvcode" id="termine" >';
-	
-	echo '</select>
-	<input type="submit" />';
-
-	echo '<script>
-	function loadListe(action)
-	{
-		var stg = $("#studiengang").val();
-		var sem = $("#semester").val();
-		var stsem = $("#stsem").val();
-		var lv = $("#lv").val();
-		
-		if(action=="lv" && lv!="")
-		{
-			// Termine holen
-			data = {
-				stg: stg,
-				sem: sem,
-				stsem: stsem,
-				lv: lv,
-				work: "getTermine"
-			};
-
-			$.ajax({
-				url: "anwesenheit.php",
-				data: data,
-				type: "POST",
-				dataType: "json",
-				success: function(data) 
-				{
-					$("#termine").empty();
-					$("#termine").append(\'<option value="">-- Auswahl --</option>\');
-					$.each(data, function(i, entry){
-						$("#termine").append(\'<option value="\'+i+\'">\'+entry+\'</option>\');
-					});
-				},
-				error: function(data) 
-				{
-					alert("Fehler beim Laden der Daten");
-				}
-			});
-		}
-		else
-		{
-			// LV holen
-			data = {
-				stg: stg,
-				sem: sem,
-				stsem: stsem,
-				work: "getLVs"
-			};
-
-			$.ajax({
-				url: "anwesenheit.php",
-				data: data,
-				type: "POST",
-				dataType: "json",
-				success: function(data) 
-				{
-					$("#lv").empty();
-					$("#lv").append(\'<option value="">-- Auswahl --</option>\');
-					$.each(data, function(i, entry){
-						$("#lv").append(\'<option value="\'+i+\'">\'+entry+\'</option>\');
-					});
-				},
-				error: function(data) 
-				{
-					alert("Fehler beim Laden der Daten");
-				}
-			});
-		}
-	}
-	</script>';
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 }
 echo '
 </body>

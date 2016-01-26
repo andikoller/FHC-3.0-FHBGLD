@@ -207,7 +207,6 @@ if(isset($_POST['updateliste']))
 	}
 	else
 	{
-<<<<<<< HEAD
 		// Verschiebung in einen anderen Raum
 		$ids = $_POST['bmid'];
 		foreach($ids as $id)
@@ -225,25 +224,6 @@ if(isset($_POST['updateliste']))
 			}
 		}
 		
-=======
-		// Verschiebung in einen anderen Raum
-		$ids = $_POST['bmid'];
-		foreach($ids as $id)
-		{
-			$bm_obj = new betriebsmittel();
-			if($bm_obj->load($id))
-			{
-				$bm_obj->ort_kurzbz=$_POST['work'];
-				if(!$bm_obj->save(false))
-					echo 'Fehler beim Speichern von ID:'.$id;
-			}
-			else
-			{
-				echo 'Fehler beim Laden von ID:'.$id;
-			}
-		}
-		
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 		$work='uebersicht';
 	}
 }

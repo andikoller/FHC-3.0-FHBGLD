@@ -1,0 +1,43 @@
+\chapter{Betriebsmittel}
+\label{betriebsmittel}
+Als Betriebsmittel werden hier auszuleihende Gegenstände wie Zutrittskarten oder Schlüssel verstanden.
+\section{Aufbau der Karteikarte Betriebsmittel}
+Die Abbildung \ref{Betriebsmittel1} zeigt den Aufbau der Karteikarte \textsl{Betriebsmittel}:
+\begin{itemize}
+	\item Listenfeld: Hier werden alle Betriebsmittel, die der Student ausgeliehen hat angezeigt.
+	\item Details-Bereich: Im Details-bereich können die Betriebsmitteldaten eingegeben und verändert werden.
+	\begin{itemize}
+		\item Typ: Welcher Gegenstand wurde entliehen. Auswahl z.Z.: Schlüssel, Zutrittskarte, Laptop.
+		\item Nummer: Schlüsselnummer bzw Kartennummer
+		\item Nummer 2: Feld für die zweite Kartennummer (zb bei Dualtranspondern)
+		\item Inventarnummer: Feld zur Auswahl der Inventarnummer
+		\item Beschreibung: Zusätzliche Informationen zum Betriebsmittel.
+		\item Kaution: Einbezahlte Kaution.
+		\item Anmerkung: Zusätzliche Informationen zur Entleihung.
+		\item Ausgegeben am: Datum der Ausgabe.
+		\item Retour am: Datum der Rückgabe.
+	\end{itemize}
+	\item Button \textsl{Neu}: Start der Eingabe einer Betriebsmittelentlehnung.
+	\item Button \textsl{Loeschen}: Löschen eines markierten, fehlerhaften Eintrags.
+	\item Button \textsl{Übernahmebestätigung}: Hier wird eine Übernahmebestätigung für das gewählte Betriebsmittel erstellt
+\end{itemize}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.75\textwidth]{FAS_Betriebsmittel1.png}
+	\caption{Die Karteikarte Betriebsmittel}
+	\label{Betriebsmittel1}
+\end{figure}
+\section{Eingabe von Betriebsmittelentlehnungen}
+\underline{Beispiel}:\\
+Student XY erhält einen Laptop vom Studiengang für seine Projektarbeit.
+Nach der Auswahl des Studenten wird die Karteikarte \textsl{Betriebsmittel} geöffnet und mit der Taste \textit{Neu} der Eingabevorgang begonnen. Zuerst wird bei Typ \textsl{Inventar} ausgewählt. Nun wird statt den Nummern-Feldern ein Inventarnummer Feld angezeigt. Hier wird die Inventarnummer des Laptops eingetragen (zB 88+02+0005). Hier kann auch nur ein Teil der Inventarnummer eingetragen werden, die gefundenen Vorschläge werden nach dem Eintippen im Dropdown angezeigt. Zuletzt wird noch das aktuelle Datum als Entlehndatum eingegeben. Abgeschlossen wird der Eingabevorgang durch Klicken der Taste \textsl{Speichern}.\\
+Damit das Inventar hier gefunden wird, muss dieses zuerst inventarisiert werden. Dies geschieht im Vilesci unter \textsl{Inventar}\\
+\underline{Beispiel}:\\
+Student XY erhält zum Studienbeginn die Zutrittskarte mit der Nummer 408627633833. \\
+Nach der Auswahl des Studenten wird die Karteikarte \textsl{Betriebsmittel} geöffnet und mit der Taste \textit{Neu} der Eingabevorgang begonnen. Zuerst wird bei Typ \textsl{Zutrittskarte} ausgewählt, dann darunter die Nummer 408627633833 der Zutrittskarte in das linke Feld eingegeben. Im Feld \textsl{Beschreibung} könnte jetzt noch eine genauere Beschreibung der Zutrittskarte eingegeben werden. Dann wird der Betrag der Kaution eingegeben. Zuletzt wird noch das aktuelle Datum als Entlehndatum eingegeben. Abgeschlossen wird der Eingabevorgang durch Klicken der Taste \textsl{Speichern}.\\
+\underline{Beispiel}:\\
+Student XY hat sein Studium beendet und will seine Zutrittskarte zurückgeben.\\
+Nach der Auswahl des Studenten wird der Karteikarte \textsl{Betriebsmittel} geöffnet und die Eintragung mit der Nummer der Zutrittskarte im Listenfeld markiert. Jetzt kann das Rückgabedatum in das Feld \textsl{Retour am} eingetragen werden. Durch Klicken der Taste \textsl{Speichern} wird der Datensatz aktualisiert und das Rückgabedatum gespeichert.\\
+\underline{Beispiel}:\\
+Student YZ ist seine Zutrittskarte leider abhanden gekommen.\\
+In diesem Fall wird im \textsl{Anmerkung}-Feld vermerkt, daß der Student YZ am heutigen Tag den Verlust der Karte gemeldet hat und das \textsl{Retour am}-Feld auf das aktuelle Datum gesetzt.

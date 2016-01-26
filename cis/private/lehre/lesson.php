@@ -31,12 +31,6 @@ require_once('../../../include/moodle.class.php');
 require_once('../../../include/phrasen.class.php');
 require_once('../../../include/lehre_tools.class.php');
 require_once('../../../include/lvangebot.class.php');
-require_once('../../../include/benutzergruppe.class.php');
-<<<<<<< HEAD
-=======
-require_once('../../../include/lehreinheit.class.php');
-require_once('../../../include/variable.class.php');
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 
 $sprache = getSprache();
 $p = new phrasen($sprache);
@@ -49,30 +43,18 @@ if (!$user=get_uid())
 
 // Init
 $user_is_allowed_to_upload=false;
-<<<<<<< HEAD
-=======
-$lektor_der_lv=false;
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 
 // Plausib
 if(check_lektor($user))
 	$is_lector=true;
 else
 	$is_lector=false;
-<<<<<<< HEAD
 	   
-=======
-
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 if(isset($_GET['lvid']) && is_numeric($_GET['lvid']))
 	$lvid = $_GET['lvid'];
 else
 	die('Fehlerhafte Parameteruebergabe');
-<<<<<<< HEAD
 	
-=======
-
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 $lv_obj = new lehrveranstaltung();
 $lv_obj->load($lvid);
 $lv=$lv_obj;
@@ -109,86 +91,13 @@ if (isset($_GET["handbuch"])){
 	readfile($filename);
 	exit;
 }
-<<<<<<< HEAD
 ?><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-=======
-?><!DOCTYPE HTML>
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<link href="../../../skin/style.css.php" rel="stylesheet" type="text/css">
-<<<<<<< HEAD
-=======
-	<link href="../../../skin/jquery.css" rel="stylesheet" type="text/css"/>
-    <script src="../../../include/js/jquery1.9.min.js" type="text/javascript" ></script>
-
-<?php
-// Angezeigtes Studiensemester ermitteln
-// Wenn ein Studiensemester uebergeben wird, wird das uebergebene angezeigt
-$stsem = new studiensemester();
-if($studiensemester_kurzbz!='')
-	$angezeigtes_stsem=$studiensemester_kurzbz;
-else
-{
-	if($lv->studiengang_kz==0 || (defined('CIS_LEHRVERANSTALTUNG_AKTUELLES_STUDIENSEMESTER_ANZEIGEN') && CIS_LEHRVERANSTALTUNG_AKTUELLES_STUDIENSEMESTER_ANZEIGEN))
-		$angezeigtes_stsem = $stsem->getNearest();
-	else
-	{
-		// wenn im nahegelegensten/aktuellen Studiensemester eine Lehreinheit angelegt ist dann diese anzeigen
-		$lehreinheit = new lehreinheit();
-		if($lehreinheit->load_lehreinheiten($lvid, $stsem->getNearest()) && count($lehreinheit->lehreinheiten)>0)
-		{
-			$lehreinheit_found=false;
-			foreach($lehreinheit->lehreinheiten as $row_lehreinheit)
-			{
-				if($row_lehreinheit->lehre)
-				{
-					$angezeigtes_stsem = $stsem->getNearest();
-					$lehreinheit_found=true;
-					break;
-				}
-			}
-			if($lehreinheit_found==false)
-			{
-				$angezeigtes_stsem = $stsem->getNearest($semester);
-			}
-		}
-		else
-		{
-			// fuer ungerade semester das naeheste WS fuer gerade semester das naeheste SS anzeigen
-			$angezeigtes_stsem = $stsem->getNearest($semester);
-		}
-	}
-}
-
-// ADDONS laden
-$addon_obj = new addon();
-$addon_obj->loadAddons();
-foreach($addon_obj->result as $addon)
-{
-	if(file_exists('../../../addons/'.$addon->kurzbz.'/cis/init.js.php'))
-		echo '<script type="application/x-javascript" src="../../../addons/'.$addon->kurzbz.'/cis/init.js.php" ></script>';
-}
-
-// Wenn Seite fertig geladen ist Addons aufrufen
-echo '
-<script>
-$( document ).ready(function()
-{
-	if(typeof addon  !== \'undefined\')
-	{
-		for(i in addon)
-		{
-			addon[i].init("cis/private/lehre/lesson.php", {uid:\''.$user.'\',lvid:\''.$lvid.'\',studiensemester_kurzbz:\''.$angezeigtes_stsem.'\'});
-		}
-	}
-});
-</script>
-';
-
-?>
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
+	<script type="text/javascript" src="../../../include/js/flexcroll.js"></script>
+	<link href="../../../skin/flexcrollstyles.css" rel="stylesheet" type="text/css" />
 	<style type="text/css">
 	.transparent {
 	    filter:alpha(opacity=90);
@@ -196,11 +105,7 @@ $( document ).ready(function()
 	    -khtml-opacity: 0.9;
 	    opacity: 0.9;
 	}
-<<<<<<< HEAD
 	</style> 
-=======
-	</style>
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 
 	<script language="JavaScript">
 	function showSemPlanHelp(){
@@ -210,13 +115,10 @@ $( document ).ready(function()
 		document.getElementById("semplanhelp").style.visibility = "hidden";
 	}
 
-<<<<<<< HEAD
 	</script>   
-=======
-	</script>
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 </head>
 <body>
+<div class="flexcroll" style="outline: none;">
 <div id="semplanhelp" style="position:absolute; top:200px; left:200px; width:500px; height:250px; background-color:#cccccc; visibility:hidden; border-style:solid; border-width:1px; border-color:#333333;" class="transparent">
 <table width="100%">
 <tr><td valign="top"><h2>&nbsp;Erstellung des Semesterplanes</h2></td><td align="right" valign="top"><a href="#" onclick="hideSemPlanHelp();">X</a>&nbsp;</td></tr>
@@ -238,22 +140,18 @@ $( document ).ready(function()
 <table class="tabcontent" height="100%" id="inhalt">
 	<tr>
 		<td class="tdwidth10">&nbsp;</td>
-		<td style="vertical-align:top; height: 10px"><h1 style="white-space:normal;">
-<<<<<<< HEAD
+		<td style="vertical-align:top; height: 10px"><h1>
 		<?php		
 		$stsem = new studiensemester();
 		if($studiensemester_kurzbz!='')
 			$angezeigtes_stsem=$studiensemester_kurzbz;
 		else
 		{
-			if($lv->studiengang_kz==0 || (defined('CIS_LEHRVERANSTALTUNG_AKTUELLES_STUDIENSEMESTER_ANZEIGEN') && CIS_LEHRVERANSTALTUNG_AKTUELLES_STUDIENSEMESTER_ANZEIGEN))
+			if($lv->studiengang_kz==0)
 				$angezeigtes_stsem = $stsem->getNearest();
 			else
 				$angezeigtes_stsem = $stsem->getNearest($semester);
 		}
-=======
-		<?php
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 		$lehrfach_id='';
 		if(defined('CIS_LEHRVERANSTALTUNG_LEHRFACH_ANZEIGEN') && CIS_LEHRVERANSTALTUNG_LEHRFACH_ANZEIGEN)
 		{
@@ -261,15 +159,9 @@ $( document ).ready(function()
 			// wird zusätzlich das Lehrfach der Lehreinheit angezeigt.
 			if($is_lector)
 			{
-<<<<<<< HEAD
 				$qry = "SELECT 
 					distinct lehrfach_id 
 					FROM 
-=======
-				$qry = "SELECT
-					distinct lehrfach_id
-					FROM
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 						lehre.tbl_lehreinheit
 						JOIN lehre.tbl_lehreinheitmitarbeiter USING(lehreinheit_id)
 					WHERE
@@ -280,7 +172,6 @@ $( document ).ready(function()
 			else
 			{
 				$qry = "SELECT distinct lehrfach_id
-<<<<<<< HEAD
 					FROM 
 						campus.vw_student_lehrveranstaltung
 					WHERE 
@@ -289,16 +180,6 @@ $( document ).ready(function()
 						AND uid=".$db->db_add_param($user);
 			}
 			
-=======
-					FROM
-						campus.vw_student_lehrveranstaltung
-					WHERE
-						lehrveranstaltung_id=".$db->db_add_param($lvid, FHC_INTEGER)."
-						AND studiensemester_kurzbz=".$db->db_add_param($angezeigtes_stsem)."
-						AND uid=".$db->db_add_param($user);
-			}
-
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 			if($result = $db->db_query($qry))
 			{
 				// Wenn die LV mehrere verschiedenen Lehrfaecher hat, und der User zu mehreren davon zugeteilt ist
@@ -313,11 +194,7 @@ $( document ).ready(function()
 						if($lehrfach->bezeichnung_arr[$sprache]==$lv_obj->bezeichnung_arr[$sprache])
 							echo $lv_obj->bezeichnung_arr[$sprache];
 						else
-<<<<<<< HEAD
 							echo $lehrfach->bezeichnung_arr[$sprache].' - '.$lv_obj->bezeichnung_arr[$sprache]; 
-=======
-							echo $lehrfach->bezeichnung_arr[$sprache].' - '.$lv_obj->bezeichnung_arr[$sprache];
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 					}
 				}
 				else
@@ -326,23 +203,14 @@ $( document ).ready(function()
 		}
 		else
 			echo $lv_obj->bezeichnung_arr[$sprache];
-<<<<<<< HEAD
 			
-=======
-
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 		echo ' '.$lv_obj->lehrform_kurzbz;
 
 		if(!defined('CIS_LEHRVERANSTALTUNG_SEMESTERINFO_ANZEIGEN') || CIS_LEHRVERANSTALTUNG_SEMESTERINFO_ANZEIGEN)
 			echo ' / '.$kurzbz.'-'.$semester.' '.$lv_obj->orgform_kurzbz;
 
-<<<<<<< HEAD
 		
 						
-=======
-
-
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	    echo "&nbsp;($angezeigtes_stsem)";
 	    echo '</h1></td>
               </tr>
@@ -350,7 +218,6 @@ $( document ).ready(function()
               <td>&nbsp;</td>
               <td style="vertical-align:top; height: 10px">';
 
-<<<<<<< HEAD
 	    $qry = "SELECT * FROM (SELECT distinct on(uid) vorname, nachname, tbl_benutzer.uid as uid, 
 	    			CASE WHEN lehrfunktion_kurzbz='LV-Leitung' THEN true ELSE false END as lvleiter 
 	    		FROM lehre.tbl_lehreinheit, lehre.tbl_lehreinheitmitarbeiter, public.tbl_benutzer, public.tbl_person 
@@ -364,21 +231,6 @@ $( document ).ready(function()
 	    			studiensemester_kurzbz=".$db->db_add_param($angezeigtes_stsem);
 
 		// Wenn das Lehrfach angezeigt werden nur die Lektoren angezeigt die dieser 
-=======
-	    $qry = "SELECT * FROM (SELECT distinct on(uid) vorname, nachname, tbl_benutzer.uid as uid,
-	    			CASE WHEN lehrfunktion_kurzbz='LV-Leitung' THEN true ELSE false END as lvleiter
-	    		FROM lehre.tbl_lehreinheit, lehre.tbl_lehreinheitmitarbeiter, public.tbl_benutzer, public.tbl_person
-	    		WHERE
-	    			tbl_lehreinheit.lehreinheit_id=tbl_lehreinheitmitarbeiter.lehreinheit_id AND
-	    			tbl_lehreinheitmitarbeiter.mitarbeiter_uid=tbl_benutzer.uid AND
-	    			tbl_person.person_id=tbl_benutzer.person_id AND
-	    			lehrveranstaltung_id=".$db->db_add_param($lvid, FHC_INTEGER)." AND
-	    			tbl_lehreinheitmitarbeiter.mitarbeiter_uid NOT like '_Dummy%' AND
-	    			tbl_benutzer.aktiv=true AND tbl_person.aktiv=true AND
-	    			studiensemester_kurzbz=".$db->db_add_param($angezeigtes_stsem);
-
-		// Wenn das Lehrfach angezeigt werden nur die Lektoren angezeigt die dieser
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 		// Lehreinheit / Lehrfach zugeordnet sind
 		if($lehrfach_id!='')
 			$qry.=" AND tbl_lehreinheit.lehrfach_id=".$db->db_add_param($lehrfach_id);
@@ -404,22 +256,11 @@ $( document ).ready(function()
 				{
 					$i++;
 					if($user==$row_lector->uid)
-<<<<<<< HEAD
 						$user_is_allowed_to_upload=true;
 
 					if($row_lector->lvleiter=='t')
 						$style='style="font-weight: bold"';
 					else 
-=======
-					{
-						$lektor_der_lv=true;
-						$user_is_allowed_to_upload=true;
-					}
-
-					if($row_lector->lvleiter=='t')
-						$style='style="font-weight: bold"';
-					else
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 						$style='';
 					echo '<a href="mailto:'.$row_lector->uid.'@'.DOMAIN.'" '.$style.'>'.$row_lector->vorname.' '.$row_lector->nachname.'</a>';
 					if($i!=$num_rows_result)
@@ -428,7 +269,6 @@ $( document ).ready(function()
 			}
 		}
 
-<<<<<<< HEAD
 				//Berechtigungen auf Fachbereichsebene
 	  $qry = "SELECT 
 	  			distinct fachbereich_kurzbz, tbl_lehrveranstaltung.studiengang_kz, tbl_fachbereich.oe_kurzbz 
@@ -450,29 +290,6 @@ $( document ).ready(function()
 	  			$user_is_allowed_to_upload=true;
 	  	}
 	  }
-=======
-		//Berechtigungen auf Fachbereichsebene
-		$qry = "SELECT
-	  			distinct lehrfach.oe_kurzbz
-	  		FROM
-	  			lehre.tbl_lehrveranstaltung
-	  			JOIN lehre.tbl_lehreinheit USING(lehrveranstaltung_id)
-	  			JOIN lehre.tbl_lehrveranstaltung as lehrfach ON(tbl_lehreinheit.lehrfach_id=lehrfach.lehrveranstaltung_id)
-	  		WHERE tbl_lehrveranstaltung.lehrveranstaltung_id=".$db->db_add_param($lvid, FHC_INTEGER);
-
-		if(isset($angezeigtes_stsem) && $angezeigtes_stsem!='')
-			$qry .= " AND studiensemester_kurzbz=".$db->db_add_param($angezeigtes_stsem);
-		$lehrfach_oe_kurzbz_arr = array();
-		if($result = $db->db_query($qry))
-		{
-			while($row = $db->db_fetch_object($result))
-			{
-				$lehrfach_oe_kurzbz_arr[]=$row->oe_kurzbz;
-				if($rechte->isBerechtigt('lehre',$row->oe_kurzbz) || $rechte->isBerechtigt('assistenz',$stg_obj->oe_kurzbz))
-					$user_is_allowed_to_upload=true;
-			}
-		}
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 		?></td>
 	</tr>
 	<tr>
@@ -489,5 +306,6 @@ $( document ).ready(function()
 		<td class="tdwidth30">&nbsp;</td>
 	</tr>
 </table>
+</div>
 </body>
 </html>

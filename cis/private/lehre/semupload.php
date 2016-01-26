@@ -33,11 +33,7 @@ $user = get_uid();
 $sprache=getSprache(); 
 $p = new phrasen($sprache); 
 
-<<<<<<< HEAD
 
-=======
-$is_lector=false;
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 if(check_lektor($user))
 	$is_lector=true;
 
@@ -106,11 +102,7 @@ $openpath = DOC_ROOT.'/documents/'.strtolower($stg_obj->kuerzel).'/'.$lv_obj->se
 				if(is_file($openpath . $inhalt))
 				{
 					writeCISlog('DELETE', "rm -r '$openpath$inhalt'");
-<<<<<<< HEAD
 					exec("rm -r '$openpath$inhalt'");
-=======
-					exec("rm -r ".escapeshellarg($openpath.$inhalt));
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 					echo '<center>'.$p->t('global/erfolgreichgelöscht').'</center>';
 				}
 				else
@@ -140,19 +132,11 @@ $openpath = DOC_ROOT.'/documents/'.strtolower($stg_obj->kuerzel).'/'.$lv_obj->se
 			{
 				if(!stristr($fn, '.php') && !stristr($fn, '.php3') &&
 				   !stristr($fn,'.php4') && !stristr($fn, '.php5') &&
-<<<<<<< HEAD
 				   !stristr($fn, '.cgi') && !stristr($fn, '.pl'))
 				{
 					if(move_uploaded_file($_FILES['userfile']['tmp_name'],$openpath . $fn))
 					{
 						exec('sudo chown www-data:teacher "'.$openpath.$fn.'"');
-=======
-				   !stristr($fn, '.cgi') && !stristr($fn, '.pl') && !stristr($fn, '.phtml'))
-				{
-					if(move_uploaded_file($_FILES['userfile']['tmp_name'],$openpath . $fn))
-					{
-						exec('sudo chown www-data:teacher '.escapeshellarg($openpath.$fn));
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 						echo '<center>'.$p->t('semesterplan/fileErfolgreichHochgeladen').'</center>';
 					}
 					else
@@ -197,8 +181,4 @@ $openpath = DOC_ROOT.'/documents/'.strtolower($stg_obj->kuerzel).'/'.$lv_obj->se
 ?>
 	</table>
 </body>
-<<<<<<< HEAD
 </html>
-=======
-</html>
->>>>>>> fee287127566cd5d18c55b556d178b661711c694

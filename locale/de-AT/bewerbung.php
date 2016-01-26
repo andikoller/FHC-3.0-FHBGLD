@@ -32,16 +32,5 @@ $this->phrasen['bewerbung/bitteEmailAngeben']='Bitte geben Sie eine gültige eMa
 $this->phrasen['bewerbung/bitteStudienbeginnWaehlen']='Bitte wählen Sie den gewünschten Studienbeginn.';
 $this->phrasen['bewerbung/captcha']='Geben Sie bitte hier die Zeichen aus der Grafik ein (Spamschutz).';
 $this->phrasen['bewerbung/andereGrafik']='Andere Grafik';
-$this->phrasen['bewerbung/datumFormat']='TT.MM.JJJJ';
-$this->phrasen['bewerbung/egal']='egal';
-$this->phrasen['bewerbung/orgform']='Organisationsform';
-$this->phrasen['bewerbung/orgform/berufsbegleitend']='Berufsbegleitend';
-$this->phrasen['bewerbung/orgform/vollzeit']='Vollzeit';
-$this->phrasen['bewerbung/sprache']='Sprache';
-$this->phrasen['bewerbung/sprache/deutsch']='Deutsch';
-$this->phrasen['bewerbung/sprache/englisch']='Englisch';
-$this->phrasen['bewerbung/topprio']='Oberste Priorität';
-$this->phrasen['bewerbung/alternative']='Alternative';
-$this->phrasen['bewerbung/priowaehlen']='Primären und alternative Variante auswählen';
-$this->phrasen['bewerbung/ok']='OK';
-$this->phrasen['bewerbung/abbrechen']='Abbrechen';
+
+?>

@@ -15,7 +15,7 @@
  * @author Evert Pot (http://www.rooftopsolutions.nl/) 
  * @license http://code.google.com/p/sabredav/wiki/License Modified BSD License
  */
-class MySabre_DAVACL_PrincipalBackend implements \Sabre\DAVACL\PrincipalBackend\BackendInterface
+class MySabre_DAVACL_PrincipalBackend implements Sabre_DAVACL_IPrincipalBackend 
 {
     /**
      * PDO table name for 'principals' 
@@ -223,16 +223,7 @@ class MySabre_DAVACL_PrincipalBackend implements \Sabre\DAVACL\PrincipalBackend\
      */
     public function setGroupMemberSet($principal, array $members) 
 	{
-		throw new \Sabre\DAV\Exception('Not implemented');
+		throw new Sabre_DAV_Exception('Not implemented');
     }
-	
-   public function updatePrincipal($path, $mutations)
-   {
-	throw new \Sabre\DAV\Exception('Not implemented');
-   }
 
-	public function searchPrincipals($prefixPath,array $searchProperties)
-	{
-		throw new \Sabre\DAV\Exceptin('Not implemented');
-	}
 }

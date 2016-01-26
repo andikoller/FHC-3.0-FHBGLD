@@ -167,7 +167,7 @@ if(!$user->bnaktiv)
 	{
 		
 		if ($type=='student')
-			$message = $p->t('profil/inaktivStudent');
+			$message = $p->t('profil/inaktivStudentNeu');
 		elseif($type=='mitarbeiter')
 			$message = $p->t('profil/inaktivMitarbeiter');
 		else
@@ -208,11 +208,7 @@ if(!$ansicht)
 	//Foto Upload nur möglich wenn das Bild noch nicht akzeptiert wurde
 	$fs = new fotostatus();
 	if(!$fs->akzeptiert($user->person_id))
-<<<<<<< HEAD
 		echo "<br><a href='#BildUpload' onclick='window.open(\"../bildupload.php?person_id=$user->person_id\",\"BildUpload\", \"height=500,width=500,left=0,top=0,hotkeys=0,resizable=yes,status=no,scrollbars=yes,toolbar=no,location=no,menubar=no,dependent=yes\"); return false;'>".$p->t('profil/bildHochladen')."</a>";
-=======
-		echo "<br><a href='#BildUpload' onclick='window.open(\"../bildupload.php?person_id=$user->person_id\",\"BildUpload\", \"height=800,width=800,left=0,top=0,hotkeys=0,resizable=yes,status=no,scrollbars=yes,toolbar=no,location=no,menubar=no,dependent=yes\"); return false;'>".$p->t('profil/bildHochladen')."</a>";
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 }
 if($user->foto_sperre)
 	echo '<br><b>'.$p->t('profil/profilfotoGesperrt').'</b>';
@@ -505,8 +501,21 @@ if(!$ansicht && (!defined('CIS_PROFIL_BETRIEBSMITTEL_ANZEIGEN') || CIS_PROFIL_BE
 		          							Inventar:%20".$oBetriebsmittelperson->result[$i]->inventarnummer."%20(".$oBetriebsmittelperson->result[$i]->beschreibung.")%0A%0A
 		          							Status:%20ausgeschieden%20%2F%20falsche%20Zuordnung%20%2F%20falsche%20Angaben%0A
 		          							Details:%20%0A\"";
+											
+					//Andreas Koller
+					$betriebsmitteltyp = $oBetriebsmittelperson->result[$i]->betriebsmitteltyp;
+					
+					$qry = "SELECT beschreibung FROM wawi.tbl_betriebsmitteltyp WHERE betriebsmitteltyp = '$betriebsmitteltyp'";
+
+					$result_betriebsmittelbeschreibung = $db->db_query($qry);
+					
+					while ($line = pg_fetch_array($result_betriebsmittelbeschreibung, NULL, PGSQL_ASSOC))
+					{
+						$betriebsmittel_beschreibung = $line['beschreibung'];
+					}
+						
 					echo "<tr>
-		      				<td>".$oBetriebsmittelperson->result[$i]->betriebsmitteltyp.' '.$oBetriebsmittelperson->result[$i]->beschreibung.(isset($oBetriebsmittelperson->result[$i]->verwendung)?' ('.$oBetriebsmittelperson->result[$i]->verwendung.')':'')."</td>
+		      				<td>".$betriebsmittel_beschreibung.(isset($oBetriebsmittelperson->result[$i]->verwendung)?' ('.$oBetriebsmittelperson->result[$i]->verwendung.')':'')."</td>
 		      				<td>".$oBetriebsmittelperson->result[$i]->nummer.' <a href="mailto:'.$mailtext_inventar.'>'.$oBetriebsmittelperson->result[$i]->inventarnummer."</a></td>
 		      				<td>".$datum_obj->formatDatum($oBetriebsmittelperson->result[$i]->ausgegebenam,'d.m.Y')."</td>
 		      			</tr>";

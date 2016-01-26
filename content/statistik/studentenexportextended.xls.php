@@ -163,6 +163,10 @@ loadVariables($user);
 	$maxlength[$i]=10;
 	$worksheet->write($zeile,++$i,"RT_PUNKTE2", $format_bold);
 	$maxlength[$i]=10;
+	//Andreas Koller: RT_PUNKTE3 hinzugefügt
+	$worksheet->write($zeile,++$i,"RT_PUNKTE3", $format_bold);
+	$maxlength[$i]=10;
+	//ENDE Andreas Koller
 	$worksheet->write($zeile,++$i,"RT_GESAMTPUNKTE", $format_bold);
 	$maxlength[$i]=18;
 	
@@ -502,6 +506,12 @@ loadVariables($user);
 		if(mb_strlen($row->rt_punkte2)>$maxlength[$i])
 			$maxlength[$i] = mb_strlen($row->rt_punkte2);
 		$worksheet->write($zeile,$i, $row->rt_punkte2);
+		$i++;
+		
+		//Andreas Koller: RT_Punkte3 hinzugefügt
+		if(mb_strlen($row->rt_punkte3)>$maxlength[$i])
+		$maxlength[$i] = mb_strlen($row->rt_punkte3);
+		$worksheet->write($zeile,$i, $row->rt_punkte3);
 		$i++;
 		
 		//RT_Gesamtpunkte

@@ -1,0 +1,27 @@
+\chapter{Statistik}
+\label{Statistik}
+Die vorhandenen Statistiken werden im Vilesci unter dem Menüpunkt Auswertung
+angezeigt.\\
+Hier werden die Statistiken und zugehörigen Beschreibungen angezeigt.\\
+\section{Statistiken hinzufügen}
+Unter dem Punkt Stammdaten->Statistik können neue Statistiken hinzugefügt
+werden.\\
+Statistiken können entweder auf eine URL zeigen (zB PHP Script) oder direkt als
+SQL Befehl definiert werden.\\ In beiden Fällen können Variablen verwendet
+werden:\\
+''SELECT * FROM public.tbl\_person WHERE nachname like '\$filter' ''\\
+oder\\
+''../../content/statistik/bewerberstatistik.php?stsem=\$Studiensemester''\\
+\\
+Der Pfad bei URLs ist immer ausgehend vom Verzeichnis /vilesci/statistik/\\
+\\
+Beim Anzeigen der Statistik werden in diesem Fall Eingabefelder für die
+entsprechenden Variablen angezeigt.\\
+\\
+Die Beschreibung von Statistiken werden über das CMS System angelegt. Diese
+können über das Feld ContentID mit der Statistik verknüpft werden.\\
+\\
+Soll eine Statistik nur einer ausgewählten Benutzergruppe zur Verfügung stehen,
+kann eine Statistik mit einer Berechtigung verknüpft werden.
+Wenn diese eintgetragen ist, ist die Statistik nur für Personen sichtbar, welche
+diese Berechtigung auch besitzen.

@@ -38,14 +38,6 @@ require_once('../include/nation.class.php');
 require_once('../include/datum.class.php');
 require_once('../include/studiengang.class.php');
 require_once('../include/akadgrad.class.php');
-<<<<<<< HEAD
-=======
-require_once('../include/organisationseinheit.class.php');
-require_once('../include/projektarbeit.class.php');
-require_once('../include/lehreinheit.class.php');
-require_once('../include/lehrveranstaltung.class.php');
-require_once('../include/note.class.php');
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 
 $xmlformat='rdf';
 if(isset($_GET['xmlformat']))
@@ -79,7 +71,7 @@ if($db->db_query($qry))
 		$pruefer1= '';
 		$pruefer2= '';
 		$pruefer3= '';
-
+		
 		//Nachnamen der Pruefer holden
 		$person = new person();
 		$mitarbeiter = new mitarbeiter();
@@ -95,15 +87,20 @@ if($db->db_query($qry))
 		$studiengang = new studiengang($student->studiengang_kz);
 		$akadgrad = new akadgrad($row->akadgrad_id);
 		
-		if($mitarbeiter->load($row->vorsitz))
-<<<<<<< HEAD
-			$vorsitz = trim($mitarbeiter->titelpre.' '.$mitarbeiter->vorname.' '.$mitarbeiter->nachname.' '.$mitarbeiter->titelpost);
-=======
+		
+		//Andreas Koller - Studiengangsleiter holen
+		$stgleiter = $studiengang->getLeitung($student->studiengang_kz);
+		$stgl='';
+		foreach ($stgleiter as $stgleiter_uid)
 		{
-		    $vorsitz = trim($mitarbeiter->titelpre.' '.$mitarbeiter->vorname.' '.$mitarbeiter->nachname.' '.$mitarbeiter->titelpost);
-		    $vorsitz_geschlecht = $mitarbeiter->geschlecht;
+			$stgl_ma = new mitarbeiter($stgleiter_uid);
+			$stgl .= trim($stgl_ma->titelpre.' '.$stgl_ma->vorname.' '.$stgl_ma->nachname.' '.$stgl_ma->titelpost);
 		}
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
+		
+		
+		
+		if($mitarbeiter->load($row->vorsitz))
+			$vorsitz = trim($mitarbeiter->titelpre.' '.$mitarbeiter->vorname.' '.$mitarbeiter->nachname.' '.$mitarbeiter->titelpost);
 		if($person->load($row->pruefer1))
 			$pruefer1 = trim($person->titelpre.' '.$person->vorname.' '.$person->nachname.' '.$person->titelpost);
 		if($person->load($row->pruefer2))
@@ -119,11 +116,8 @@ if($db->db_query($qry))
 			if($row_rek = $db->db_fetch_object())
 				$rektor = $row_rek->titelpre.' '.$row_rek->vorname.' '.$row_rek->nachname.' '.$row_rek->titelpost;
 		$qry = "SELECT * FROM (SELECT titel as themenbereich, ende, projektarbeit_id, note, beginn FROM lehre.tbl_projektarbeit a 
-<<<<<<< HEAD
-							WHERE student_uid='$student->uid' AND (projekttyp_kurzbz='Bachelor' OR projekttyp_kurzbz='Diplom') 
-=======
-							WHERE student_uid='$student->uid' AND (projekttyp_kurzbz='Bachelor' OR projekttyp_kurzbz='Diplom' OR projekttyp_kurzbz='Master' OR projekttyp_kurzbz='Dissertation' OR projekttyp_kurzbz='Lizenziat' OR projekttyp_kurzbz='Magister') 
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
+							WHERE student_uid='$student->uid'
+							AND (projekttyp_kurzbz='Bachelor' OR projekttyp_kurzbz='Diplom')
 							ORDER BY beginn DESC, projektarbeit_id ASC LIMIT 2) as a ORDER BY beginn asc";
 		$themenbereich='';
 		$datum_projekt='';
@@ -146,13 +140,6 @@ if($db->db_query($qry))
 				$themenbereich = $row_proj->themenbereich;
 				$note = (isset($note_arr[$row_proj->note])?$note_arr[$row_proj->note]:$row_proj->note);
 				$datum_projekt = $datum_obj->convertISODate($row_proj->ende);
-<<<<<<< HEAD
-=======
-				$projektarbeit = new projektarbeit($row_proj->projektarbeit_id);
-				$lehreinheit = new lehreinheit($projektarbeit->lehreinheit_id);
-				$lehrveranstaltung = new lehrveranstaltung($lehreinheit->lehrveranstaltung_id);
-				$projektnote = new note($note);
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 			}
 			
 			if($row_proj = $db->db_fetch_object($result_proj))
@@ -201,132 +188,72 @@ if($db->db_query($qry))
 			$stg_art_engl='diploma';
 		}
 		
-<<<<<<< HEAD
-=======
-		$oe = new organisationseinheit();
-		$parents = $oe->getParents($studiengang->oe_kurzbz);
-		$oe_parent = "";
-		
-		foreach ($parents as $parent)
+		//Andreas Koller:
+		//Wenn die Abschlussbeurteilung negativ ist, dann soll kein Pruefungszeugnis generiert werden.
+		if ($abschlussbeurteilung_arr[$row->abschlussbeurteilung_kurzbz] != "nicht bestanden")
 		{
-		    $oe_temp = new organisationseinheit();
-		    $oe_temp->load($parent);
-		    if($oe_temp->organisationseinheittyp_kurzbz == 'Fakultät')
-		    {
-			$oe_parent = $oe_temp->bezeichnung;
-			break;
-		    }
+			echo "\t<pruefung>".'
+			<abschlusspruefung_id><![CDATA['.$row->abschlusspruefung_id.']]></abschlusspruefung_id>
+			<student_uid><![CDATA['.$row->student_uid.']]></student_uid>
+			<vorsitz><![CDATA['.$row->vorsitz.']]></vorsitz>
+			<vorsitz_nachname><![CDATA['.$vorsitz.']]></vorsitz_nachname>
+			<pruefer1><![CDATA['.$row->pruefer1.']]></pruefer1>
+			<pruefer1_nachname><![CDATA['.$pruefer1.']]></pruefer1_nachname>
+			<pruefer2><![CDATA['.$row->pruefer2.']]></pruefer2>
+			<pruefer2_nachname><![CDATA['.$pruefer2.']]></pruefer2_nachname>
+			<pruefer3><![CDATA['.$row->pruefer3.']]></pruefer3>
+			<pruefer3_nachname><![CDATA['.$pruefer3.']]></pruefer3_nachname>
+			<abschlussbeurteilung_kurzbz><![CDATA['.($row->abschlussbeurteilung_kurzbz!=''?$abschlussbeurteilung_arr[$row->abschlussbeurteilung_kurzbz]:'').']]></abschlussbeurteilung_kurzbz>
+			<abschlussbeurteilung_kurzbzEng><![CDATA['.($row->abschlussbeurteilung_kurzbz!=''?$abschlussbeurteilung_arrEng[$row->abschlussbeurteilung_kurzbz]:'').']]></abschlussbeurteilung_kurzbzEng>
+			<akadgrad_id><![CDATA['.$row->akadgrad_id.']]></akadgrad_id>
+			<datum><![CDATA['.$datum_obj->convertISODate($row->datum).']]></datum>
+			<datum_iso><![CDATA['.$row->datum.']]></datum_iso>
+			<sponsion><![CDATA['.$datum_obj->convertISODate($row->sponsion).']]></sponsion>
+			<sponsion_iso><![CDATA['.$row->sponsion.']]></sponsion_iso>
+			<pruefungstyp_kurzbz><![CDATA['.$row->pruefungstyp_kurzbz.']]></pruefungstyp_kurzbz>
+			<anrede><![CDATA['.$anrede.']]></anrede>
+			<anrede_engl><![CDATA['.$anrede_engl.']]></anrede_engl>
+			<titelpre><![CDATA['.$student->titelpre.']]></titelpre>
+			<vorname><![CDATA['.$student->vorname.']]></vorname>
+			<vornamen><![CDATA['.$student->vornamen.']]></vornamen>
+			<nachname><![CDATA['.$student->nachname.']]></nachname>
+			<titelpost><![CDATA['.$student->titelpost.']]></titelpost>
+			<matrikelnr><![CDATA['.$student->matrikelnr.']]></matrikelnr>
+			<gebdatum_iso><![CDATA['.$student->gebdatum.']]></gebdatum_iso>
+			<gebdatum><![CDATA['.$datum_obj->convertISODate($student->gebdatum).']]></gebdatum>
+			<gebort><![CDATA['.$student->gebort.']]></gebort>
+			<staatsbuergerschaft><![CDATA['.$staatsbuergerschaft.']]></staatsbuergerschaft>
+			<staatsbuergerschaft_engl><![CDATA['.$staatsbuergerschaft_engl.']]></staatsbuergerschaft_engl>
+			<geburtsnation><![CDATA['.$geburtsnation.']]></geburtsnation>
+			<geburtsnation_engl><![CDATA['.$geburtsnation_engl.']]></geburtsnation_engl>
+			<studiengang_kz><![CDATA['.sprintf('%04s',$student->studiengang_kz).']]></studiengang_kz>
+			<stg_bezeichnung><![CDATA['.$studiengang->bezeichnung.']]></stg_bezeichnung>
+			<stg_bezeichnung_engl><![CDATA['.$studiengang->english.']]></stg_bezeichnung_engl>
+			<stg_art><![CDATA['.$stg_art.']]></stg_art>
+			<stg_art_engl><![CDATA['.$stg_art_engl.']]></stg_art_engl>
+			<akadgrad_kurzbz><![CDATA['.$akadgrad->akadgrad_kurzbz.']]></akadgrad_kurzbz>
+			<titel><![CDATA['.$akadgrad->titel.']]></titel>
+			<datum_aktuell><![CDATA['.date('d.m.Y').']]></datum_aktuell>
+			<anmerkung><![CDATA['.$row->anmerkung.']]></anmerkung>
+			<bescheidbgbl1><![CDATA['.$studiengang->bescheidbgbl1.']]></bescheidbgbl1>
+			<bescheidbgbl2><![CDATA['.$studiengang->bescheidbgbl2.']]></bescheidbgbl2>
+			<bescheidgz><![CDATA['.$studiengang->bescheidgz.']]></bescheidgz>
+			<bescheidvom><![CDATA['.$datum_obj->convertISODate($studiengang->bescheidvom).']]></bescheidvom>
+			<titelbescheidvom><![CDATA['.$datum_obj->convertISODate($studiengang->titelbescheidvom).']]></titelbescheidvom>
+			<rektor><![CDATA['.$rektor.']]></rektor>
+			<themenbereich><![CDATA['.$themenbereich.']]></themenbereich>
+			<themenbereich_2><![CDATA['.$themenbereich_2.']]></themenbereich_2>
+			<studiengangsleiter><![CDATA['.$stgl.']]></studiengangsleiter>";
+			<betreuer><![CDATA['.$betreuer.']]></betreuer>
+			<betreuer_2><![CDATA['.$betreuer_2.']]></betreuer_2>
+			<note><![CDATA['.$note.']]></note>
+			<note2><![CDATA['.$note2.']]></note2>
+			<notekommpruef><![CDATA['.$row->note.']]></notekommpruef>
+			<datum_projekt><![CDATA['.$datum_projekt.']]></datum_projekt>
+			<datum_projekt2><![CDATA['.$datum_projekt.']]></datum_projekt2>
+			<ort_datum><![CDATA['.date('d.m.Y').']]></ort_datum>';
+			echo "\n\t</pruefung>";
 		}
-		
-		$studiengang_bezeichnung2 = explode(" ", $studiengang->bezeichnung, 2);
-		$name = trim($student->titelpre.' '.trim($student->vorname.' '.$student->vornamen).' '.$student->nachname.($student->titelpost!=''?', '.$student->titelpost:''));
-		
-		//Wenn Lehrgang, dann Erhalter-KZ vor die Studiengangs-Kz hängen
-		if ($student->studiengang_kz<0)
-		{
-			$stg = new studiengang();
-			$stg->load($student->studiengang_kz);
-				
-			$studiengang_kz = sprintf("%03s", $stg->erhalter_kz).sprintf("%04s", abs($student->studiengang_kz));
-		}
-		else
-			$studiengang_kz = sprintf("%04s", abs($student->studiengang_kz));
-		
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
-		echo "\t<pruefung>".'
-		<abschlusspruefung_id><![CDATA['.$row->abschlusspruefung_id.']]></abschlusspruefung_id>
-		<student_uid><![CDATA['.$row->student_uid.']]></student_uid>
-		<vorsitz><![CDATA['.$row->vorsitz.']]></vorsitz>
-		<vorsitz_nachname><![CDATA['.$vorsitz.']]></vorsitz_nachname>
-<<<<<<< HEAD
-=======
-		<vorsitz_geschlecht><![CDATA['.$vorsitz_geschlecht.']]></vorsitz_geschlecht>
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
-		<pruefer1><![CDATA['.$row->pruefer1.']]></pruefer1>
-		<pruefer1_nachname><![CDATA['.$pruefer1.']]></pruefer1_nachname>
-		<pruefer2><![CDATA['.$row->pruefer2.']]></pruefer2>
-		<pruefer2_nachname><![CDATA['.$pruefer2.']]></pruefer2_nachname>
-		<pruefer3><![CDATA['.$row->pruefer3.']]></pruefer3>
-		<pruefer3_nachname><![CDATA['.$pruefer3.']]></pruefer3_nachname>
-		<abschlussbeurteilung_kurzbz><![CDATA['.($row->abschlussbeurteilung_kurzbz!=''?$abschlussbeurteilung_arr[$row->abschlussbeurteilung_kurzbz]:'').']]></abschlussbeurteilung_kurzbz>
-		<abschlussbeurteilung_kurzbzEng><![CDATA['.($row->abschlussbeurteilung_kurzbz!=''?$abschlussbeurteilung_arrEng[$row->abschlussbeurteilung_kurzbz]:'').']]></abschlussbeurteilung_kurzbzEng>
-		<akadgrad_id><![CDATA['.$row->akadgrad_id.']]></akadgrad_id>
-		<datum><![CDATA['.$datum_obj->convertISODate($row->datum).']]></datum>
-		<datum_iso><![CDATA['.$row->datum.']]></datum_iso>
-		<sponsion><![CDATA['.$datum_obj->convertISODate($row->sponsion).']]></sponsion>
-		<sponsion_iso><![CDATA['.$row->sponsion.']]></sponsion_iso>
-		<pruefungstyp_kurzbz><![CDATA['.$row->pruefungstyp_kurzbz.']]></pruefungstyp_kurzbz>
-<<<<<<< HEAD
-		<anrede><![CDATA['.$anrede.']]></anrede>
-		<anrede_engl><![CDATA['.$anrede_engl.']]></anrede_engl>
-=======
-		<pruefungstyp_beschreibung><![CDATA['.$row->beschreibung.']]></pruefungstyp_beschreibung>
-		<anrede><![CDATA['.$anrede.']]></anrede>
-		<anrede_engl><![CDATA['.$anrede_engl.']]></anrede_engl>
-		<name><![CDATA['.$name.']]></name>
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
-		<titelpre><![CDATA['.$student->titelpre.']]></titelpre>
-		<vorname><![CDATA['.$student->vorname.']]></vorname>
-		<vornamen><![CDATA['.$student->vornamen.']]></vornamen>
-		<nachname><![CDATA['.$student->nachname.']]></nachname>
-		<titelpost><![CDATA['.$student->titelpost.']]></titelpost>
-		<matrikelnr><![CDATA['.$student->matrikelnr.']]></matrikelnr>
-		<gebdatum_iso><![CDATA['.$student->gebdatum.']]></gebdatum_iso>
-<<<<<<< HEAD
-=======
-		<geschlecht><![CDATA['.$student->geschlecht.']]></geschlecht>
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
-		<gebdatum><![CDATA['.$datum_obj->convertISODate($student->gebdatum).']]></gebdatum>
-		<gebort><![CDATA['.$student->gebort.']]></gebort>
-		<staatsbuergerschaft><![CDATA['.$staatsbuergerschaft.']]></staatsbuergerschaft>
-		<staatsbuergerschaft_engl><![CDATA['.$staatsbuergerschaft_engl.']]></staatsbuergerschaft_engl>
-		<geburtsnation><![CDATA['.$geburtsnation.']]></geburtsnation>
-		<geburtsnation_engl><![CDATA['.$geburtsnation_engl.']]></geburtsnation_engl>
-<<<<<<< HEAD
-		<studiengang_kz><![CDATA['.sprintf('%04s',$student->studiengang_kz).']]></studiengang_kz>
-		<stg_bezeichnung><![CDATA['.$studiengang->bezeichnung.']]></stg_bezeichnung>
-		<stg_bezeichnung_engl><![CDATA['.$studiengang->english.']]></stg_bezeichnung_engl>
-=======
-		<studiengang_kz><![CDATA['.$studiengang_kz.']]></studiengang_kz>
-		<stg_bezeichnung><![CDATA['.$studiengang->bezeichnung.']]></stg_bezeichnung>
-		<stg_bezeichnung2><![CDATA['.$studiengang_bezeichnung2[1].']]></stg_bezeichnung2>
-		<stg_bezeichnung_engl><![CDATA['.$studiengang->english.']]></stg_bezeichnung_engl>
-		<stg_oe_parent><![CDATA['.$oe_parent.']]></stg_oe_parent>
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
-		<stg_art><![CDATA['.$stg_art.']]></stg_art>
-		<stg_art_engl><![CDATA['.$stg_art_engl.']]></stg_art_engl>
-		<akadgrad_kurzbz><![CDATA['.$akadgrad->akadgrad_kurzbz.']]></akadgrad_kurzbz>
-		<titel><![CDATA['.$akadgrad->titel.']]></titel>
-		<datum_aktuell><![CDATA['.date('d.m.Y').']]></datum_aktuell>
-		<anmerkung><![CDATA['.$row->anmerkung.']]></anmerkung>
-		<bescheidbgbl1><![CDATA['.$studiengang->bescheidbgbl1.']]></bescheidbgbl1>
-		<bescheidbgbl2><![CDATA['.$studiengang->bescheidbgbl2.']]></bescheidbgbl2>
-		<bescheidgz><![CDATA['.$studiengang->bescheidgz.']]></bescheidgz>
-		<bescheidvom><![CDATA['.$datum_obj->convertISODate($studiengang->bescheidvom).']]></bescheidvom>
-		<titelbescheidvom><![CDATA['.$datum_obj->convertISODate($studiengang->titelbescheidvom).']]></titelbescheidvom>
-		<rektor><![CDATA['.$rektor.']]></rektor>
-		<themenbereich><![CDATA['.$themenbereich.']]></themenbereich>
-<<<<<<< HEAD
-=======
-		<projekt_typ><![CDATA['.$projektarbeit->projekttyp_bezeichnung.']]></projekt_typ>
-		<projekt_fach><![CDATA['.$lehrveranstaltung->bezeichnung.']]></projekt_fach>
-		<projekt_titel><![CDATA['.$projektarbeit->titel.']]></projekt_titel>
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
-		<themenbereich_2><![CDATA['.$themenbereich_2.']]></themenbereich_2>
-		<betreuer><![CDATA['.$betreuer.']]></betreuer>
-		<betreuer_2><![CDATA['.$betreuer_2.']]></betreuer_2>
-		<note><![CDATA['.$note.']]></note>
-<<<<<<< HEAD
-=======
-		<note_bezeichnung><![CDATA['.$projektnote->bezeichnung.']]></note_bezeichnung>
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
-		<note2><![CDATA['.$note2.']]></note2>
-		<notekommpruef><![CDATA['.$row->note.']]></notekommpruef>
-		<datum_projekt><![CDATA['.$datum_projekt.']]></datum_projekt>
-		<datum_projekt2><![CDATA['.$datum_projekt.']]></datum_projekt2>
-		<ort_datum><![CDATA['.date('d.m.Y').']]></ort_datum>';
-		
-	 	echo "\n\t</pruefung>";
 	}
 
 

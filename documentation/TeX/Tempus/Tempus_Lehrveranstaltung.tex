@@ -1,0 +1,60 @@
+\chapter{Lehrveranstaltung}
+\label{Kapitel Lehrveranstaltung}
+
+Als Lehrveranstaltung wird im Gesamtsystem das gleiche verstanden, wie im Antrag des Studiengangs. In ihr enthalten sind die grundlegenden Stammdaten. Im Gegensatz zu der Lehreinheit enthält die Lehrveranstaltung Daten, die im Wesentlichen von Jahr zu Jahr unverändert bleiben. Sie bildet das Grundgerüst auf dem alle anderen Tabellen aufbauen.\\
+Die Lehrveranstaltung wird immer aus Sicht eines Studiengangs oder aus der Sicht des Studenten gesehen. Der Titel der Lehrveranstaltung findet sich im Zeugnis und im Lehre-Bereich im CIS wieder. Nicht zu verwechseln ist die Lehrveranstaltung mit dem Lehrfach oder der Lehreinheit (siehe eigene Begriffserklärungen).\\
+
+Einmal verwendete Lehrveranstaltungen können nicht mehr entfernt sondern nur deaktiviert werden, da Notenzuordnungen verloren gehen würden.
+
+Folgende Attribute bestimmen eine Lehrveranstaltung:
+\begin{table*}[htbp]
+	\centering
+		\begin{tabular}{|r|l|}
+			\hline
+			Kuerzel & Abkürzung der LV. Mindestens 2, maximal 5 Zeichen. \\&3,4 od. 5tes Zeichen darf eine Ziffer sein.\\& Buchstaben sollten einheitlich groß geschrieben werden.\\
+			\hline
+			Bezeichnung & Name der Lehrveranstaltung (max. 64 Zeichen)\\
+			\hline
+			LehreVz	& Der Name des Lehreverzeichnisses sollte mit dem Kürzel übereinstimmen. \\&Es sind ausschließlich kleingeschriebene Buchstaben zu verwenden.\\
+			\hline
+		\end{tabular}
+	\caption{Attribute der Lehrveranstaltung}
+	\label{tab:AttributeDerLehrveranstaltung}
+\end{table*}
+
+Die Registerkarte ''Lehrveranstaltung'' ist ein Grenzbereich, in dem sich die administrative Seite und die Planungsseite überschneiden.
+
+In der Registerkarte werden alle Daten eingegeben, die zum Verplanen im LV-Plan notwendig und relevant sind.
+
+
+\section{Bearbeiten von LV-Einträgen}
+Kommt es zu Curriculumsänderungen, stehen dem FAS-Anwender einige Anpassungsmöglichkeiten zur Verfügung. Der Aufruf erfolgt durch Anklicken von Menüpunkt \textit{Lehrveranstaltungsverwaltung} unter \textsl{Extras} wie Abbildung \ref{LV} zeigt.
+\begin{figure}
+	\centering
+	\includegraphics[width=0.75\textwidth]{FAS_LV.png}
+	\caption{Bearbeiten von Lehrveranstaltungseinträgen}
+	\label{LV}
+\end{figure}
+Der Anwender gelangt daraufhin auf die in Abbildung \ref{LV1} gezeigte Seite in einem neuen Fenster. Zuerst werden in den Auswahlfeldern links oben, Studiengang und Semester ausgewählt. Zusätzlich kann die Ausgabe auch noch auf einen Fachbereich eingeschränkt werden. Zum Aktualisieren der Anzeige wird dann noch die Taste \textit{Anzeigen} angeklickt. Es werden alle \underline{aktiven} Lehrveranstaltungen, die den angegebenen Kriterien entsprechen, angezeigt. Es können folgende Werte verändert werden:
+\begin{enumerate}
+	\item Lehre: Wenn angehakt, erscheint die LV auf der CIS-Seite.
+	\item Sort: Die eingegebenen Zahlen bestimmen die Reihenfolge der LVs auf dem Semesterzeugnis.
+	\item Zeugnis: Wenn angehakt, erscheint die LV auf den Zeugnisausdrucken und Studienerfolgsbestätigungen.
+	\item BA/DA: Wenn angehakt, können Projektarbeiten zugeordnet werden.
+	\item FBK: Hier kann ein Koordinator für diese LV ausgewählt werden. Dieses Feld muß nur befüllt werden, wenn der verantwortliche Koordinator nicht mit dem Fachbereichskoordinator übereinstimmt. Bleibt das Feld leer, wird der Fachbereichskoordinator zugeordnet.
+\end{enumerate}
+Bei den Feldern Lehre, Zeugnis und BA/DA ist nur ein einfacher Klick und kein Doppelklick zur Zustandsänderung notwendig. Die Eingabe wird mit einem Klick auf die Taste \fbox{ok} am rechten Zeilenrand gespeichert. Mit dem Schließen des Fensters wird die Bearbeitung der Lehrveranstaltungen beendet.
+\begin{figure}
+	\begin{center}
+    \begin{picture}(108,90)
+			\put(0,0){\includegraphics[height=90mm, width=108mm]{FAS_LV1.png}}
+			\markier{1}{47}{81}{1}{-1}
+			\markier{2}{65}{81}{1}{-1}
+			\markier{3}{74}{81}{1}{-1}
+			\markier{4}{82}{81}{1}{-1}
+			\markier{5}{88}{81}{1}{-1}
+		\end{picture}
+    \caption{Lehrveranstaltungen}
+		\label{LV1}
+  \end{center}
+\end{figure}

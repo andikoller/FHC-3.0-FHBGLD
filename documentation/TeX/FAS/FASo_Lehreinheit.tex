@@ -1,0 +1,89 @@
+\chapter{Lehreinheiten}
+\label{lehreinheiten}
+\begin{figure}
+	\begin{center}
+    \begin{picture}(128,34)
+			\put(20,0){\includegraphics[height=34mm, width=108mm]{FAS_LE1.png}}
+			\markier{1}{15}{25}{3}{-1}
+			\markier{2}{15}{20}{3}{1}
+		\end{picture}
+    \caption{Lehrveranstaltungsübersicht mit Lehreinheiten}
+		\label{LE1}
+  \end{center}
+\end{figure}
+Abbildung \ref{LE1} zeigt das Listenfeld mit einer Anzeige von Lehrveranstaltungen und Lehreinheiten. 
+\begin{enumerate}
+	\item Lehrveranstaltung: Eine Lehrveranstaltung ist ein Teil des Curriculums und scheint auf dem Zeugnissen der Studenten auf. Eine Lehrveranstaltung kann aus mehreren Lehreinheiten, auch unterschiedlicher Art, bestehen.
+	\item Lehreinheit: Eine Lehreinheit ist ein Teil des stattfindenden Unterrichts und muß immer einer Lehrveranstaltung zugeordnet sein. Lehreinheiten werden im Stundenplan verplant und scheinen in den Lehraufträgen der Lektoren auf.
+\end{enumerate}
+Es gibt mehrere Möglichkeiten wie eine Lehrveranstaltung im Unterricht (Lehreinheiten) umgesetzt werden kann:
+\begin{itemize}
+	\item Eine Gruppe - ein Lektor: Es wird eine Lehreinheit angelegt, zu der die Gruppe und der Lektor zugeordnet werden.
+	\item Mehrere Gruppen - ein Lektor: Es muß für jede Gruppe eine Lehreinheit angelegt werden, denen der gleiche Lektor zugeteilt wird. Ausnahme: Findet der Unterricht für alle gleichzeitig statt, reicht eine Lehreinheit aus, der der Lektor zugeordnet wird.
+	\item Eine Gruppe oder mehrere Gruppen - mehrere Lektoren: Findet der Untericht zusammen zur gleichen Zeit im gleiche Raum statt, wird nur eine Lehreinheit angelegt, ansonsten wird für jeden Unterrichtsteil eine Lehreinheit angelegt, der dann die entsprechenden Gruppen und Lektoren zugeteilt werden.
+\end{itemize}
+\underline{Beispiel:}\\
+Abbildung \ref{LE1} zeigt die mit \textit{1} markierte Lehrveranstaltung \textsl{Schaltungsdesign und EMV1} mit 32 Semesterstunden und 3.0 ECTS-Punkten. Diese 32 Stunden sind die Unterrichtsstunden aus der Studentensicht. Darunter, etwas eingerückt, befinden sich zwei Lehreinheiten zu jeweils 16 Stunden, denen verschiedene Lektoren aber die gleiche Gruppe zugeordnet sind. Die 16 Stunden bei der Lehreinheit sind die Unterrichtsstunden des Lektors und müssen daher in Summe nicht zwingend die Semesterstunden der Lehrveranstaltung ergeben.
+Hier finden die 32 Stunden des Unterrichts in zwei Teilen zu je 16 Stunden zu unterschiedlichen Zeiten ohne Überschneidung für die zugeordnete Gruppe statt.\\
+
+\achtung{\textbf{Wichtig} Findet der Unterricht zeitlich oder räumlich getrennt statt, muß der Unterricht in mehrere Lehreinheiten geteilt werden!}\\
+\section{Lehreinheit anlegen}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.75\textwidth]{FAS_LE2.png}
+	\caption{LE-Eigenschaften}
+	\label{LE2}
+\end{figure}
+Um eine neue Lehreinheit anzulegen, muß zuerst der Studiengang im linken Fenster und dann die übergeordnete Lehrveranstaltung im Karteiblatt Lehrveranstaltungen im oberen Fenster ausgewählt werden. Mit einem Klick auf die Taste \textit{Neue Lehreinheit}, die sich oberhalb der LV-/LE-Liste befindet (siehe auch Abbildung \ref{LE1}), wird das Anlegen einer neuen LE vorbereitet und im unteren Fenster, die Anzeige der Attribute eingeblendet. Abbildung \ref{LE2} zeigt das Detailfester mit bereits eingegebenen Werten.
+\begin{itemize}
+	\item Sprache: In welcher Sprachen wird der Unterricht abgehalten? Zur Auswahl stehen zur Zeit German, English, Espanol.
+	\item UNR: Die Unterrichtsnummer wird automatisch nach dem ersten Speichern der Lehreinheit vergeben vergeben. Wenn man bei mehreren Lehreinheiten die gleiche UNR manuell eingibt, werden diese zusammen verplant.
+	\item Lehrfach: Das Lehrfach stellt die Verbindung zum Fachbereich dar.
+	\item Lehrform: Hier wird die Form des Unterrichts ausgewählt, z.B. Seminar, Vorlesung oder Übung.
+	\item Raumtyp und Raumtyp alternativ: Diese beiden Felder dienen zur Auswahl des Raumtyps, dessen Räume über die Einrichtung und Größe verfügen, die für den Unterricht notwendig sind, bzw. dem Ersatz, wenn alle Räume des gewünschten Typs besetzt sind.
+	\item Lehre: Wenn angehakt, wird diese Lehreinheit in den Stundenplan einbezogen.
+	\item Stundenblockung: Die Stundenblockung gibt an, wie groß die wöchentliche Unterrichtszeit ist, der in einem Stück verplant wird.
+	\item Wochenrythmus: Der Wochenrythmus gibt an in welchem Intervall (z.B. wöchentlich oder alle 2 Wochen) der Unterricht stattfindet.
+	\item Start KW: Die Start-Kalenderwoche gibt die Wochen an, in der der Unterricht beginnt.
+	\item Studiensemester: Hier wird ausgewählt, in welchem Studiensemester der Unterricht stattfindert (z.B. WS2007).
+	\item Anmerkung: Besonderheiten, die bei der Erstellung des Stundenplans berücksichtigt werden sollen, können hier eingegeben werden. 
+\end{itemize}
+\section{Gruppen zuweisen}
+Die Gruppenzuweisung erfolgt per 'Drag And Drop' indem die Gruppe mit der Maus vom linken Bereich in das Listenfeld \textsl{Gruppen} unterhalb der Details der Lehrveranstaltung gezogen wird (Siehe Abbildung \ref{LE4}).
+\begin{figure}
+	\centering
+	\includegraphics[width=0.75\textwidth]{FAS_LE2.png}
+	\caption{Gruppen zuweisen}
+	\label{LE4}
+\end{figure}
+\subsection{Wahlfächer}
+Es wird für alle Wahlfächer je eine zugehörige Spezialgruppe angelegt, in die dann die teilnehmenden Studenten hineingezogen werden. Studenten anderer Studiengänge können oft nicht direkt zugeordnet werden, da die Zugriffsrechte dies nicht erlauben. Studenten anderer Studiengänge müssen mit der Suchfunktion im Listenfeld 2 gefunden werden und dann von dort in die entsprechende Spezialgruppe in Listenfeld 1 gezogen werden.
+
+\achtung{\textbf{Wichtig} Die studiengangsfremden Studenten müssen in Spezialgruppen und auf keinen Fall in Lehrverbandsgruppen (z.B. 1A1, 5B3, etc.) gezogen werden, da es sonst zu Problemen im Herkunftsstudiengang kommt!}\\
+
+\subsection{Incoming}
+Incoming-Studenten werden in ihrem Studiengang im Semester 0I angelegt und dort einzeln in Untergruppen (0I1, 0I2,...) aufgeteilt. Die Untergruppe eines Incoming-Studenten wird nun einer Lehreinheit der vom Studenten auswählten Lehrveranstaltung zugeordnet.
+
+\section{Lektoren zuweisen}
+Die Zuweisung von Lektoren erfolgt per 'Drag And Drop'. Zuerst im unteren Fenster auf die Kateikarte \textsl{Lektorenzuteilung} wechseln. Danach im linken Fenster auf die Karteikarte \textsl{Lektor} wechseln und die gewünschte Person mit der Maus in das Listenfeld in der Karteikarte \textsl{Lektorenzuteilung} hineinziehen. Wie in Abbildung \ref{LE3} zu sehen, befindet sich der Name nun in der Liste. Rechts davon sind die Lektorendaten für diese Lehreinheit angezeigt bzw. einzugeben.
+\begin{itemize}
+	\item Lehrfunktion: Hier wird die Funktion der Person innerhalb der Lehreinheit bestimmt. Um einen Lektor im CIS fett gedruckt darzustellen, muss hier LV-Leitung ausgewählt werden.
+	\item Lektor: Diese Feld zeigt den Namen der gewählten Person an.
+	\item Semesterstunden: Anzahl der Stunden, die ausgezahlt werden.
+	\item Planstunden: Anzahl der Unterrichtsstunden, die im Stundenplan verplant werden.
+	\item Stundensatz: Bezahlung pro Unterrichtsstunde.
+	\item Faktor: Faktor mit dem der Stundensatz mulipliziert wird. Im Normalfall 1.0, wenn z.B. eine Mehrbelastung durch eine große Studentenzahl besteht, kann mit einer Erhöhung des Faktors das Entgelt für diese Lehreinheit erhöht werden.
+	\item Anmerkung: Hier können zusätzliche Informationen eingegeben werden.
+	\item BIS-Melden: Eingabe, ob dieser Unterricht in der BIS-Meldung berücksichtigt wird. 
+\end{itemize}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.75\textwidth]{FAS_LE3.png}
+	\caption{Lektoren zuweisen}
+	\label{LE3}
+\end{figure}
+
+\achtung{
+Freie Lektoren dürfen nicht mehr als 130 Stunden pro Semester unterrichten da diese sonst Fix Angstellt werden müssen.. Falls die Zuteilung diese Grenze überschreiten sollte, wird der Datensatz NICHT gespeichert und eine entsprechende Fehlermeldung erscheint.\\
+Bei Fixen Lektoren liegt die Grenze bei 320 Stunden. Hier erscheint jedoch nur eine Warnung. Die Daten werden dennoch gespeichert.
+}\\

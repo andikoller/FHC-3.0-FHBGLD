@@ -1,0 +1,8 @@
+AuthBasicProvider ldap
+AuthType Basic
+AuthName "FH-Burgenland"
+AuthLDAPURL ldap://EFSADS001.fhbgld.at:389/dc=fhbgld,dc=at?sAMAccountName?sub
+AuthLDAPBindDN "CN=fhcomplete,OU=FHComplete,OU=Users,OU=Technik,DC=fhbgld,DC=at"
+AuthLDAPBindPassword "w7dn2XcvWPB2Il8QdoQY"
+require valid-user
+

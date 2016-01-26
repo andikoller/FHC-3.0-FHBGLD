@@ -1,0 +1,292 @@
+\setlength{\baselineskip}{0.5cm}
+\chapter{Benutzerbereich}
+
+\section{Bestellung}
+\label{bestellung}
+
+Der folgenden Abbildung können Sie den regulären Ablauf des Bestellvorgangs entnehmen.
+\begin{figure}
+	\centering
+	\includegraphics[width=0.8\textwidth]{workflow.png}
+	\label{workflow}
+\end{figure}
+
+\subsection{Anlegen einer neuen Bestellung}
+\label{neue_bestellung}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.8\textwidth]{neue_bestellung.png}
+	\caption{Eingabeformular zum Anlegen einer neuen Bestellung }
+	\label{neue_bestellung}
+\end{figure}
+Das Anlegen einer neuen Bestellung wird mit einem Klick auf den Menüpunkt \textit{Neu} unter \textit{Bestellung} im linken Fenster begonnen. Es öffnet sich danach die in Abbildung \ref{neue_bestellung} gezeigte Eingabemaske. \\
+Hier sind vier Eingaben vorzunehmen:
+\begin{description}
+	\item [Titel:] Der Titel der Bestellung ist eine Kurzbeschreibung der Bestellung. Er vereinfacht das Wiederauffinden der Bestellung, da er als Suchkriterium verwendet werden kann. Der Titel erscheint auch auf dem Bestellformular.
+	\item [Kostenstelle:] Auswahl jener Kostenstelle, die der Bestellung zugeordnet wird. Angezeigt werden nur Kostenstellen, für die der Nutzer/die Nutzerin Schreibrechte besitzt.
+	\item [Firma:] Auswahl der Firma, bei der bestellt wird. Die Firma muss zuvor im WaWi angelegt worden sein. Die Auswahlliste der Firma wird nach Eingabe von mind. zwei Zeichen gefiltert. Unter der Firmenbezeichnung wird die ID der Firma in der Datenbank angezeigt.
+	\item [Konto:] Auswahl, zu welchem buchhalterischen Konto die Bestellung zugeordnet wird. Die angezeigten Konten ändern sich abhängig von der ausgewählten Kostenstelle.
+\end{description}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=1\textwidth]{bestellformular.png}
+	\caption{Bestellformular}
+	\label{bestellformular}
+\end{figure}
+
+\subsection{Angaben im Bestellformular}
+\label{angaben_im_bestellformular}
+
+Nach Klicken der Taste \textit{Anlegen} erscheint das eigentliche Bestellformular (siehe Abbildung \ref{bestellformular}):
+\begin{description}
+	\item [Bestellnummer:] Hier sehen Sie die automatisch generierte Bestellnummer. 
+	Sie setzt sich zusammen aus der Organisationseinheit, dem Geschäftsjahr, dem Kürzel der Kostenstelle und einer fortlaufenden dreistelligen Nummer.
+	Daneben finden Sie zwei Buttons. Der erste kopiert die Bestellung und öffnet diese gleich zur Bearbeitung.
+	Das Rechner-Symbol legt die zugehörige Rechnung an und öffnet diese ebenfalls zur Bearbeitung.
+\end{description}
+	
+	\info{Das nachträgliche Ändern der Bestellnummer ist nur möglich, solange die Bestellung noch nicht bestellt wurde. Sollte sich danach die Kostenstelle ändern,
+	wird die Bestellnummer (das Kürzel der Kostenstelle) NICHT angepasst.}
+	
+\begin{description}
+	\item [Titel:] Der Titel der Bestellung.
+	\item [Erstellt am:] Das Erstellungsdatum der Bestellung.
+	\item [Liefertermin:] Hier können Sie einen gewünschten Liefertermin definieren, falls die Bestellung nicht promt stattfinden soll (zB: \textit{KW10} oder \textit{15.03.2011}).
+	\item [Firma:] Über den Firmennamen wird die Anschrift für das Bestellformular ausgewählt.
+	\item [Kontaktperson:] Die Ansprechperson für die Bestellung.
+	\item [Kostenstelle:] Die, der Bestellung zugeordnete, Kostenstelle.
+	\item [Lieferadresse:] Die Adresse, an die die Bestellung geliefert werden soll.
+	\item [Konto:] Buchhalterisches Konto.
+	\item [Rechnungsadresse:] Die Empfängeradresse der Rechnung.
+	\item [Bemerkungen:] Anmerkungen zur Bestellung können hier eingetragen werden. Bemerkungen werden NICHT auf dem Bestellschein gedruckt.
+\end{description}
+	\info{Bei Waren wie zB. techn. Einrichtungen, Laborgeräten, etc. bitte die Raumnummer dazu angeben. Dadurch erleichtern Sie uns die Erfassung im Inventarsystem}
+\begin{description}
+	\item [Status:] Zeigt den derzeitigen Bestellstatus an:
+		\begin{itemize}
+			\item Bestellen/Bestellt: Kann nur vom Zentraleinkauf aktiviert werden. Zeigt an, dass die Bestellung durchgeführt wurde (Fax, Onlinebestellung,...).
+			\item Stornieren/Storniert: Wenn die Bestellung storniert wurde.
+			\item Geliefert: Zeigt an, dass die Ware abholbereit ist bzw. geliefert wurde.
+		\end{itemize}
+	\item [Tags:] Ein Tag ist ein Schlagwort, welches frei gewählt werden kann. Es dient dem leichteren Auffinden von Bestellungen bzw. der sinnvollen Zuordnung zu Themenbereichen.
+	Es können sowohl einer ganzen Bestellung als auch einzelnen Posten innerhalb einer Bestellung Tags zugeordnet werden.\\
+	Bei der Eingabe eines Tags, werden automatisch Übereinstimmungen mit vorhandenen Tags vorgeschlagen. Wählen Sie entweder ein vorgeschlagenes Tag aus oder tippen Sie ein neues ein.
+	Sie können auch mehrere Tags zuweisen. Trennen Sie diese mit einem Strichpunkt (;). Vermeiden Sie nach Möglichkeit Leer- und Sonderzeichen bei der Eingabe von Tags.
+	
+	Beispiele für die Verwendung von Tags finden Sie in Kapitel \ref{begriffe}.
+\end{description}
+
+	\info{Wenn Sie bei einer Bestellung oder Bestellposition mehrere Tags definiert haben, werden diese auch bei der statistischen Auswertung mehrmals berücksichtigt und zur Gesamtsumme addiert. Zusätzliche Tags verfälschen also die Gesamtsumme.}
+	
+\begin{description}
+	\item [Freigabe:] Hier wird nach dem Abschicken der Bestellung angezeigt, welche Abteilungen die Bestellung freigeben müssen (zB. Kostenstelle, Organisationseinheit).
+	Wurde die entsprechende Freigabe erteilt, erscheint zusätzlich das Datum der Freigabe neben der Abteilung.
+	\item [Zahlungstyp:] Hier können Sie noch die Art der Zahlung ändern. (Kreditkarte, Nachnahme, Rechnung, Vorauszahlung) 
+		\begin{math}\rightarrow \end{math} Details siehe auch unter "`Workflows"' Kapitel \ref{workflows}.
+\end{description}
+
+	\info{Wenn Sie eine Bestellung per Nachnahme tätigen, haben Sie dafür zu sorgen, dass der entsprechende Betrag rechtzeitig beim Empfang hinterlegt ist}
+
+\begin{description}
+	\item [Rest-Budget:] Zeigt das verfügbare Budget VOR dem Speichern der aktuellen Bestellung. Nach jedem Speichervorgang wird die Summe neu berechnet.
+\end{description}
+
+\subsection{Bestellpositionen innerhalb der Bestellung}
+
+Jede Bestellposition wird in einer eigenen Zeile erfasst. Zu Beginn ist nur eine leere Zeile vorhanden.
+Sobald Sie das Feld der Spalte \textit{Bezeichnung} verlassen, wird eine neue Zeile hinzugefügt.
+Folgende Eingabefelder stehen zur Verfügung:
+\begin{description}
+	\item \includegraphics[height=3mm]{delete_round}: Dieser Button löscht die jeweilige Zeile.
+	\item \includegraphics[height=3mm]{arrow-single-down-green}: Schiebt diese Zeile um eine Zeile weiter nach unten.
+	\item \includegraphics[height=3mm]{arrow-single-up-green}: Schiebt diese Zeile um eine Zeile weiter nach oben.
+	\item [Pos:] Nummerierung des Postens. Standardmäßig erhält jede neue Zeile eine neue Postennummer.
+	Wenn das nicht gewünscht ist (weil zB. die neue Zeile nur Zusatztext aber keinen neuen Bestellposten enthält) kann die Nummerierung beliebig verändert werden.
+	\item [Menge:] Anzahl der zu bestellenden Ware.
+	\item [VE:] Verpackungseinheit (Stück, Pack, Meter, Rollen, usw.)( Max. 7 Zeichen).
+	\item [Bezeichnung:] Beschreibung der Ware.
+	\item [Artikelnr.:] Artikelnummer der Ware.
+	\item [Preis/VE:] Nettopreis der Ware pro Verpackungseinheit. Der Bruttopreis wird automatisch nach Eingabe der USt berechnet.
+	\item [USt:] Umsatzsteuer auf diese Ware. (Standardeinstellung 20\%). Durch einen Klick auf das Icon neben der USt öffnet sich ein Fenster, dem Sie Details zur Eingabe der Umsatzsteuer entnehmen können. Die Internationale UID (Umsatzsteuer-Identifikationsnummer) wird links oben auf dem Bestellschein gedruckt.
+	\item [Brutto:] Bruttopreis der Ware. Der Nettopreis wird automatisch nach Eingabe der USt berechnet.
+	\item \includegraphics[height=3mm]{plus}: Damit blenden Sie die zusätzliche Spalte \textit{Tags} ein.
+	Sie können jeder Bestellposition Tags zuweisen. Zur Verwendung von Tags siehe unter \textit{Tags} im Kapitel \ref{angaben_im_bestellformular}.
+\end{description}
+
+\info{Wenn Sie einzelnen Posten innerhalb einer Bestellung Tags zuweisen, werden eventuell vorhandene Tags, die sich auf die Gesamtbestellung beziehen, ignoriert und bei den Berichten nicht berücksichtigt (siehe dazu auch Kapitel \ref{bericht_tags})}
+
+\begin{description}
+	\item [Speichern:] Diese Taste speichert die aktuellen Eingaben.
+	\item [Abschicken:] Das Abschicken der Bestellung hat zur Folge, dass der Freigabe- und Bestellvorgang mit dem Versenden entsprechender Emails gestartet wird. 
+	\end{description}
+	
+\achtung{Nach dem Abschicken können Änderungen in der Bestellung nur mehr von der Kostenstellenleitung durchgeführt werden}
+
+\begin{description}
+	\item [Erneut Abschicken:] (siehe Abbildung \ref{bestellformular_abgeschickt}) Nach dem erstmaligen abschicken der Bestellung wird dieser Button aktiv. Ein erneutes Abschicken versendet wiederholt eine E-Mail und kann verwendet werden um die Kostenstellenleitung an die Freigabe zu erinnern.
+	\item [Statusinformation:] Hier sehen Sie, wann die Bestellung abgeschickt wurde.
+	\item [Aufteilung anzeigen/ausblenden:] Hiermit wird die Aufteilung des Endbetrages auf die Studiengänge angezeigt. Standardmäßig ist die Aufteilung ausgeblendet.
+\end{description}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=1\textwidth]{bestellformular_abgeschickt.png}
+	\caption{Bestellformular nach dem Abschicken}
+	\label{bestellformular_abgeschickt}
+\end{figure}
+
+\subsection{Suchen nach einer Bestellung}
+\label{suche_nach_bestellung}
+
+Klicken Sie im Hauptmenü unter dem Punkt \textit{Bestellung} auf \textit{Suchen}. Hier können Sie nach vorhandenen Bestellungen suchen.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=1\textwidth]{bestellung_suchen.png}
+	\caption{Bestellung suchen}
+	\label{bestellung_suchen}
+\end{figure}
+
+Suchkriterien (alle optional):
+
+\begin{description}
+	\item [Bestellnummer:] Sucht nach der kompletten Bestellnummer oder Teilen davon.
+	\item [Titel:] Sucht nach dem Titel einer Bestellung oder Teilen davon.
+	\item [Erstelldatum/Bestelldatum:] Wenn Sie in das Feld klicken, erscheint ein Kalender, aus dem Sie das gewünschte Beginn- und Enddatum wählen können.
+	Sie können das Datum auch direkt in der Form TT.MM.JJJJ eingeben.
+	\item [Organisationseinheit:] Wählen Sie eine OE aus der Drop-Down Liste. Durchgestrichene OEs sind inaktiv.
+	\item [Firma:] Auswahl der Firma, bei der bestellt wurde. Die Auswahlliste der Firma wird nach Eingabe von mind. zwei Zeichen gefiltert. Unter der Firmenbezeichnung wird die ID der Firma in der Datenbank angezeigt. Im Drop-Down Feld daneben werden die - zur OE zugeordneten - Firmen angezeigt, sofern welche vorhanden sind.
+	\item [Konto:] Wählen Sie hier das gewünschte Verrechnungskonto aus.
+	\item [Änderung durch:] Geben Sie hier den Namen der Person ein, die die Bestellung zuletzt geändert hat.
+	\item [Nur ohne Rechnung:] Es sollen nur Bestellungen aufgelistet werden, zu denen noch keine Rechnung eingetragen wurde.
+\end{description}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=1\textwidth]{gefundene_bestellungen.png}
+	\caption{Suchergebnis der Bestellungen}
+	\label{gefundene_bestellungen}
+\end{figure}
+
+Abbildung \ref{gefundene_bestellungen} zeigt eine Zeile einer Ergebnisliste nach einer Suchabfrage. Sie können die Liste durch klicken auf die Spaltenüberschriften sortieren.
+Folgende Möglichkeiten haben Sie durch klicken auf den entsprechenden Button:
+\begin{itemize}
+	\item \includegraphics[height=3mm]{edit}: Öffnet das Bestellformular der Bestellung damit Änderungen vorgenommen werden können.
+	\item \includegraphics[height=3mm]{delete_x}: Bestellungen, zu denen noch keine Rechnung vorhanden ist, können hiermit gelöscht werden.
+	\item \includegraphics[height=3mm]{calculator}: Anlegen einer neuen Rechnung zu dieser Bestellung.
+	\item \includegraphics[height=3mm]{copy}: Es wird eine Kopie der Bestellung angelegt.
+\end{itemize}
+
+
+\section{Rechnung}
+\label{rechnung}
+
+\subsection{Neue Rechnung eingeben}
+
+Rechnungen werden hauptsächlich vom Zentraleinkauf eingegeben.
+Bei der Abrechnung des Kassabuchs und bei Dienstreiseabrechnungen (siehe dazu auch Kapitel \ref{dienstreiseabrechnung}) ist es erforderlich,
+dass Sie selbst eine Rechnung anlegen.
+
+Sie haben mehrere Möglichkeiten, eine Rechnung einzugeben.
+Entweder Sie suchen nach einer Bestellung und klicken in der Auswahlliste auf das Symbol für \textit{Rechnung} (siehe dazu Kapitel \ref{suche_nach_bestellung})
+oder Sie klicken im Benutzerbereich unter \textit{Rechnung} auf \textit{Neu}. \\
+Im Hauptfenster können Sie nun aus einem Drop-Down Menü die gewünschte Kostenstelle eingeben,
+zu der Sie eine Rechnung eingeben möchten.\\
+Wählen Sie sie aus und drücken Sie auf die Schaltfläche \textit{Weiter}.
+
+Abbildung \ref{rechnung_neu} zeigt das Formular zum Eingeben neuer Rechnungen.
+
+Neu ist hier die Auswahlmöglichkeit des Rechnungstyps sowie das Bezeichnungsfeld bei den Beträgen.
+Außerdem kann nun auch das Transferdatum der Rechnung erfasst werden.
+
+\achtung{Vergessen Sie nicht, die MWSt anzugeben}
+
+Zum genauen Ablauf bezüglich der Eingabe des Transferdatums und der genauen Rechnungsbeträge siehe Kapitel \ref{workflows}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=1\textwidth]{rechnung_neu.png}
+	\caption{Eingabeformular für neue Rechnungen}
+	\label{rechnung_neu}
+\end{figure}
+
+\begin{description}
+ \item [Rechnungsnummer:] Die Rechnungsnummer kann frei gewählt werden und aus Buchstaben und Zahlen bestehen.
+ \item [Buchungstext:] Beliebiger Text.
+ \item [Rechnungsdatum:] Datum der Rechnungslegung (auf der Rechnung).
+ \item [Buchungsdatum:] Datum, an dem die Buchung vorgenommen wird (Standardeinstellung ist das heutige Datum).
+ \item [Transferdatum:] Das Datum, an dem der Rechnungsbetrag tatsächlich überwiesen wurde.
+ \item [Bestellung:] Wählen Sie hier die gewünschte Bestellnummer aus, zu der die Rechnung angelegt werden soll.
+ In der Auswahlliste können Sie erkennen, ob bereits eine Rechnung zu der Bestellnummer angelegt wurde.
+ Die Zahl in der Klammer rechts neben der Bestellnummer gibt die Anzahl der vorhandenen Rechnungen an.
+ Außerdem werden Bestellungen ohne Rechnung grün hervorgehoben.
+ \item [Typ:] Zahlungstyp. Zur Auwahl stehen:
+ 		\begin{itemize}
+ 		\item Zahlung
+ 	  \item Gutschrift
+ 	  \item Honorarnote
+ 		\end{itemize}
+ 		Für eine genauere Beschreibung zur Verwendung der Zahlungstypen siehe Kapitel \ref{workflows}.
+ 	\item [Bezeichnung:] Eventuelle Beschreibung des Betrags. Nach Eingabe eines Betrags, wird automatisch eine neue Zeile hinzugefügt.
+ 	\item [Betrag Netto:] Nettobetrag der Rechnung. Der Bruttobetrag wird automatisch nach Eingabe der Mehrwertsteuer berechnet.
+	\item [MwSt:] Mehrwertsteuer auf dem Betrag.
+	\item [Brutto:] Bruttobetrag der Rechnung. Der Nettobetrag wird automatisch nach Eingabe der MwSt angepasst.
+\end{description}
+
+\subsection{Suchen nach einer Rechnung}
+
+Klicken Sie im Hauptmenü unter dem Punkt \textit{Rechnung} auf \textit{Suchen}. Hier können Sie nach vorhandenen Rechnungen suchen.
+
+Abbildung \ref{rechnung_suchen} zeigt die Suchmaske, in der Sie folgende (optionale) Eingabemöglichkeiten haben:
+
+\begin{figure}
+	\centering
+	\includegraphics[width=1\textwidth]{rechnung_suchen.png}
+	\caption{Suchmaske für Rechnungen}
+	\label{rechnung_suchen}
+\end{figure}
+
+\begin{description}
+	\item [Rechnungsnummer:] Sucht nach der kompletten Rechnungsnummer oder Teilen davon.
+	\item [Rechnungsdatum/Buchungsdatum:] Wenn Sie in das Feld klicken, erscheint ein Kalender, aus dem Sie das gewünschte Beginn- und Enddatum wählen können.
+	Sie können das Datum auch direkt in der Form TT.MM.JJJJ eingeben.
+	\item [Betrag:] Sucht nach einem bestimmten Netto- oder Brutto-Gesamtbetrag einer Rechnung.
+\end{description}
+Außerdem können Sie die Suche mit Kriterien zu einer Bestellung verknüpfen:
+\begin{description}
+	\item [Bestellnummer:] Sucht nach der kompletten Bestellnummer.
+	\item [Erstelldatum/Bestelldatum:] Wenn Sie in das Feld klicken, erscheint ein Kalender, aus dem Sie das gewünschte Beginn- und Enddatum wählen können.
+	Sie können das Datum auch direkt in der Form TT.MM.JJJJ eingeben.
+	\item [Organisationseinheit:] Wählen Sie eine OE aus der Drop-Down Liste. Durchgestrichene OEs sind inaktiv.
+	\item [Firma:] Auswahl der Firma, bei der bestellt wurde. Die Auswahlliste der Firma wird nach Eingabe von mind. zwei Zeichen gefiltert. Unter der Firmenbezeichnung wird die ID der Firma in der Datenbank angezeigt. Im Drop-Down Feld daneben werden die - zur OE zugeordneten - Firmen angezeigt, sofern welche vorhanden sind.
+	\item [Kostenstelle:] Wählen Sie hier die gewünschte Kostenstelle aus.
+	\item [Konto:] Wählen Sie hier das gewünschte Verrechnungskonto aus.
+	\end{description}
+
+\section{Firma}
+\label{firma}
+
+In der Firmenverwaltung können Sie neue Firmen anlegen und bestehende Einträge suchen und bearbeiten.
+
+Bitte überprüfen Sie vor dem Anlegen einer neuen Firma, ob diese nicht bereits im System existiert.
+Häufig werden Firmen mehrfach angelegt, was zu einem unnötigen Datenberg führt und letzlich auch Ihnen das Auffinden erschwert.
+
+\subsection{Neue Firma anlegen}
+
+Klicken Sie im Hauptmenü unter dem Punkt \textit{Firma} auf \textit{Neu} um eine neue Firma anzulegen.
+Im erscheinenden Formular können Sie die Firmenbezeichnung, Adresse sowie Kontaktdaten eingeben.
+Füllen Sie das Formular bitte so vollständig wie möglich aus.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\textwidth]{firma_neu.png}
+	\caption{Eingabeformular für einen neuen Firmenkontakt}
+	\label{firma_neu}
+\end{figure}
+
+\subsection{Firma suchen}
+
+Die Firmensuche sucht nach Übereinstimmungen innerhalb des Firmennamens, der Adresse und der ID im System.
+Um eine übersichtliche Ergebnisliste zu erhalten, sollten Sie mindestens 3 Zeichen bei der Suche eingeben.

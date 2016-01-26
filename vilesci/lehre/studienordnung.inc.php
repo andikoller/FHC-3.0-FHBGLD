@@ -39,11 +39,7 @@ $rechte->getBerechtigungen($uid);
 
 $method=(isset($_GET['method'])?$_GET['method']:'');
 
-<<<<<<< HEAD
 if(!$rechte->isBerechtigt('lehre/studienordnung'))
-=======
-if((!$rechte->isBerechtigt('lehre/studienordnung')) && (!$rechte->isBerechtigt('lehre/studienordnungInaktiv')))
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	die('Sie haben keine Berechtigung für diese Seite');
 
 switch($method)

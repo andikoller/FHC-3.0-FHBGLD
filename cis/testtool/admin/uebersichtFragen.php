@@ -18,15 +18,11 @@
  * Authors: Karl Burkhart <burkhart@technikum-wien.at>,
  */
 require_once("../../../config/cis.config.inc.php");
-require_once('../../../include/basis_db.class.php');
 require_once("../../../include/gebiet.class.php");
 require_once("../../../include/frage.class.php");
 require_once("../../../include/vorschlag.class.php");
 require_once('../../../include/functions.inc.php');
 require_once("../../../include/benutzerberechtigung.class.php");
-
-if (!$db = new basis_db())
-      die('Fehler beim Oeffnen der Datenbankverbindung');
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
@@ -88,12 +84,6 @@ if(isset($_REQUEST['AuswahlGebiet']))
 	$gebietdetails = new gebiet();
 	$gebietdetails->load($gebiet_id);
 	
-	$qry = "SELECT DISTINCT UPPER(typ||kurzbz) AS studiengang 
-			FROM testtool.tbl_ablauf JOIN public.tbl_studiengang USING (studiengang_kz)
-			WHERE gebiet_id=".$db->db_add_param($gebiet_id)."
-			ORDER BY studiengang";
-	$result = $db->db_query($qry);
-	
 	if ($gebietdetails)
 	{
 		echo '
@@ -101,19 +91,6 @@ if(isset($_REQUEST['AuswahlGebiet']))
 		<tr>
 			<td align="right">Gebiet:</td>
 			<td>'.$gebietdetails->bezeichnung.'</td>
-		</tr>
-		<tr>
-			<td valign="top">Verwendet in den Studiengängen:</td>
-			<td>';
-			$i=1;
-			while ($row = $db->db_fetch_object($result))
-			{
-				echo $row->studiengang.($db->db_num_rows($result)>1 && $db->db_num_rows($result)>$i?', ':'');
-				$i++;
-				if ($i % 10 == 0)
-					echo '<br>';
-			}
-			echo '</td>
 		</tr>
 		<tr>
 			<td>&nbsp;</td>
@@ -142,23 +119,28 @@ if(isset($_REQUEST['AuswahlGebiet']))
 		<tr>
 			<td align="right">Zufallsvorschlag:</td>
 			<td>'.($gebietdetails->zufallvorschlag==true?'Ja':'Nein').'</td>
-		</tr>
-		<tr>
-			<td align="right">Startlevel:</td>
-			<td>'.($gebietdetails->level_start!=''?$gebietdetails->level_start:'Keines').'</td>
-		</tr>
-		<tr>
-			<td align="right">Höheres Level nach:</td>
-			<td>'.($gebietdetails->level_sprung_auf!=''?$gebietdetails->level_sprung_auf.' richtigen Antwort(en)':'-').'</td>
-		</tr>
-		<tr>
-			<td align="right">Niedrigeres Level nach:</td>
-			<td>'.($gebietdetails->level_sprung_ab!=''?$gebietdetails->level_sprung_ab.' falschen Antwort(en)':'-').'</td>
-		</tr>
-		<tr>
-			<td align="right">Levelgleichverteilung:</td>
-			<td>'.($gebietdetails->levelgleichverteilung==true?'Ja':'Nein').'</td>
-		</tr>
+		</tr>';
+		if ($gebietdetails->level_start!='')
+		{
+			echo'
+			<tr>
+				<td align="right">Startlevel:</td>
+				<td>'.$gebietdetails->level_start.'</td>
+			</tr>
+			<tr>
+				<td align="right">Höheres Level nach:</td>
+				<td>'.$gebietdetails->level_sprung_auf.' Fragen</td>
+			</tr>
+			<tr>
+				<td align="right">Niedrigeres Level nach:</td>
+				<td>'.$gebietdetails->level_sprung_ab.' Fragen</td>
+			</tr>
+			<tr>
+				<td align="right">Levelgleichverteilung:</td>
+				<td>'.($gebietdetails->levelgleichverteilung==true?'Ja':'Nein').'</td>
+			</tr>';
+		}
+		echo'
 		<tr>
 			<td align="right">Maximalpunkte:</td>
 			<td>'.$gebietdetails->maxpunkte.'</td>
@@ -185,7 +167,6 @@ if(isset($_REQUEST['AuswahlGebiet']))
 		//Sound einbinden
 		if($spracheFrage->audio!='')
 		{
-<<<<<<< HEAD
 			echo '
 			<script language="JavaScript" src="../audio-player/audio-player.js"></script>
 			<object type="application/x-shockwave-flash" data="../audio-player/player.swf" id="audioplayer1" height="24" width="290">
@@ -195,13 +176,6 @@ if(isset($_REQUEST['AuswahlGebiet']))
 			<param name="menu" value="false" />
 			<param name="wmode" value="transparent" />
 			</object>';
-=======
-			echo '	<audio src="../sound.php?src=frage&amp;frage_id='.$spracheFrage->frage_id.'&amp;sprache='.$sprache.'" controls="controls">
-						<div>
-							<p>Ihr Browser unterstützt dieses Audioelement leider nicht.</p>
-						</div>
-					</audio>';
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 		} 
 		// FRAGE anzeigen
 		echo "$spracheFrage->text<br/><br/>\n"; 
@@ -234,7 +208,6 @@ if(isset($_REQUEST['AuswahlGebiet']))
 			}
 			if($vorschlag->audio!='')
 			{
-<<<<<<< HEAD
 				echo '
 				<script language="JavaScript" src="../audio-player/audio-player.js"></script>
 				<object type="application/x-shockwave-flash" data="../audio-player/player.swf" id="audioplayer1" height="24" width="290">
@@ -244,13 +217,6 @@ if(isset($_REQUEST['AuswahlGebiet']))
 				<param name="menu" value="false" />
 				<param name="wmode" value="transparent" />
 				</object>';
-=======
-				echo '	<audio src="../sound.php?src=vorschlag&amp;vorschlag_id='.$vorschlag->vorschlag_id.'&amp;sprache='.$sprache.'" controls="controls">
-							<div>
-								<p>Ihr Browser unterstützt dieses Audioelement leider nicht.</p>
-							</div>
-						</audio>';
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 			}
 
 		}

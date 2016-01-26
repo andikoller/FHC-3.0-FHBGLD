@@ -1,0 +1,20 @@
+\chapter{Erweiterbarkeit}
+\label{Erweiterbarkeit}
+
+Es gibt die Möglichkeit, das Programm zu erweitern, ohne dabei größere Probleme bei Updates zu verursachen. \\
+\\
+Teile des Programmcodes wurden in das Verzeichnis /trunk/include/tw/ ausgelagert um individuelle Anpassungen am Programm durchzuführen. (zB Menüstruktur des CIS, Vorlagen für PDFs die nicht über XSLT erstellt werden, ...)
+Dieser Ordner kann kopiert und unter einem anderen Namen im include Ordner abgelegt werden. Der Pfad zu diesem Ordner wird im config.inc.php in
+der Konstante EXT\_FKT\_PATH abgelegt. Danach können die Dateien in diesem Verzeichnis abgeändert werden, ohne das diese bei einem Update überschrieben werden.\\
+
+\section{Zusätzliche Menüpunkte im FAS-Online}
+Im FAS-Online können auch zustzliche Menüpunkte eingefügt werden, ohne dass diese bei einem Update überschrieben werden. Dies ist nützlich falls zusätzliche Statistiken o.ä. eingebaut werden sollen. Dazu gibt es im Ordner /trunk/include/tw/ zwei Files:\\
+- fas\_zusatzmenues.inc.php\\
+- fas\_zusatzmenues.js.php\\
+\\
+Im ersten File kann der XUL Code für die Erstellung zusätzlicher Menüs eingetragen werden.\\
+Das Zweite File enthält den dazugehörigen Javascript Code um etwa die Seite mit der Statistik aufzurufen.\\
+\\
+Einen Beispielcode für das Hinzufügen eines neuen Menüpunktes befindet sich in den oben genannten Dateien.\\
+\\
+Der neue Menüpunkt wird im FAS, nach einfügen des Codes, automatisch vor dem Menüpunkt Extras eingebunden.

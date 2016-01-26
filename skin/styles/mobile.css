@@ -35,18 +35,10 @@ iframe
 	padding:0px;
 	height: 100%;
 	top: 15%;
-<<<<<<< HEAD
 	
 	border-width:1px;
 	border-style:solid;
 	border-color: #A5AFB6;
-=======
-	/*
-	border-width:1px;
-	border-style:solid;
-	border-color: #A5AFB6;
-	*/
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 }
 textarea
 {
@@ -700,12 +692,7 @@ img.header_logo
 	left: 16px;
 	top: 3%;
 	z-index: 5000;
-<<<<<<< HEAD
 	height: 5%;
-=======
-	max-height: 7%;
-	max-width: 11%;
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 }
 /*
 ==== Farben ====

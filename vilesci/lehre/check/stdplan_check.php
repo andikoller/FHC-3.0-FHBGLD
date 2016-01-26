@@ -20,27 +20,10 @@
  *          Rudolf Hangl 		< rudolf.hangl@technikum-wien.at >
  *          Gerald Simane-Sequens 	< gerald.simane-sequens@technikum-wien.at >
  */
-<<<<<<< HEAD
 		require_once('../../../config/vilesci.config.inc.php');
 		require_once('../../../include/basis_db.class.php');
 		if (!$db = new basis_db())
 			die('Es konnte keine Verbindung zum Server aufgebaut werden.');
-=======
-require_once('../../../config/vilesci.config.inc.php');
-require_once('../../../include/basis_db.class.php');
-require_once('../../../include/functions.inc.php');
-require_once('../../../include/benutzerberechtigung.class.php');
-
-$uid = get_uid();
-$rechte = new benutzerberechtigung();
-$rechte->getBerechtigungen($uid);
-
-if(!$rechte->isBerechtigt('lehre/lvplan',null,'suid'))
-	die('Sie haben keine Berechtigung für diese Seite');
-
-if (!$db = new basis_db())
-	die('Es konnte keine Verbindung zum Server aufgebaut werden.');
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 
 
 	//Stundenplandaten ermitteln welche mehrfach vorkommen
@@ -54,11 +37,7 @@ if (!$db = new basis_db())
 		die($db->db_last_error().' <a href="javascript:history.back()">Zur&uuml;ck</a>');			
 			
 		
-<<<<<<< HEAD
 $cfgBorder=1;
-=======
-$cfgBorder=0;
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 $cfgBgcolorOne='liste0';
 $cfgBgcolorTwo='liste1';		
 ?>
@@ -87,12 +66,8 @@ if ($num_rows>0)
 		$foo % 2  ? 0: $bgcolor = $cfgBgcolorTwo;
 		echo "<tr class='liste".($j%2)."'>";
 	    for ($i=0; $i<$num_fields; $i++)
-<<<<<<< HEAD
 			echo "<td>$row[$i]</td>";
 		echo "<td><a href=\"stdplan_check_det.php?datum=$row[1]&stunde_id=$row[2]&ort_id=$row[3]&studiengang_id=$row[4]&semester=$row[5]&verband=$row[6]&gruppe=$row[7]\">Details</a><td>";
-=======
-			echo "<td>$row[$i]</td>";		
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	    echo "</tr>\n";
 		$foo++;
 	}
@@ -102,8 +77,4 @@ else
 ?>
 </table>
 </body>
-<<<<<<< HEAD
 </html>
-=======
-</html>
->>>>>>> fee287127566cd5d18c55b556d178b661711c694

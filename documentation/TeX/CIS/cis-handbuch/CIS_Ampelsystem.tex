@@ -1,0 +1,57 @@
+\chapter{Ampelsystem}
+\label{kapitel_ampelsystem}
+
+\section{Allgemeines}
+
+Das Ampelsystem ist ein Erinnerungs- und Bestätigungssystem welches beliebig für Studierende, LektorInnen und MitarbeiterInnen eingesetzt werden kann.
+Hierbei werden dem Benutzer/der Benutzerin nach dem Login entsprechend offene Meldungen als rote bzw. gelbe Ampeln in der Titelleiste angezeigt (siehe Abbildung \ref{ampel_icons}).
+Neue Meldungen können nur von Administratoren angelegt und gewartet werden.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.70\textwidth]{CIS_Ampelsystem_Ampelicons.png}
+	\caption{Offene Ampeln werden in der Titelleiste angezeigt}
+	\label{ampel_icons}
+\end{figure}
+
+Nach dem Klicken auf eine offene Ampel wird eine Übersichtsseite geladen, auf der nun jede Meldung einzeln bestätigt werden kann (siehe Abbildung \ref{ampel_uebersicht}).
+Eine Meldung kann dabei von folgenden Parametern eingeschränkt werden:
+
+\begin{description}
+	\item[Beschreibung:] Titel und Inhalt der Meldung.
+	\item[Zielgruppe:] Für eine Meldung kann genau definiert werden, wer diese angezeigt bekommen soll. Dies können definierte Personengruppen (MitarbeiterInnen, Studierende, ...) und/oder einzelne Personen sein.
+	\item[Deadline:] Gibt an, ab wann das Datum einer Meldung als "`überschritten"' gilt. Ab diesem Zeitpunkt, wird die Ampel auf "`rot"' gesetzt.
+	\item[Vorlaufzeit (in Tagen):] Gibt an, ab wann die Meldung angezeigt und als "`gelb"' markiert wird.
+	\item[Verfallzeit (in Tagen):] Gibt an, ab wann die Meldung nicht mehr angezeigt wird. Dabei spielt es keine Rolle, ob die Meldung bestätigt wurde oder nicht.
+\end{description}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=1\textwidth]{CIS_Ampelsystem_Ampeluebersicht.png}
+	\caption{Übersicht zum Bestätigen der Meldungen}
+	\label{ampel_uebersicht}
+\end{figure}
+
+\section{Ampelübersicht}
+\label{ampeluebersicht}
+
+Wie in Abbildung \ref{ampel_uebersicht} gezeigt, werden auf der Übersichtsseite alle Meldungen untereinander angeführt. Dabei werden Meldungen VOR der Deadline mit einer gelben Ampel gekennzeichnet, Meldungen, die die Deadline überschritten haben, werden mit einer roten Ampel gekennzeichnet und bestätigte Meldungen werden mit einem grünen Haken markiert.
+Wenn eine Meldung die Verfallszeit erreicht hat, wird diese nicht mehr angezeigt (Egal ob bestätigt oder nicht).
+
+\subsection{Meldung bestätigen}
+
+Klicken Sie in der letzten Spalte auf "`bestätigen"' um eine Meldung zu bestätigen. Daraufhin wird die Meldung mit einem grünen Haken markiert und bis zum Verfallsdatum als "`bestätigt"' angezeigt.
+
+\section{Sonstiges}
+
+Sie können die Liste durch Klicken auf die Spaltenüberschriften sortieren.
+
+\section{Ampelübersicht für LeiterInnen}
+\label{ampeluebersicht_leiterinnen}
+
+Unter "`Mein CIS -> Ampel-Übersicht"' können Sie bei entsprechender Berechtigung den Status aller Meldungen einsehen.
+Damit haben Sie einen Überblick, welche Personen eine entsprechende Meldung bestätigt haben oder nicht.
+Sie können die Liste nach Organisationseinheit und/oder Bezeichnung der Ampel filtern und durch Klicken auf die Spaltenüberschrift sortieren.
+
+In der Spalte "`Bestätigt am"' ist ersichtlich, wann die Meldung bestätigt wurde.
+Die Spalte "`Restdauer in Tagen"' gibt an, wann die Deadline der Meldung erreicht wird bzw. bei negativen Zahlen, um wieviele Tage die Deadline überschritten wurde.

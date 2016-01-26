@@ -1,0 +1,20 @@
+\chapter{Mailverteiler}
+\label{Mailverteiler}
+Die Mailverteiler werden täglich neu erstellt. Hierzu werden Textfiles mit den entsprechenden Verteilern erstellt. Dies erfolgt durch die Scripten im Verzeichnis system/mlists.
+
+Verteiler die Automatisch erstellt werden, haben in der Gruppe das Attribut generiert auf true gesetzt.\\
+(Hier werden die Personen automatisch zugeteilt über das Script system/mlists/mlists\_generate.php)\\
+
+\label(Sperrung von Mailverteilern)
+Mailverteiler können gesperrt werden, damit diese nur von Mitarbeitern verwendet werden können.\\
+Dazu muss im config die Konstante MAILVERTEILER\_SPERRE auf true gesetzt sein. Zur Benutzung des Verteilers muss dieser dann erst Freigeschalten werden. Dies erfolgt über das kleine Symbol links neben dem Verteilernamen. \\
+Das Symbol zur Entsperrung eines Verteilers erscheint nur dann, wenn aktiv=false ist.\\
+
+(Diese Schritte zeigen nur die Einstellungen im FH-Complete damit der Verteiler als gesperrt angezeigt wird. Die tatsächliche Sperre der Verteiler muss extra am MailServer eingerichtet werden.)\\
+
+\section{Alias}
+Vom System werden automatisch Email-Aliase angelegt. Diese werden mit vorname.nachname@domain generiert. Wenn der Alias bereits vergeben ist, wird kein Ersatz generiert.\\
+Die Email-Aliase werden für alle Benuzter angelegt (auch für Studenten).\\
+Das Erstellen von Aliase für Studenten kann auch unterbunden werden, wenn in der Datei /include/globals.inc.php der Studiengang für den keine Aliase erstellt werden sollen, zu dem Array 'noalias' hinzugefügt wird.\\
+\\
+Die Aliase werden in die Datei tw\_alias.txt exportiert.

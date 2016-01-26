@@ -23,20 +23,22 @@
 
 require_once('../../config/vilesci.config.inc.php');
 require_once('../../include/studiensemester.class.php');
-require_once('../../include/datum.class.php');
 require_once('../../include/benutzerberechtigung.class.php');
-require_once('../../include/functions.inc.php');
-
-$uid = get_uid();
-
-$rechte = new benutzerberechtigung();
-$rechte->getBerechtigungen($uid);
-
-if(!$rechte->isBerechtigt('mitarbeiter/stammdaten',null,'suid'))
-	die('Sie haben keine Berechtigung für diese Seite');
+require_once('../../include/datum.class.php');
 
 if (!$db = new basis_db())
 	die('Es konnte keine Verbindung zum Server aufgebaut werden.');
+	
+//Andreas Koller:
+$user = get_uid();
+loadVariables($user);
+
+$rechte = new benutzerberechtigung();
+$rechte->getBerechtigungen($user);
+
+if(!$rechte->isBerechtigt('basis/vilesci'))
+	die('Sie haben keine Berechtigung fuer diese Seite');
+	
 
 $error_log='';
 $error_log1='';
@@ -417,6 +419,5 @@ foreach($mitarbeiter_gesamt as $row)
 	echo '</tr>';
 }
 echo '</tbody></table><br>';
-echo '<a href="archiv.php?meldung='.$ddd.'&sem='.$stsem.'&typ=mitarbeiter&action=archivieren">Mitarbeiter-BIS-Meldung archivieren</a><br>';
 echo "<a href=$ddd>XML-Datei f&uuml;r Mitarbeiter-BIS-Meldung</a><br><br>";
 ?>

@@ -70,10 +70,10 @@ SELECT DISTINCT ON (matrikelnr) matrikelnr AS personenkennzeichen,
 	tbl_student.studiengang_kz,
 	tbl_student.student_uid,
 	(SELECT plz FROM public.tbl_adresse WHERE person_id=public.tbl_person.person_id ORDER BY zustelladresse desc  LIMIT 1) AS zustell_plz, 
-	(SELECT gemeinde FROM public.tbl_adresse WHERE person_id=public.tbl_person.person_id ORDER BY zustelladresse desc  LIMIT 1) AS zustell_ort, 
-	(SELECT strasse FROM public.tbl_adresse WHERE person_id=public.tbl_person.person_id ORDER BY zustelladresse desc  LIMIT 1) AS zustell_strasse, 
+	(SELECT ort FROM public.tbl_adresse WHERE person_id=public.tbl_person.person_id ORDER BY zustelladresse desc  LIMIT 1) AS zustell_ort, 
+	(SELECT strasse FROM public.tbl_adresse WHERE person_id=public.tbl_person.person_id ORDER BY heimatadresse desc  LIMIT 1) AS zustell_strasse, 
 	(SELECT plz FROM public.tbl_adresse WHERE person_id=public.tbl_person.person_id ORDER BY heimatadresse desc LIMIT 1) AS heimat_plz, 
-	(SELECT gemeinde FROM public.tbl_adresse WHERE person_id=public.tbl_person.person_id ORDER BY heimatadresse desc LIMIT 1) AS heimat_ort, 
+	(SELECT ort FROM public.tbl_adresse WHERE person_id=public.tbl_person.person_id ORDER BY heimatadresse desc LIMIT 1) AS heimat_ort, 
 	(SELECT strasse FROM public.tbl_adresse WHERE person_id=public.tbl_person.person_id ORDER BY heimatadresse desc LIMIT 1) AS heimat_strasse,
 	tbl_person.person_id
 FROM public.tbl_person 
@@ -91,7 +91,7 @@ WHERE
 	AND tbl_student.studiengang_kz!='9".$erhalter_row->erhalter_kz."'
 	AND ka.studiensemester_kurzbz=".$db->db_add_param($studiensemester_kurzbz)." AND ka.buchungstyp_kurzbz='OEH' AND tbl_student.studiengang_kz=ka.studiengang_kz 
 	AND kb.studiensemester_kurzbz=".$db->db_add_param($studiensemester_kurzbz)." AND kb.buchungstyp_kurzbz='OEH' AND tbl_student.studiengang_kz=kb.studiengang_kz 
-	AND kb.buchungsnr_verweis=ka.buchungsnr AND bismelden
+	AND kb.buchungsnr_verweis=ka.buchungsnr
 ) a
 ORDER BY person_id";
 

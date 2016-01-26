@@ -33,7 +33,7 @@ $user = get_uid();
 $rechte = new benutzerberechtigung();
 $rechte->getBerechtigungen($user);
 
-if(!$rechte->isBerechtigt('basis/ort', null, 's'))
+if(!$rechte->isBerechtigt('basis/ort', null, 'suid'))
 	die('Sie haben keine Rechte fuer diese Seite');
 
 // Speichern der Daten
@@ -45,9 +45,6 @@ if(isset($_POST['ort_kurzbz']))
 	//Lehre Feld setzen
 	if(isset($_POST['lehre']))
 	{
-		if(!$rechte->isBerechtigt('basis/ort', null, 'sui'))
-			die('Sie haben keine Rechte fuer diese Seite');
-
 		$lv_obj = new ort();
 		if($lv_obj->load($_POST['ort_kurzbz']))
 		{
@@ -66,8 +63,6 @@ if(isset($_POST['ort_kurzbz']))
 	//Reservieren Feld setzen
 	if(isset($_POST['reservieren']))
 	{
-		if(!$rechte->isBerechtigt('basis/ort', null, 'sui'))
-			die('Sie haben keine Rechte fuer diese Seite');
 		$lv_obj = new ort();
 		if($lv_obj->load($_POST['ort_kurzbz']))
 		{
@@ -86,8 +81,6 @@ if(isset($_POST['ort_kurzbz']))
 	//Aktiv Feld setzen
 	if(isset($_POST['aktiv']))
 	{
-		if(!$rechte->isBerechtigt('basis/ort', null, 'sui'))
-			die('Sie haben keine Rechte fuer diese Seite');
 		$lv_obj = new ort();
 		if($lv_obj->load($_POST['ort_kurzbz']))
 		{

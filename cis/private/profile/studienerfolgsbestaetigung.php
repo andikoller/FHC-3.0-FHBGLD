@@ -26,10 +26,6 @@ require_once('../../../include/functions.inc.php');
 require_once('../../../include/studiensemester.class.php');
 require_once('../../../include/basis_db.class.php');
 require_once('../../../include/phrasen.class.php');
-<<<<<<< HEAD
-=======
-require_once('../../../include/benutzerberechtigung.class.php');
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 
 $sprache = getSprache();
 $p = new phrasen($sprache);
@@ -37,33 +33,12 @@ $p = new phrasen($sprache);
 if (!$db = new basis_db())
 	die($p->t('global/fehlerBeimOeffnenDerDatenbankverbindung'));
 	
-<<<<<<< HEAD
 	$uid=get_uid();
 	
 	if(isset($_GET['lang']) && $_GET['lang']=='en')
 		$xsl = 'StudienerfolgEng';
 	else
 		$xsl = 'Studienerfolg';	
-=======
-$uid=get_uid();
-
-if(isset($_GET['uid']))
-{
-	// Administratoren duerfen die UID als Parameter uebergeben um die Studienerfolgsbestätigung
-	// von anderen Personen anzuzeigen
-
-	$rechte = new benutzerberechtigung();
-	$rechte->getBerechtigungen($uid);
-	if($rechte->isBerechtigt('admin'))
-		$uid=$_GET['uid'];
-}
-
-if(isset($_GET['lang']) && $_GET['lang']=='en')
-    $xsl = 'StudienerfolgEng';
-else
-    $xsl = 'Studienerfolg';	
-
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -81,17 +56,7 @@ function createStudienerfolg()
 		finanzamt = "&typ=finanzamt";
 	else
 		finanzamt = "";
-<<<<<<< HEAD
 	window.location.href= "../pdfExport.php?xml=studienerfolg.rdf.php&xsl='.$xsl.'&ss="+stsem+"&uid='.$uid.'"+finanzamt;
-=======
-    
-    if(stsem == "alle")
-        alle = "&all=1";
-    else
-        alle = "";
-    
-    window.location.href= "../pdfExport.php?xml=studienerfolg.rdf.php&xsl='.$xsl.'&ss="+stsem+"&uid='.$uid.'"+finanzamt+alle;
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 }
 </script>
 </head>
@@ -104,10 +69,6 @@ $qry = "SELECT distinct studiensemester_kurzbz FROM campus.vw_student JOIN publi
 if($result = $db->db_query($qry))
 {
 	echo $p->t('global/studiensemester').': <SELECT id="stsem">';
-<<<<<<< HEAD
-=======
-    echo '<OPTION value="alle">alle Semester</OPTION>';
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	
 	$stsem_obj = new studiensemester();
 	$stsem = $stsem_obj->getPrevious();

@@ -41,10 +41,6 @@
     require_once('../../include/konto.class.php'); 
     require_once('../../include/functions.inc.php'); 
     require_once('../../include/authentication.class.php'); 
-<<<<<<< HEAD
-=======
-    require_once('../../include/addon.class.php'); 
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	require_once('../../include/'.EXT_FKT_PATH.'/serviceterminal.inc.php');
 
 	if (!$db = new basis_db())
@@ -70,12 +66,6 @@
 //	Request Parameter 
 // ------------------------------------------------------------------------------------------
   	$timer=trim((isset($_REQUEST['timer']) ? $_REQUEST['timer']:0));
-<<<<<<< HEAD
-=======
-	if(!isset($ServiceTerminalDefaultRaumtyp))
-		$ServiceTerminalDefaultRaumtyp='HS';
-
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	// Raumtyp
   	$raumtyp_kurzbz=trim((isset($_REQUEST['raumtyp_kurzbz']) ? $_REQUEST['raumtyp_kurzbz']:$ServiceTerminalDefaultRaumtyp));
 	// Saal - Raum
@@ -88,7 +78,29 @@
   	$pwd=trim((isset($_REQUEST['pwd']) ? $_REQUEST['pwd']:''));
   	$debug=trim((isset($_REQUEST['debug']) ? $_REQUEST['debug']:''));
   	$sdtools=trim((isset($_REQUEST['sdtools']) ? $_REQUEST['sdtools']:false));	
-  	$standort_id = (isset($_COOKIE['standort_id']) ? $_COOKIE['standort_id']:'');
+	
+	$standort_id = (isset($_REQUEST['standort_id']) ? $_REQUEST['standort_id']:'');
+	
+	
+	# BEGIN: Andreas Koller - Cookie setzen wenn noch nicht gesetzt
+	#if (!is_null($standort_id) && $standort_id != "0")
+	#{
+	#setCookie("standort_id", $standort_id);
+	#}
+	//$standort_id = $_COOKIE['standort_id'];
+	
+	if (isset($_COOKIE['standort_id']))
+	{
+		$standort_id = $_COOKIE['standort_id'];
+	}
+	else
+	{
+		//$standort_id = 3;
+	}
+	
+	# END: Andreas Koller - Cookie setzen wenn noch nicht gesetzt
+	
+	
 	if ($sdtools)
 		$work='login';
 
@@ -102,11 +114,7 @@
 			unset($_SESSION[constSESSIONNAME]);
 		$uid='';
 		$work='raumanzeigen';
-<<<<<<< HEAD
 	  	$raumtyp_kurzbz='EDV';
-=======
-	  	$raumtyp_kurzbz=$ServiceTerminalDefaultRaumtyp;
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	}
 
 	
@@ -121,7 +129,6 @@
 	// Login Prozedure wenn Anmeldung ueber einen Schluessel erfolgte 
 	// - Lesen der Betriebsmittel um Anwender zu ermitteln ( es wird hier kein Passwort benoetigt / LDAP )
 	$cardlogin=false;
-<<<<<<< HEAD
 	if ($db && !empty($key_input)) // Login 
 	{
 		// Pruefen ob es sich um eine HEX Eingabe handelt 
@@ -138,51 +145,6 @@
 			$work = "login"; 
 			$cardlogin = true; 
 		}
-=======
-	$cardnumber = "";
-	if ($db && !empty($key_input)) // Login 
-	{
-	    // Pruefen ob es sich um eine HEX Eingabe handelt 
-	    $betriebsmittel = new betriebsmittel(); 
-	    //$key_input = $betriebsmittel->transform_kartennummer($key_input); 
-        
-	    // führende nullen entfernen
-	    $key_input = preg_replace("/^0*/", "", $key_input);
-	    $uidStudent = getUidFromCardNumber($key_input); 
-	    if($uidStudent != false)
-	    {
-		$uid = $uidStudent; 
-		$work = "login"; 
-		$cardlogin = true;
-	    }
-	    else
-	    {
-		$addon_externeAusweise = false;
-		$addon = new addon();
-		$addon->loadAddons();
-		foreach($addon->result as $ad)
-		{
-		    if($ad->kurzbz == "externeAusweise")
-		    {
-			$addon_externeAusweise = true;
-		    }
-		}
-
-		if($addon_externeAusweise)
-		{
-		    require_once (dirname(__FILE__).'/../../addons/externeAusweise/include/idCard.class.php');
-		    $idCard = new idCard();
-		    if($idCard->loadByCardnumber($key_input))
-		    {
-			$uid = "";
-			$cardnumber = $idCard->cardnumber;
-			$work = "verlaengerung";
-			$cardlogin = true;
-			$_SESSION[constSESSIONNAME]["uid"]=$cardnumber;
-		    }
-		}
-	    }
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	}
 		
 	if (mb_strtolower($work)=='login')
@@ -228,11 +190,7 @@
 // ------------------------------------------------------------------------------------------
 //	Linkes Auswahlmenue fuer Raumtypen
 // ------------------------------------------------------------------------------------------
-<<<<<<< HEAD
 	if(!is_null($ServiceTerminalRaumtypen))
-=======
-	if(isset($ServiceTerminalRaumtypen) && !is_null($ServiceTerminalRaumtypen))
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 		$row_ort = $ServiceTerminalRaumtypen;
 	else
 	{
@@ -549,11 +507,7 @@ $refreshtime = ($sdtools?99999:(isset($_SESSION[constSESSIONNAME]["uid"]) && !em
     echo '<a href="'.htmlspecialchars($_SERVER['PHP_SELF']).'?standort_id='.$standort_id.'">
     			<img alt="Logo" src="../../skin/styles/'.DEFAULT_STYLE.'/logo.png" border="0" style="max-width: 170px; max-height: 150px">
     	  </a></td></tr>';
-<<<<<<< HEAD
 	if(isset($_SESSION[constSESSIONNAME]["uid"])  && !empty($_SESSION[constSESSIONNAME]["uid"]) ) 
-=======
-	if(isset($_SESSION[constSESSIONNAME]["uid"])  && !empty($_SESSION[constSESSIONNAME]["uid"]) && !empty($_SESSION[constSESSIONNAME]["pwd"])) 
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	{
 		//Angemeldeter User -  Stundenplan der Woche
 		echo '
@@ -574,12 +528,8 @@ $refreshtime = ($sdtools?99999:(isset($_SESSION[constSESSIONNAME]["uid"]) && !em
 	
 	// Tabelle der Raumtypen	
 	echo html_output_liste_raumtypen($row_ort);
-<<<<<<< HEAD
 
 	if(isset($_SESSION[constSESSIONNAME]["uid"])  && !empty($_SESSION[constSESSIONNAME]["uid"]) ) 
-=======
-	if(isset($_SESSION[constSESSIONNAME]["uid"])  && !empty($_SESSION[constSESSIONNAME]["uid"]) && empty($cardnumber)) 
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	{
 		 //Angemeldeter User -  Stundenplan der Woche	
 		 echo '
@@ -605,15 +555,8 @@ $refreshtime = ($sdtools?99999:(isset($_SESSION[constSESSIONNAME]["uid"]) && !em
 	else 
 	{
 		// Lageplan
-<<<<<<< HEAD
 		echo '	   
          <tr class="cursor_hand">
-=======
-	    if(defined('CIS_INFOSCREEN_LAGEPLAN_ANZEIGEN') && CIS_INFOSCREEN_LAGEPLAN_ANZEIGEN)
-	    {
-		echo '	   
-		<tr class="cursor_hand">
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	  		<td>
 				<a href="'.htmlspecialchars($_SERVER['PHP_SELF']).'?work=lageplan&amp;standort_id='.$standort_id.'">		
 					<span class="blau_mitteText">
@@ -622,10 +565,6 @@ $refreshtime = ($sdtools?99999:(isset($_SESSION[constSESSIONNAME]["uid"]) && !em
 				</a>
 	  		</td>
  		</tr>';
-<<<<<<< HEAD
-=======
-	    }
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	}
 	
 	echo '<tr><td>&nbsp;</td></tr>';
@@ -643,7 +582,6 @@ $refreshtime = ($sdtools?99999:(isset($_SESSION[constSESSIONNAME]["uid"]) && !em
 			echo '<img alt="Logout" height="35" src="system-users_out.png" border="0">&nbsp;Logoff';
 		else
 			echo '<img alt="Login" height="35" src="system-users_in.png" border="0">&nbsp;Login';
-		
 		echo '
 						</span>
 					</a>
@@ -690,11 +628,7 @@ $refreshtime = ($sdtools?99999:(isset($_SESSION[constSESSIONNAME]["uid"]) && !em
 	}	
     else if (strtolower($work)==strtolower("verlaengerung") && isset($_SESSION[constSESSIONNAME]))
 	{
-<<<<<<< HEAD
 		karten_verlaengerung($_SESSION[constSESSIONNAME]["uid"]);
-=======
-		karten_verlaengerung($_SESSION[constSESSIONNAME]["uid"],$cardnumber);
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	}	
 	else if (mb_strtolower($work)==mb_strtolower("stundenplan") && isset($_SESSION[constSESSIONNAME]["uid"])  && !empty($_SESSION[constSESSIONNAME]["uid"]) )
 	{
@@ -836,7 +770,6 @@ function meine_uid_informationen($db,$uid,$user="")
 * Zeigt die Oberfläche zur Kartenverlängerung an
 * @param $uid Userkurzzeichen
 */
-<<<<<<< HEAD
 function karten_verlaengerung($uid)
 {
     $studienbeitrag = false; 
@@ -877,48 +810,6 @@ function karten_verlaengerung($uid)
     // User zur Karte konnte nicht geladen werden
         
 	$data = ServiceTerminalCheckVerlaengerung($uid);
-=======
-function karten_verlaengerung($uid, $cardnumber=NULL)
-{
-    if(is_null($cardnumber))
-    {
-	$studienbeitrag = false;
-	// Mitarbeiter brauchen die Karte nicht verlängern
-
-	$cardPerson = new benutzer(); 
-	if(!$cardPerson->load($uid))
-	{
-	    die('Konnte User nicht laden');  
-	}
-
-	$html_user_daten='';
-	$html_user_daten.='<h1>Verl&auml;ngerung Studienausweis</h1>';
-	$html_user_daten.='<table>
-		    <tr>
-			<td valign="top">
-			    <table>
-				<tr>
-				    <td><b><font size="+2">'.($cardPerson->titelpre?$cardPerson->titelpre.' ':'').$cardPerson->vorname.' '.$cardPerson->nachname.' '.($cardPerson->titelpost?$cardPerson->titelpost:'').'</font></b>&nbsp;</td>
-				</tr>
-				<tr>
-				    <td></td>
-				</tr>
-			    </table>
-			&nbsp;</td>
-			<td valign="top">
-			    <table>
-				<tr><td>&nbsp;</td></tr>
-			    </table>
-			&nbsp;</td>
-		    </tr>	
-	</table>';
-
-	echo $html_user_daten;
-    }
-    // User zur Karte konnte nicht geladen werden
-        
-	$data = ServiceTerminalCheckVerlaengerung($uid, $cardnumber);
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
     
 	if($data[0]===true)
     {
@@ -1751,11 +1642,7 @@ function stundenplan_raum($db,$ort_kurzbz="",$datum="",$stunde_von,$stunde_bis=0
 	$qry.=' SELECT studiengang_kz,0 as "stundenplan_id",tbl_reservierung.reservierung_id,tbl_reservierung.ort_kurzbz,tbl_reservierung.titel,tbl_reservierung.semester,tbl_reservierung.studiengang_kz,tbl_reservierung.verband, tbl_reservierung.gruppe  , to_char(tbl_reservierung.datum, \'YYYYMMDD\') as "datum_jjjjmmtt", to_char(tbl_reservierung.datum, \'IW\') as "datum_woche" , tbl_stunde.beginn, tbl_stunde.ende , to_char(tbl_stunde.beginn, \'HH24:MI\') as "beginn_anzeige" , to_char(tbl_stunde.ende, \'HH24:MI\') as "ende_anzeige" , EXTRACT(EPOCH FROM tbl_reservierung.datum) as "datum_timestamp" ,tbl_stunde.stunde ';
 	$qry.=' FROM campus.tbl_reservierung , lehre.tbl_stunde ';
 	$qry.=" WHERE tbl_stunde.stunde=tbl_reservierung.stunde  ";
-<<<<<<< HEAD
-	$qry.=" and tbl_reservierung.stunde between ". $db->db_add_param(trim($stunde_von), FHC_STRING) ." and ". $db->db_add_param(trim($stunde_bis, FHC_STRING)) ;
-=======
 	$qry.=" and tbl_reservierung.stunde between ". $db->db_add_param(trim($stunde_von), FHC_STRING) ." and ". $db->db_add_param(trim($stunde_bis), FHC_STRING) ;
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 
 	$datum_obj = new datum();
 	if (!empty($datum))

@@ -64,14 +64,6 @@ xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0" xmlns:style="urn
         </style:tab-stops>
       </style:paragraph-properties>
     </style:style>
-     <style:style style:name="Footer" style:family="paragraph" style:parent-style-name="Standard" style:class="extra">
-      <style:paragraph-properties text:number-lines="false" text:line-number="0">
-        <style:tab-stops>
-          <style:tab-stop style:position="8.5cm" style:type="center"/>
-          <style:tab-stop style:position="17cm" style:type="right"/>
-        </style:tab-stops>
-      </style:paragraph-properties>
-    </style:style>
     <text:outline-style style:name="Outline">
       <text:outline-level-style text:level="1" style:num-format="">
         <style:list-level-properties text:list-level-position-and-space-mode="label-alignment">
@@ -145,31 +137,31 @@ xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0" xmlns:style="urn
       <style:table-column-properties style:column-width="4.256cm"/>
     </style:style>
     <style:style style:name="Tabelle1.A1" style:family="table-cell">
-      <style:table-cell-properties fo:padding="0.097cm" fo:border-left="0.30pt solid #000000" fo:border-right="none" fo:border-top="0.30pt solid #000000" fo:border-bottom="none"/>
+      <style:table-cell-properties fo:padding="0.097cm" fo:border-left="0.05pt solid #000000" fo:border-right="none" fo:border-top="0.05pt solid #000000" fo:border-bottom="none"/>
     </style:style>
     <style:style style:name="Tabelle1.B1" style:family="table-cell">
-      <style:table-cell-properties fo:padding="0.097cm" fo:border-left="none" fo:border-right="none" fo:border-top="0.30pt solid #000000" fo:border-bottom="none"/>
+      <style:table-cell-properties fo:padding="0.097cm" fo:border-left="none" fo:border-right="none" fo:border-top="0.05pt solid #000000" fo:border-bottom="none"/>
     </style:style>
     <style:style style:name="Tabelle1.D1" style:family="table-cell">
-      <style:table-cell-properties fo:padding="0.097cm" fo:border-left="none" fo:border-right="0.30pt solid #000000" fo:border-top="0.30pt solid #000000" fo:border-bottom="none"/>
+      <style:table-cell-properties fo:padding="0.097cm" fo:border-left="none" fo:border-right="0.05pt solid #000000" fo:border-top="0.05pt solid #000000" fo:border-bottom="none"/>
     </style:style>
     <style:style style:name="Tabelle1.A2" style:family="table-cell">
-      <style:table-cell-properties fo:padding="0.097cm" fo:border-left="0.30pt solid #000000" fo:border-right="none" fo:border-top="none" fo:border-bottom="none"/>
+      <style:table-cell-properties fo:padding="0.097cm" fo:border-left="0.05pt solid #000000" fo:border-right="none" fo:border-top="none" fo:border-bottom="none"/>
     </style:style>
     <style:style style:name="Tabelle1.B2" style:family="table-cell">
       <style:table-cell-properties fo:padding="0.097cm" fo:border="none"/>
     </style:style>
     <style:style style:name="Tabelle1.D2" style:family="table-cell">
-      <style:table-cell-properties fo:padding="0.097cm" fo:border-left="none" fo:border-right="0.30pt solid #000000" fo:border-top="none" fo:border-bottom="none"/>
+      <style:table-cell-properties fo:padding="0.097cm" fo:border-left="none" fo:border-right="0.05pt solid #000000" fo:border-top="none" fo:border-bottom="none"/>
     </style:style>
     <style:style style:name="Tabelle1.A3" style:family="table-cell">
-      <style:table-cell-properties fo:padding="0.097cm" fo:border-left="0.30pt solid #000000" fo:border-right="none" fo:border-top="none" fo:border-bottom="0.30pt solid #000000"/>
+      <style:table-cell-properties fo:padding="0.097cm" fo:border-left="0.05pt solid #000000" fo:border-right="none" fo:border-top="none" fo:border-bottom="0.05pt solid #000000"/>
     </style:style>
     <style:style style:name="Tabelle1.B3" style:family="table-cell">
-      <style:table-cell-properties fo:padding="0.097cm" fo:border-left="none" fo:border-right="none" fo:border-top="none" fo:border-bottom="0.30pt solid #000000"/>
+      <style:table-cell-properties fo:padding="0.097cm" fo:border-left="none" fo:border-right="none" fo:border-top="none" fo:border-bottom="0.05pt solid #000000"/>
     </style:style>
     <style:style style:name="Tabelle1.D3" style:family="table-cell">
-      <style:table-cell-properties fo:padding="0.097cm" fo:border-left="none" fo:border-right="0.30pt solid #000000" fo:border-top="none" fo:border-bottom="0.30pt solid #000000"/>
+      <style:table-cell-properties fo:padding="0.097cm" fo:border-left="none" fo:border-right="0.05pt solid #000000" fo:border-top="none" fo:border-bottom="0.05pt solid #000000"/>
     </style:style>
     <style:style style:name="MP1" style:family="paragraph" style:parent-style-name="Standard">
       <style:paragraph-properties fo:text-align="end" style:justify-single-word="false"/>
@@ -267,7 +259,7 @@ xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0" xmlns:style="urn
           </table:table-row>
           <table:table-row>
             <table:table-cell table:style-name="Tabelle1.A3" office:value-type="string">
-              <text:p text:style-name="MP5">Geburtsdatum:</text:p>
+              <text:p text:style-name="MP5">Geb.datum:</text:p>
             </table:table-cell>
             <table:table-cell table:style-name="Tabelle1.B3" office:value-type="string">
               <text:p text:style-name="MP6"><xsl:value-of select="gebdatum" /></text:p>
@@ -282,10 +274,6 @@ xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0" xmlns:style="urn
         </table:table>
         <text:p text:style-name="MP4"/>
       </style:header>
-      <style:footer>
-        <text:p text:style-name="Footer"></text:p>
-        <text:p text:style-name="Footer"></text:p>
-      </style:footer>
     </style:master-page>
   </office:master-styles>
 </office:document-styles>

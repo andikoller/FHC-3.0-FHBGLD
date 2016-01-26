@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 AuthBasicProvider ldap
 AuthName "Technikum-Wien"
 AuthType Basic
@@ -8,15 +7,4 @@ AuthLDAPURL "ldap://ldap.technikum-wien.at:389/ou=People,dc=technikum-wien,dc=at
 AuthLDAPGroupAttributeIsDN Off
 AuthLDAPGroupAttribute memberuid
 Require ldap-group cn=fhadmin,ou=Group,dc=technikum-wien,dc=at
-=======
-AuthBasicProvider ldap
-AuthName "Technikum-Wien"
-AuthType Basic
-AuthBasicAuthoritative Off
-AuthLDAPURL "ldap://ldap.technikum-wien.at:389/ou=People,dc=technikum-wien,dc=at?uid?one?objectclass=posixAccount"
-#AuthLDAPURL "ldap://ldap.technikum-wien.at:389/ou=People,dc=technikum,dc=at?uid?sub?(objectClass=*)"
-AuthLDAPGroupAttributeIsDN Off
-AuthLDAPGroupAttribute memberuid
-Require ldap-group cn=fhadmin,ou=Group,dc=technikum-wien,dc=at
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 require ldap-group cn=hadesadm,ou=Group,dc=technikum-wien,dc=at

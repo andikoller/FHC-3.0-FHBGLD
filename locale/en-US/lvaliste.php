@@ -1,7 +1,5 @@
 <?php
 $this->phrasen['lvaliste/titel']='Course Summary';
-$this->phrasen['lvaliste/anwesenheit']='Attendance';
-$this->phrasen['lvaliste/anwesenheit/studenten']='Attendance of students';
 $this->phrasen['lvaliste/hilfeText']='Legend\n\nDP-Sem: Degree-Program - Semester\nGroups: Student Groups\nBlock: (1->single Hour; 2->double Hour; ...)\nWR: Weekly rhythm (1->each week; 2->every second week; ...)\nHrs: Hours\nCW: Calendar Week where the Course starts';
 $this->phrasen['lvaliste/hilfeAnzeigen']='Show Legend';
 
@@ -31,3 +29,4 @@ $this->phrasen['lvaliste/betreuungen']='Supervisor';
 $this->phrasen['lvaliste/koordination']='Coordination';
 $this->phrasen['lvaliste/anzahl']='Number';
 $this->phrasen['lvaliste/summe']='Total';
+?>

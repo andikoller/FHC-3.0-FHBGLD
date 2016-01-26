@@ -1,0 +1,205 @@
+\chapter{Entwicklung-Software}
+\section{Namensgebung}
+Eine einheitliche Form der Namensgebung f\"ur Variablen, Konstanten und anderer Komponenten erleichter es dem Entwickler, den Code des anderen zu verstehen.
+
+\subsection{Dateinamen}
+Alle Dateinamen haben die f\"ur ihren Dateityp {\bf bestimmte Endung}. So haben z.B. HTML Dateien die Endung .html oder PHP Dateien .php. 
+Es gibt jedoch Datentypen die eine {\bf eigene Schreibweise} haben. Hier eine Aufz\"ahlung der wichtigsten: \newline
+
+
+
+\begin{tabular}{ll}
+Klassen: & <klasse>.class.php \\
+PHP-File: & <name>.php \\
+HTML-File: & <name>.hmtl \\
+RDF-File: & <name>.rdf \\
+JavaScript: & <name>.js \\
+CSS: & <name>.css \\
+XUL: & <name>.xul \\
+Config: & <name>.inc.php \\
+\end{tabular}
+
+Hierzu sind Endungen wie <name>.rdf.php oder <name>.js.php erlaubt. \newline
+Es sind nur {\bf alphanumerische Zeichen, Underscores und Trennstriche} erlaubt. Beispiele f\"ur g\"ultige Namen sind: \newline
+\begin{itemize}
+\item studiengang.class.php
+\item bestellung.rdf.php
+\item tablesort.css
+\item kontakt.js.php
+\item ToDo\_CIS.html
+\end{itemize}
+
+\subsection{Variablen}
+Alle Variablen m\"ussen mit {\bf Kleinbuchstaben beginnen} und der "`{\bf camelCaps}"' Namenskonventation folgen. Das bedeutet, wenn ein Variablenname aus mehereren
+Namen besteht muss der Anfangsbuchstabe von jedem {\bf neuen Wort gro\ss{}geschrieben} werden. Repr\"{a}sentiert die Variable eine ID so wird die Endung ID mit \_ angef\"ugt. 
+Variablennamen sind so {\bf kurz} und so {\bf verst\"andlich} wie m\"oglich
+zu halten. Variablen wie "`\$i"' und "`\$j"' d\"urfen nur bei Loops verwendet werden.\\
+{\bf Variablen in Klassen m\"ussen immer so hei\ss{}en wie sie in der Datenbank angelegt wurden.}
+\begin{verbatim}
+$anzahlVariablen
+$datum
+$person_id
+\end{verbatim}
+
+\subsection{Konstanten}
+Pfade werden in Konstanten immer mit / beendet
+
+\begin{verbatim}
+define('SERVER_ROOT','http://calva.technikum-wien.at/');
+\end{verbatim}
+
+\subsection{Session Variablen}
+Session Variablen die nur ein bestimmtes {\bf Modul} betreffen, werden folgenderma\ss en benannt: 
+{\bf [Modulname] / [Name der Variable]}. Andere Session Variablen, die das ganze System betreffen werden ohne Modulnamen geschrieben. 
+\begin{verbatim}
+$_SESSION['cms/menu']
+$_SESSION['wawi/user']
+$_SESSION['user']
+\end{verbatim}
+Eine Session Variable wird {\bf immer klein geschrieben}. 
+
+\subsection{Funktionen und Methoden}
+Funktionsnamen m\"ussen immer mit einem {\bf Kleinbuchstaben beginnen}. Wenn eine Funktion aus mehreren Namen besteht, muss der Anfangsbuchstabe von jedem 
+{\bf neuen Wort gro\ss geschrieben} werden. Funktionen und Methoden m\"ussen so {\bf klar} wie m\"oglich bezeichnet werden, damit anhand des Funktionsnamen jeder
+versteht, wof\"ur diese bestimmt sind. Optionale \"Ubergabeparameter m\"ussen immer mit null initialisiert werden. \newline
+Hier ein paar {\bf Beispiele} f\"ur g\"ultige Funktionsnamen:
+
+\begin{verbatim}
+getAllDetailsFromBestellung()
+load()
+saveTags($tag, $visible=null)
+\end{verbatim}
+
+\section{Kommentare}
+Kommentare die nur eine Zeile lang sind sollen mit // beginnen. F\"ur Kommentare, die l\"anger als eine Zeile sind gilt als Start die /* Zeichenfolge und als Beendigung */. 
+
+\subsection{Klassen}
+Jede Klasse muss im Minimum einen {\bf Docblock} mit einer Beschreibung enthalten. \newline
+Mit einem Docblock Kommentar bezeichnet man spezielle Kommentare, die sich automatisch generieren um PHP Abschnitte genauer zu kommentieren. Diese beginnen mit {\bf /**} und es k\"onnen spezielle tags wie @param oder @return benutzt werden. 
+
+\begin{verbatim}
+/**
+ * Short description for class
+ *
+ * Long description for class (if any)...
+ */
+\end{verbatim}
+ 
+\subsection{Funktionen und Methoden}
+Jede Funktion oder Klassenmethode muss im Minimum einen {\bf Docblock} mit den folgenden Tags enthalten: {\bf Beschreibung, Parameter und R\"uckgabewerte}.
+\begin{verbatim}
+/**
+ * Short description for the function
+ *
+ * Long description for the function (if any)...
+ *
+ * @param  array  $array  Description of array
+ * @param  string $string Description of string
+ * @return boolean 
+ */
+\end{verbatim}
+
+\subsection{Variablen}
+Jede Klassenvariable muss im Minimum einen {\bf Docblock} oder {\bf normalen} Kommentar enthalten welche den Typ der Variable ersichtlich macht. Wenn erforderlich kann dieser auch eine {\bf Beschreibung} der Variablen enthalten:
+\begin{verbatim}
+/**
+ * Variable Description
+ * @var array
+ */
+\end{verbatim}
+\subsection{Programmkopf}
+
+\begin{verbatim}
+/* Copyright (C) 2011 Technikum-Wien
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307,USA.
+ *
+ * Authors: Christian Paminger <christian.paminger@technikum-wien.at>,
+ *     Andreas Oesterreicher <andreas.oesterreicher@technikum-wien.at> and
+ *     Karl Burkhart <burkhart@technikum-wien.at>.
+ */
+\end{verbatim}
+Zu beginn jedes Skriptes soll ganz oben der {\bf GNU Header} eingef\"ugt werden. \newline
+Im {\bf Authors Block} werden nur Programmierer erw\"ahnt die das aktuelle File auch wirklich bearbeitet haben. 
+
+\section{Programmierstil}
+\subsection{Strings}
+Ein String wird mit echo ausgegeben und sollte grunds\"atzlich mit {\bf einfachen Apostrophen}(single quotes) abgegrenzt werden. Dies hat den Vorteil, dass PHP Code im String {\bf nicht ausgef\"uhrt wird} und so z.B. HTML Ausgaben einfacher und schneller sind. Eine Folge von auszugebenden Strings kann mit Beistrich getrennt werden (anstatt mit . verkn\"upft), wodurch die Ausgabe beschleunigt wird
+
+\begin{verbatim}
+$message = 'Hello World';
+echo '<div style="float: right;">',$message,'</div>';
+echo '<div style="float: right;">'.$message.'</div>';
+\end{verbatim}
+
+\subsection{IF - ELSE}
+Um Bl\"ocke zu gruppieren, k\"onnen {\bf zus\"atzliche Klammern} eingesetzt werden. Bei l\"angeren Bedingungen werden alle Bedingungen {\bf untereinander dargestellt}, um die Lesbarkeit zu erh\"ohen. Die \"offnende geschweifte Klammer wird immer in die {\bf n\"achste separate Zeile geschrieben}. Die abschlie\ss ende geschweifte Klammer erh\"alt ebenfalls immer eine separate Zeile. Jeder Code innerhalb der geschweiften Klammern muss {\bf einen Tabulator} (standardm\"a\ss ig vier Leerzeichen) einger\"uckt werden. \begin{verbatim}
+if($user == 'Herbert')
+{
+   echo 'Hallo Herbert';
+}
+else
+{
+   echo 'Falscher User';
+} 
+\end{verbatim}
+Bei sehr kurzen "`if-else"' Konstrukten kann auch der {\bf dreifach konditionale Operator} verwendet werden:
+\begin{verbatim}
+$sampleVar = isset($_GET['sampleVar']) ? $_GET['sampleVar'] : '';
+\end{verbatim}
+Gibt es nur eine ausf\"uhrende Zeile, so k\"onnen die geschweiften Klammern auch {\bf weggelassen werden}.
+\begin{verbatim}
+if($user == 'Herbert')
+   echo 'Hallo Herbert';
+else
+   echo 'Falscher User';
+\end{verbatim}
+
+\subsection{Datenbankabfragen}
+\begin{itemize}
+\item Datenbankabfragen sind grunds\"atzlich \"uber die Datenbankklasse abzusetzen. 
+\item Um SQL-Injections zu verhindern, sind die Paramter mittels der Funktion db\_add\_param zu escapen. 
+(M\"ogliche \"Ubergabeparameter sind FHC\_INTEGER, FHC\_STRING und FHC\_BOOLEAN)
+\item SQL Statements sind mit Strichpunkt abzuschlie\ss{}en.
+\item Vor jedem Tabellennamen ist das entsprechende Schema anzugeben
+\item Schl\"usselw\"orter (zB SELECT, WHERE, FROM, GROUP BY) sind gro\ss{} zu schreiben
+\end{itemize}
+\begin{verbatim}
+$qry = "SELECT * FROM public.tbl_person WHERE 
+person_id=".$db->db_add_param($person_id, FHC_INTEGER, false).';';
+\end{verbatim}
+
+Boolean Attribute sind ber die Datenbankklasse zu parsen um inkompatibilit\"aten mit verschiedenen DB-Systemen zu verhindern.
+
+\begin{verbatim}
+$aktiv = $db->db_parse_bool($row->aktiv);
+\end{verbatim}
+
+\subsection{HTML-Ausgaben}
+HTML Attribute sollen generell mit doppelten Hochkomma umschlossen werden.
+Variablen die innerhalb des HTML-Codes ausgegeben werden sind mit der Funktion convert\_html\_chars zu escapen. Dies ist vorallem wichtig bei Strings die den Typ Text oder varchar in der Datenbank haben. 
+
+\begin{verbatim}
+echo '<div style="float: right;">',$basis->convert_html_chars($message),'</div>';
+\end{verbatim}
+
+
+\subsection{Sonstiges}
+\begin{itemize}
+	\item {\bf Geschwungene Klammern} \\
+	Um einen Block zu definieren werden die geschwungenen Klammern {\bf immer} in der neuen Zeile gesetzt. 
+	\item {\bf Tabulator} \\
+	Es wird immer wenn m\"oglich mit Tabulatoren einger\"uckt. Tabulatorbreite = 4 Leerzeichen. 
+\end{itemize}

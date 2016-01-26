@@ -1,0 +1,136 @@
+\chapter{Code Reviews}
+\underline{{\bf 20. Mai 2011 - abschlusspruefung.class.php}}
+\begin{itemize}
+	\item Getter und Setter
+		\begin{itemize}
+			\item {\bf Wichtige} Attribute protected
+			\item Realisierbar mit {\bf \_\_set} und {\bf \_\_get}
+		\end{itemize}
+\end{itemize}
+\begin{verbatim}
+public function __set($name, $value)
+{
+   $this->vars[$name] = $value;
+}
+\end{verbatim}
+\begin{itemize}
+	\item Klasse soll alles erledigen
+		\begin{itemize}
+		\item Konstruktor setzt \$new = true
+		\item Funktion load() setzt \$new = false
+		\item Save() unterscheidet true oder false (insert oder update)
+		\end{itemize}
+\end{itemize}
+\begin{itemize}
+	\item Allgemein
+		\begin{itemize}
+		\item Immer require\_once() verwenden
+		\item Im Skriptkopf nur den Autor vermerken, der File wirklich bearbeitet hat
+		\item \"Uber Klasse Kommentarblock \newline
+		\end{itemize}
+\end{itemize}
+\underline{{\bf 10. Juni 2011}}
+\begin{itemize}
+	\item Allgemein
+		\begin{itemize}
+		\item Ordnerstruktur verbessern		
+			\begin{itemize}
+			\item local/cms Dateien in -> local/[sprache] verschieben
+			\end{itemize}
+		\item Phrasenmodul	
+			\begin{itemize}
+			\item Gro\ss - Kleinschreibung bei Name z.B.: ['global/fehlerBeiDerParameteruebergabe']
+			\item Keine Sonderzeichen in Name
+			\end{itemize}
+		\item Variablen	
+			\begin{itemize}
+			\item Kein \_ vor private oder protected Variablen
+			\item Docblock Kommentare bei Variablen nicht ntig, Kommentar mit {\bf Datentyp in Datenbank} reicht
+			\end{itemize}
+		\end{itemize}
+\end{itemize}
+\newpage
+
+\underline{{\bf 07. Oktober 2011 - rdf.class.php}}
+\begin{itemize}
+	\item SOAP
+		\begin{itemize}
+		\item username / passwort optional in WSDL
+		\item Objekt Array -> Complextype wenn mehere Parameter \"ubergeben werden 
+		\end{itemize}
+	\item XUL
+		\begin{itemize}
+		\item menuitemID = Element-Modul z.B.: menuitem-projekt
+		\item Die Trennung erfolgt mit -, da beim markieren davor und dannach abgebrochen wird
+		\end{itemize}
+	\item RDF
+		\begin{itemize}
+		\item kein {\bf /alle} mehr -> sondern http://www.technikum-wien.at/[Datenbankname]
+		\end{itemize}
+	\item Adressoperator \&
+	\item statische Variablen
+	\item Configs s\"aubern und global.conf [include] f\"ur globale Konfiguration bereitstellen \newline
+\end{itemize}
+
+\underline{{\bf 11. November 2011 - bestellung.php - Projekt zu Bestellung zuordnen}}
+\begin{itemize}
+	\item Anf\"uhrungszeichen bei echo
+		\begin{itemize}
+		\item Es sollen die Einfachen Anf\"uhrungszeichen verwendet werden ['] und zur Stringverkettung der Beistrich [,]
+			\begin{verbatim}
+			echo 'Username: ',$user,' eingeloggt'; 
+			\end{verbatim}
+		\end{itemize}
+	\item Einfache Apostroph ['] in String escapen -> htmlentities => eigene Funktion bauen
+	\item Magic Quotes -> deprecated
+	\item Session Authentifizierung im CIS / Kalenderschnittstellen
+	\item Cross Side Scripting Schw\"achen ausarbeiten \newline
+\end{itemize}
+
+\underline{{\bf 16. Dezember 2011 - addslashes - String escapen}}
+\begin{itemize}
+	\item Einfache Anf\"uhrungszeichen bei echo und doppelte f\"ur Eigenschaften 
+	\item Eine funktion db\_null\_value soll in die DB Klasse implementiert werden 
+	\begin{itemize}
+		\item Bei einem leeren String wird null geschrieben
+		\item es soll ein Parameter \$quote \"ubergeben werden(defaultwert true) -> wenn false wird nicht gequotet (f\"ur Integer) 
+	\end{itemize}
+	\item Daten die aus DB kommen, sollen mit escaped werden(doublequotes ["] werden escaped) -> Quellcode soll nicht ver\"anderbar werden - Hierf�r steht in der Basisklasse die funktion convert\_html\_chars zur Verf�gung
+	\item ! Auch quoten bei Integerzahlen in DB query? !!\newline
+\end{itemize}
+
+\underline{{\bf 10. Februar 2012 Escapen von DB Parametern - functions.inc.php ausmisten }}
+\begin{itemize}
+	\item Zum Escapen von DB Parametern steht nun eine neue Funktion zur Verf�gung: \$db->db\_add\_param(\$var, \$type, \$nullable) 
+	\item Boolean Parameter ueber DB-Klasse parsen, damit keine Probleme mit anderen Datenbanken auftreten. (zB t/f bei Postgres 0/1 bei MySQL)
+	\begin{itemize}
+		\item Boolean die aus der Datenbank gelesen werden, sollen durch die funktion \$db->db\_parse\_bool(\$var) geparst werden
+		\item Boolean die in die Datenbank geschrieben werden, sollen die Funktion \$db->db\_add\_param(\$var, \$type, \$nullable) verwenden
+	\end{itemize}
+	\item functions.inc.php s\"aubern
+	\begin{itemize}
+		\item Datumsfunktionen in datum.class.php auslagern
+		\item eventuelle Auslagerung der Authentifizierungsfunktionen in eine eigene Klasse\newline
+	\end{itemize}
+\end{itemize}
+\underline{{\bf 09. August 2012 Strichpunkt bei SQL Statements }}
+\begin{itemize}
+		\item SQL Statements im Code sind mit Strichpunkt am Schluss abzuschlie\ss{}en
+\end{itemize}
+
+\underline{{\bf 08. November 2012 - XSS L\"ucken und WYSIWYG}}
+\begin{itemize}
+	\item XSS-L\"ucke im CIS wo es m\"oglich ist fremde Webseiten in den main Frame einzuschleusen
+		\begin{itemize}
+		\item L\"osung: \"Uberpr\"ufung ob APP\_ROOT in URL vorkommt - wenn nicht dann Seite nicht laden und Email an uns senden
+		\end{itemize}
+	\item In den LV Infos k\"onnen Tags wie <ul><li> eingegeben werden -> soll \"uberarbeitet werden
+	\item Anstatt dass jedes Jahr das gesamte CIS ins Archiv kopiert wird, sollen nur mehr die LV Infos weggespeichert werden
+	\item Im WYSWYG Editor können Tags eingegeben werden. Auch <script> Tags
+		\begin{itemize}
+		\item SaveHTML dar\"uberlaufen lassen
+		\item vor Speichern in DB durch Methode Tags rausfiltern
+		\end{itemize}
+	\item EMail Signaturen sollen in Zukunft als Phrase ausgelagert werden -> Auch für Community leichter zum Editieren \newline
+	\item N\"achstes Codereview: Basis Klasse und Stundenplanklasse (Zusammenhang zu anderen Klassen)
+\end{itemize}

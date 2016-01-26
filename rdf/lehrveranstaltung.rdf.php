@@ -62,14 +62,7 @@ else
 	$student_uid=null;
 
 if(isset($_GET['lehrveranstaltung_kompatibel_id']))
-<<<<<<< HEAD
 	$lehrveranstaltung_kompatibel_id = $_GET['lehrveranstaltung_kompatibel_id'];
-=======
-{
-	$lehrveranstaltung_kompatibel_id = $_GET['lehrveranstaltung_kompatibel_id'];
-	isset($_GET['self']) ? $self = $_GET['self'] : $self = 1;
-}
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 else
 	$lehrveranstaltung_kompatibel_id=null;
 
@@ -81,12 +74,7 @@ elseif($lehrveranstaltung_kompatibel_id!='')
 {
 	// Laedt die Lehrveranstaltung und alle die dazu kompatibel sind
 	$lvid_arr = $lehrveranstaltung->loadLVkompatibel($lehrveranstaltung_kompatibel_id);
-<<<<<<< HEAD
 	$lvid_arr[]=$lehrveranstaltung_kompatibel_id;
-=======
-	if($self == 1)
-		$lvid_arr[]=$lehrveranstaltung_kompatibel_id;
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 
 	if(isset($_GET['lehrfach_id']))
 		$lvid_arr[]=$_GET['lehrfach_id'];

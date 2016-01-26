@@ -32,10 +32,6 @@ require_once('../include/functions.inc.php');
 require_once('../include/lvgesamtnote.class.php');
 require_once('../include/datum.class.php');
 require_once('../include/studiengang.class.php');
-<<<<<<< HEAD
-=======
-require_once('../include/benutzerberechtigung.class.php');
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 
 echo '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>';
 
@@ -43,15 +39,6 @@ $user = get_uid();
 loadVariables($user);
 $datum = new datum();
 
-<<<<<<< HEAD
-=======
-$rechte = new benutzerberechtigung();
-$rechte->getBerechtigungen($user);
-
-if(!$rechte->isBerechtigt('student/noten'))
-	die('Sie haben keine Berechtigung fuer diese Seite');
-
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 $stg_arr = array();
 $stg_obj = new studiengang();
 $stg_obj->getAll(null, false);
@@ -91,11 +78,7 @@ foreach ($obj->result as $row)
 	{
 		$vorname = '';
 		$nachname = '';
-<<<<<<< HEAD
 		$qry_name = "SELECT vorname, nachname FROM public.tbl_person JOIN public.tbl_benutzer USING(person_id) WHERE uid='$row->student_uid'";
-=======
-		$qry_name = "SELECT vorname, nachname FROM public.tbl_person JOIN public.tbl_benutzer USING(person_id) WHERE uid=".$db->db_add_param($row->student_uid);
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 		if($db->db_query($qry_name))
 		{
 			if($row_name = $db->db_fetch_object())
@@ -113,10 +96,6 @@ foreach ($obj->result as $row)
 					<NOTE:mitarbeiter_uid><![CDATA['.$row->mitarbeiter_uid.']]></NOTE:mitarbeiter_uid>
 					<NOTE:studiensemester_kurzbz><![CDATA['.$row->studiensemester_kurzbz.']]></NOTE:studiensemester_kurzbz>
 					<NOTE:note><![CDATA['.$row->note.']]></NOTE:note>
-<<<<<<< HEAD
-=======
-					<NOTE:punkte><![CDATA['.$row->punkte.']]></NOTE:punkte>
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 					<NOTE:freigabedatum_iso><![CDATA['.$row->freigabedatum.']]></NOTE:freigabedatum_iso>
 					<NOTE:freigabedatum><![CDATA['.$datum->convertISODate($row->freigabedatum).']]></NOTE:freigabedatum>
 					<NOTE:benotungsdatum_iso><![CDATA['.$row->benotungsdatum.']]></NOTE:benotungsdatum_iso>

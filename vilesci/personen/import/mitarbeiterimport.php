@@ -42,11 +42,7 @@ function getGemeindeDropDown($postleitzahl)
 {
 	global $_REQUEST, $gemeinde;
 	$db = new basis_db();
-<<<<<<< HEAD
 	
-=======
-
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	$found=false;
 	$firstentry='';
 	$gemeinde_x = (isset($_REQUEST['gemeinde'])?$_REQUEST['gemeinde']:'');
@@ -62,11 +58,7 @@ function getGemeindeDropDown($postleitzahl)
 					$firstentry=$row->name;
 				if($gemeinde_x=='')
 					$gemeinde_x=$row->name;
-<<<<<<< HEAD
 				
-=======
-
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 				if($row->name==$gemeinde_x)
 				{
 					$selected='selected';
@@ -78,11 +70,7 @@ function getGemeindeDropDown($postleitzahl)
 			}
 		}
 	}
-<<<<<<< HEAD
 	
-=======
-
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	echo '</SELECT>';
 	if(!$found && (isset($importort) && $importort!=''))
 	{
@@ -103,15 +91,9 @@ function getOrtDropDown($postleitzahl, $gemeindename)
 {
 	global $_REQUEST;
 	$db = new basis_db();
-<<<<<<< HEAD
 	
 	$ort = (isset($_REQUEST['ort'])?$_REQUEST['ort']:'');
 	$qry = "SELECT distinct ortschaftsname FROM bis.tbl_gemeinde 
-=======
-
-	$ort = (isset($_REQUEST['ort'])?$_REQUEST['ort']:'');
-	$qry = "SELECT distinct ortschaftsname FROM bis.tbl_gemeinde
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 			WHERE plz='".addslashes($postleitzahl)."' AND name='".addslashes($gemeindename)."'";
 	echo '<SELECT id="ort" name="ort">';
 	if(is_numeric($postleitzahl) && $postleitzahl<10000)
@@ -122,30 +104,18 @@ function getOrtDropDown($postleitzahl, $gemeindename)
 			{
 				if($row->ortschaftsname==$ort)
 					$selected='selected';
-<<<<<<< HEAD
 				else 
-=======
-				else
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 					$selected='';
 				echo "<option value='$row->ortschaftsname' $selected>$row->ortschaftsname</option>";
 			}
 		}
-<<<<<<< HEAD
 	}	
-=======
-	}
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	echo '</SELECT>';
 }
 if(isset($_GET['type']) && $_GET['type']=='getortcontent' && isset($_GET['plz']) && isset($_GET['gemeinde']))
 {
 	header('Content-Type: text/html; charset=UTF-8');
-<<<<<<< HEAD
 	
-=======
-
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	echo getOrtDropDown($_GET['plz'], $_GET['gemeinde']);
 	exit;
 }
@@ -159,24 +129,14 @@ if(isset($_GET['type']) && $_GET['type']=='getortcontent' && isset($_GET['plz'])
 <link rel="stylesheet" href="../../../skin/tablesort.css" type="text/css">
 <script type="text/Javascript">
 
-<<<<<<< HEAD
 $(document).ready(function() 
 { 
-=======
-$(document).ready(function()
-{
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	$('#t1').tablesorter(
 	{
 		sortList: [[1,0],[2,0],[4,0]],
 		widgets: ['zebra'],
-<<<<<<< HEAD
 		headers: {0: {sorter: false},8: {sorter: false},9: {sorter: false}} 
 	}); 
-=======
-		headers: {0: {sorter: false},8: {sorter: false},9: {sorter: false}}
-	});
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 });
 
 function disablefields(obj)
@@ -219,30 +179,14 @@ function GeburtsdatumEintragen()
 {
 	svnr = document.getElementById('svnr').value;
 	gebdat = document.getElementById('geburtsdatum');
-<<<<<<< HEAD
 	
-=======
-
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	if(svnr.length==10 && gebdat.value=='')
 	{
 		var tag = svnr.substr(4,2);
 		var monat = svnr.substr(6,2);
 		var jahr = svnr.substr(8,2);
-<<<<<<< HEAD
 		
 		gebdat.value='19'+jahr+'-'+monat+'-'+tag;
-=======
-		//Wenn die Person juenger als 70 ist, schreib beim Geburtsdatum 19xx sonst 20xx
-		var jahr_diff = jahr-70;
-
-		if(jahr_diff < -15 && jahr_diff < 30)
-			var jahrhundert = '20';
-		else
-			var jahrhundert = '19';
-
-		gebdat.value=jahrhundert+jahr+'-'+monat+'-'+tag;
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	}
 }
 
@@ -301,11 +245,7 @@ function loadGemeindeData()
 	{
 		anfrage=null;
 		//Request erzeugen und die Note speichern
-<<<<<<< HEAD
 		erzeugeAnfrage(); 
-=======
-		erzeugeAnfrage();
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	    var jetzt = new Date();
 		var ts = jetzt.getTime();
 		var plz = document.getElementById('plz').value;
@@ -330,21 +270,13 @@ function setGemeindeData()
 {
 	if (anfrage.readyState == 4)
 	{
-<<<<<<< HEAD
 		if (anfrage.status == 200) 
-=======
-		if (anfrage.status == 200)
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 		{
 			var resp = anfrage.responseText;
             var gemeindediv = document.getElementById('gemeindediv');
 			gemeindediv.innerHTML = resp;
 			loadOrtData();
-<<<<<<< HEAD
         } 
-=======
-        }
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
         else alert("Request status:" + anfrage.status);
     }
 }
@@ -355,11 +287,7 @@ function loadOrtData()
 	{
 		anfrage=null;
 		//Request erzeugen und die Note speichern
-<<<<<<< HEAD
 		erzeugeAnfrage(); 
-=======
-		erzeugeAnfrage();
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	    var jetzt = new Date();
 		var ts = jetzt.getTime();
 		var plz = document.getElementById('plz').value;
@@ -377,20 +305,12 @@ function setOrtData()
 {
 	if (anfrage.readyState == 4)
 	{
-<<<<<<< HEAD
 		if (anfrage.status == 200) 
-=======
-		if (anfrage.status == 200)
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 		{
 			var resp = anfrage.responseText;
             var ortdiv = document.getElementById('ortdiv');
 			ortdiv.innerHTML = resp;
-<<<<<<< HEAD
         } 
-=======
-        }
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
         else alert("Request status:" + anfrage.status);
     }
 }
@@ -398,11 +318,7 @@ function setOrtData()
 function AnredeChange()
 {
 	anrede = document.getElementById('anrede').value;
-<<<<<<< HEAD
 	
-=======
-
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	if(anrede=='Herr')
 		document.getElementById('geschlecht').value='m';
 	if(anrede=='Frau')
@@ -413,20 +329,12 @@ function GeschlechtChange()
 {
 	geschlecht = document.getElementById('geschlecht').value;
 	anrede = document.getElementById('anrede');
-<<<<<<< HEAD
 	
-=======
-
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	if(anrede.value=='' || anrede.value=='Herr' || anrede.value=='Frau')
 	{
 		if(geschlecht=='m')
 			anrede.value='Herr';
-<<<<<<< HEAD
 			
-=======
-
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 		if(geschlecht=='w')
 			anrede.value='Frau';
 	}
@@ -463,11 +371,7 @@ if($adresse_nation=='A')
 	$ort = (isset($_REQUEST['ort'])?$_REQUEST['ort']:'');
 	$gemeinde = (isset($_REQUEST['gemeinde'])?$_REQUEST['gemeinde']:'');
 }
-<<<<<<< HEAD
 else 
-=======
-else
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 {
 	$ort = (isset($_REQUEST['ort_txt'])?$_REQUEST['ort_txt']:'');
 	$gemeinde = (isset($_REQUEST['gemeinde_txt'])?$_REQUEST['gemeinde_txt']:'');
@@ -490,10 +394,6 @@ $person_id = (isset($_POST['person_id'])?$_POST['person_id']:'');
 $ueberschreiben = (isset($_POST['ueberschreiben'])?$_POST['ueberschreiben']:'');
 $svnr = (isset($_POST['svnr'])?$_POST['svnr']:'');
 $lektor = (isset($_POST['lektor'])?true:false);
-<<<<<<< HEAD
-=======
-$fixangestellt = (isset($_POST['fixangestellt'])?true:false);
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 if(!isset($_POST['svnr']))
 	$lektor = true;
 $ersatzkennzeichen = (isset($_POST['ersatzkennzeichen'])?$_POST['ersatzkennzeichen']:'');
@@ -550,11 +450,7 @@ if(isset($_POST['save']))
 		$person->staatsbuergerschaft = 'A';
 		$person->familienstand = 'l';
         $person->zugangscode= uniqid();
-<<<<<<< HEAD
 		
-=======
-
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 		if($person->save())
 		{
 			$error=false;
@@ -568,7 +464,6 @@ if(isset($_POST['save']))
 
 	//UID generieren
 	if(!$error)
-<<<<<<< HEAD
 	{		
 		$nachname_clean = mb_strtolower(convertProblemChars($nachname));
 		$vorname_clean = mb_strtolower(convertProblemChars($vorname));
@@ -578,28 +473,13 @@ if(isset($_POST['save']))
 			
 		$bn = new benutzer();
 		
-=======
-	{
-		$nachname_clean = mb_strtolower(convertProblemChars($nachname));
-		$vorname_clean = mb_strtolower(convertProblemChars($vorname));
-		$uid='';
-
-		$uid = generateMitarbeiterUID($vorname_clean, $nachname_clean, $lektor, $fixangestellt);
-
-		$bn = new benutzer();
-
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 		if($bn->uid_exists($uid))
 		{
 			$error = true;
 			$errormsg = 'Es konnte keine UID ermittelt werden';
 		}
 	}
-<<<<<<< HEAD
 	
-=======
-
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	//Kurzbz generieren
 	if(!$error)
 	{
@@ -623,11 +503,7 @@ if(isset($_POST['save']))
  			$errormsg = 'Es konnte keine Kurzbezeichnung ermittelt werden';
  		}
 	}
-<<<<<<< HEAD
 	
-=======
-
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	//Alias generieren
 	if(!$error)
 	{
@@ -635,7 +511,6 @@ if(isset($_POST['save']))
 		$vorname_clean = mb_strtolower(convertProblemChars($vorname));
 		$nachname_clean = str_replace(' ','_', $nachname_clean);
 		$vorname_clean = str_replace(' ','_', $vorname_clean);
-<<<<<<< HEAD
 		
 		$bn = new benutzer();
 		
@@ -645,26 +520,11 @@ if(isset($_POST['save']))
 			$alias = '';
 	}
 	
-=======
-
-		$bn = new benutzer();
-
-		if(!$bn->alias_exists($vorname_clean.'.'.$nachname_clean))
-			$alias = $vorname_clean.'.'.$nachname_clean;
-		else
-			$alias = '';
-	}
-
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	//Benutzer anlegen
 	if(!$error)
 	{
 		$benutzer = new benutzer();
-<<<<<<< HEAD
 		
-=======
-
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 		$benutzer->uid = $uid;
 		$benutzer->person_id = $person->person_id;
 		$benutzer->bnaktiv = true;
@@ -678,70 +538,42 @@ if(isset($_POST['save']))
 		{
 			$error = false;
 		}
-<<<<<<< HEAD
 		else 
-=======
-		else
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 		{
 			$error = true;
 			$errormsg = 'Fehler beim Speichern des Benutzers:'.$benutzer->errormsg;
 		}
 	}
-<<<<<<< HEAD
 			
-=======
-
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	//Mitarbeiter anlegen
 	if(!$error)
 	{
 		$mitarbeiter = new mitarbeiter();
-<<<<<<< HEAD
 		
-=======
-
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 		$mitarbeiter->uid = $uid;
 		$mitarbeiter->personalnummer = $personalnummer;
 		$mitarbeiter->kurzbz = $kurzbz;
 		$mitarbeiter->lektor = $lektor;
 		$mitarbeiter->aktiv = true;
-<<<<<<< HEAD
 		$mitarbeiter->fixangestellt = true;
-=======
-		$mitarbeiter->fixangestellt = $fixangestellt;
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 		$mitarbeiter->stundensatz = 0;
 		$mitarbeiter->bismelden = true;
 		$mitarbeiter->anmerkung = $anmerkungen;
 		$mitarbeiter->ausbildungcode = $letzteausbildung;
 		$mitarbeiter->insertamum = date('Y-m-d H:i:s');
 		$mitarbeiter->insertvon = $user;
-<<<<<<< HEAD
 		
-=======
-
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 		if($mitarbeiter->save(true, false))
 		{
 			$error = false;
 		}
-<<<<<<< HEAD
 		else 
-=======
-		else
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 		{
 			$error = true;
 			$errormsg = 'Fehler beim Speichern des Mitarbeiters:'.$mitarbeiter->errormsg;
 		}
 	}
-<<<<<<< HEAD
 	
-=======
-
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	//Adresse anlegen
 	if($ueberschreiben!='' && !($plz=='' && $adresse=='' && $ort==''))
 	{
@@ -889,30 +721,18 @@ if($geburtsdatum!='')
 			$geburtsdatum_error=true;
 		}
 	}
-<<<<<<< HEAD
 	else 
-=======
-	else
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	{
 		if(!mb_ereg("([0-9]{4})-([0-9]{2})-([0-9]{2})",$geburtsdatum))
 			$geburtsdatum_error=true;
 	}
-<<<<<<< HEAD
 	
-=======
-
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	if($geburtsdatum_error)
 		echo "Format des Geburtsdatums ist ungueltig!";
 }
 if(($vorname=='' && $nachname=='') || $geburtsdatum_error || $geburtsdatum=='')
 	echo "<form method='POST' onsubmit='return checkInput1();'>";
-<<<<<<< HEAD
 else 
-=======
-else
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	echo "<form method='POST'>";
 ?>
 <!-- <form method='POST'>-->
@@ -946,11 +766,7 @@ foreach ($nation->nation as $row)
 {
 	if($row->code==$adresse_nation)
 		$selected='selected';
-<<<<<<< HEAD
 	else 
-=======
-	else
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 		$selected='';
 	echo "<option value='$row->code' $selected>$row->langtext</option>";
 }
@@ -964,17 +780,10 @@ if($adresse_nation=='A' && $plz!='')
 {
 	echo getGemeindeDropDown($plz);
 }
-<<<<<<< HEAD
 else 
 {
 	echo '<font color="gray">Bitte zuerst eine Postleitzahl eintragen</font>';
 }	
-=======
-else
-{
-	echo '<font color="gray">Bitte zuerst eine Postleitzahl eintragen</font>';
-}
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 
 //wenn der Ort per EMail-Import von der www kommt und der Ort in der Gemeindetabelle
 //nicht gefunden wird, dann wird der Ort in Klammer neben dem DropDown angezeigt
@@ -1012,10 +821,6 @@ if($result = $db->db_query($qry))
 echo '</SELECT>';
 echo '</td></tr>';
 echo '<tr><td>Lektor</td><td><input type="checkbox" name="lektor" '.($lektor?'checked':'').' /></td></tr>';
-<<<<<<< HEAD
-=======
-echo '<tr><td>Fixangestellt</td><td><input type="checkbox" name="fixangestellt" '.($fixangestellt?'checked':'').' /></td></tr>';
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 echo '<tr><td>Personalnummer</td><td><input type="text" name="personalnummer" size="4" value="'.$personalnummer.'" /> (optional)</td></tr>';
 echo '<tr><td>Anmerkungen</td><td><textarea id="anmerkung" name="anmerkungen">'.$anmerkungen.'</textarea></td></tr>';
 echo '<tr><td></td><td>';
@@ -1039,11 +844,7 @@ Felder die mit einem * gekennzeichnet sind müssen ausgefüllt werden!
 
 //Vorschlaege laden
 if($geburtsdatum!='')
-<<<<<<< HEAD
 {		
-=======
-{
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	if(mb_ereg("([0-9]{4})-([0-9]{2})-([0-9]{2})",$geburtsdatum))
 	{
 		$where = " gebdatum='".$geburtsdatum."'";
@@ -1060,11 +861,7 @@ if($vorname!='' && $nachname!='')
 if($where!='')
 {
 	$qry = "SELECT * FROM public.tbl_person WHERE $where ORDER BY nachname, vorname, gebdatum";
-<<<<<<< HEAD
 	
-=======
-
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	if($result = $db->db_query($qry))
 	{
 		echo '<table style="margin-top: 0px" class="tablesorter" id="t1"><thead><tr><th></th><th>Nachname</th><th>Vorname</th><th>Weitere<br/>Vornamen</th><th>GebDatum</th><th>SVNR</th><th>Geschlecht</th><th>Adresse</th><th>Status</th><th>Details</th></tr></thead>';

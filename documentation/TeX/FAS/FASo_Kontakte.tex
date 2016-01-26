@@ -1,0 +1,120 @@
+\chapter{Kontakte}
+\label{kontakte}
+Die Karteikarte \textit{Kontakte} (Abbildung \ref{Kontakte1}) beinhaltet die Daten zur Kontaktaufnahme mit dem Studenten. Im oberen Feld werden die Adressen gespeichert, im mittleren Telefon- und Faxnummern sowie Emailadressen und im unteresten Feld können Bankverbindungsdaten festgehalten werden.
+\begin{figure}
+	\centering
+	\includegraphics[width=0.75\textwidth]{FAS_Kontakte1.png}
+	\caption{Die Karteikarte Kontakte}
+	\label{Kontakte1}
+\end{figure}
+\section{Anlegen von Adressen}
+Das Feld \textsl{Adressen} besteht aus einer Liste sowie drei Tasten. Durch Drücken der Taste \textit{Neu} kann eine Adresse hinzugefügt werden. Es wird die Eingabemaske wie in Abbildung \ref{Kontakte2} geöffnet. Die Eingabemaske besteht aus folgenden Teilen:
+\begin{itemize}
+	\item Typ: Hier wird ausgewählt, um welchen Adresstyp es sich bei der Eintragung handelt. Zur Auswahl stehen Hauptwohnsitz, Nebenwohnsitz und Firma für eine Firmenanschrift.
+	\item Strasse: Strassen- oder Gassenname der Adresse.
+	\item Nation: Gibt an in welchem Land die Adresse sich befindet. Wird hier Österreich angegeben, wird in den folgenden Auswahlfeldern die Postleitzahlentabelle des FHR verwendet.
+	\item Plz: Die Postleitzahl der Adresse.
+	\item Gemeinde: Handelt es sich um eine österreichische Adresse, muß der Gemeindename in der Liste des FHR vorkommen, ansonsten kann der Gemeindename frei eingegeben werden.
+	\item Ortschaft: Handelt es sich um eine österreichische Adresse, muß der Ortschaftsname aus der Liste des FHR ausgewählt werden, ansonsten kann der Gemeindename frei eingegeben werden.
+	\item Heimatadresse: Kennzeichnet diese Adresse als Heimatadresse. Das ist jene Adresse, die zum Zeitpunkt der Inskription der Hauptwohnsitz des Studenten war. \\
+\end{itemize}
+\achtung{\textbf{Wichtig} Die Heimatadresse darf sich während eines Studiums nicht verändern!\\
+	(BIS-Meldung) Wenn das Attribut Heimatadresse gesetzt ist, kann diese Adresse daher nicht gelöscht werden. Um diese Adresse dennoch zu löschen muss erst das Hackerl bei Heimatadresse entfernt werden.}\\
+
+\begin{itemize}
+	\item Zustelladresse: Postalische Zustellungen an desn Studenten sollen zu dieser Adresse erfolgen.
+	\item Firma: Hier kann die Firma ausgewählt werden zu der diese Adresse gehört. Tippen Sie dazu in das Feld den Namen der Firma ein. Danach werden in dem DropDown Feld die Firmen angezeigt die diesem Suchkriterium entsprechen. (Es müssen mindestens 3 Zeichen eingegeben werden damit die Einträge angezeigt werden.
+	\item Anmerkung: Hier können zusätzliche Informationen eingegeben werden.\\
+\end{itemize}
+\achtung{\textbf{Wichtig} Erst durch Drücken der Taste \textsl{Speichern} werden die Daten in die Datenbank übertragen! Wird das Eingabeformular vor dem Drücken der Taste \textsl{Speichern} geschlossen, werden die Daten verworfen.}\\
+
+Durch Drücken der Taste \textit{Bearbeiten} kann eine zuvor ausgewählte Adresse geändert werden. Es öffnet sich hier die selbe Eingabemaske bereits vorbefüllt mit den gespeicherten Daten. Die Daten können nun verändert und mittels \textsl{Speichern}-Taste in die Datenbank übertragen werden.
+Mit der Taste \textsl{Loeschen} kann ein ausgewählter Eintrag entfernt werden.
+\begin{figure}
+	\centering
+	\includegraphics[width=0.75\textwidth]{FAS_Kontakte2.png}
+	\caption{Adressen anlegen}
+	\label{Kontakte2}
+\end{figure}
+\section{Anlegen von Kontaktmöglichkeiten}
+Das Feld \textsl{Kontakte} gleicht in Aufbau und Funktion dem zuvor beschriebenen Feld \textsl{Adressen}. Die Eingabemaske besteht hier allerdings aus folgenden Teilen:
+\begin{itemize}
+	\item Typ: Hier wird der Kontakttyp festgelegt. Zur Auswahl stehen E-Mail, Faxnummer, Mobiltelefonnummer, sonstige Telefonnummer und Telefonnummer.
+	\item Kontakt: Passend zum Kontakttyp wird die E-Mailadresse oder Fax- oder Telefonnummer eingegeben.
+	\item Anmerkung: Hier können zusätzliche Informationen eingegeben werden.
+	\item Zustellung: Zeigt an, ob zu diesem Kontakt Mitteilungen und Infos geschickt werden sollen.  
+	\item Firma/Standort: Hier kann die Firma ausgewählt werden zu der dieser Kontakt gehört. Tippen Sie dazu in das erste Feld den Namen der Firma ein (zumindest 3 Zeichen) und wählen Sie den entsprechenden Eintrag aus der Liste aus. Im zweiten Feld werden dann die zugehörigen Standorte dieser Firma angezeigt. Wählen Sie auch hier einen der Einträge aus.
+\end{itemize}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.75\textwidth]{FAS_Kontakte3.png}
+	\caption{Kontaktmöglichkeiten anlegen am Beispiel einer E-Mailadresse}
+	\label{Kontakte3}
+\end{figure}
+\section{Anlegen von Bankverbindungen}
+Auch das Feld \textsl{Bankverbindungen}  gleicht im Aufbau und Funktion den zuvor beschriebenen Feldern. Die Eingabemaske beinhaltet folgende Eingabefenster:
+\begin{itemize}
+	\item Name: Eingabefeld für den Namen der Bank.
+	\item Anschrift: Hier wird die Adresse der Bank eingegeben.
+	\item BIC: Der SWIFT-BIC (SWIFT ist die Abkürzung für \textbf{S}ociety for \textbf{W}orldwide \textbf{I}nterbank \textbf{F}inancial \textbf{T}elecommunication, BIC ist die Abkürzung für \textbf{B}ank \textbf{I}dentifier \textbf{C}ode) ist ein nach ISO 9362 international standardisierten Bankcode, mit dem weltweit jedes direkt oder indirekt teilnehmende Kreditinstitut eindeutig identifiziert werden kann. Er findet weltweit Verwendung bei grenzüberschreitenden Zahlungen und beim \textbf{internationalen} Austausch von Nachrichten zwischen Kreditinstituten. \\
+Der BIC oder SWIFT-Code hat eine Länge von 8 oder 11 alphanumerischen Zeichen und folgenden Aufbau:\\
+
+ BBBBCCLLbbb\\
+ 
+\begin{itemize}
+	\item BBBB  4-stelliger Bankcode, vom Geldinstitut frei wählbar (nur Alphazeichen)
+	\item CC    2-stelliger Ländercode nach ISO 3166-1 (nur Alphazeichen)
+	\item LL    2-stellige Codierung des Ortes (alphanumerische Zeichen; wenn das zweite
+       Zeichen eine 1 ist, so handelt es sich um einen passiven SWIFT-Teilnehmer)
+	\item bbb   3-stellige Kennzeichnung der Filiale oder Abteilung (optional, 
+       Standard: "XXX", kann weggelassen werden, andere Kennzeichen nicht)
+       (alphanumerische Zeichen)
+\end{itemize}
+(http://de.wikipedia.org/wiki/SWIFT, 04.01.2008)
+	\item BLZ: Die Bankleitzahl (BLZ) ist in Deutschland und Österreich eine Kennziffer zur eindeutigen Identifizierung eines Kreditinstituts. Die Bankleitzahl besteht in Deutschland immer aus acht Ziffern, in Österreich aus fünf Ziffern. In der Schweiz und in Liechtenstein hat die Bankenclearing-Nummer (BC-Nummer) dieselbe Bedeutung.\\
+(http://de.wikipedia.org/wiki/Bankleitzahl, 04.01.2008)\\
+Die Bankleitzahl ist nur für innerstaatliche Überweisungen wichtig, für Überweisungen in der EU oder in Drittstaaten sollten BIC und IBAN verwendet werden.
+	\item IBAN: Die \textbf{I}nternational \textbf{B}ank \textbf{A}ccount \textbf{N}umber (IBAN) ist eine internationale, standardisierte Notation für Bankkontonummern. Die Notation wird durch die ISO-Norm ISO 13616:2003 beschrieben. \\
+	IBAN-Struktur in verschiedenen Ländern:\\
+	\begin{table*}[htbp]
+	\centering
+			\begin{tabular}{lcl}
+Land&Stellen&Struktur\\
+\hline
+Oesterreich&20&ATpp bbbb bkkk kkkk kkkk\\
+Deutschland&22&DEpp bbbb bbbb kkkk kkkk kk\\
+Italien&27&ITpp ABBB BBCC CCCX XXXX XXXX XXX\\
+Malta&31&MTpp bbbb ssss skkk kkkk kkkk kkkk kkk\\
+...\\
+			\end{tabular}
+		\caption{IBAN-Strukturen}
+		\label{tab:IBAN-Strukturen}
+	\end{table*}
+		
+Dabei bedeutet:
+	\begin{itemize}
+		\item AT, DE...    Länderkennzeichen
+		\item pp           zweistellige Prüfziffer
+		\item b            Stelle der Bankleitzahl
+		\item d            Kontotyp
+		\item g            code guichet
+		\item k            Stelle der Kontonummer
+		\item K            Kontrollziffer
+		\item r            Regionalcode
+		\item s            Stelle des Bankcodes
+		\item A,B,C,X      sonstige Funktionen
+	\end{itemize}
+	
+Kürzere Kontonummern werden mit führenden Nullen auf 10 Stellen erweitert.\\
+Die IBAN kann maximal 34 Stellen umfassen und findet zur Zeit hauptsächlich beim Zahlungsverkehr innerhalb der Europäischen Union Verwendung. Dies gilt sowohl für das Datenträgeraustausch-Verfahren als auch für den Zahlungsverkehr mit Formularen (Zahlungsverkehrsvordrucken).\\
+(http://de.wikipedia.org/wiki/International\_Bank\_Account\_Number, 04.01.2008)
+	\item Kontonummer: Hier wird die Kontonummer eingegeben.
+	\item Typ: Auswahl, ob es sich um ein Privat- oder Firmenkonto handelt.
+	\item Verrechnungskonto: Angabe, ob es sich bei dem Eintrag um das Verrechnungskonto handelt.
+\end{itemize}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.75\textwidth]{FAS_Kontakte4.png}
+	\caption{Bankverbindungen anlegen}
+	\label{Kontakte4}
+\end{figure}

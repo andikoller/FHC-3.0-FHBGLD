@@ -1,0 +1,98 @@
+\chapter{Templates}
+\section{Arten von Templates}
+Für den Content der Seiten stehen diverse Templates zur Verfügung.
+\subsection{Content mit Titel}
+Dies ist das Standard-Template für normale Content Seiten. 
+Es erstellt eine Seite mit Überschrift und statischem Content.
+\subsection{Redirects}
+Um auf Seiten zu verklinken, welche sich nicht im CMS befinden, 
+ist das Redirect Template zu verwenden. Hier kann auf eine beliebige URL 
+verlinkt werden.\\
+In der Redirect URL können Variablen verwendet werden.\\
+z.B.: news.php?stg\_kz=\$stg\_kz
+\\
+\subsection{Includes (Addons)}
+Das Menü besteht teilweise aus dynamischem Content. Dieser kann über 
+Includes (Addons) erzeugt werden. Bei diesem Template wird die URL zu einem PHP
+Script angegeben welches sich im Verzeichnis /cms/menu/ befindet.\\ 
+Dieses Script enthält eine Klasse welche von der menu\_addon Klasse abgeleitet
+ist. Die Klasse erzeugt den Content der unterhalb des Menüpunkts angezeigt wird.
+\\
+\subsection{News}
+Neue News werden generell nicht über das CMS-System angelegt.\\ 
+Zum Anlegen von neuen News-Einträgen ist die Newsverwaltung zu verwenden.\\
+Nach dem Anlegen eines Newseintrages können die sprachspezifischen Daten 
+über das CMS System verwaltet werden. Dazu kann im oberen Teil des Menüs 
+auf den Reiter News gewechselt werden. Hier werden die neuesten Newseinträge 
+angezeigt und können editiert werden.\\
+
+\section{Anwendungsfälle}
+Im folgenden werden diverse Beispiele für die Verwendung von Templates
+aufgezeigt.
+
+\subsection{Link auf eigenen Menübaum}
+Im Menü können Links eingefügt werden, welche auf ein Untermenü verweisen.
+Es wird dann nur das angegebene Submenü angezeigt. (zb Freifächer, Lehre,
+Mein CIS):\\
+\\
+	template: 	Redirect\\
+	url: 		?content\_id=12\\
+	target: 	\_self\\
+\\
+Wenn das angezeigt Menü nicht das Start Menü ist, wird automatisch ein Zurück
+Button anzeigt.\\
+\subsection{Link auf PHP Scripte}
+Links auf PHP-Seiten können mit dem Redirect Template eingefügt werden:\\
+\\
+	template: 	Redirect\\
+	url:		../cis/private/script.php\\
+	target:		content\\
+\\
+\subsection{Anlegen eines Links auf einen anderen Content}
+Ein Content kann an mehreren Stellen im Menübaum eingehängt werden.
+Sollen die Menüeinträge jedoch unterschiedlich benannt werden, muss einer
+der Einträge als Redirect auf den anderen angelegt werden.\\ 
+\\
+	template: 	Redirect\\
+	url:		../cms/content.php?content\_id=12\\
+	target:		content\\
+\\
+\subsection{Include Menü Addons}
+Anlegen eines Include Menü Addons 
+(zB LV-Auswahl, Freifächerliste, MeineLVs, Zeitsperren, etc)\\
+\\
+	template: 	include\\
+	url:		menu\_addon\_meinelv.inc.php\\
+\\
+\subsection{Abstand im Menübaum}
+Wenn zwischen den Menüeinträgen ein Abstand eingefügt werden soll, muss dies
+über das Spacer-Addon geschehen.\\
+\\
+	template:	include\\
+	url:		menu\_addon\_spacer.inc.php\\
+\\
+Diese Seite kann dann als Child zum Menü hinzugefügt und an der entsprechenden
+Stelle plaziert werden. Dadurch entsteht eine Leerzeile
+	
+\subsection{Links mit Variablen}
+Bei manchen Links müssen Variablen als Parameter übergeben werden (zB
+Newsverwaltung)\\
+Diese können bei Redirects mittels \$variablenname eingefügt werden.\\
+\\
+	template: 	redirect\\
+	url:	
+	../cms/newsverwaltung.php?studiengang\_kz=\$studiengang\_kz\&semester=\$semester\\
+\\
+Die Variablen werden entweder durch ein IncludeAddon gesetzt, oder als Parameter 
+an das menue.php uebergeben.\\
+\\
+\subsection{Menüeintrag zum Aufklappen ohne Link}
+Menüeinträge die nur zur Gruppierung der Links verwendet werden, und selbst
+keinen Content haben können mittels Redirect Template angelegt werden.
+Dadurch bleibt die derzeit angezeigte Seite bestehen und es wird nur das
+Menü auf und zu geklappt. (zB Lehre)\\
+\\
+	template: 	Redirect\\
+	url:		\#Lehre\\
+	target:		\_self\\
+\\

@@ -50,15 +50,9 @@
 
 	if(isset($_POST["schick"]) || isset($_POST["schick_neu"]))
 	{
-<<<<<<< HEAD
 		if(!$rechte->isBerechtigt('lehre/lehrveranstaltung',null,'sui'))
 			die('Sie haben keine Berechtigung fuer diese Aktion');
 			
-=======
-		if(!$rechte->isBerechtigt('lehre/lehrveranstaltung',null,'sui') && !$rechte->isBerechtigt('lehre/lehrveranstaltungAnlegen',null,'sui'))
-			die('Sie haben keine Berechtigung fuer diese Aktion');
-		
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 		$lv = new lehrveranstaltung();
 
 		if(isset($_POST["schick_neu"]))
@@ -485,11 +479,7 @@
 	<link rel="stylesheet" href="../../skin/colorpicker.css" type="text/css"/>
 	<script type="text/javascript" src="../../include/js/mailcheck.js"></script>
 	<script type="text/javascript" src="../../include/js/datecheck.js"></script>
-<<<<<<< HEAD
 	<script type="text/javascript" src="../../include/js/jquery.js"></script>
-=======
-	<script type="text/javascript" src="../../include/js/jquery1.9.min.js"></script>
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	<script type="text/javascript" src="../../include/js/colorpicker.js"></script>
 	<script>
 	    function copyToLehreVz()

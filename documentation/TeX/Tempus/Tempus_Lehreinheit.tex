@@ -1,0 +1,128 @@
+\chapter{Lehreinheiten \normalsize{(Karteireiter Lehrveranstaltung)}}
+\label{Kapitel Lehreinheiten}
+
+In der Lehreinheit verschmelzen die wesentlichen, veränderlichen Daten um mit der Planung fortfahren zu können. Die Daten in den Lehreinheiten dienen speziell für die LV-Planung und auch als Datenquelle für die CIS-Seite. Lehraufträge werden auch auf Basis dieser Daten erstellt. 
+
+Die Lehreinheit führt Lektoren, Studenten, Lehrfächer usw. zusammen und muss jedes Semester überarbeitet werden.
+
+\section{Einträge vornehmen}
+Ein Eintrag oder vielmehr eine Änderung der Daten hat keine direkte Auswirkung auf verplante Stunden. Wenn eine Änderung vorgenommen wird (z.B. ein neuer Lektor) muss dies der Lehrveranstaltungsplanung kommuniziert werden.
+
+Die Bearbeitung der Lehreinheiten erfolgt in der Registerkarte ''Lehrveranstaltung''
+
+Im Quellmenü wird wie gewohnt ein Lehrverband oder Lektor ausgewählt, dessen Lehreinheiten bearbeitet werden sollen.
+Im Hauptfenster werden daraufhin die Lehrveranstaltungen angezeigt, die dem Verband oder Lektor zugeordnet sind.
+Siehe dazu Abbildung \ref{Lehrveranstaltung}
+
+\info{Bearbeitet werden können nur die \textit{Lehreinheiten}.
+Die \textit{Lehrveranstaltungen} müssen schon in der Datenbank vorhanden sein, oder von einem Administrator angelegt werden.}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.8\textwidth]{Tempus_Lehrveranstaltungen1}
+	\caption{Aufbau der Registerkarte \textit{Lehrveranstaltung}}
+	\label{Lehrveranstaltung}
+\end{figure}
+
+Ein kleiner Pfeil neben einer Lehrveranstaltung zeigt an, dass sich darunter eine Lehreinheit befindet. Klicken Sie auf den Pfeil um die Lehreinheiten auszuklappen.
+
+Ist noch keine Lehreinheit vorhanden (kein Pfeil), klicken Sie eine Lehrveranstaltung an. Diese wird nun \colorbox{yellow}{gelb} unterlegt. Klicken Sie nun auf\\
+\includegraphics{icon_neue_LE}...neue Lehreinheit anlegen\\
+um ein leeres Eingabefeld zu erhalten.
+Dort können Sie nun alle Daten zu der Lehreinheit eingeben, die für die Verplanung notwendig sind.
+In den Drop-Down Feldern, können Sie einen Eintrag aus vordefinierten Listen (wie z.B. Raumtypen) wählen.
+% Die Bedeutung der Felder können Sie im Kapitel ''Begriffserklärungen'' nachschlagen.
+
+\begin{itemize}
+	\item Sprache: In welcher Sprachen wird der Unterricht abgehalten? Zur Auswahl stehen zur Zeit German, English, Espanol.
+	\item UNR: Die UNR (=Unterrichtsnummer) wird nach dem Klicken auf \fbox{Speichern} automatisch generiert und ist normalerweise identisch mit der Lehreinheit\_ID. Wenn die UNR manuell mit einer anderen LE gleichgesetzt wird, findet kein Kollisionscheck im Stundenplan statt. Lehreinheiten mit gleicher UNR können demnach zeitgleich verplant werden.
+	\item Lehrfach: Das Lehrfach stellt die Verbindung zum Fachbereich dar. Die Kurzbezeichnung des Lehrfachs wird gemeinsam mit der Lehrform an erster Stelle im Lehrveranstaltungsplan angezeigt. 
+	\item Lehrform: Hier wird die Form des Unterrichts ausgewählt, z.B. Seminar, Vorlesung oder Übung.
+	\item Raumtyp und Raumtyp alternativ: Um die verschiedenen Unterrichtsräume übersichtlicher zu gruppieren, wird das Attribut ''Raumtyp'' verwendet.
+Ein Raumtyp wäre beispielsweise ''Seminarraum''. Dieser fasst beliebig viele, einzelne Räume zu einer Gesamtheit zusammen.
+Das Attribut dient hauptsächlich dazu, um bei der Stundenverplanung eine übersichtliche Menge an Raumvorschlägen für eine Lehreinheit zu erhalten.
+	\item Lehre: Wenn angehakt, wird diese Lehreinheit in den Stundenplan einbezogen.
+	\item Stundenblockung: Gibt an, wie viele Einheiten am Stück (also direkt hintereinander) verplant werden sollen. Da (bei Einheiten zu 45 Minuten) eine Einzelstunde oft unzureichend ist, wird die Stundenblockung in den meisten Fällen zumindest ''2'' betragen.
+	\item Wochenrythmus: Der Wochenrythmus gibt an, in welchem Intervall (z.B. ''1'' für wöchentlich oder ''2'' für einen 14-tägigen Rhythmus) der Unterricht stattfindet.
+	\item Start KW: Die Start-Kalenderwoche gibt die Wochen an, in der die Lehreinheit beginnen soll.
+	\item Studiensemester: Hier wird ausgewählt, in welchem Studiensemester der Unterricht stattfindet (z.B. WS2007).
+	\item Anmerkung: Besonderheiten, die bei der Erstellung des Stundenplans berücksichtigt werden sollen, können hier eingegeben werden. 
+	\end{itemize}
+
+\section{Gruppen zuweisen}
+
+In dem weißen Feld ''Gruppen'' können nun die Lehrverbände definiert werden, die der Lehreinheit zugeordnet werden sollen.
+Das Feld kann durch Drag\&Drop aus dem Quellmenü befüllt werden. Klappen Sie den gewünschten Verband im Quellmenü auf und ziehen Sie ihn in das Feld ''Gruppen''. Es können mehrere Gruppen zugewiesen werden.
+
+Sie können einzelne Gruppen löschen, indem Sie diese markieren, mit der rechten Maustaste anklicken, und \textit{Entfernen} drücken.
+
+\section{Lektoren zuweisen}
+
+Im nächsten Schritt erfolgt die Zuweisung der Lektoren zur Lehreinheit.
+Wechseln Sie dazu im Eingabefeld den Karteireiter auf ''Lektorenzuteilung'' und im Quellmenü auf die Karteikarte ''Lektor'' wie in Abbildung \ref{Lektorenzuteilung} dargestellt ist.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.8\textwidth]{Tempus_Lehrveranstaltungen2}
+	\caption{Registerkarte Lektorenzuteilung}
+	\label{Lektorenzuteilung}
+\end{figure}
+
+Nun können Sie per Drag\&Drop aus dem Quellmenü einen oder mehrere Lektoren in das weiße Feld ziehen.
+Wenn Sie danach einen Lektor anklicken, können Sie daneben die Lektorendaten eingeben oder ändern.
+
+\begin{itemize}
+	\item Lehrfunktion: Hier wird die Funktion der Person innerhalb der Lehreinheit bestimmt.
+	\item Lektor: Diese Feld dient dazu, den eingetragenen Lektor zu ändern, wenn dieser schon verplant wurde. (siehe Kapitel \ref{Lektoren ändern})
+	\item Semesterstunden: Hier wird die Stundenanzahl definiert, die der Lektor tatsächlich bezahlt bekommt. Dezimalangaben sind dabei erlaubt (Trennung durch einen Punkt). Diese Zahl wird abgerundet als ganze Zahl in das Feld ''Planstunden'' übernommen.
+	\item Planstunden: Die Planstunden werden in der Lehrfächerverteilung in TEMPUS\raisebox{1ex}{\tiny \copyright} angezeigt und sind die Stunden, die im LV-Plan verplant werden sollen.
+Im Normalfall werden Semesterstunden und Planstunden übereinstimmen.
+Sollte jedoch eine Abweichung beabsichtigt sein, können die Planstunden verändert werden.
+	\item Stundensatz: Eine Dezimalzahl, die in \textit{Euro} angibt, wie viel der Lektor pro Einheit bezahlt bekommt.
+	\item Faktor: Der Faktor wirkt sich auf den Stundensatz aus und wird bei der Berechnung des Lehrauftrages multipliziert. Standardmäßig ist der Faktor auf 1.0 gestellt. Wenn z.B. eine Mehrbelastung durch eine große Studentenzahl besteht, kann mit einer Erhöhung des Faktors das Entgelt für diese Lehreinheit erhöht werden.
+	\item Anmerkung: Hier können zusätzliche Informationen eingegeben werden.
+	\item BIS-Melden: Eingabe, ob dieser Unterricht in der BIS-Meldung berücksichtigt wird. 
+\end{itemize}
+
+Durch drücken auf \fbox{Speichern} werden die Daten gesichert.
+Wenn Sie danach in der Registerkarte ''Details'' auf \fbox{Speichern} drücken, aktualisiert sich die Liste der Lehrveranstaltungen.
+
+Sie können Lektoren aus der Zuteilung löschen, indem Sie diese markieren, mit der rechten MAustaste anklicken und \textit{Entfernen} wählen.
+Ein Lektor kann nicht gelöscht werden, wenn er bereits im Stundenplan verplant wurde. In diesem Fall erscheint eine Fehlermeldung.
+
+\idee{Die Liste der Lehrveranstaltungen kann durch klicken auf die Überschrift sortiert werden.}
+
+\info{Werden pro Lehreinheit mehrere Gruppen und/oder mehrere Lektoren angegeben, gibt dies der Planungsstelle zu verstehen, dass diese Lehreinheiten auch nur so stattfinden. Zwei zugeteilte Lektoren bedeuten demnach, dass zwei Lektoren zur selben Zeit, im selben Raum, die selbe Gruppe unterrichten.}
+
+\includegraphics{icon_aktualisieren}...Durch klicken auf das Symbol, aktualisiert sich die Liste der Lehrveranstaltungen.
+
+\includegraphics{Listenfeld_ConfigButton}...Dieser Button blendet zusätzliche Details in der Liste der Lehrveranstaltungen ein.
+
+\section{Lektoren ändern}
+\label{Lektoren ändern}
+
+Die folgende Möglichkeit ist gerade beim Ändern von Dummy- oder NN-Lektoren hilfreich aber auch um jeden bereits verplanten Lektor durch einen anderen zu ersetzen.
+Es ist nicht zwingend notwendig, den alten Lektor zu löschen und einen neuen Lektor an den selben Terminen zu verplanen.\\
+
+Wählen Sie in der Registerkarte ''Lehrveranstaltung'' die betreffende Lehreinheit aus und gehen Sie dort auf die Registerkarte ''Lektorenzuteilung''. Klicken Sie den Lektor an, den Sie ersetzen möchten. Im Drop-Down Feld wählen Sie nun den neuen Lektor aus und drücken auf  \fbox{Speichern}.\\
+Wenn diese Änderung keine Kollision im LV-Plan verursacht, wird der alte Lektor gleich im LV-Plan ersetzt. Sollte aber eine Kollision entstehen (auch bei Zeitsperren) muss die Lehrveranstaltungsplanung diese erst in BEIDEN Stundenplantabellen beseitigen oder ggf. den alten Lektor löschen und den neuen Lektor händisch verplanen.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.8\textwidth]{Tempus_Lektor_aendern}
+	\caption{Einen bereits verplanten Lektor nachträglich ändern}
+	\label{Lektor ändern}
+\end{figure}
+
+\section{Einträge löschen}
+
+Angelegte Lehreinheiten können auf 2 Arten gelöscht werden.
+
+Entweder durch markieren der Lehreinheit und klicken auf den Button 
+\includegraphics{delete}...''Lehreinheiten löschen'' oder durch markieren, klicken mit der rechten Maustaste und drücken auf ''Entfernen''.
+
+Zugeteilte Lektoren und Gruppen werden ebenfalls durch markieren und der rechten Maustaste gelöscht.
+
+Wenn eine Lehreinheit bereits im LV-Plan verplant wurde, ist das Löschen der Lehreinheit, eines zugeteilten Lektors und einer Gruppe NICHT möglich.
+
+Zuvor müssen alle verplanten Lehreinheiten aus den Tabellen Stundenplan UND StundenplanDEV entfernt werden.

@@ -1,0 +1,21 @@
+\chapter{Ampel}
+\label{Ampel}
+Das Ampelsystem ist eine Art Erinnerungssystem für Mitarbeiter und Studierende.
+Ampeln werden im CIS angezeigt und müssen dort bestätigt werden.
+Fallbeispiele für Ampeln:\\
+- Erinnerung zur Eintragung der Zeitwünsche für Lektoren\\
+- Bestätigung von Verordnungen (Brandschutzordnung etc)\\
+\\
+\section{Ampel hinzufügen}
+Unter dem Punkt Stammdaten->Ampel können neue Ampeln erstellt
+werden.\\
+\\
+Die folgenden Felder müssen befüllt werden:\\
+\begin{itemize}
+	\item kurzbz - Kurze eindeutige Bezeichnung der Ampel
+	\item benutzer select - SQL Select. Dieser liefert die UID aller Personen die die  Ampel betrifft
+	\item beschreibung - Beschreibungstext
+	\item deadline - Datum der Deadline
+	\item vorlaufzeit - Anzahl der Tage vor der Deadline bei der die Ampel auf Gelb schaltet
+	\item verfallszeit - Anzahl der Tage nach der Deadline nach der die Ampel verschwindet
+\end{itemize}

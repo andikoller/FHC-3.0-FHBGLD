@@ -22,11 +22,8 @@ require_once('../../include/functions.inc.php');
 require_once('../../include/filter.class.php');
 require_once('../../include/benutzerberechtigung.class.php');
 
-<<<<<<< HEAD
 $nl="\n";
 
-=======
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 if (!$db = new basis_db())
 	die('Es konnte keine Verbindung zum Server aufgebaut werden.');
 
@@ -35,20 +32,12 @@ $user = get_uid();
 $rechte = new benutzerberechtigung();
 $rechte->getBerechtigungen($user);
 
-if(!$rechte->isBerechtigt('basis/statistik', 's'))
-	die('Sie haben keine Berechtigung (basis/statistik) für diese Seite');
+if($rechte->isBerechtigt('addon/reports', 'suid'))
+	$write_admin=true;
 
-
-if(isset($_POST['action']) && $_POST['action']=='delete' && isset($_POST['filter_id']))
-{
-	$filter = new filter();
-	$filter->delete($_POST['filter_id']);
-		
-}
 $filter = new filter();
 if (!$filter->loadAll())
     die($filter->errormsg);
-<<<<<<< HEAD
 
 //$htmlstr = "<table class='liste sortable'>\n";
 $htmlstr = "<form name='formular'><input type='hidden' name='check' value=''></form><table class='tablesorter' id='t1'>\n";
@@ -56,12 +45,11 @@ $htmlstr .= "   <thead><tr>\n";
 $htmlstr .= '    <th onmouseup="document.formular.check.value=0">ID</th>
 		<th title="Kurzbezeichnung des Filters">KurzBz</th>
 		<th>ValueName</th>
-		<th>Show Value</th>
+		<th>ShowV</th>
 		<th>Type</th>
 		<th>HTMLAttributes</th>
 		<th>SQL</th>
-		<th>Action</th>';
-		
+		<th>Reserve</th>';
 $htmlstr .= "   </tr></thead><tbody>\n";
 $i = 0;
 foreach ($filter->result as $filter)
@@ -69,17 +57,17 @@ foreach ($filter->result as $filter)
     //$htmlstr .= "   <tr class='liste". ($i%2) ."'>\n";
 	$htmlstr .= "   <tr>\n";
 	$htmlstr .= "       <td align='right'><a href='filter_details.php?filter_id=".$filter->filter_id."' target='frame_filter_details'>".$filter->filter_id." </a>
-						<a href='filter_vorschau.php?filter_id=".$filter->filter_id."' target='_blank'>
-							<img src='../../skin/images/x-office-presentation.png' height='15px'/>
-						</a>
+							<a href='../data/".$filter->filter_id.".html' target='_blank'>
+								<img title='".$filter->kurzbz." anzeigen' src='x-office-presentation.svg' height='15' />
+							</a>
 						</td>\n";
 	$htmlstr .= "       <td><a href='filter_details.php?filter_id=".$filter->filter_id."' target='frame_filter_details'>".$filter->kurzbz."</a></td>\n";
-	$htmlstr .= "       <td>".$db->convert_html_chars($filter->valuename)."</td>\n";
-	$htmlstr .= "       <td>".($filter->showvalue?'Ja':'Nein')."</td>\n";
-	$htmlstr .= "       <td>".$db->convert_html_chars($filter->type)."</td>\n";
-	$htmlstr .= "       <td>".$db->convert_html_chars($filter->htmlattr)."</td>\n";
-	$htmlstr .= "       <td>".$db->convert_html_chars(substr($filter->sql,0,32))."...</td>\n";
-	$htmlstr .=	'		<td><form action="'.$_SERVER['PHP_SELF'].'" style="display: inline" name="form_'.$filter->filter_id.'" method="POST"><input type="hidden" name="filter_id" value="'.$filter->filter_id.'"><input type="hidden" name="action" value="delete"/><a href="#Loeschen" onclick="ConfirmDelete('.$filter->filter_id.');">Delete</a></form></td>';
+	$htmlstr .= "       <td>".$filter->valuename."</td>\n";
+	$htmlstr .= "       <td>".$filter->showvalue."</td>\n";
+	$htmlstr .= "       <td>".$filter->type."</td>\n";
+	$htmlstr .= "       <td>".$filter->htmlattr."</td>\n";
+	$htmlstr .= "       <td>".substr($filter->sql,0,32)."...</td>\n";
+	$htmlstr .= "       <td>".substr($filter->sql,0,16)."...</td>\n";
 	$htmlstr .= "   </tr>\n";
 	$i++;
 }
@@ -89,144 +77,82 @@ $htmlstr .= "</tbody></table>\n";
 ?>
 <html>
 <head>
-	<title>Filter &Uuml;bersicht</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<link rel="stylesheet" href="../../skin/vilesci.css" type="text/css">
-	<script type="text/javascript" src="../../include/js/jquery.js"></script>
-	<link rel="stylesheet" href="../../skin/tablesort.css" type="text/css"/>
-	<script language="JavaScript" type="text/javascript">
-	$(document).ready(function() 
-			{ 
-=======
-?>
-<html>
-	<head>
-		<title>Filter Übersicht</title>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<link rel="stylesheet" href="../../skin/vilesci.css" type="text/css">
-		<script type="text/javascript" src="../../include/js/jquery.min.1.11.1.js"></script>
-		<script type="text/javascript" src="../../submodules/tablesorter/jquery.tablesorter.min.js"></script>
-		<link rel="stylesheet" href="../../skin/tablesort.css" type="text/css"/>
-		<script language="JavaScript" type="text/javascript">
+<title>R&auml;ume &Uuml;bersicht</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../../skin/vilesci.css" type="text/css">
+<!--<link rel="stylesheet" href="../../include/js/tablesort/table.css" type="text/css">
+<script src="../../include/js/tablesort/table.js" type="text/javascript"></script>-->
+<script type="text/javascript" src="../../include/js/jquery.js"></script>
+<link rel="stylesheet" href="../../skin/tablesort.css" type="text/css"/>
+<style>
+table.tablesorter tbody td
+{
+	margin: 0;
+	padding: 0;
+	vertical-align: middle;
+}
+</style>
+<script language="JavaScript" type="text/javascript">
+$(document).ready(function() 
+		{ 
+			$("#t1").tablesorter(
+			{
+				sortList: [[2,0]],
+				widgets: ["zebra"]
+			}); 
+		});
+		
+function confdel()
+{
+	if(confirm("Diesen Datensatz wirklick loeschen?"))
+	  return true;
+	return false;
+}
 
-			$(function() {
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
-				$("#t1").tablesorter(
-				{
-					sortList: [[2,0]],
-					widgets: ["zebra"]
-<<<<<<< HEAD
-				}); 
-			});
-	function ConfirmDelete(filter_id)
-	{
-		if(confirm("Wollen Sie diesen Filter wirklich löschen?"))
+function changeboolean(ort_kurzbz, name)
+{
+	value=document.getElementById(name+ort_kurzbz).value;
+	
+	var dataObj = {};
+	dataObj["ort_kurzbz"]=ort_kurzbz;
+	dataObj[name]=value;
+
+	$.ajax({
+		type:"POST",
+		url:"raum_uebersicht.php", 
+		data:dataObj,
+		success: function(data) 
 		{
-			document.forms['form_'+filter_id].submit();
-		}
-	}
-	</script>
+			if(data=="true")
+			{
+				//Image und Value aendern
+				if(value=="true")
+					value="false";
+				else
+					value="true";
+				document.getElementById(name+ort_kurzbz).value=value;
+				document.getElementById(name+"img"+ort_kurzbz).src="../../skin/images/"+value+".png";
+			}
+			else 
+				alert("ERROR:"+data)
+		},
+		error: function() { alert("error"); }
+	});
+}
+
+</script>
+
 </head>
 
-<body>
-<a href="filter_details.php" target="frame_filter_details">Neuer Filter</a>
+<body class="background_main">
+<a href="filter_details.php" target="frame_report_details">Neuer Filter</a>
+
+
 <?php 
     echo $htmlstr;
 ?>
+
+
+
 </body>
-=======
-				});
-			});
-
-			function ConfirmDelete(filter_id)
-			{
-				if(confirm("Wollen Sie diesen Filter wirklich löschen?"))
-				{
-					document.forms['form_'+filter_id].submit();
-				}
-			}
-		</script>
-	</head>
-
-	<body>
-		<a href="filter_details.php" target="frame_filter_details">Neuer Filter</a>
-
-		<form name="formular">
-			<input type="hidden" name="check" value="">
-		</form>
-		<table class="tablesorter" id="t1">
-			<thead>
-				<tr>
-					<th onmouseup="document.formular.check.value=0">
-						ID
-					</th>
-					<th title="Kurzbezeichnung des Filters">
-						KurzBz
-					</th>
-					<th>
-						ValueName
-					</th>
-					<th>
-						Show Value
-					</th>
-					<th>
-						Type
-					</th>
-					<th>
-						HTMLAttributes
-					</th>
-					<th>
-						SQL
-					</th>
-					<th>
-						Action
-					</th>
-				</tr>
-			</thead>
-			<tbody>
-				<?php foreach ($filter->result as $filter): ?>
-					<tr>
-						<td class="overview-id">
-							<a href="filter_details.php?filter_id=<?php echo $filter->filter_id ?>" target="frame_filter_details">
-								<?php echo $filter->filter_id ?>
-							</a>
-							<a href="filter_vorschau.php?filter_id=<?php echo $filter->filter_id ?>" target="_blank">
-								<img src="../../skin/images/x-office-presentation.png" class="mini-icon" />
-							</a>
-						</td>
-						<td>
-							<a href="filter_details.php?filter_id=<?php echo $filter->filter_id ?>" target="frame_filter_details">
-								<?php echo $filter->kurzbz ?>
-							</a>
-						</td>
-						<td>
-							<?php echo $db->convert_html_chars($filter->valuename) ?>
-						</td>
-						<td>
-							<?php echo $filter->showvalue ? 'Ja' : 'Nein' ?>
-						</td>
-						<td>
-							<?php echo $db->convert_html_chars($filter->type) ?>
-						</td>
-						<td>
-							<?php echo $db->convert_html_chars($filter->htmlattr) ?>
-						</td>
-						<td>
-							<?php echo $db->convert_html_chars(substr($filter->sql,0,32)) ?>...
-						</td>
-						<td>
-							<form action="<?php echo basename(__FILE__) ?>" name="form_<?php echo $filter->filter_id ?>" method="POST">
-								<input type="hidden" name="filter_id" value="<?php echo $filter->filter_id ?>">
-								<input type="hidden" name="action" value="delete" />
-								<a href="#Loeschen" onclick="ConfirmDelete(<?php echo $filter->filter_id ?>);">
-									Delete
-								</a>
-							</form>
-						</td>
-					</tr>
-				<?php endforeach; ?>
-			</tbody>
-		</table>
-	</body>
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 </html>

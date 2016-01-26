@@ -20,8 +20,7 @@
  *          Rudolf Hangl 		< rudolf.hangl@technikum-wien.at >
  *          Gerald Simane-Sequens 	< gerald.simane-sequens@technikum-wien.at >
  */
-require_once('../../config/vilesci.config.inc.php');
-require_once('../../config/global.config.inc.php');			
+require_once('../../config/vilesci.config.inc.php');			
 require_once('../../include/benutzerberechtigung.class.php');
 require_once('../../include/datum.class.php');
 require_once('../../include/functions.inc.php');
@@ -31,10 +30,6 @@ require_once('../../include/pruefling.class.php');
 require_once('../../include/studiengang.class.php');
 require_once('../../include/reihungstest.class.php');
 require_once('../../include/studiensemester.class.php');
-<<<<<<< HEAD
-=======
-require_once('../../include/log.class.php');
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	
 //	Studiengang lesen 
 $s=new studiengang();
@@ -153,10 +148,6 @@ if(isset($_POST['personzuteilen']))
 }
 //Links
 echo '<br><a href="'.CIS_ROOT.'cis/testtool/admin/auswertung.php" target="blank">Auswertung</a> | 
-<<<<<<< HEAD
-=======
-	<a href="'.CIS_ROOT.'cis/testtool/admin/index.php" target="blank">Fragenadministration</a> |
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	<a href="'.CIS_ROOT.'cis/testtool/admin/uebersichtFragen.php" target="blank">Fragenkatalog</a><br>
 	<hr>';
 //Anzeigen der kommenden Reihungstesttermine:
@@ -164,11 +155,7 @@ echo '<br><a href="'.$_SERVER['PHP_SELF'].'?action=showreihungstests">Anzeigen d
 
 if(isset($_GET['action']) && $_GET['action']=='showreihungstests')
 {
-<<<<<<< HEAD
 	$qry = "SELECT kurzbzlang, datum,ort_kurzbz,anmerkung, uhrzeit, insertvon,reihungstest_id, 
-=======
-	$qry = "SELECT kurzbzlang,datum,ort_kurzbz,anmerkung,uhrzeit,max_teilnehmer,insertvon,reihungstest_id, 
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 			(SELECT count(*) FROM public.tbl_prestudent WHERE reihungstest_id=tbl_reihungstest.reihungstest_id) as anzahl_teilnehmer
 			FROM public.tbl_reihungstest JOIN public.tbl_studiengang USING (studiengang_kz)
 			WHERE datum>=CURRENT_DATE ORDER BY datum";
@@ -183,10 +170,6 @@ if(isset($_GET['action']) && $_GET['action']=='showreihungstests')
 						<th>Ort</th>
 						<th>Uhrzeit</th>
 						<th>Teilnehmer</th>
-<<<<<<< HEAD
-=======
-						<th>Max-Teilnehmer</th>
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 						<th>Anmerkung</th>
 						<th>InsertVon</th>
 						<th>ReihungstestID</th>
@@ -201,10 +184,6 @@ if(isset($_GET['action']) && $_GET['action']=='showreihungstests')
 			echo "<td>$row->ort_kurzbz</td>";
 			echo "<td>$row->uhrzeit</td>";
 			echo "<td>$row->anzahl_teilnehmer</td>";
-<<<<<<< HEAD
-=======
-			echo "<td ".($row->anzahl_teilnehmer>$row->max_teilnehmer?"style='color: red; font-weight: bold'":"").">$row->max_teilnehmer</td>";
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 			echo "<td>$row->anmerkung</td>";
 			echo "<td>$row->insertvon</td>";
 			echo "<td>$row->reihungstest_id</td>";
@@ -214,11 +193,7 @@ if(isset($_GET['action']) && $_GET['action']=='showreihungstests')
 	}
 }
 
-<<<<<<< HEAD
 // Antworten eines Gebietes einer Person löschen
-=======
-// Antworten eines Gebietes einer Person löschen und einen Logfile-Eintrag mit Undo-Befehl erstellen
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 $ps=new prestudent();
 $datum=date('Y-m-d');
 $ps->getPrestudentRT($datum,true);
@@ -290,62 +265,7 @@ if(isset($_POST['deleteteilgebiet']))
 		$pruefling->getPruefling($_POST['prestudent']);
 		if($pruefling->pruefling_id=='')
 			die('Pruefling wurde nicht gefunden');
-<<<<<<< HEAD
 	
-=======
-
-		//UNDO Befehl zusammenbauen und Log schreiben
-		$undo='';
-		$db->db_query('BEGIN;');
-		
-		$qry = "SELECT * FROM testtool.tbl_pruefling_frage WHERE pruefling_id=".$db->db_add_param($pruefling->pruefling_id, FHC_INTEGER)." AND
-				frage_id IN (SELECT frage_id FROM testtool.tbl_frage WHERE gebiet_id=".$db->db_add_param($_POST['gebiet']).");
-				";
-		
-		if($db->db_query($qry))
-		{
-			while($row = $db->db_fetch_object())
-			{
-				$undo.=" INSERT INTO testtool.tbl_pruefling_frage(prueflingfrage_id,pruefling_id,frage_id,nummer,begintime,endtime) VALUES (".
-				 		$db->db_add_param($row->prueflingfrage_id, FHC_INTEGER).', '.
-				 		$db->db_add_param($row->pruefling_id, FHC_INTEGER).', '.
-						$db->db_add_param($row->frage_id, FHC_INTEGER).', '.
-						$db->db_add_param($row->nummer, FHC_INTEGER).', '.
-						$db->db_add_param($row->begintime).', '.
-						$db->db_add_param($row->endtime).');';
-			}
-		}
-		else 
-		{
-			$db->errormsg = 'Fehler beim Erstellen des UNDO Befehls fuer testtool.tbl_pruefling_frage';
-			$db->db_query('ROLLBACK');
-			return false;
-		}
-		
-		$qry = "SELECT * FROM testtool.tbl_antwort 
-				WHERE pruefling_id=".$db->db_add_param($pruefling->pruefling_id)." AND 
-				vorschlag_id IN (SELECT vorschlag_id FROM testtool.tbl_vorschlag WHERE frage_id IN 
-				(SELECT frage_id FROM testtool.tbl_frage WHERE gebiet_id=".$db->db_add_param($_POST['gebiet'])."));
-				";
-		
-		if($db->db_query($qry))
-		{
-			while($row = $db->db_fetch_object())
-			{
-				$undo.=" INSERT INTO testtool.tbl_antwort(antwort_id,pruefling_id,vorschlag_id) VALUES (".
-				 		$db->db_add_param($row->antwort_id, FHC_INTEGER).', '.
-				 		$db->db_add_param($row->pruefling_id, FHC_INTEGER).', '.
-						$db->db_add_param($row->vorschlag_id, FHC_INTEGER).');';
-			}
-		}
-		else 
-		{
-			$db->errormsg = 'Fehler beim Erstellen des UNDO Befehls fuer testtool.tbl_antwort';
-			$db->db_query('ROLLBACK');
-			return false;
-		}
-		//Gebiet loeschen
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 		$qry = "DELETE FROM testtool.tbl_pruefling_frage where pruefling_id=".$db->db_add_param($pruefling->pruefling_id, FHC_INTEGER)." AND
 				frage_id IN (SELECT frage_id FROM testtool.tbl_frage WHERE gebiet_id=".$db->db_add_param($_POST['gebiet']).");
 				
@@ -353,54 +273,18 @@ if(isset($_POST['deleteteilgebiet']))
 				WHERE pruefling_id=".$db->db_add_param($pruefling->pruefling_id)." AND 
 				vorschlag_id IN (SELECT vorschlag_id FROM testtool.tbl_vorschlag WHERE frage_id IN 
 				(SELECT frage_id FROM testtool.tbl_frage WHERE gebiet_id=".$db->db_add_param($_POST['gebiet'])."));";
-<<<<<<< HEAD
 		if($result = $db->db_query($qry))
 		{
 			echo '<b>'.$db->db_affected_rows($result).' Antworten wurden gelöscht</b>';
 		}
 		else 
 			echo '<b>Fehler beim Löschen der Daten</b>';
-=======
-		
-		if($result = $db->db_query($qry))
-		{
-			//Log schreiben
-			$log = new log();
-			
-			$log->new = true;
-			$log->sql = $qry;
-			$log->sqlundo = $undo;
-			$log->executetime = date('Y-m-d H:i:s');
-			$log->mitarbeiter_uid = $user;
-			$log->beschreibung = "Testtool-Antworten-Gebiet ".$_POST['gebiet']." von Prestudent ".$_POST['prestudent']." geloescht";
-
-			if(!$log->save())
-			{
-				$db->errormsg = 'Fehler beim Schreiben des Log-Eintrages';
-				$db->db_query('ROLLBACK');
-				return false;
-			}
-			
-			$db->db_query('COMMIT;');
-			echo '<b>'.$db->db_affected_rows($result).' Antworten wurden gelöscht</b>';
-		}
-		else 
-		{
-			$db->errormsg = 'Fehler beim Loeschen der Daten';
-			$db->db_query('ROLLBACK');
-		}
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	}
 	else 
 		echo '<span class="error">Wählen Sie bitte ein Gebiet, dessen Antworten Sie löschen wollen</span>';
 }
 
 echo '<input type="submit" value="! Alle Teilgebiete l&ouml;schen !" name="delete_all" onclick="return confirm(\'Wollen Sie wirklich ALLE Antworten des Prüflings löschen?\')"></form>';
-<<<<<<< HEAD
-=======
-
-// Alle Antworten aller Gebiete einer Person löschen und einen Logfile-Eintrag mit Undo-Befehl erstellen
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 if(isset($_POST['delete_all']))
 {
 	if(isset($_POST['prestudent']) && isset($_POST['gebiet']) && 
@@ -411,7 +295,6 @@ if(isset($_POST['delete_all']))
 		if($pruefling->pruefling_id=='')
 			die('Pruefling wurde nicht gefunden');
 	
-<<<<<<< HEAD
 		$qry = "DELETE FROM testtool.tbl_pruefling_frage where pruefling_id=".$db->db_add_param($pruefling->pruefling_id).";
 				DELETE FROM testtool.tbl_antwort WHERE pruefling_id=".$db->db_add_param($pruefling->pruefling_id).";";
 				
@@ -422,85 +305,6 @@ if(isset($_POST['delete_all']))
 		}
 		else 
 			echo '<b>Fehler beim Löschen der Daten</b>';
-=======
-		//UNDO Befehl zusammenbauen und Log schreiben
-		$undo='';
-		$db->db_query('BEGIN;');
-		
-		$qry = "SELECT * FROM testtool.tbl_pruefling_frage where pruefling_id=".$db->db_add_param($pruefling->pruefling_id).";
-				";
-		
-		if($db->db_query($qry))
-		{
-			while($row = $db->db_fetch_object())
-			{
-				$undo.=" INSERT INTO testtool.tbl_pruefling_frage(prueflingfrage_id,pruefling_id,frage_id,nummer,begintime,endtime) VALUES (".
-				 		$db->db_add_param($row->prueflingfrage_id, FHC_INTEGER).', '.
-				 		$db->db_add_param($row->pruefling_id, FHC_INTEGER).', '.
-						$db->db_add_param($row->frage_id, FHC_INTEGER).', '.
-						$db->db_add_param($row->nummer, FHC_INTEGER).', '.
-						$db->db_add_param($row->begintime).', '.
-						$db->db_add_param($row->endtime).');';
-			}
-		}
-		else 
-		{
-			$db->errormsg = 'Fehler beim Erstellen des UNDO Befehls fuer testtool.tbl_pruefling_frage';
-			$db->db_query('ROLLBACK');
-			return false;
-		}
-		
-		$qry = "SELECT * FROM testtool.tbl_antwort WHERE pruefling_id=".$db->db_add_param($pruefling->pruefling_id).";
-				";
-		
-		if($db->db_query($qry))
-		{
-			while($row = $db->db_fetch_object())
-			{
-				$undo.=" INSERT INTO testtool.tbl_antwort(antwort_id,pruefling_id,vorschlag_id) VALUES (".
-				 		$db->db_add_param($row->antwort_id, FHC_INTEGER).', '.
-				 		$db->db_add_param($row->pruefling_id, FHC_INTEGER).', '.
-						$db->db_add_param($row->vorschlag_id, FHC_INTEGER).');';
-			}
-		}
-		else 
-		{
-			$db->errormsg = 'Fehler beim Erstellen des UNDO Befehls fuer testtool.tbl_antwort';
-			$db->db_query('ROLLBACK');
-			return false;
-		}
-		//Gebiet loeschen
-		$qry = "DELETE FROM testtool.tbl_pruefling_frage where pruefling_id=".$db->db_add_param($pruefling->pruefling_id).";
-				DELETE FROM testtool.tbl_antwort WHERE pruefling_id=".$db->db_add_param($pruefling->pruefling_id).";";
-		
-		if($result = $db->db_query($qry))
-		{
-			//Log schreiben
-			$log = new log();
-			
-			$log->new = true;
-			$log->sql = $qry;
-			$log->sqlundo = $undo;
-			$log->executetime = date('Y-m-d H:i:s');
-			$log->mitarbeiter_uid = $user;
-			$log->beschreibung = "Testtool-Antworten aller Gebiete von Prestudent ".$_POST['prestudent']." geloescht";
-
-			if(!$log->save())
-			{
-				$db->errormsg = 'Fehler beim Schreiben des Log-Eintrages';
-				$db->db_query('ROLLBACK');
-				return false;
-			}
-			
-			$db->db_query('COMMIT;');
-			echo '<b> Alle '.$db->db_affected_rows($result).' Antworten wurden gelöscht</b>';
-		}
-		else 
-		{
-			$db->errormsg = 'Fehler beim Loeschen der Daten';
-			$db->db_query('ROLLBACK');
-		}
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	}
 	else 
 		echo '<span class="error">Um alle Antworten eines Prüflings zu löschen, wählen Sie im DropDown bitte "Alle Gebiete" aus</span>';
@@ -570,8 +374,8 @@ if(isset($_GET['action']) && $_GET['action']=='deletedummyanswers')
 	if(!$rechte->isBerechtigt('basis/testtool', null, 'suid'))
 		die('<span class="error">Sie haben keine Berechtigung für diese Aktion. <a href="reihungstest_administration.php">Seite neu laden</a></span>');
 		
-	$qry = "DELETE FROM testtool.tbl_antwort WHERE pruefling_id=(SELECT pruefling_id FROM testtool.tbl_pruefling WHERE prestudent_id=".$db->db_add_param(PRESTUDENT_ID_DUMMY_STUDENT).");
-			DELETE FROM testtool.tbl_pruefling_frage where pruefling_id=(SELECT pruefling_id FROM testtool.tbl_pruefling WHERE prestudent_id=".$db->db_add_param(PRESTUDENT_ID_DUMMY_STUDENT).");";
+	$qry = "DELETE FROM testtool.tbl_antwort WHERE pruefling_id=841;
+			DELETE FROM testtool.tbl_pruefling_frage where pruefling_id=841;";
 	if($db->db_query($qry))
 		echo ' <b>Antworten wurden gelöscht</b>';
 	else 
@@ -585,8 +389,8 @@ if(isset($_POST['savedummystg']) && isset($_POST['stg']))
 	if(!$rechte->isBerechtigt('basis/testtool', null, 'su'))
 		die('<span class="error">Sie haben keine Berechtigung für diese Aktion. <a href="reihungstest_administration.php">Seite neu laden</a></span>');
 		
-	$qry = "UPDATE public.tbl_prestudent SET studiengang_kz=".$db->db_add_param($_POST['stg'])." WHERE prestudent_id=".$db->db_add_param(PRESTUDENT_ID_DUMMY_STUDENT).";
-	UPDATE testtool.tbl_pruefling SET studiengang_kz=".$db->db_add_param($_POST['stg'])." WHERE prestudent_id=".$db->db_add_param(PRESTUDENT_ID_DUMMY_STUDENT).";";	
+	$qry = "UPDATE public.tbl_prestudent SET studiengang_kz=".$db->db_add_param($_POST['stg'])." WHERE prestudent_id='13478';
+	UPDATE testtool.tbl_pruefling SET studiengang_kz=".$db->db_add_param($_POST['stg'])." WHERE prestudent_id='13478';";	
 	if($db->db_query($qry))
 		echo '<b>Studiengang geändert!</b><br>';
 	else 
@@ -594,7 +398,7 @@ if(isset($_POST['savedummystg']) && isset($_POST['stg']))
 }
 $name='';
 $dummystg='';
-$qry = "SELECT studiengang_kz, vorname, nachname FROM public.tbl_prestudent JOIN public.tbl_person USING(person_id) WHERE prestudent_id=".$db->db_add_param(PRESTUDENT_ID_DUMMY_STUDENT);
+$qry = "SELECT studiengang_kz, vorname, nachname FROM public.tbl_prestudent JOIN public.tbl_person USING(person_id) WHERE prestudent_id='13478'";
 if($result = $db->db_query($qry))
 {
 	if($row = $db->db_fetch_object($result))

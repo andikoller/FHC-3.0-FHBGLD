@@ -1,0 +1,170 @@
+\documentclass[
+BCOR 0.7cm,							% Bindekorrektur, bspw. 1 cm
+11pt										% Schriftgroesse
+]{scrbook}
+
+
+\newif\ifpdf
+\ifx\pdfoutput\undefined
+	\pdffalse              	%normales LaTeX wird ausgeführt
+\else
+	\pdfoutput=1           
+	\pdftrue               	%pdfLaTeX wird ausgeführt
+\fi
+
+\ifpdf %%Einbindung von Grafiken mittels \includegraphics{datei}
+	\usepackage[pdftex]{graphicx} %%Grafiken in pdfLaTeX
+\else
+	\usepackage[dvips]{graphicx} %%Grafiken und normales LaTeX
+\fi
+
+\ifpdf
+	\pdfinfo
+	{
+    /Author (Manfred Kindl)                                
+    /Title (Abgabetool)     
+    /Subject (Benutzerhandbuch Abgabetool Assistenz)                                    
+    /Keywords (Abgabe Abgabetool FH-Complete Technikum-Wien)
+	}
+\else			
+\fi
+
+\usepackage{listings} \lstset{numbers=left, numberstyle=\tiny, numbersep=5pt}
+\lstset{language=tex} 
+
+\usepackage[pdftex,colorlinks=true,urlcolor=blue,linkcolor=blue]{hyperref}
+\usepackage[ngerman]{babel}		%Deutsche Worttrennung
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{makeidx} % Stichwortverzeichnis erstellen aus \index{} Einträgen
+\usepackage{float}
+\usepackage[small,bf]{caption}
+\usepackage{fancyhdr}
+\usepackage{amssymb,amsmath}
+\usepackage{color}
+\usepackage{hyperref} % Paket zum formatieren der Hyperlinks
+\hypersetup{colorlinks=false} % Formatiert die internen Links nicht. Optionen siehe unter: http://en.wikibooks.org/wiki/LaTeX/Hyperlinks#Customization
+
+\addtokomafont{chapter}{\color[rgb]{0.0,0.376,0.584}} %Schriftfarbe für Kapitelüberschriften
+\addtokomafont{section}{\color[rgb]{0.0,0.376,0.584}} %Schriftfarbe für Kapitelüberschriften
+\addtokomafont{subsection}{\color[rgb]{0.0,0.376,0.584}} %Schriftfarbe für Kapitelüberschriften
+
+
+\renewcommand{\rmdefault}{phv} % Arial
+\renewcommand{\sfdefault}{phv} % Arial
+
+\makeindex
+
+\graphicspath{{../../../../images/}}
+
+\setlength{\tolerance}{2000}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1ex plus 0.5ex minus 0.2ex}
+\addtolength{\textheight}{2cm}
+\addtolength{\headheight}{2pt}
+\setlength{\captionmargin}{20pt}
+\floatstyle{plain}
+\floatname{example}{Example}
+
+\newfloat{example}{hbtp}{loe}[chapter]
+\floatplacement{figure}{hbtp}
+\floatplacement{table}{htbp}
+
+\newcommand{\dollar}{\char36}
+
+\newenvironment{info}[1]{
+    %\hspace{-10mm}
+     \framebox[\textwidth][l]{
+        \begin{minipage}{1,3cm}
+        \includegraphics[width=1cm]{icon_info}
+        \end{minipage}
+        \begin{minipage}{12cm}
+        #1
+        \end{minipage}
+    }
+}
+
+\newenvironment{achtung}[1]{
+    %\hspace{-10mm}
+     \framebox[\textwidth][l]{
+        \begin{minipage}{1,3cm}
+        \includegraphics[width=1cm]{icon_achtung}
+        \end{minipage}
+        \begin{minipage}{12cm}
+        #1
+        \end{minipage}
+    }    
+}
+
+\newenvironment{halt}[1]{
+    %\hspace{-10mm}
+     \framebox[\textwidth][l]{
+        \begin{minipage}{1,3cm}
+        \includegraphics[width=1cm]{icon_halt}
+        \end{minipage}
+        \begin{minipage}{12cm}
+        #1
+        \end{minipage}
+    }
+}
+
+\newenvironment{idee}[1] {
+    %\hspace{-10mm}
+     \framebox[\textwidth][l]{
+        \begin{minipage}{1,3cm}
+        \includegraphics[width=1cm]{icon_idee}
+        \end{minipage}
+        \begin{minipage}{12cm}
+        #1
+        \end{minipage}
+    }
+}
+
+\setlength{\unitlength}{1mm}
+
+\newenvironment{markier}[5]
+{    
+    \thicklines \put(#2,#3){\vector(#4,#5){5}} \thinlines
+    \put(#2,#3){\circle*{5}}
+    \put(#2,#3){\textcolor{black}{\circle{5}}\makebox(-10,0){\textcolor{white}{#1}}}
+}
+
+
+\hyphenation{gleich-zeitig para-meter}
+
+
+\begin{document}
+
+\ifpdf
+	\DeclareGraphicsExtensions{.pdf,.jpg,.png}
+\else
+	\DeclareGraphicsExtensions{.eps}
+\fi
+
+\pagestyle{fancyplain}
+% Titelseite einbinden
+
+\include{abgabetool_titel_assistenz}
+
+
+\tableofcontents			% Inhaltsverzeichnis
+
+\frontmatter					% Vorspann (z.B. römische Seitenzahlen)
+
+\include {abgabetool_einleitung}
+
+\mainmatter						% Hauptteil
+
+%% Kapitel Anfang %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\include{abgabetool_beschreibung_assistenz}
+
+
+%% Kapitel Ende   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\appendix							% Beginn des Anhangs
+%\chapter{Schluss}
+%\listoftables				% Tabellenverzeichnis
+%\listoffigures				% Abbildungsverzeichnis
+
+\end{document}

@@ -1,12 +1,5 @@
-<<<<<<< HEAD
 So k&ouml;nnte Ihr angepasstes Layout aussehen!<br>
 Moderner?<br>
 Einfacher?<br>
 oder einfach anders?<br><br>
-=======
-So k&ouml;nnte Ihr angepasstes Layout aussehen!<br>
-Moderner?<br>
-Einfacher?<br>
-oder einfach anders?<br><br>
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 <i><small>copyright by Olivia Padalewski (2007)</small></i>

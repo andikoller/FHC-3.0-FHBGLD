@@ -1,0 +1,171 @@
+\documentclass[
+BCOR0.7cm,							% Bindekorrektur, bspw. 1 cm
+]
+{scrbook}
+
+\newif\ifpdf
+\ifx\pdfoutput\undefined
+	\pdffalse              	%normales LaTeX wird ausgeführt
+\else
+	\pdfoutput=1           
+	\pdftrue               	%pdfLaTeX wird ausgeführt
+\fi
+
+\ifpdf %%Einbindung von Grafiken mittels \includegraphics{datei}
+	\usepackage[pdftex]{graphicx} %%Grafiken in pdfLaTeX
+\else
+	\usepackage[dvips]{graphicx} %%Grafiken und normales LaTeX
+\fi
+
+\ifpdf
+	\pdfinfo
+	{
+    /Author (Manfred Kindl)                                
+    /Title (Tempus)     
+    /Subject (Benutzerhandbuch Tempus)                                    
+    /Keywords (Tempus FH-Complete Technikum-Wien)
+	}
+\else			
+\fi
+
+\usepackage{listings} \lstset{numbers=left, numberstyle=\tiny, numbersep=5pt}
+\lstset{language=tex} 
+
+\usepackage[pdftex,colorlinks=true,urlcolor=blue,linkcolor=blue]{hyperref}
+\usepackage[ngerman]{babel}		
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{makeidx}
+\usepackage{float}
+\usepackage[small,bf]{caption}
+\usepackage{fancyhdr}
+\usepackage{amssymb,amsmath}
+\makeindex
+
+\graphicspath{{../../images/}}
+
+\setlength{\tolerance}{2000}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1ex plus 0.5ex minus 0.2ex}
+\addtolength{\textheight}{2cm}
+\addtolength{\headheight}{2pt}
+\setlength{\captionmargin}{20pt}
+\floatstyle{plain}
+\floatname{example}{Example}
+
+\newfloat{example}{hbtp}{loe}[chapter]
+\floatplacement{figure}{hbtp}
+\floatplacement{table}{htbp}
+
+\newcommand{\dollar}{\char36}
+
+\newenvironment{info}[1]
+{
+    \hspace{-10mm}
+    \fbox
+    {
+        \begin{minipage}{1cm}
+        \includegraphics[width=1cm]{icon_info}
+        \end{minipage}
+        \begin{minipage}{14.5cm}
+        #1
+        \end{minipage}
+    }
+}
+
+\newenvironment{achtung}[1]{
+    \hspace{-10mm}
+    \fbox{
+        \begin{minipage}{1cm}
+        \includegraphics[width=1cm]{icon_achtung}
+        \end{minipage}
+        \begin{minipage}{14.5cm}
+        #1
+        \end{minipage}
+    }
+}
+
+\newenvironment{halt}[1]{
+    \hspace{-10mm}
+    \fbox{
+        \begin{minipage}{1cm}
+        \includegraphics[width=1cm]{icon_halt}
+        \end{minipage}
+        \begin{minipage}{14.5cm}
+        #1
+        \end{minipage}
+    }
+}
+
+\newenvironment{idee}[1]{
+    \hspace{-10mm}
+    \fbox{
+        \begin{minipage}{1cm}
+        \includegraphics[width=1cm]{icon_idee}
+        \end{minipage}
+        \begin{minipage}{14.5cm}
+        #1
+        \end{minipage}
+    }
+}
+
+
+\setlength{\unitlength}{1mm}
+
+\newenvironment{markier}[5]
+{    
+    \thicklines \put(#2,#3){\vector(#4,#5){5}} \thinlines
+    \put(#2,#3){\circle*{5}}
+    \put(#2,#3){\textcolor{black}{\circle{5}}\makebox(-10,0){\textcolor{white}{#1}}}
+}
+
+
+\hyphenation{gleich-zeitig para-meter}
+
+
+\begin{document}
+
+\ifpdf
+	\DeclareGraphicsExtensions{.pdf,.jpg,.png}
+\else
+	\DeclareGraphicsExtensions{.eps}
+\fi
+
+\pagestyle{fancyplain}
+% Titelseite einbinden
+
+\include{Tempus_Titel}
+
+
+\tableofcontents			% Inhaltsverzeichnis
+
+\frontmatter					% Vorspann (z.B. römische Seitenzahlen)
+
+\include {../TEMPUS/Tempus_Einleitung}
+
+\mainmatter						% Hauptteil
+
+%% Kapitel Anfang %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\include{../FHComplete_Begriffe}
+\include{../Tempus/Tempus_Lehreinheit}
+\include{../Tempus/Tempus_Benutzeroberflaeche}
+\include{../Tempus/Tempus_Stundenverplanung}
+\include{../Tempus/Tempus_Aendern_von_verplanten_Stunden}
+\include{../Tempus/Tempus_Kollisionen_erzwingen}
+\include{../Tempus/Tempus_Semesterplan}
+\include{../Tempus/Tempus_Studenten}
+%\include{../Tempus/Tempus_Lehrveranstaltung}
+\include{../Tempus/Tempus_Extras}
+\include{../Tempus/Tempus_Tricks}
+%\include{../Tempus/Tempus_Installation}
+
+
+%% Kapitel Ende   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\appendix							% Beginn des Anhangs
+%\chapter{Schluss}
+%\listoftables				% Tabellenverzeichnis
+%\listoffigures				% Abbildungsverzeichnis
+
+\end{document}

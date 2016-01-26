@@ -1,0 +1,203 @@
+\chapter{Studenten}
+\label{studenten}
+\section{Stati}
+Ein Student erhält im Zuge seiner Studentenkarriere verschiedene Stati zugewiesen.
+\begin{itemize}
+	\item Abbrecher: Person, die das Studium ohne Abschluß beendet hat.\\Student muß UID besitzen. Das \textit{Aktiv}-Häkchen muß entfernt werden!
+	\item Abgewiesener: Person, die nicht zum Studium zugelassen wurde.
+	\item Absolvent: Person, die das Studium mit Abschluß beendet hat.\\Student muß UID besitzen. Das \textit{Aktiv}-Häkchen muß entfernt werden!
+\\
+\textbf{Achtung}, werden Absolventen auf inaktiv gesetzt, werden sie aus den E-Mail-Verteilern entfernt! 
+Die E-Mail-Adressen selbst sind davon nicht betroffen.
+ 
+	\item Aufgenommener: Person, die zum Studium zugelassen wird.\\Ein Status Bewerber muß vorhanden sein.
+	\item Bewerber: Person, die den Reihungstest bestanden hat.\\Datum für \textit{Anmeldung zum Reihungstest} muß eingeben sein, \textit{Zum Reihungstest angetreten} muß angekreuzt sein.
+	\item Diplomand: Person, die das Studium abgeschlossen hat und vor der Abschlußprüfung steht. Jeder Student, der die Berechtigung zum Antritt zur Abschlußprüfung erreicht, wechselt in den Status Diplomand.\\
+	Die BIS-Meldung sieht vor, daß Studenten, die erst später zur Prüfung antreten, mit der Semesteranzahl 50 (entspricht 2-3 Eintragungen eines Diplomandenstatus) für die Absolvierung der Abschlußprüfung innerhalb eines Jahres oder Semesteranzahl 60 (entspricht 4 oder mehr Eintragungen eines Diplomandenstatus) für einen längeren Zeitraum gemeldet werden müssen.
+	\item Incoming: Studenten anderere FHs, die hier Auslandssemester absolvieren.
+	\item Interessent: Person, die Interesse am Studiengang bekundet hat.\\Nachname, Vorname, Geburtsdatum, Geschlecht müssen eingegeben sein. Status wird beim Anlegen vergeben.
+	\item Student: Person, die im Studiengang inskribiert ist.\\\textit{ZGV} muß ausgewählt sein, bei Masterstudiengängen auch \textit{ZGV Master} und ein Status Bewerber und Absolvent muß vorhanden sein.
+	\item Unterbrecher: Karenzierter Student.\\Student muß UID besitzen.
+	\item Wartender: Bewerber auf einer Warteliste, der nachrücken kann, wenn ein inskribierter Student bis kurze Zeit nach Beginn des Startsemesters ausfällt.\\Ein Status Bewerber muß vorhanden sein.
+\end{itemize}
+Abbildung \ref{Statusverlauf} zeigt die Abfolge der Prestudentrollen (Stati).
+\begin{figure}
+	\centering
+	\includegraphics[width=1\textwidth]{FAS_Statusverlauf.png}
+	\caption{Statusfolge}
+	\label{Statusverlauf}
+\end{figure}
+\section{Anlegen eines neuen Interessenten}
+\label{Anlegen eines neuen Interessenten}
+Abbildung \ref{Interessent1} zeigt das Formular zum Anlegen eines Interessenten. Es gibt nun zwei Arten, dieses Formular auszufüllen:
+\begin{enumerate}
+	\item manuell: Das Formular wird mit der Taste \includegraphics[width=10mm]{../../images/icon_neu.png} aufgerufen und die Eingabefelder müssen dann mit den Interessentendaten befüllt werden.
+	\item E-Mail: Es besteht auch die Möglichkeit über die offizielle Technikum Wien - Homepage www.technikum-wien.at Kontakt mit den Studiengängen aufzunehmen. Es kann dort ein Formular ausgefüllt und per E-Mail (siehe Abbildung \ref{Interessent2} an den betreffenden Studiengang geschickt werden. Auf diesem E-Mail befindet sich ein Link \textsl{Bewerbung ins System übertragen}, mit dem diese Daten in das Formular eingetragen weden. 
+\end{enumerate}
+Nachdem die Eingabefelder befüllt wurden, sollte überprüft werden, ob der Interessent bereits in der Datenbank vorhanden ist. Durch Drücken des Knopfs \textsl{Vorschlag laden} werden die Eingabedaten verglichen und mögliche Treffer rechts neben der Eingabemaske ausgegeben. Befindet sich der Interessent bereits in der Datenbank, kann einer der Vorschläge geladen oder ein neuer Interessent angelegt werden. Die Auswahl wird mittels Radio-Buttons angegeben.
+\begin{figure}
+	\centering
+	\includegraphics[width=0.75\textwidth]{FAS_Interessent1.png}
+	\caption{Interessenten anlegen}
+	\label{Interessent1}
+\end{figure}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.75\textwidth]{FAS_Interessent2.png}
+	\caption{Interessentenmail}
+	\label{Interessent2}
+\end{figure}
+\subsection{Ablauf Interessenten anlegen}
+\idee{\textbf{Hinweis:} Ein Student kann kein zweites Mal in einem Studiengang angelegt werden!}\\
+
+\begin{enumerate}
+	\item Karteikarte \textit{Verband} im Listenfeld 1 auswählen.
+	\item In der Karteikarte \textit{Student} des Listenfeld 2 die Taste \includegraphics{icon_neu.png} anklicken.
+	\item Es öffnet sich die Eingabemaske.
+	\item Eingabemaske befüllen:
+	\begin{itemize}
+		\item Mit * markierte Felder müssen befüllt bzw. ausgewählt werden.
+		\item Da es sich hier um einen Interessenten und keinen Incoming handelt, darf die Checkbox \textit{Incoming} nicht angekreuzt werden!\\
+\textbf{Achtung}, beim Anlegen des Incoming werden auch dessen Personenkennzeichen und UID erzeugt. Eine nachträgliche Änderung ist mit einigem Aufwand verbunden.
+ 
+	\end{itemize}
+	\item Beim Klicken auf 'Vorschlag laden' wird geprüft, ob diese Person bereits im System vorhanden ist. Wenn dies der Fall ist, muss in der rechten Spalte die Person markiert werden. Andernfalls wählen Sie den Eintrag neue Person aus. Wenn die vorhandene Person verwendet wird, werden die Stammdaten (SVNR, Geburtsdatum, Kontaktdaten, etc) von der bereits vorhandenen Person übernommen.\\
+	\textbf{Achtung}, wenn Sie hier eine neue Person anlegen, obwohl die neue Person bereits im System vorhanden ist, kann es in weiterer Folge zu Problemen beim Eintragen der Sozialversicherungsnummer oder bei Zutrittskarten kommen.
+	\item Durch Drücken der Taste \textit{Speichern} werden die Daten in die Datenbank übertragen.
+\end{enumerate}
+\subsection{PreInteressenten}
+Personen die sich für ein Studium Interessieren, sich aber noch nicht für einen Studiengang entschieden haben, werden im System als Preinteressenten geführt. Diese Daten werden vom Studienberater gewartet. Sobald die Person sich für einen Studiengang entschieden hat, wird die Person zur Übernahme ins FAS freigegeben.\\
+Bei Freigabe einer Person durch den Studienberater wird die Assistenz automatisch per E-Mail informiert.\\
+Der PreInteressent kann über den Menüpunkt Extras->Perinteressenten übernehmen ins System übertragen werden.\\
+Es gibt 2 Arten wie ein PreInteressent übertragen werden kann:\\
+\begin{itemize}
+	\item Interessent existiert bereits im Studiengang\\
+		In diesem Fall muss der Preinteressent mit der bestehenden Interessenten zusammengelegt werden. Dies geschieht über das DropDown in der Spalte Zusammenlegung. Hier wird der Interessent ausgewählt mit dem der PreInteressent zusammengelegt werden soll. Mit einem klick auf Zusammenlegen, wird die Person dann ins System übertragen.
+\begin{figure}
+	\centering
+	\includegraphics[width=0.75\textwidth]{FAS_Preinteressent1.png}
+	\caption{Preinteressent übernahme}
+	\label{Preinteressent übernahme}
+\end{figure}
+  \item Interessent existiert nicht im Studiengang\\
+		Wenn die zu übernehmende Person noch nicht im Studiengang existiert, dann wird diese einfach dadurch ins System übertragen indem man das Hackerl vor dem Nachnamen markiert und danach auf Übertragen klickt.\\
+\end{itemize}
+Die Person wird nun im FAS als Interessent geführt.\\
+
+Um nach der Übertragung die Anmerkungen zu diesem Preinteressenten anzuzeigen, klicken Sie mit der rechten Maustaste auf den Interessenten und wählen den Menüpunkt Personendetails anzeigen.
+\section{Statusänderungen}
+\subsection{Manuelle Änderung des Status}
+\label{ManuellerStatus}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.75\textwidth]{FAS_Statusaendern1.png}
+	\caption{Studentenstatus ändern}
+	\label{Stataend1}
+\end{figure}
+Eine Statusänderung durch den Anwender wird wie folgt durchgeführt:
+\begin{itemize}
+	\item Markieren der Person
+	\item Anklicken des Button \textsl{Status ändern} wie in Abbildung \ref{Stataend1} gezeigt. Der Inhalt des Auswahlfelds ist vom aktuellen Status der Person abhängig, da nur die Stati angezeigt werden, die vom aktuellen Status aus erreichbar sind.
+	\item Auswahl des neuen Status. Es wird \underline{nur} der Status des Studenten eingetragen, es wird keine Änderung z.B. bei den Gruppenzuordnungen gemacht.
+\end{itemize}
+Die Inskription eines Studenten ist die Statusänderung eines Aufgenommenen auf Student. Währen diesem Vorgang werden das Personenkennzeichen und die UID des neuen Studenten generiert.\\
+
+\achtung{\textbf{Wichtig} Die Inskription erfolgt im gleichen Semester wie der letzte Bewerbereintrag!}\\
+
+\underline{Beispiel}:\\
+Der Student XY hat sich für das Wintersemester 2006 beworben und wurde am 12.06.2006 als Bewerber für das 3.Semester eingetragen. Im Sommer überlegt er es sich anders und will erst im Sommersemester, dann allerdings ins 2.Semester einsteigen. Um diesen Studenten korrekt inskribieren zu können, muß ein Bewerbereintrag und ein Aufgenommereintrag für das 2.Semester im Sommersemester angelegt werden. Erst danach wird der Status mit \textit{Status ändern} auf Student gesetzt und somit der Student inskribiert.\\
+
+\underline{Beispiel}:\\
+Student des 3.Semesters Schorsch Schlaffhih bekommt im Sommersemester 2007 einen akuten Anfall von Frühjahrsmüdichkeit und will sich karenzieren lassen. Dazu wird über \textsl{Status ändern} --- \textsl{Unterbrecher} der neue Status Unterbrecher im Sommersemester 2007 und Ausbildungssemester 3 eingetragen. Danach wird in der  Karteikarte \textsl{Details} Semester auf 0, Verband auf B (für Unterbrecher) und Gruppe leer gesetzt und mit der Taste \textsl{Speichern} in die Datenbank geschrieben. Bei der nächsten Vorrückung wird dann der Status Unterbrecher im 3.Semester des Wintersemester 2007 gesetzt, der Unterbrecher selbst bleibt aber in der Gruppe 0B.\\
+\subsection{Vorrückung}
+Siehe Kapitel \ref{vorrueckung}.Vorrückung
+\subsection{Korrekturmöglichkeiten}
+\achtung{\textbf{Wichtig} Die Korrekturmöglichkeiten sollten nur in Ausnahmefällen verwendet werden. Die Statusänderung, wie unter \ref{ManuellerStatus} beschrieben, ist die Standardmethode zum Ändern des Status!}\\
+
+Kickt man eine Statuseintragung mit der rechten Maustaste an, erscheint die in Abbildung \ref{Stataend2} gezeigte Auswahl: 
+\begin{itemize}
+	\item Bearbeiten: Es kann für den ausgewählten Eintrag das Studiensemester, das Ausbildungssemester und das Datum der Eintragung geändert werden. Der Status des Studenten kann nicht verändert werden.
+	\item Neuen Status hinzufügen: Hier kann eine neuer Status hinzugefügt werden. Eingegeben werden muß das Studiensemester, das Ausbildungssemester, das Datum der Eintragung (Vorgabe ist das aktuelle Datum) und der Status. Beim Status stehen nur bereits vergebene Stati zur Auswahl.
+	\item Entfernen: Hier kann der ausgewählte Status mit Ausnahme des Status \textit{Student}, der nur vom Administrator entfernt werden kann, gelöscht werden. 
+\end{itemize}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.75\textwidth]{FAS_Statusaendern2.png}
+	\caption{Studentenstatus ändern}
+	\label{Stataend2}
+\end{figure}
+\section{Auslandsaufenthalt (Outgoing)}
+\label{Outgoing}
+Es besteht die Möglichkeit, während eines Studiums ein oder auch mehrere Semester im Ausland zu absolvieren (siehe auch Incoming \textit{Kapitel \ref{Incoming}}).\\
+Dazu müssen folgende Daten eingegeben werden:
+\begin{itemize}
+	\item BIS: Daten für die BIS-Meldung
+	\begin{itemize}
+		\item Von: Beginndatum des Auslandssemesters.
+		\item Bis: Endedatum des Auslandssemesters.
+		\item Mobilitaetsprogramm: Hier kann das vom Studenten in Anspruch genommene Mobilitätsprogramm ausgewählt werden.
+		\item Gastnation: Nation in der das Auslandssemester absolviert wird. Darf nicht \textsl{Österreich} sein.
+		\item Zweck: Der Grund des Auslandsaufenthalts: Studium, Praktikum oder beides.
+	\end{itemize}
+	\item Outgoing(Zeugnis): Wenn für einen Auslandsaufenthalt eine globale Anrechnung mittels eines Eintrags im Zeugnis erfolgen soll, müssen nachfolgende Daten eingegeben werden. Es besteht auch weiterhin die Möglichkeit, alternativ dazu, die Lehrveranstaltungen, die ursprünglich ohne Outgoing besucht worden wären, mit der Note angerechnet zu werten.
+	\begin{itemize}
+		\item Lehrveranstaltung: Lehrveranstaltung, die nur für den Auslandsaufenthalt angelegt wird. Diese LV scheint mit den Infos des Auslandaufenthalts (Zeit und Ort) am Zeugnis auf. (Bei der Lehrveranstaltung muss das Attribut lehrevz gesetzt sein, damit diese in der Liste aufscheint!)
+		\item Lehreinheit: Es muß auch eine Lehreinheit angelegt werden, der die Outgoingstudenten über eine Gruppe zugeordnet sind.
+		\item Ort: Ort des Auslandsaufenthalts
+		\item Universitaet: Name der Universität oder FH des Auslandsaufenthalts.
+	\end{itemize}
+\end{itemize}
+\achtung{\textbf{Wichtig} Outgoing müssen in die Gruppe 0O verschoben werden, damit die Lehrveranstaltungen des gesamten Semesters nicht auf seinem Zeugnis aufscheinen und der Outgoing nicht auf den Anwesenheitslisten dieser Lehrveranstaltungen geführt wird!}\\
+
+\underline{Beispiel:}\\
+Studentin XX macht ein Aulandssemester in Italien während ihres 3.Semesters. \\Eingetragen wird wie folgt:
+\begin{enumerate}
+	\item Vor der Eingabe der Daten des Bereichs \textit{Outgoing (Zeugnis)} muß eine Lehrveranstaltung mit den benötigten ECTS-Punkten und Semesterstunden angelegt sein bzw. werden. Ist die LV vorhanden, wird im Semester des Auslandsaufenthalts dazu eine Lehreinheit angelegt. Dieser Lehreinheit werden dann über eine Gruppe die Outgoing-Studenten zugewiesen. Die Note für das Auslandssemester (meistens \textsl{angerechnet}) wird wie bei jeder \textit{gewöhnlichen} Lehrveranstaltung eingegeben.
+	\item In der Karteikarte \textit{In/Out} wird durch Drücken der Taste \textit{Neu} die Eingabe begonnen. Im Bereich \textsl{BIS} werden das Beginn- und Endedatum, das Mobilitätsprogramm, die Gastnation und der Zweck des Auslandssemesters eingegeben.
+	\item Die genannte Lehrveranstaltung und die Lehreinheit werden dann im Karteireiter \textit{In/Out} im Bereich \textit{Outgoing (Zeugnis)} ausgewählt. Danach werden dann noch der Ort und der Name der Bildungseinrichtung angegeben.
+	\item Die Lehrverbandsgruppe im Karteireiter \textit{Details} auf 0O ändern.
+	\item Sollten neben dem Auslandsaufenthalt auch FH-eigene Lehrveranstaltungen absolviert werden, wird der Outgoing in eine Untergruppe von 0O verschoben und diese Gruppe einer Lehreinheit der gewünschten Lehrveranstaltung zugeordnet.
+\end{enumerate}
+Am Zeugnis:\\
+Der Name der ausgewählten Lehrveranstaltung wird durch folgenden Text ersetzt:\\
+Auslandsaaufenthalt: \textsc{Von}-\textsl{Bis}, \textsl{Ort},\\
+\textsl{Universitaet}\\
+
+Die im Ausland absolvierten Lehrveranstaltungen\\
+werden für das \textsc{Sem. d. Lehreinh.} des Studiums an der\\
+Fachhochschule Technikum Wien angerechnet\\
+(Details siehe Transscript of Records der\\
+Gasthochschule).\\
+Note, Anzahl der SWS und die ECTS-Punkte werden von der Lehrveranstaltung ins Zeugnis übernommen.
+Sollte die Studentin XX noch weitere Lehrveranstaltungen besucht haben, können diese wie gewohnt eingetragen werden. Diese Lehrveranstaltungen werden dann gemeinsam mit der Anrechnung des Auslandssemesters am Zeugnis aufscheinen.
+\begin{figure}
+	\centering
+	\includegraphics[width=0.75\textwidth]{FAS_IO.png}
+	\caption{Die Karteikarte I/O}
+	\label{IO2}
+\end{figure}
+\section{Gruppen}
+\label{gruppen}
+Im FAS gibt es zwei Arten von Studentengruppen - Lehrverbandsgruppen und Spezialgruppen. Alle Gruppen werden vom Administrator angelegt.
+\subsection{Lehrverbandsgruppen}
+Lehrverbandsgruppen sind maximal 3-stufig und bilden die Grundlage der Unterrichtsplanung indem die Studenten eines Jahrgangs je nach Anzahl in kleinere Teile gegliedert werden:
+\begin{enumerate}
+	\item Semester: Zum einen ist der erste Teil das Semester, in dem sich der Student befindet, zum anderen kann aber auch eine Organisationseinheit verwendet werden, wie das Semester 0 für Abbrecher (0A), Unterbrecher (0B), Incoming (0I) und Outgoing (0O). 
+	\item Lehrverband: Unterteilung des Semesters in mehrere Teile und wird beginnend mit A mit Großbuchstaben benannt.
+	\item Gruppe: Weiter Unterteilung der Lehrverbänder in Gruppen. Bezeichnungen sind Zahlen beginnend mit 1.
+\end{enumerate}
+Jeder Student muß genau einer Lehrverbandsgruppe zugeordnet werden. Die Zuordnung der Studenten zu einer Lehrverbandsgruppe erfolgt durch einen Eintrag in der Kateikarte \textsl{Details} unter \textsl{Student}.
+\subsection{Spezialgruppen}
+Spezialgruppen sind das organisatorische Bindeglied zwischen Studenten und Lehrveranstaltungen, die außerhalb der Lehrverbandsstrukturen zugeteilt werden (z.B.: Wahlfächer).\\
+\underline{Beispiel:}\\
+Der Studiengang 1 bietet ein Wahlfach XY an. Da dieses Wahlfach von den verschiedensten Studenten besucht werden kann, die sich nicht in einer Lehrverbandsgruppe, ja nicht einmal im selben Studiengang befinden, muß für diese Lehrveranstaltung eine eigene Spezialgruppe angelegt werden. Die Zuordnung der Studenten erfolgt mittels Drag \& Drop - die Studenten werden mit der Maus vom Listenfenster in die Gruppe im linken Fenster auf die entsprechende Gruppe gezogen. Sollte ein Student aus einem anderen Studiengang teilnehmen wollen, muß er mit der Personensuche aufgelistet werden und dann in die Gruppe gezogen werden.
+\section{Rechtsklickfunktionen}
+\begin{itemize}
+	\item \textsl{Student aus Gruppe entfernen}: (auch möglich, wenn mehrere Studenten markiert wurden) entfernt den Studenten aus einer Spezialgruppe. Dazu muss im linken Menü eine Spezialgruppe ausgewählt sein. Aus Lehrverbandsgruppen können die Personen auf diese Art nicht entfernt werden.
+	\item \textsl{E-Mail senden}: Es wird ein E-Mail Fenster geöffnet, bei dem die markierten Studenten als Empfänger eingetragen sind.\\
+	Wird der Eintrag 'E-Mail senden (intern)' gewählt werden die Adressen der Hochschule eingetragen.\\
+	Wenn der Eintrag 'E-Mail senden (privat)' gewählt wird, dann wird das E-Mail an die Zustell-E-Mail-Adresse gesendet die unter Kontakt eingetragen wurde.\\
+	\\
+	Aus technischen Gründen ist die maximale Anzahl an Empfängern pro E-Mail begrenzt. Wenn diese Grenze überschritten wird, wird automatisch ein 2. E-Mail Fenster mit den restlichen Empfängern geöffnet.
+	\item \textsl{Personendetails anzeigen}: zeigt eine Gesamtübersicht über die Person an (Wo hat er sich nicht beworben, In welchen Studiengängen studiert diese Person noch,...)
+\end{itemize}

@@ -18,16 +18,9 @@
  * Authors: Andreas Oesterreicher <andreas.oesterreicher@technikum-wien.at> and
  */
 /**
-<<<<<<< HEAD
  * Script zum manuellen synchronisieren der User in die Moodle Kurse 
  */
 require_once('../../config/vilesci.config.inc.php');
-=======
- * Script zum manuellen synchronisieren der User in die Moodle Kurse
- */
-require_once('../../config/vilesci.config.inc.php');
-require_once('../../config/global.config.inc.php');
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 require_once('../../include/functions.inc.php');
 require_once('../../include/moodle.class.php');
 require_once('../../include/moodle24_user.class.php');
@@ -75,11 +68,7 @@ if(isset($_POST['sync']))
 	if(isset($_POST['mdl_course_id']) && $_POST['mdl_course_id']!='' && is_numeric($_POST['mdl_course_id']))
 	{
 		$mdl_course_id = $_POST['mdl_course_id'];
-<<<<<<< HEAD
 		
-=======
-
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 		$moodle = new moodle24_user();
 		echo '<br><h2>Übertrage LektorInnen</h2><br>';
 		if($moodle->sync_lektoren($mdl_course_id))
@@ -88,22 +77,7 @@ if(isset($_POST['sync']))
 		}
 		else
 			echo 'Fehler bei der Zuteilung:'.$moodle->errormsg;
-<<<<<<< HEAD
 		
-=======
-
-		if(defined('MOODLE_SYNC_FACHBEREICHSLEITUNG') && MOODLE_SYNC_FACHBEREICHSLEITUNG)
-		{
-			$moodle = new moodle24_user();
-			echo '<br><h2>Übertrage Fachbereichsleitung</h2><br>';
-			if($moodle->sync_fachbereichsleitung($mdl_course_id))
-			{
-				echo $moodle->log;
-			}
-			else
-				echo 'Fehler bei der Zuteilung:'.$moodle->errormsg;
-		}
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 
 		$moodle = new moodle24_user();
 		echo '<br><h2>Übertrage Studierende</h2><br>';

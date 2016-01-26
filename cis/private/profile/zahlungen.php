@@ -45,11 +45,7 @@
 			<body>';
 
 	$studiengang = new studiengang();
-<<<<<<< HEAD
 	$studiengang->getAll();
-=======
-	$studiengang->getAll(null,null);
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	
 	$stg_arr = array();
 	foreach ($studiengang->result as $row)
@@ -98,10 +94,6 @@
 				foreach ($row['childs'] as $row_child)
 				{
 					$betrag += $row_child->betrag;
-<<<<<<< HEAD
-=======
-                    $betrag = round($betrag, 2);
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 				}
 			}
 			
@@ -123,11 +115,7 @@
 			echo '<td>'.$row['parent']->buchungstext.'</td>';
 			echo '<td align="right">'.($betrag<0?'-':($betrag>0?'+':'')).sprintf('%.2f',abs($row['parent']->betrag)).' €</td>';
 			echo '<td align="center">';
-<<<<<<< HEAD
 			if($betrag==0 && $row['parent']->betrag<0)
-=======
-			if($betrag==0 && $row['parent']->betrag<=0)
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 				echo '<a href="../pdfExport.php?xml=konto.rdf.php&xsl=Zahlung&uid='.$uid.'&buchungsnummern='.$row['parent']->buchungsnr.'" title="'.$p->t('tools/bestaetigungDrucken').'"><img src="../../../skin/images/pdfpic.gif" alt="'.$p->t('tools/bestaetigungDrucken').'"></a>';
 			elseif($row['parent']->betrag>0)
 			{
@@ -138,11 +126,7 @@
 			{
 				echo '<a onclick="window.open(';
 				echo "'zahlungen_details.php?buchungsnr=".$row['parent']->buchungsnr."','Zahlungsdetails','height=500,width=550,left=0,top=0,hotkeys=0,resizable=yes,status=no,scrollbars=no,toolbar=no,location=no,menubar=no,dependent=yes');return false;";
-<<<<<<< HEAD
 				echo '" href="#">'.$p->t('tools/offen').'</a>';
-=======
-				echo '" href="#">'.$p->t('tools/offen').'</a> ('.sprintf('%.2f',$betrag*-1).' €)';
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 			}
 				echo '</td>';
 			}

@@ -116,10 +116,6 @@ else
 		<inventarnummer><![CDATA['.$bmp->inventarnummer.']]></inventarnummer>
 		<kaution><![CDATA['.$bmp->kaution.']]></kaution>
 		<ausgegebenam><![CDATA['.$datum->convertISODate($bmp->ausgegebenam).']]></ausgegebenam>
-<<<<<<< HEAD
-=======
-		<retouram><![CDATA['.$datum->convertISODate($bmp->retouram).']]></retouram>
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 		<organisationseinheit><![CDATA['.$organisationseinheit.']]></organisationseinheit>
 		<titelpre><![CDATA['.$person->titelpre.']]></titelpre>
 		<vorname><![CDATA['.$person->vorname.']]></vorname>
@@ -163,8 +159,4 @@ function draw_content($row)
 }
 
 ?>
-<<<<<<< HEAD
    
-=======
-   
->>>>>>> fee287127566cd5d18c55b556d178b661711c694

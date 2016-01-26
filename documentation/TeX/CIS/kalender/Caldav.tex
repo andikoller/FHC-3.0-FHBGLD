@@ -1,0 +1,40 @@
+\chapter{Caldav}
+\label{Caldav}
+FH-Complete stellt eine Caldav Schnittstelle für LV-Plan Einträge zur Verfügung.\\
+\\
+Die Caldav Schnittstelle ist über folgende URL erreichbar:\\
+\\
+https://cis.technikum-wien.at/webdav/lvplan.php/calendars/<username>/LVPlan-<username>\\
+\\
+<username> ist durch den Loginnamen zu ersetzten.\\
+\\
+Die Caldav Schnittstelle liefert alle LV-Plan Einträge des persönlichen LV-Plans des Benutzers in einem Zeitraum der letzten 2 Wochen und bis zu 6 Monate im vorraus.\\
+\\
+Es kann immer nur der eigene LV-Plan abboniert werden. Der LV-Plan anderer User kann derzeit nicht über Caldav abboniert werden.
+
+\section{Kalender in Thunderbird Lightning Abbonieren}
+\begin{enumerate}
+	\item Datei->Neu->Kalender
+	\item ''Im Netzwerk'' auswählen
+	\item Format: ''CalDAV'' auswählen
+	\item Adresse: siehe URL oben
+	\item Name und Farbe vergeben
+	\item Username und Passwort eingeben
+\end{enumerate}
+
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=1.0\textwidth]{CalDAVLightning1.png}
+\end{center}
+\end{figure}
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=1.0\textwidth]{CalDAVLightning2.png}
+\end{center}
+\end{figure}
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=1.0\textwidth]{CalDAVLightning3.png}
+\end{center}
+\end{figure}

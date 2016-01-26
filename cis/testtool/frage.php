@@ -17,9 +17,8 @@
  *
  * Authors: Christian Paminger <christian.paminger@technikum-wien.at>,
  *          Andreas Oesterreicher <andreas.oesterreicher@technikum-wien.at>,
- *          Rudolf Hangl <rudolf.hangl@technikum-wien.at>,
- *			Gerald Simane-Sequens <gerald.simane-sequens@technikum-wien.at>,
- *			Manfred Kindl <manfred.kindl@technikum-wien.at>
+ *          Rudolf Hangl <rudolf.hangl@technikum-wien.at> and
+ *			Gerald Simane-Sequens <gerald.simane-sequens@technikum-wien.at>
  */
 /**
  * Formular zum Beantworten der Fragen
@@ -28,62 +27,16 @@
 header("Content-type: application/xhtml+xml");
 
 require_once('../../config/cis.config.inc.php');
-require_once('../../config/global.config.inc.php');
 require_once('../../include/functions.inc.php');
 require_once('../../include/frage.class.php');
 require_once('../../include/vorschlag.class.php');
 require_once('../../include/antwort.class.php');
 require_once('../../include/gebiet.class.php');
-require_once('../../include/sprache.class.php');
-require_once '../../include/phrasen.class.php';
 
 if (!$db = new basis_db())
 	die('Fehler beim Oeffnen der Datenbankverbindung');
 
 $PHP_SELF=$_SERVER["PHP_SELF"];
-
-function getSpracheUser()
-{
-	if(isset($_SESSION['sprache_user']))
-	{
-		$sprache_user=$_SESSION['sprache_user'];
-	}
-	else
-	{
-		if(isset($_COOKIE['sprache_user']))
-		{
-			$sprache_user=$_COOKIE['sprache_user'];
-		}
-		else
-		{
-			$sprache_user=DEFAULT_LANGUAGE;
-		}
-		setSpracheUser($sprache_user);
-	}
-	return $sprache_user;
-}
-
-function setSpracheUser($sprache)
-{
-	$_SESSION['sprache_user']=$sprache;
-	setcookie('sprache_user',$sprache,time()+60*60*24*30,'/');
-}
-
-if(isset($_GET['sprache_user']))
-{
-	$sprache_user = new sprache();
-	if($sprache_user->load($_GET['sprache_user']))
-	{
-		setSpracheUser($_GET['sprache_user']);
-	}
-	else
-		setSpracheUser(DEFAULT_LANGUAGE);
-}
-
-$sprache_user = getSpracheUser(); 
-$p = new phrasen($sprache_user);
-
-$sprache = getSprache(); 
 
 session_start();
 
@@ -98,14 +51,10 @@ else
 	$frage_id = '';
 
 //$MAX_VORSCHLAEGE_PRO_ZEILE=4;
-
-echo '
-<!--[IF !IE]>
+?>
 <?xml version="1.0" ?>
 <?xml-stylesheet type="text/xsl" href="mathml.xsl" ?>
- -->';
 
-?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="Content-Type" content="text/xhtml; charset=UTF-8" />
@@ -157,27 +106,6 @@ echo '
 		}
 	}
 
-	function GebietStarten(bezeichnung,stunde,minute,sekunde,gebiet_id)
-	{
-		var check = confirm(<?php echo "'".$p->t('testtool/okKlickenUmZuStarten')."'"?>+' '+stunde+'h '+minute+'m '+sekunde+'s');
-        if (check == true) {
-<<<<<<< HEAD
-=======
-			var sprache_user = <?php echo "'".$sprache_user."'"?>;
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
-        	document.location.href = 'frage.php?gebiet_id='+gebiet_id+'&start=true';
-        }
-        else {
-            return false;
-        }
-	}
-
-	function letzteFrage()
-	{
-		alert(<?php echo "'".$p->t("testtool/alleFragenBeantwortet")."'"?>);
-        return true;
-	}
-
 	//]]>
 	</script>
 </head>
@@ -185,7 +113,7 @@ echo '
 <body>
 <?php
 if(!isset($_SESSION['pruefling_id']))
-	die($p->t('testtool/bitteZuerstAnmelden'));
+	die('Bitte zuerst anmelden!');
 
 $gebiet = new gebiet($gebiet_id);
 
@@ -196,37 +124,26 @@ else
 
 list($stunde, $minute, $sekunde) = explode(':',$gebiet->zeit);
 
-<<<<<<< HEAD
 //Start des Pruefungsvorganges
 if(isset($_GET['start']))
-=======
-$gestartet = $gebiet->isGestartet($gebiet_id, $_SESSION['pruefling_id'], null);
-if(!$gestartet && $gebiet->errormsg!='')
-{
-	die($gebiet->errormsg.'</body></html>');
-}
-
-//Start des Pruefungsvorganges
-if(isset($_GET['start']) && !$gestartet)
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 {
 	//Fragenpool generieren
 	$frage = new frage();
 	if(!$frage->generateFragenpool($_SESSION['pruefling_id'], $gebiet_id))
-		die($p->t('testtool/fehlerBeimGenerierenDesFragenpools').':'.$frage->errormsg);
+		die('Fehler beim Generieren des Fragenpools:'.$frage->errormsg);
 	
 	//Erste Frage des Pools holen
 	if(!$frage_id = $frage->getNextFrage($gebiet_id, $_SESSION['pruefling_id']))
-		die($p->t('testtool/esWurdeKeineFrageGefunden'));
+		die('Es wurde keine Frage gefunden');
 	
 	//Beginnzeit Speichern
 	$prueflingfrage = new frage();
 	if(!$prueflingfrage->getPrueflingfrage($_SESSION['pruefling_id'], $frage_id))
-		die($p->t('testtool/fehler').':'.$prueflingfrage->errormsg);
+		die('Fehler:'.$prueflingfrage->errormsg);
 	
 	$prueflingfrage->begintime = date('Y-m-d H:i:s');
 	if(!$prueflingfrage->save_prueflingfrage(false))
-		die($p->t('testtool/fehlerBeimStartvorgang'));
+		die('Fehler beim Startvorgang');
 		
 	echo '<script language="Javascript">parent.menu.location.reload();</script>';
 }
@@ -240,7 +157,7 @@ if(isset($_POST['submitantwort']) && isset($_GET['frage_id']))
 	
 	if($levelgebiet && !isset($_POST['vorschlag_id']))
 	{
-		echo '<span class="error">'.$p->t('testtool/beiDiesemGebietMuessenSieJedeFrageBeantworten').'</span>';
+		echo '<span class="error">Bei diesem Gebiet müssen Sie jede Frage beantworten!</span>';
 	}
 	else
 	{
@@ -252,7 +169,7 @@ if(isset($_POST['submitantwort']) && isset($_GET['frage_id']))
 		// alle vorhandenen Antworten zu dieser Frage loeschen
 		$qry = "DELETE FROM testtool.tbl_antwort WHERE antwort_id in(
 					SELECT antwort_id FROM testtool.tbl_antwort JOIN testtool.tbl_vorschlag USING(vorschlag_id)
-					WHERE frage_id=".$db->db_add_param($_GET['frage_id'])." AND pruefling_id=".$db->db_add_param($_SESSION['pruefling_id']).")";
+					WHERE frage_id='".addslashes($_GET['frage_id'])."' AND pruefling_id='".addslashes($_SESSION['pruefling_id'])."')";
 	
 		$db->db_query($qry);
 		
@@ -307,7 +224,7 @@ if(isset($_POST['submitantwort']) && isset($_GET['frage_id']))
 		if($error)
 		{
 			$db->db_query('ROLLBACK;');
-			die($p->t('testtool/fehler').':'.$errormsg);
+			die('Fehler:'.$errormsg);
 		}
 		else 
 		{
@@ -330,7 +247,7 @@ if(isset($_POST['submitantwort']) && isset($_GET['frage_id']))
 $qry = "SELECT begintime
 		FROM 
 			testtool.tbl_pruefling_frage JOIN testtool.tbl_frage USING(frage_id)
-		WHERE pruefling_id=".$db->db_add_param($_SESSION['pruefling_id'], FHC_INTEGER)." AND gebiet_id=".$db->db_add_param($gebiet_id, FHC_INTEGER)."
+		WHERE pruefling_id='".addslashes($_SESSION['pruefling_id'])."' AND gebiet_id='".addslashes($gebiet_id)."'
 		ORDER BY begintime ASC LIMIT 1";
 
 if($result = $db->db_query($qry))
@@ -357,16 +274,14 @@ else
 $info='';
 
 //Name und Studiengang anzeigen
-$qry_pruefling = "SELECT vorname, nachname, stg_bez, tbl_studiengangstyp.bezeichnung FROM testtool.vw_pruefling 
-					JOIN public.tbl_studiengang USING (studiengang_kz)
-					JOIN public.tbl_studiengangstyp USING (typ)
-					WHERE pruefling_id=".$db->db_add_param($_SESSION['pruefling_id']);
+$qry_pruefling = "SELECT vorname, nachname, stg_bez FROM testtool.vw_pruefling 
+					WHERE pruefling_id='".addslashes($_SESSION['pruefling_id'])."'";
 
 if($result_pruefling = $db->db_query($qry_pruefling))
 {
 	if($row_pruefling = $db->db_fetch_object($result_pruefling))
 	{
-		$info = "$row_pruefling->vorname $row_pruefling->nachname, $row_pruefling->bezeichnung $row_pruefling->stg_bez";
+		$info = "$row_pruefling->vorname $row_pruefling->nachname, $row_pruefling->stg_bez";
 	}
 }
 
@@ -376,8 +291,8 @@ if($levelgebiet)
 	$max = $gebiet->maxfragen;
 	$aktuell=0;
 	$qry = "SELECT count(*) as anzahl FROM testtool.tbl_pruefling_frage JOIN testtool.tbl_frage USING(frage_id)
-			WHERE pruefling_id=".$db->db_add_param($_SESSION['pruefling_id'], FHC_INTEGER)."
-			AND gebiet_id=".$db->db_add_param($gebiet_id, FHC_INTEGER);
+			WHERE pruefling_id='".addslashes($_SESSION['pruefling_id'])."'
+			AND gebiet_id='$gebiet_id'";
 	
 	if($result_aktuell = $db->db_query($qry))
 	{
@@ -408,20 +323,20 @@ if($levelgebiet)
 	
 }
 //Zeit des Gebietes holen
-echo '<table width="100%"><tr><td valign="top" width="50%">'.$info.'</td><td align="center">'.$fortschrittsbalken.'</td><td width="50%"></td></tr><tr><td colspan="3">';
+echo '<table width="100%"><tr><td valign="top" width="50%">'.$info.'</td><td align="center">'.$fortschrittsbalken.'</td><td width="50%"></td></tr><tr><td>';
 
 if($demo)
 {
 	//Wenn es sich um ein Demobeispiel handelt, dann wird die Maximale Gesamtzeit angezeigt
-	echo "<input type=\"button\" value=\"".$p->t("testtool/gebietStarten")."\" onclick=\"GebietStarten('".$db->convert_html_chars($gebiet->bezeichnung)."','".$stunde."','".$minute."','".$sekunde."','".$gebiet_id."')\" /> ";
-	echo '<center>'.$p->t('testtool/bearbeitungszeit').': '.$stunde.'h '.$minute.'m '.$sekunde.'s</center>';
+	echo "<input type=\"button\" style=\"width:110px; height:40px; white-space:normal\" value=\"Gebiet starten Start chapter\" onclick=\"document.location.href='$PHP_SELF?gebiet_id=$gebiet_id&amp;start=true'\" /> ";
+	echo $minute.':'.$sekunde.' Minuten ';
 }
 else
 {
 	//Wenn es sich um eine Testfrage handelt, dann wird die verbleibende Zeit angezeigt
 	$qry = "SELECT '$gebiet->zeit'-(now()-min(begintime)) as time 
 			FROM testtool.tbl_pruefling_frage JOIN testtool.tbl_frage USING(frage_id) 
-			WHERE gebiet_id=".$db->db_add_param($gebiet_id, FHC_INTEGER)." AND pruefling_id=".$db->db_add_param($_SESSION['pruefling_id'], FHC_INTEGER);
+			WHERE gebiet_id='".addslashes($gebiet_id)."' AND pruefling_id='".addslashes($_SESSION['pruefling_id'])."'";
 	$result = $db->db_query($qry);
 	$row = $db->db_fetch_object($result);
 	//Zeit in Sekunden umrechnen
@@ -434,11 +349,11 @@ else
 		$zeit = $zeit*-1;
 	}
 
-	echo $p->t('testtool/bearbeitungszeit').': <span id="counter"></span>';
+	echo '<span id="counter"></span> Minuten';
 	echo "<script>count_down($zeit)</script>";
 	
 	if($zeit<0)
-		die('</td></tr></table><center><b>'.$p->t('testtool/dieZeitIstAbgelaufen').'</b></center></body></html>');
+		die('</td></tr></table><center><b>Die Zeit ist abgelaufen!<br /> Bitte aktivieren Sie Javascript in Ihrem Browser!</b></center></body></html>');
 }
 echo '</td></tr>';
 echo '</table>';
@@ -457,7 +372,7 @@ else
 		// wenn keine Frage uebergeben wurde und die maximale Fragenanzahl erreicht wurde
 		// dann ist das Gebiet fertig
 		$qry = "SELECT count(*) as anzahl FROM testtool.tbl_pruefling_frage JOIN testtool.tbl_frage USING(frage_id) 
-				WHERE gebiet_id=".$db->db_add_param($gebiet_id, FHC_INTEGER)." AND pruefling_id=".$db->db_add_param($_SESSION['pruefling_id'], FHC_INTEGER)." AND tbl_pruefling_frage.endtime is not null";
+				WHERE gebiet_id='".addslashes($gebiet_id)."' AND pruefling_id='".addslashes($_SESSION['pruefling_id'])."' AND tbl_pruefling_frage.endtime is not null";
 		$result = $db->db_query($qry);
 		$row = $db->db_fetch_object($result);
 		
@@ -487,127 +402,18 @@ if($frage->frage_id!='')
 			//wenn diese noch nicht angesehen wurde, dann wird die begintime gesetzt
 			$prueflingfrage = new frage();
 			if(!$prueflingfrage->getPrueflingfrage($_SESSION['pruefling_id'], $frage_id))
-				die($p->t('testtool/dieseFrageIstNichtFuerSieBestimmt'));
+				die('Diese Frage ist nicht fuer Sie bestimmt');
 				
 			if($prueflingfrage->begintime=='')
 			{
 				$prueflingfrage->begintime = date('Y-m-d H:i:s');
 				$prueflingfrage->new = false;
 				if(!$prueflingfrage->save_prueflingfrage())
-					echo $p->t('testtool/fehlerBeimSpeichernDerErstansicht');
+					echo 'Fehler beim Speichern der Erstansicht';
 			}
 		}
 	}
-	echo '<center>';
-	//Kopfzeile mit Weiter Button und Sprung direkt zu einer Frage
-	if(!$demo && !$levelgebiet)
-	{
-		$qry = "SELECT tbl_pruefling_frage.nummer, tbl_pruefling_frage.frage_id 
-				FROM testtool.tbl_pruefling_frage JOIN testtool.tbl_frage USING(frage_id) 
-				WHERE gebiet_id=".$db->db_add_param($gebiet_id, FHC_INTEGER)." AND pruefling_id=".$db->db_add_param($_SESSION['pruefling_id'], FHC_INTEGER)." AND demo=false ORDER BY nummer";
-
-		echo " <table><tr>";
-		//Nummern der Fragen Anzeigen
-		$result = $db->db_query($qry);
-		while($row = $db->db_fetch_object($result))
-		{
-			$antwort = new antwort();
-			$antwort->getAntwort($_SESSION['pruefling_id'],$row->frage_id);
-			if($row->frage_id==$frage_id)
-<<<<<<< HEAD
-				echo " <a href='#' target='_self'><td style='width:12px; text-align:center; padding:2px; box-shadow: 0px 0px 3px 3px #888888;".(count($antwort->result)!=0?"background-color:lightgreen;":"")."'>".($row->nummer<10?" ":"")."$row->nummer</td></a>";
-			else
-				echo " <a href='$PHP_SELF?gebiet_id=$gebiet_id&amp;frage_id=$row->frage_id'><td style='width:12px; text-align:center; padding:2px; box-shadow: 0px 0px 3px 0px #888888;".(count($antwort->result)!=0?"background-color:lightgreen;":"")."'>$row->nummer</td></a>";
-=======
-				echo " <a href='#' target='_self'><td style='width:12px; text-align:center; padding:2px; box-shadow: 0px 0px 3px 3px #888888;".(count($antwort->result)!=0?"background-color:lightblue;":"")."'>".($row->nummer<10?" ":"")."$row->nummer</td></a>";
-			else
-				echo " <a href='$PHP_SELF?gebiet_id=$gebiet_id&amp;frage_id=$row->frage_id'><td style='width:12px; text-align:center; padding:2px; box-shadow: 0px 0px 3px 0px #888888;".(count($antwort->result)!=0?"background-color:lightblue;":"")."'>$row->nummer</td></a>";
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
-		}
-		//echo " </tr></table>";
-	}
-	//Weiter Button nur bei nicht gelevelten Gebieten anzeigen
-	if(!$levelgebiet)
-	{
-		//Naechste Frage holen und Weiter-Button anzeigen
-		$frage2 = new frage();
-		$nextfrage = $frage2->getNextFrage($gebiet_id, $_SESSION['pruefling_id'], $frage_id, $demo);
-		if($nextfrage)
-		{
-			if($demo)
-				$value='';
-			else 
-				$value=$p->t('testtool/blaettern').' &gt;&gt;';
-			
-			echo " <a href='$PHP_SELF?gebiet_id=$gebiet_id&amp;frage_id=$nextfrage' class='Item'>$value</a>";
-		}
-		else
-		{
-			if(!$demo)
-<<<<<<< HEAD
-			/*{
-				$qry = "SELECT count(*) as anzahl FROM testtool.tbl_frage 
-						WHERE tbl_frage.gebiet_id=".$db->db_add_param($gebiet_id, FHC_INTEGER)." 
-						AND demo ";
-				if($row = $db->db_fetch_object($db->db_query($qry)))
-				{
-					if($row->anzahl>1)
-					{
-						//Bei Demos den Weiter-Button nur anzeigen, wenn ausser der Startseite noch andere Demoseiten vorhanden sind
-						echo " <a href='$PHP_SELF?gebiet_id=$gebiet_id' class='Item'>".$p->t("testtool/zurueckZurStartseite")." &gt;&gt;</a>";
-					}
-				}
-			}*/
-=======
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
-			//else
-			{
-				//Wenns der letzte Eintrag ist, wieder zum ersten springen
-				echo " <a href='$PHP_SELF?gebiet_id=$gebiet_id' class='Item'>".$p->t('testtool/blaettern')." &gt;&gt;</a>";
-			}
-		}
-	}
-<<<<<<< HEAD
-	/*else 
-	{
-		//Naechste Frage holen und Weiter-Button anzeigen
-		if($demo)
-		{
-			
-			$frage2 = new frage();
-			$nextfrage = $frage2->getNextFrage($gebiet_id, $_SESSION['pruefling_id'], $frage_id, $demo);
-
-			if($nextfrage)
-			{
-				$value="Demo";
-				echo " <a href='$PHP_SELF?gebiet_id=$gebiet_id&amp;frage_id=$nextfrage' class='Item'>$value &gt;&gt;</a>";
-			}
-			else
-			{
-				//Naechste Frage holen und Weiter-Button anzeigen
-				//$frage = new frage();
-				//$nextfrage = $frage->getNextFrage($gebiet_id, $_SESSION['pruefling_id'], $frage_id, $demo);
-				
-				$qry = "SELECT count(*) as anzahl FROM testtool.tbl_frage 
-						WHERE tbl_frage.gebiet_id=".$db->db_add_param($gebiet_id, FHC_INTEGER)."
-						AND demo ";
-				if($row = $db->db_fetch_object($db->db_query($qry)))
-				{
-					if($row->anzahl>1)
-					{
-						//Bei Demos den Weiter-Button nur anzeigen, wenn ausser der Startseite noch andere Demoseiten vorhanden sind
-						echo " <a href='$PHP_SELF?gebiet_id=$gebiet_id' class='Item'>".$p->t("testtool/zurueckZurStartseite")." &gt;&gt;</a>";
-					}
-				}
-			}
-		}
-	}*/
-=======
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
-	if(!$demo && !$levelgebiet)
-		echo " </tr></table>";
-	
-	echo '<br/><br/><br/><br/>';
+	echo '<br/><br/><center>';
 	//Bild und Text der Frage anzeigen
 	if($frage->bild!='')
 		echo "<img class='testtoolfrage' src='bild.php?src=frage&amp;frage_id=$frage->frage_id&amp;sprache=".$_SESSION['sprache']."' /><br/><br/>\n";
@@ -615,7 +421,6 @@ if($frage->frage_id!='')
 	//Sound einbinden
 	if($frage->audio!='')
 	{
-<<<<<<< HEAD
 		//echo '<embed autostart="false" src="sound.php?src=frage&amp;frage_id='.$frage->frage_id.'&amp;sprache='.$_SESSION['sprache'].'" height="20" width="250"/><br />';
 		echo '
 			<script language="JavaScript" src="audio-player/audio-player.js"></script>
@@ -626,25 +431,16 @@ if($frage->frage_id!='')
 			<param name="menu" value="false" />
 			<param name="wmode" value="transparent" />
 			</object>';
-=======
-		echo '	<audio src="sound.php?src=frage&amp;frage_id='.$frage->frage_id.'&amp;sprache='.$_SESSION['sprache'].'" controls="controls">
-					<div>
-						<p>Ihr Browser unterstützt dieses Audioelement leider nicht.</p>
-					</div>
-				</audio>';
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	}
 	echo "$frage->text<br/><br/>\n";
 
 	//Vorschlaege laden
 	$vs = new vorschlag();
 	$vs->getVorschlag($frage->frage_id, $_SESSION['sprache'], $gebiet->zufallvorschlag);
-	$letzte = $frage->getNextFrage($gebiet_id, $_SESSION['pruefling_id'], $frage_id, $demo);
-	echo "<form action=\"$PHP_SELF?gebiet_id=$gebiet_id&amp;frage_id=$frage->frage_id\" method=\"POST\" ".(!$letzte && !$levelgebiet?"onsubmit=\"letzteFrage()\"":"").">";
+	echo "<form action=\"$PHP_SELF?gebiet_id=$gebiet_id&amp;frage_id=$frage->frage_id\" method=\"POST\">";
 	echo '<table cellspacing="30px">';
 	echo '<tr>';
 	$anzahl = 1;
-	$beantwortet = false;
 	
 	//Antworten laden falls bereits vorhanden
 	$antwort = new antwort();
@@ -669,18 +465,16 @@ if($frage->frage_id!='')
 			if($vorschlag->vorschlag_id==$answer->vorschlag_id)
 			{
 				$checked='checked="checked"';
-				$beantwortet = true;
 			}
 		}
 		
-		echo '<input type="'.$type.'" class="button_style" name="vorschlag_id[]" value="'.$vorschlag->vorschlag_id.'" '.$checked.'/>';
+		echo '<input type="'.$type.'" name="vorschlag_id[]" value="'.$vorschlag->vorschlag_id.'" '.$checked.'/>';
 		
 		echo '<br/>';
 		if($vorschlag->bild!='')
 			echo "<img class='testtoolvorschlag' src='bild.php?src=vorschlag&amp;vorschlag_id=$vorschlag->vorschlag_id&amp;sprache=".$_SESSION['sprache']."' /><br/>";
 		if($vorschlag->audio!='')
 		{
-<<<<<<< HEAD
 			//echo '<embed autostart="false" src="sound.php?src=vorschlag&amp;vorschlag_id='.$vorschlag->vorschlag_id.'&amp;sprache='.$_SESSION['sprache'].'" height="20" width="100"/><br />';
 			echo '
 				<script language="JavaScript" src="audio-player/audio-player.js"></script>
@@ -691,13 +485,6 @@ if($frage->frage_id!='')
 				<param name="menu" value="false" />
 				<param name="wmode" value="transparent" />
 				</object>';
-=======
-			echo '	<audio src="sound.php?src=vorschlag&amp;vorschlag_id='.$vorschlag->vorschlag_id.'&amp;sprache='.$_SESSION['sprache'].'" controls="controls">
-						<div>
-							<p>Ihr Browser unterstützt dieses Audioelement leider nicht.</p>
-						</div>
-					</audio>';
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 		}
 		if($vorschlag->text!='')
 			echo $vorschlag->text.'<br/>';
@@ -716,51 +503,155 @@ if($frage->frage_id!='')
 	if(!$gebiet->multipleresponse && !$levelgebiet && count($vs->result)>0)
 	{
 		echo "<td align='center' valign='top'>";
-		echo '<input type="radio" class="button_style" name="vorschlag_id[]" value="" '.($beantwortet==false?'checked="checked"':'').'/><br /><font color="#acacac">'.$p->t('testtool/keineAntwort').'</font></td>';
+		echo '<input type="radio" name="vorschlag_id[]" value="" /><br /><font color="#acacac">CLEAR</font></td>';
 	}
 	echo '</tr></table>';
 	
 	if(!$demo)
 	{
-		echo '<input style="width:180px; white-space:normal" type="submit" name="submitantwort" value="'.$p->t('testtool/speichernUndWeiter').'" />';
+		echo "<input style=\"width:180px; height:45px; white-space:normal\" type=\"submit\" name=\"submitantwort\" value=\"Speichern und weiter Save and next\" />";
 	}
-	else
+	echo "</form>";
+	echo '<br/><br/><br/>';
+	//Fusszeile mit Weiter Button und Sprung direkt zu einer Frage
+	if(!$demo && !$levelgebiet)
 	{
-		$frage2 = new frage();
-		$nextfrage = $frage2->getNextFrage($gebiet_id, $_SESSION['pruefling_id'], $frage_id, $demo);
+		$qry = "SELECT tbl_pruefling_frage.nummer, tbl_pruefling_frage.frage_id 
+				FROM testtool.tbl_pruefling_frage JOIN testtool.tbl_frage USING(frage_id) 
+				WHERE gebiet_id='".addslashes($gebiet_id)."' AND pruefling_id='".addslashes($_SESSION['pruefling_id'])."' AND demo=false ORDER BY nummer";
 
+		//Nummern der Fragen Anzeigen
+		$result = $db->db_query($qry);
+		while($row = $db->db_fetch_object($result))
+		{
+			if($row->frage_id==$frage_id)
+				echo " <u>$row->nummer</u> -";
+			else
+				echo " <a href='$PHP_SELF?gebiet_id=$gebiet_id&amp;frage_id=$row->frage_id' class='Item'>$row->nummer</a> -";
+		}
+	}
+
+	//Weiter Button nur bei nicht gelevelten Gebieten anzeigen
+	if(!$levelgebiet)
+	{
+		//Naechste Frage holen und Weiter-Button anzeigen
+		$frage = new frage();
+		$nextfrage = $frage->getNextFrage($gebiet_id, $_SESSION['pruefling_id'], $frage_id, $demo);
 		if($nextfrage)
 		{
-			echo " <a href='$PHP_SELF?gebiet_id=$gebiet_id&amp;frage_id=$nextfrage' class='Item'>".$p->t("testtool/demo")."</a>";
+			if($demo)
+				$value="Demo";
+			else 
+				$value="Weiter";
+			
+			echo " <a href='$PHP_SELF?gebiet_id=$gebiet_id&amp;frage_id=$nextfrage' class='Item'>$value &gt;&gt;</a>";
 		}
 		else
 		{
-			//Naechste Frage holen und Weiter-Button anzeigen
-			//$frage = new frage();
-			//$nextfrage = $frage->getNextFrage($gebiet_id, $_SESSION['pruefling_id'], $frage_id, $demo);
-			
-			$qry = "SELECT count(*) as anzahl FROM testtool.tbl_frage 
-					WHERE tbl_frage.gebiet_id=".$db->db_add_param($gebiet_id, FHC_INTEGER)."
-					AND demo ";
-			if($row = $db->db_fetch_object($db->db_query($qry)))
+			if($demo)
 			{
-				if($row->anzahl>1)
+				$qry = "SELECT count(*) as anzahl FROM testtool.tbl_frage 
+						WHERE tbl_frage.gebiet_id='".addslashes($gebiet_id)."' 
+						AND demo ";
+				if($row = $db->db_fetch_object($db->db_query($qry)))
 				{
-					//Bei Demos den Weiter-Button nur anzeigen, wenn ausser der Startseite noch andere Demoseiten vorhanden sind
-					echo " <a href='$PHP_SELF?gebiet_id=$gebiet_id' class='Item'>".$p->t("testtool/zurueckZurStartseite")."</a>";
+					if($row->anzahl>1)
+					{
+						//Bei Demos den Weiter-Button nur anzeigen, wenn ausser der Startseite noch andere Demoseiten vorhanden sind
+						echo " <a href='$PHP_SELF?gebiet_id=$gebiet_id' class='Item'>Startseite &gt;&gt;</a>";
+					}
+				}
+			}
+			else
+			{
+				//Wenns der letzte Eintrag ist, wieder zum ersten springen
+				echo " <a href='$PHP_SELF?gebiet_id=$gebiet_id' class='Item'>Weiter &gt;&gt;</a>";
+			}
+		}
+	}
+	else 
+	{
+		//Naechste Frage holen und Weiter-Button anzeigen
+		if($demo)
+		{
+			
+			$frage = new frage();
+			$nextfrage = $frage->getNextFrage($gebiet_id, $_SESSION['pruefling_id'], $frage_id, $demo);
+
+			if($nextfrage)
+			{
+				$value="Demo";
+				echo " <a href='$PHP_SELF?gebiet_id=$gebiet_id&amp;frage_id=$nextfrage' class='Item'>$value &gt;&gt;</a>";
+			}
+			else
+			{
+				//Naechste Frage holen und Weiter-Button anzeigen
+				//$frage = new frage();
+				//$nextfrage = $frage->getNextFrage($gebiet_id, $_SESSION['pruefling_id'], $frage_id, $demo);
+				
+				$qry = "SELECT count(*) as anzahl FROM testtool.tbl_frage 
+						WHERE tbl_frage.gebiet_id='".addslashes($gebiet_id)."' 
+						AND demo ";
+				if($row = $db->db_fetch_object($db->db_query($qry)))
+				{
+					if($row->anzahl>1)
+					{
+						//Bei Demos den Weiter-Button nur anzeigen, wenn ausser der Startseite noch andere Demoseiten vorhanden sind
+						echo " <a href='$PHP_SELF?gebiet_id=$gebiet_id' class='Item'>Startseite &gt;&gt;</a>";
+					}
 				}
 			}
 		}
 	}
-	echo "</form>";
-	echo '<br/><br/><br/>';
+
 	echo '</center>';
 }
 else
 {
 	//Wenn kein Demo vorhanden ist
-	echo "<br/><br/><br/><center><b>".$p->t("testtool/startDrueckenUmZuBeginnen")."</b></center>";
+	echo "<br/><br/><br/><center><b>Start druecken um zu beginnen</b></center>";
 }
+
+
+
+
+/*
+//Test mit Button unten
+echo '<br/><br/><br/><table width="100%"><tr><td valign="top" align="center">';
+
+if($demo)
+{
+	//Wenn es sich um ein Demobeispiel handelt, dann wird die Maximale Gesamtzeit angezeigt
+	echo $minute.':'.$sekunde.' Minuten ';
+	echo '<br/><br/>';
+	echo "<input type=\"button\" value=\"Start des Teilgebiets\" onclick=\"document.location.href='$PHP_SELF?gebiet_id=$gebiet_id&amp;start=true'\" />";
+}
+else
+{
+	//Wenn es sich um eine Testfrage handelt, dann wird die verbleibende Zeit angezeigt
+	$qry = "SELECT '$gebiet->zeit'-(now()-min(begintime)) as time 
+			FROM testtool.tbl_pruefling_frage JOIN testtool.tbl_frage USING(frage_id) 
+			WHERE gebiet_id='".addslashes($gebiet_id)."' AND pruefling_id='".addslashes($_SESSION['pruefling_id'])."'";
+	$result = $db->db_query($qry);
+	$row = $db->db_fetch_object($result);
+	//Zeit in Sekunden umrechnen
+	list($stunde, $minute, $sekunde) = split(':',$row->time);
+	$zeit = (int) ($stunde*60*60+$minute*60+$sekunde);
+	//Wenn die Zeit negativ ist und die Stunde 0 ist,
+	//dann muss die Zeit mit -1 multipliziert werden
+	if(substr($stunde,0,1)=='-' && $stunde==0)
+	{
+		$zeit = $zeit*-1;
+	}
+
+	echo '<span id="counter"></span> Minuten';
+	echo "<script>count_down($zeit)</script>";
+}
+echo '</td></tr>';
+echo '</table>';
+*/
+
+
 
 
 

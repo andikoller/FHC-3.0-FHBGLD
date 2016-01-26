@@ -623,7 +623,6 @@
 													  }
 													  else
 													  {
-<<<<<<< HEAD
 													  	  if(!stristr($uploadfile, '.php') && !stristr($uploadfile, '.cgi') && !stristr($uploadfile, '.pl') && $file_name!='.htaccess')
 														  {
 														  	 if(copy($_FILES[$file]['tmp_name'], $uploadfile))
@@ -636,20 +635,6 @@
 																 else
 																 {
 																	exec('sudo chown :student "'.$uploadfile.'"');
-=======
-													  	  if(!stristr($uploadfile, '.php') && !stristr($uploadfile, '.cgi') && !stristr($uploadfile, '.pl') && !stristr($uploadfile, '.phtml') && !stristr($file_name,'.htaccess'))
-														  {
-														  	 if(copy($_FILES[$file]['tmp_name'], $uploadfile))
-														  	 {
-														  	 	 exec('chmod 664 '.escapeshellarg($uploadfile));
-																 if($islector)
-																 {
-																	exec('sudo chown :teacher '.escapeshellarg($uploadfile));
-																 }
-																 else
-																 {
-																	exec('sudo chown :student '.escapeshellarg($uploadfile));
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 																 }
 														  	 }
 														  }
@@ -661,7 +646,6 @@
 												  }
 												  else
 												  {
-<<<<<<< HEAD
 												  	  if(!stristr($uploadfile, '.php') && !stristr($uploadfile, '.cgi') && !stristr($uploadfile, '.pl') && $file_name!='.htaccess')
 													  {
 														  if(copy($_FILES[$file]['tmp_name'], $uploadfile))
@@ -674,20 +658,6 @@
 															  else
 															  {
 																exec('sudo chown :student "'.$uploadfile.'"');
-=======
-												  	  if(!stristr($uploadfile, '.php') && !stristr($uploadfile, '.cgi') && !stristr($uploadfile, '.pl') && !stristr($uploadfile, '.phtml') && !stristr($file_name,'.htaccess'))
-													  {
-														  if(copy($_FILES[$file]['tmp_name'], $uploadfile))
-														  {
-														  	  exec('chmod 664 '.escapeshellarg($uploadfile));
-															  if($islector)
-															  {
-																exec('sudo chown :teacher '.escapeshellarg($uploadfile));
-															  }
-															  else
-															  {
-																exec('sudo chown :student '.escapeshellarg($uploadfile));
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 															  }
 														  }
 													  }
@@ -709,7 +679,6 @@
 														  }
 														  else
 														  {
-<<<<<<< HEAD
 															  if(!stristr($uploadfile, '.php') && !stristr($uploadfile, '.cgi') && !stristr($uploadfile, '.pl') && $file_name!='.htaccess')
 															  {
 															  	   if(copy($_FILES[$file]['tmp_name'], $uploadfile))
@@ -722,20 +691,6 @@
 																	   else
 																	   {
 																			exec('sudo chown :student "'.$uploadfile.'"');
-=======
-															  if(!stristr($uploadfile, '.php') && !stristr($uploadfile, '.cgi') && !stristr($uploadfile, '.pl') && !stristr($uploadfile, '.phtml') && !stristr($file_name,'.htaccess'))
-															  {
-															  	   if(copy($_FILES[$file]['tmp_name'], $uploadfile))
-															  	   {
-															  	   	   exec('chmod 664 '.escapeshellarg($uploadfile));
-																	   if($islector)
-																	   {
-																			exec('sudo chown :teacher '.escapeshellarg($uploadfile));
-																	   }
-																	   else
-																	   {
-																			exec('sudo chown :student '.escapeshellarg($uploadfile));
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 																	   }
 															  	   }
 															  }
@@ -747,7 +702,6 @@
 													  }
 													  else
 													  {
-<<<<<<< HEAD
 													  	  if(!stristr($uploadfile, '.php') && !stristr($uploadfile, '.cgi') && !stristr($uploadfile, '.pl') && $file_name!='.htaccess')
 														  {
 															  if(copy($_FILES[$file]['tmp_name'], $uploadfile))
@@ -760,20 +714,6 @@
 																  else
 																  {
 																	exec('sudo chown :student "'.$uploadfile.'"');
-=======
-													  	  if(!stristr($uploadfile, '.php') && !stristr($uploadfile, '.cgi') && !stristr($uploadfile, '.pl') && !stristr($uploadfile, '.phtml') && !stristr($file_name,'.htaccess'))
-														  {
-															  if(copy($_FILES[$file]['tmp_name'], $uploadfile))
-															  {
-															  	  exec('chmod 664 '.escapeshellarg($uploadfile));
-																  if($islector)
-																  {
-																	exec('sudo chown :teacher '.escapeshellarg($uploadfile));
-																  }
-																  else
-																  {
-																	exec('sudo chown :student '.escapeshellarg($uploadfile));
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 																  }
 															  }
 														  }
@@ -908,7 +848,6 @@
 									if(!@is_dir($dest_create_dir->path.'/'.$new_dir_name_text) && !@file_exists($dest_create_dir->path.'/'.$new_dir_name_text) && $new_dir_name_text != "")
 									{
 										@mkdir($dest_create_dir->path.'/'.$new_dir_name_text);
-<<<<<<< HEAD
 										exec('chmod 775 "'.$dest_create_dir->path.'/'.$new_dir_name_text.'"');
 	
 										if($islector)
@@ -918,17 +857,6 @@
 										else
 										{
 											exec('sudo chown :student "'.$dest_create_dir->path.'/'.$new_dir_name_text.'"');
-=======
-										exec('chmod 775 '.escapeshellarg($dest_create_dir->path.'/'.$new_dir_name_text));
-	
-										if($islector)
-										{
-											exec('sudo chown :teacher '.escapeshellarg($dest_create_dir->path.'/'.$new_dir_name_text));
-										}
-										else
-										{
-											exec('sudo chown :student '.escapeshellarg($dest_create_dir->path.'/'.$new_dir_name_text));
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 										}
 									}
 								}
@@ -1184,11 +1112,7 @@
 										if(@is_dir($dest_dir->path.'/'.$entry))
 										{
 											writeCISlog('DELETE', 'rm -r "'.$dest_dir->path.'/'.$entry.'"');
-<<<<<<< HEAD
 											exec('rm -r "'.$dest_dir->path.'/'.$entry.'"');
-=======
-											exec('rm -r '.escapeshellarg($dest_dir->path.'/'.$entry));
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 										}
 
 										unset($check_state);
@@ -1394,19 +1318,9 @@
 									$link_path = str_replace("+","%20",$link_path);
 									echo "</b></td><td align=\"left\" class='MarkLine'><b><font face=\"Arial,Helvetica,sans-serif\" color=\"#000000\" size=\"2\"><a href=\"$link_path\" target=\"_blank\">&nbsp;<img src=\"../../../skin/images/file.gif\" border=\"0\">&nbsp;".htmlentities($entry, ENT_QUOTES, 'UTF-8')."&nbsp;</a></font>";
 
-<<<<<<< HEAD
 									if(isset($_POST['new_file_name'.$file_count]))
 										$new_file_name_ = $_POST['new_file_name'.$file_count];
 
-=======
-									$new_file_name_='';
-									if(isset($_POST['new_file_name'.$file_count]))
-										$new_file_name_ = $_POST['new_file_name'.$file_count];
-
-									if(stristr($new_file_name_,'..'))
-										die('Invalid Parameter detected');
-
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 									if(isset($rename_file) && isset($check_state))
 									{
 										echo "</b></td><td align=\"middle\" class='MarkLine'><b><font face=\"Arial,Helvetica,sans-serif\" color=\"#000000\" size=\"2\"><input type=\"text\" name=\"new_file_name$file_count\" value=\"$entry\">&nbsp;<input type=\"submit\" name=\"confirm_rename\" value=\"OK\"></font>";
@@ -1417,11 +1331,7 @@
 										{
 											if(!@file_exists($dest_dir->path.'/'.$new_file_name_) && !@is_dir($dest_dir->path.'/'.$new_file_name_))
 											{
-<<<<<<< HEAD
 												if(!stristr($new_file_name_, '.php') && !stristr($new_file_name_, '.cgi') && !stristr($new_file_name_, '.pl') && $new_file_name_!='.htaccess')
-=======
-												if(!stristr($new_file_name_, '.php') && !stristr($new_file_name_, '.cgi') && !stristr($new_file_name_, '.pl') && !stristr($new_file_name_, '.phtml') && !stristr($new_file_name_,'.htaccess'))
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 												{
 													rename($dest_dir->path.'/'.$entry, $dest_dir->path.'/'.$new_file_name_);
 
@@ -1449,11 +1359,7 @@
 										if(!@is_dir($dest_dir->path.'/'.$entry))
 										{
 											writeCISlog('DELETE', 'rm -r "'.$dest_dir->path.'/'.$entry.'"');
-<<<<<<< HEAD
 											exec('rm -r "'.$dest_dir->path.'/'.$entry.'"');
-=======
-											exec('rm -r '.escapeshellarg($dest_dir->path.'/'.$entry));
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 										}
 
 										unset($check_state);

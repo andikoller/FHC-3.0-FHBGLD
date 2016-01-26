@@ -30,13 +30,16 @@ require_once('../../include/studiengang.class.php');
 if (!$db = new basis_db())
 	die('Es konnte keine Verbindung zum Server aufgebaut werden.');
 
-$uid = get_uid();
+//Andreas Koller:
+$user = get_uid();
+loadVariables($user);
 
 $rechte = new benutzerberechtigung();
-$rechte->getBerechtigungen($uid);
+$rechte->getBerechtigungen($user);
 
-if(!$rechte->isBerechtigt('mitarbeiter/stammdaten',null,'suid'))
-	die('Sie haben keine Berechtigung für diese Seite');
+if(!$rechte->isBerechtigt('basis/vilesci'))
+	die('Sie haben keine Berechtigung fuer diese Seite');
+	
 
 $funktion_geaendert=0;
 $funktion_hinzugefuegt=0;
@@ -51,10 +54,6 @@ $stg_arr = array();
 $stg_obj = new studiengang();
 $stg_obj->getAll(null, false);
 $lastbismeldung = date('Y-m-d',mktime(0,0,0,9,1,date('Y')-1));
-<<<<<<< HEAD
-=======
-$aktbismeldung = date('Y-m-d',mktime(0,0,0,9,1,date('Y')));
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 foreach ($stg_obj->result as $stg)
 {
 	$stg_arr[$stg->studiengang_kz] = $stg->kuerzel;
@@ -81,11 +80,7 @@ $qry =  "SELECT tbl_lehreinheitmitarbeiter.mitarbeiter_uid, tbl_lehrveranstaltun
 		WHERE
 		tbl_lehreinheitmitarbeiter.lehreinheit_id=tbl_lehreinheit.lehreinheit_id AND
 		tbl_lehreinheit.lehrveranstaltung_id=tbl_lehrveranstaltung.lehrveranstaltung_id AND
-<<<<<<< HEAD
 		(studiensemester_kurzbz='$stsemprev' OR studiensemester_kurzbz='$stsemprevprev') AND
-=======
-		(studiensemester_kurzbz=".$db->db_add_param($stsemprev)." OR studiensemester_kurzbz=".$db->db_add_param($stsemprevprev).") AND
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 		bismelden=true AND tbl_lehreinheitmitarbeiter.semesterstunden>0 GROUP BY mitarbeiter_uid, studiengang_kz";
 
 if($result = $db->db_query($qry))
@@ -98,16 +93,7 @@ if($result = $db->db_query($qry))
 			$lastuid=$row->mitarbeiter_uid;
 			//Verwendung suchen
 			$person_error=false;
-<<<<<<< HEAD
 			$qry_verw = "SELECT * FROM bis.tbl_bisverwendung WHERE (ende>now() OR ende is null OR ende>'$lastbismeldung') AND mitarbeiter_uid='$row->mitarbeiter_uid' order by beginn DESC";
-=======
-			$qry_verw = "SELECT * FROM bis.tbl_bisverwendung 
-						WHERE 
-							(ende>now() OR ende is null OR ende>".$db->db_add_param($lastbismeldung).") 
-							AND (beginn<".$db->db_add_param($aktbismeldung)." OR beginn is null)
-							AND mitarbeiter_uid=".$db->db_add_param($row->mitarbeiter_uid)." 
-						ORDER BY beginn DESC";
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 			if($result_verw = $db->db_query($qry_verw))
 			{
 				if($db->db_num_rows($result_verw)==0)
@@ -192,13 +178,8 @@ if($result = $db->db_query($qry))
 				FROM lehre.tbl_lehrveranstaltung, lehre.tbl_lehreinheit, lehre.tbl_lehreinheitmitarbeiter
 				WHERE tbl_lehrveranstaltung.lehrveranstaltung_id=tbl_lehreinheit.lehrveranstaltung_id AND
 				tbl_lehreinheit.lehreinheit_id=tbl_lehreinheitmitarbeiter.lehreinheit_id AND
-<<<<<<< HEAD
 				(tbl_lehreinheit.studiensemester_kurzbz='$stsemprev' OR tbl_lehreinheit.studiensemester_kurzbz='$stsemprevprev'))
 				AND (ende>'$lastbismeldung' OR ende is null)
-=======
-				(tbl_lehreinheit.studiensemester_kurzbz=".$db->db_add_param($stsemprev)." OR tbl_lehreinheit.studiensemester_kurzbz=".$db->db_add_param($stsemprevprev)."))
-				AND (ende>".$db->db_add_param($lastbismeldung)." OR ende is null)
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 			ORDER BY mitarbeiter_uid, studiengang_kz";
 	if($result = $db->db_query($qry))
 	{
@@ -209,23 +190,14 @@ if($result = $db->db_query($qry))
 			echo "<br><b>$row->mitarbeiter_uid</b> hat im Studiengang ".$stg_arr[$row->studiengang_kz]." ($row->studiengang_kz) eine Funktion ohne Lehrauftrag";
 		}
 	}
-<<<<<<< HEAD
 	echo "Loeschen der Funktionen mit: DELETE FROM bis.tbl_bisfunktion where (studiengang_kz, bisverwendung_id) in (SELECT studiengang_kz, bisverwendung_id FROM bis.tbl_bisfunktion JOIN bis.tbl_bisverwendung USING(bisverwendung_id)
-=======
-	echo "<br><br>Loeschen der Funktionen mit: DELETE FROM bis.tbl_bisfunktion where (studiengang_kz, bisverwendung_id) in (SELECT studiengang_kz, bisverwendung_id FROM bis.tbl_bisfunktion JOIN bis.tbl_bisverwendung USING(bisverwendung_id)
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 			WHERE (mitarbeiter_uid, studiengang_kz) NOT IN (
 				SELECT mitarbeiter_uid, studiengang_kz
 				FROM lehre.tbl_lehrveranstaltung, lehre.tbl_lehreinheit, lehre.tbl_lehreinheitmitarbeiter
 				WHERE tbl_lehrveranstaltung.lehrveranstaltung_id=tbl_lehreinheit.lehrveranstaltung_id AND
 				tbl_lehreinheit.lehreinheit_id=tbl_lehreinheitmitarbeiter.lehreinheit_id AND
-<<<<<<< HEAD
 				(tbl_lehreinheit.studiensemester_kurzbz='$stsemprevprev' OR tbl_lehreinheit.studiensemester_kurzbz='$stsemprev'))
 				AND (ende>'$lastbismeldung' OR ende is null))";
-=======
-				(tbl_lehreinheit.studiensemester_kurzbz=".$db->db_add_param($stsemprevprev)." OR tbl_lehreinheit.studiensemester_kurzbz=".$db->db_add_param($stsemprev)."))
-				AND (ende>".$db->db_add_param($lastbismeldung)." OR ende is null))";
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	echo '<br><br>';
 	echo '<h3>Uebersicht</h3>';
 	echo '<table>';

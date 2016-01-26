@@ -1,0 +1,38 @@
+\chapter{Installationsanleitung}
+\label{Installationsanleitung - Client}
+\section{Download von Seamonkey}
+Zum Betrieb des FAS und Tempus wird ein Gecko basierter Browser benötigt. Die Applikation wurde auf der Seamonkey Suite entwickelt, läuft aber auch unter MozillaSuite oder Firefox. Aktuelle Quellen des Seamonkey Browsers sind unter www.mozilla.org zu finden. Die Dialoge des Installationsassistenten können einfach mit 'Weiter' bestätigt werden. Der Standardpfad sollte unter Windows c:\textbackslash Programme\textbackslash mozilla.org\textbackslash seamonkey\textbackslash  sein.\\
+
+\section{Download der Theme}
+Die Theme(Skin) für Seamonkey ist im Grunde egal, jedoch unterstütz die Calssic-Theme keine färbigen Buttons und teilweise kein Drag and Drop. Am besten eignet sich 'Orbit 3+1', es reicht aber auch die mitgelieferte Theme 'Modern'. Die Orbit 3+1 Theme ist im SVN unter portal/trunk/vilesci/admin/XPI/orbit-1.8f5-MiK.xpi zu finden. Zur Installation reicht es, das File in das Seamonkey Fenster zu ziehen und den aufscheinenden Dialog zu bestätigen.
+
+\section{Einstellungen unter about:config}
+Damit die Applikation reibungslos funktioniert müssen einige Sicherheitseinstellungen eingetragen werden.
+Öffnen Sie dazu ein neues Browserfenster und geben Sie in die Adresszeile 'about:config' ein.\\
+Im angezeigten Fenster müssen die folgenden Einstellungen geändert werden.\\
+- browser.cache.check\_doc\_frequency 1\\
+- browser.cache.disk.capacity 0\\
+- browser.downloadmanager.behavior 1\\
+- dom.allow\_scripts\_to\_close\_windows true\\
+- dom.disable\_window\_open\_feature.status false\\\
+- signed.applets.codebase\_principal\_support true\\
+
+Falls zum Versenden von Mails ein externer Mailclient verwendet wird (zB Outlook), muss ein neuer Wert unter about:config eingetragen werden.\\
+Unter 'about:config' mit der rechten Maustaste ins leere klicken und new->boolean wählen:\\
+network.protocol-handler.external.mailto true\\
+
+\section{Seamonkey Bilder ändern}
+Um beim Starten der Applikation statt dem Seamonkey Logo das FH-Complete Logo anzuzeigen muss im Ordner c:\textbackslash Programme\textbackslash mozilla.org\textbackslash Seamonkey\textbackslash die Datei seamonkey.bmp mit dem FH-Complete Logo überschrieben werden.\\
+Um die Icons in der Titelleiste der Application zu ändern, müssen die beiden Dateien tempus.ico und fas.ico (zu finden im SVN unter portal/trunk/skin/images/ )in den Ordner  c:\textbackslash Programme\textbackslash mozilla.org\textbackslash seamonkey\textbackslash chrome\textbackslash icons\textbackslash default\textbackslash  kopiert werden.
+
+\section{Chrome Registrierung}
+Ab Seamonkey und Firefox 1.5 müssen Applikationen die über .htaccess authentifizieren intern registriert werden. Hierzu genügt in klick auf https://vilesci.technikum-wien.at/vilesci/admin/XPI/FASoProduktiv/FASonline.xpi und dann auf Install.\\
+
+\section{Verknüpfung erstellen}
+Zum Testen in der Adressleiste folgendes eingeben: chrome://fasonline/content/fasonline.xul\\
+
+Wenn die Applikation ordnungsgemäß funktioniert, kann eine Verknüpfung am Desktop angelegt werden:\\
+C:\textbackslash Programme\textbackslash mozilla.org\textbackslash seamonkey\textbackslash seamonkey.exe -chrome chrome://fasonline/content/fasonline.xul
+
+\section{Wichtige Hinweise}
+FAS Benutzer müssen in der LDAP Gruppe HADESADM sein.

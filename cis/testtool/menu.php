@@ -16,67 +16,21 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
  *
  * Authors: Christian Paminger <christian.paminger@technikum-wien.at>,
- *          Andreas Oesterreicher <andreas.oesterreicher@technikum-wien.at>,
- *          Rudolf Hangl <rudolf.hangl@technikum-wien.at>,
- *          Manfred Kindl <manfred.kindl@technikum-wien.at>
+ *          Andreas Oesterreicher <andreas.oesterreicher@technikum-wien.at> and
+ *          Rudolf Hangl <rudolf.hangl@technikum-wien.at>.
  */
 
-require_once('../../config/cis.config.inc.php');
-require_once('../../config/global.config.inc.php');
-require_once('../../include/basis_db.class.php');
-require_once('../../include/sprache.class.php');
-require_once '../../include/phrasen.class.php';
-
+	require_once('../../config/cis.config.inc.php');
+  require_once('../../include/basis_db.class.php');
   if (!$db = new basis_db())
       die('Fehler beim Oeffnen der Datenbankverbindung');
   
 require_once('../../include/gebiet.class.php');
-
-function getSpracheUser()
-{
-	if(isset($_SESSION['sprache_user']))
-	{
-		$sprache_user=$_SESSION['sprache_user'];
-	}
-	else
-	{
-		if(isset($_COOKIE['sprache_user']))
-		{
-			$sprache_user=$_COOKIE['sprache_user'];
-		}
-		else
-		{
-			$sprache_user=DEFAULT_LANGUAGE;
-		}
-		setSpracheUser($sprache_user);
-	}
-	return $sprache_user;
-}
-
-function setSpracheUser($sprache)
-{
-	$_SESSION['sprache_user']=$sprache;
-	setcookie('sprache_user',$sprache,time()+60*60*24*30,'/');
-}
-
-if(isset($_GET['sprache_user']))
-{
-	$sprache_user = new sprache();
-	if($sprache_user->load($_GET['sprache_user']))
-	{
-		setSpracheUser($_GET['sprache_user']);
-	}
-	else
-		setSpracheUser(DEFAULT_LANGUAGE);
-}
-
-$sprache_user = getSpracheUser(); 
-$p = new phrasen($sprache_user);
-$sprache = getSprache();
-
 session_start();
 
-?><!DOCTYPE HTML>
+?>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -87,114 +41,81 @@ session_start();
 <?php
 if (isset($_SESSION['pruefling_id']))
 {
-	//content_id fuer Einfuehrung auslesen
-	$qry = "SELECT content_id FROM testtool.tbl_ablauf_vorgaben WHERE studiengang_kz=".$db->db_add_param($_SESSION['studiengang_kz'])." LIMIT 1";
-	$result = $db->db_query($qry);
-	
 	echo '<table width="100%"  border="0" cellspacing="0" cellpadding="0" style="border-right-width:1px;border-right-color:#BCBCBC;">';
-	echo '<tr><td style="padding-left: 20px;" nowrap>
-			<a href="login.php" target="content">'.$p->t('testtool/startseite').'</a>
+	echo '<tr><td nowrap>
+			<a class="MenuItem" href="index.html" target="_top">
+				<img src="../../skin/images/menu_item.gif" width="7" height="9">&nbsp;Home
+			</a>
 		</td></tr>';
-	if ($content_id = $db->db_fetch_object($result))
-		if($content_id->content_id!='')
-			echo '<tr><td style="padding-left: 20px;"><a href="../../cms/content.php?content_id='.$content_id->content_id.'&sprache='.$sprache.'" target="content">'.$p->t('testtool/einleitung').'</a></td></tr>';	
-	echo '<tr><td>&nbsp;</td></tr>';
-	echo '<tr><td style="padding-left: 20px;" nowrap>';
+	echo '<tr><td nowrap><img src="../../skin/images/menu_item.gif" width="7" height="9">&nbsp;Gebiet</td></tr>';
+	echo '<tr><td nowrap>';
+	echo '<table /*width="100%"*/ border="0" cellspacing="0" cellpadding="0" id="Gebiet" style="display: visible;">';
 	  	
-	$qry = "SELECT * FROM testtool.vw_ablauf WHERE studiengang_kz=".$db->db_add_param($_SESSION['studiengang_kz'])." ORDER BY semester,reihung";
-	
-	$result = $db->db_query($qry);
-	$lastsemester = '';
-	
-	while($row = $db->db_fetch_object($result))
+	$qry = "SELECT * FROM testtool.vw_ablauf WHERE studiengang_kz='".addslashes($_SESSION['studiengang_kz'])."' AND semester='".addslashes($_SESSION['semester'])."' ORDER BY reihung";
+	//echo $qry;
+	if($result = $db->db_query($qry))
 	{
-		//Jedes Semester in einer eigenen Tabelle anzeigen
-		if($lastsemester!=$row->semester)
+		while($row = $db->db_fetch_object($result))
 		{
-			if($lastsemester!='')
+			$gebiet = new gebiet();
+			if($gebiet->check_gebiet($row->gebiet_id))
 			{
-				//echo '<tr><td>&nbsp;</td></tr>';
-				echo '</table>';
-			}
-			$lastsemester = $row->semester;
-			
-			echo '<table border="0" cellspacing="0" cellpadding="0" id="Gebiet" style="display: visible; border-collapse: separate; border-spacing: 0 6px;">';
-			echo '<tr><td style="color: #000; background-color: #8DBDD8; white-space:nowrap; padding: 0 10px 0 10px; line-height: 20px">'.$row->semester.'. '.$p->t('testtool/semester').' '.($row->semester!='1'?$p->t('testtool/quereinstieg'):'').'</td></tr>';
-		}
-		$gebiet = new gebiet();
-		if($gebiet->check_gebiet($row->gebiet_id))
-		{
-			//Status der Gebiete Pruefen
-			$gebiet->load($row->gebiet_id);
-			
-			$qry = "SELECT extract('epoch' from '".$gebiet->zeit."'-(now()-min(begintime))) as time
-					FROM testtool.tbl_pruefling_frage JOIN testtool.tbl_frage USING(frage_id) 
-					WHERE gebiet_id=".$db->db_add_param($row->gebiet_id)." AND pruefling_id=".$db->db_add_param($_SESSION['pruefling_id']);
-			if($result_time = $db->db_query($qry))
-			{
-				if($row_time = $db->db_fetch_object($result_time))
+				//Status der Gebiete Pruefen
+				$gebiet->load($row->gebiet_id);
+				
+				$qry = "SELECT extract('epoch' from '$gebiet->zeit'-(now()-min(begintime))) as time
+						FROM testtool.tbl_pruefling_frage JOIN testtool.tbl_frage USING(frage_id) 
+						WHERE gebiet_id='".addslashes($row->gebiet_id)."' AND pruefling_id='".addslashes($_SESSION['pruefling_id'])."'";
+				if($result_time = $db->db_query($qry))
 				{
-					if($row_time->time>0)
+					if($row_time = $db->db_fetch_object($result_time))
 					{
-						//Gebiet gestartet aber noch nicht zu ende
-<<<<<<< HEAD
-						//$style='text-decoration: underline;';
-=======
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
-						$style='';
-						$class='ItemTesttoolAktiv';
-					}
-					else
-					{
-						if($row_time->time=='')
+						if($row_time->time>0)
 						{
-							//Gebiet noch nicht gestartet
-							$style='';
-							$class='ItemTesttool';
+							//Gebiet gestartet aber noch nicht zu ende
+							$style='text-decoration: underline;';
 						}
 						else
 						{
-							//Gebiet ist zu Ende
-<<<<<<< HEAD
-							//$style='text-decoration:line-through;';
-=======
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
-							$style='';
-							$class='ItemTesttoolBeendet';
+							if($row_time->time=='')
+							{
+								//Gebiet noch nicht gestartet
+								$style='';
+							}
+							else
+							{
+								//Gebiet ist zu Ende
+								$style='text-decoration:line-through;';
+							}
 						}
+					}
+					else
+					{
+						$style='';
 					}
 				}
 				else
 				{
 					$style='';
-					$class='ItemTesttool';
 				}
+				
+				echo '<tr>
+							<td width="10" class="ItemTesttoolLeft" nowrap>&nbsp;</td>
+					   		<td class="ItemTesttool" nowrap>
+					   			<a class="ItemTesttool" href="frage.php?gebiet_id='.$row->gebiet_id.'" onclick="document.location.reload()" target="content" style="'.$style.'">'.$row->gebiet_bez.'</a>
+					   		</td>
+							<td width="10" class="ItemTesttoolRight" nowrap>&nbsp;</td>
+					   	</tr>';
 			}
-			else
+			else 
 			{
-				$style='';
-				$class='ItemTesttool';
+				echo '<tr>
+							<td width="10" nowrap>&nbsp;</td>
+					   		<td nowrap>
+					   			<span class="error"><img src="../../skin/images/menu_item.gif" width="7" height="9">&nbsp;'.$row->gebiet_bez.' (invalid)</span>
+					   		</td>
+					   	</tr>';
 			}
-			
-			echo '<tr>
-						<!--<td width="10" class="ItemTesttoolLeft" nowrap>&nbsp;</td>-->
-				   		<td class="'.$class.'">
-				   			<a class="'.$class.'" href="frage.php?gebiet_id='.$row->gebiet_id.'" onclick="document.location.reload()" target="content" style="'.$style.'">'.$row->gebiet_bez.'</a>
-				   		</td>
-						<!--<td width="10" class="ItemTesttoolRight" nowrap>&nbsp;</td>-->
-				   	</tr>';
-		}
-		else 
-		{
-			echo '<tr>
-				   		<td nowrap>
-<<<<<<< HEAD
-				   			<span class="error"><img src="../../skin/images/menu_item.gif" width="7" height="9">&nbsp;'.$row->gebiet_bez.' (invalid)</span>
-=======
-				   			<span class="error">&nbsp;'.$row->gebiet_bez.' (invalid)</span>
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
-				   		</td>
-				   	</tr>';
 		}
 	}
 	echo '</table>';
@@ -202,6 +123,13 @@ if (isset($_SESSION['pruefling_id']))
 }
 else
 {
+	echo '<table width="100%"  border="0" cellspacing="0" cellpadding="0" style="border-right-width:1px;border-right-color:#BCBCBC;">';
+	echo '<tr><td nowrap>
+				<a class="HyperItem" href="index.html" target="_top">
+					<img src="../../skin/images/menu_item.gif" width="7" height="9">&nbsp;Login
+				</a>
+			</td></tr>';
+	echo '</table>';
 	echo '</td></tr></table>';
 }
 ?>

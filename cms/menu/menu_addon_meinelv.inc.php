@@ -106,8 +106,8 @@ class menu_addon_meinelv extends menu_addon
 				{
 					$this->items[] = array('title'=>$p->t("lvaliste/titel"),
 							'target'=>'content',
-							'link'=>'private/profile/lva_liste.php',
-							'name'=>$p->t("lvaliste/titel"));
+							 'link'=>'private/profile/lva_liste.php',
+							 'name'=>$p->t("lvaliste/titel"));
 
 					while($row = $this->db_fetch_object($result))
 					{
@@ -161,3 +161,4 @@ class menu_addon_meinelv extends menu_addon
 }
 
 new menu_addon_meinelv();
+?>

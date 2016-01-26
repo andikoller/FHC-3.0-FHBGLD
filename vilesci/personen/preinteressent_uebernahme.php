@@ -31,11 +31,12 @@ require_once('../../include/firma.class.php');
 require_once('../../include/adresse.class.php');
 require_once('../../include/datum.class.php');
 require_once('../../include/prestudent.class.php');
+//Andreas Koller: dokument.class.php, da mittlerweile auch schon beim PreInteressent Dokumente (Lebenslauf und Zeugnis mitgeschickt werden
+//muss beim Anlegen des Prestudenten die Tabelle tbl_dokumentprestudent befüllt werden und dafür wird die Klasse prestudent.class.php benötigt.
+require_once('../../include/dokument.class.php');
 
 if (!$db = new basis_db())
 	die('Es konnte keine Verbindung zum Server aufgebaut werden.');
-
-
 
 $user = get_uid();
 
@@ -114,14 +115,20 @@ if(isset($_POST['uebertragen']))
 	$anzahl_uebernommen=0;
 	foreach ($_POST as $param=>$val)
 	{
+		echo "Foreach";
+		echo "<br>";
 		if(mb_strstr($param, 'chk_'))
 		{
+			echo "mb_strstr";
+			echo "<br>";
 			$db->db_query('BEGIN;');
 			
 			$id = mb_substr($param, 4);
 			$preinteressent = new preinteressent();
 			if($preinteressent->load($id))
 			{
+				echo "mb_strstr";
+				echo "<br>";
 				//Prestudent anlegen
 				$prestudent = new prestudent();
 				$prestudent->new = true;
@@ -130,56 +137,92 @@ if(isset($_POST['uebertragen']))
 				$prestudent->studiengang_kz = $studiengang_kz;
 				$prestudent->reihungstestangetreten = false;
 				$prestudent->bismelden = true;
-				$prestudent->insertamum = date('Y-m-d H:i:s');
+				
+				// Andreas Koller: Das exakte Datum wird dazu verwendet, um später die Zuordnung zur prestudent_id durchführen zu können
+				$insertamum_datum = date('Y-m-d H:i:s');
+				
+				$prestudent->insertamum = $insertamum_datum;
 				$prestudent->insertvon = $user;
 				
-				if($prestudent->save())
+				# BEGINN -- Andreas Koller -- #
+				//Hier die ZGV Felder vom PreInteressenten übernehmen:
+				
+				$prestudent->zgv_code = $preinteressent->zgv_code;
+				$prestudent->zgvort = $preinteressent->zgvort;
+				$prestudent->zgvdatum = $preinteressent->zgvdatum;
+				$prestudent->zgvmas_code = $preinteressent->zgvmas_code;
+				$prestudent->zgvmaort = $preinteressent->zgvmaort;
+				$prestudent->zgvmadatum = $preinteressent->zgvmadatum;
+				$prestudent->zgvdoktor_code = $preinteressent->zgvdoktor_code;
+				$prestudent->zgvdoktorort = $preinteressent->zgvdoktorort;
+				$prestudent->zgvdoktordatum = $preinteressent->zgvdoktordatum;
+				
+				$prestudent->anmerkung = $preinteressent->anmerkung;
+				
+				//Andreas Koller: Abfragen der orgform_kurzbz aus public.tbl_preinteressentstudiengang
+				
+				$preint_id = $preinteressent->preinteressent_id;
+				
+				$qry_orgform = "SELECT orgform_kurzbz FROM public.tbl_preinteressentstudiengang WHERE studiengang_kz = '$studiengang_kz' AND preinteressent_id = '$preint_id'";
+								
+				$result_orgform = $db->db_query($qry_orgform);
+
+				while($row = $db->db_fetch_object($result_orgform))
 				{
-					//Rolle anlegen	
-					$prestudent->studiensemester_kurzbz = $preinteressent->studiensemester_kurzbz;
+					$prestudent->orgform_kurzbz = $row->orgform_kurzbz;
+					echo $orgform_kurzbz = $row->orgform_kurzbz;
 					
-					//$preinteressent1 = new preinteressent();
-					//$preinteressent1->loadStudiengangszuteilung($preinteressent_id, $studiengang_kz);
-					
-					$prestudent->ausbildungssemester = 1;
-					$prestudent->status_kurzbz = 'Interessent';
-					$prestudent->datum = date('Y-m-d');
-					$prestudent->insertamum = date('Y-m-d H:i:s');
-					$prestudent->inservon = $user;
-					
-					if($prestudent->save_rolle(true))
+					if($prestudent->save())
 					{
-						//Uebernahme Datum setzen						 
-						$qry = "UPDATE public.tbl_preinteressentstudiengang SET 
-								uebernahmedatum='".date('Y-m-d H:i:s')."', 
-								updateamum='".date('Y-m-d H:i:s')."', 
-								updatevon='".$user."'
-								WHERE studiengang_kz='$studiengang_kz' AND preinteressent_id='$id'";
-						if($db->db_query($qry))
+						//Rolle anlegen	
+						$prestudent->studiensemester_kurzbz = $preinteressent->studiensemester_kurzbz;
+						
+						//$preinteressent1 = new preinteressent();
+						//$preinteressent1->loadStudiengangszuteilung($preinteressent_id, $studiengang_kz);
+						
+						$prestudent->ausbildungssemester = 1;
+						$prestudent->status_kurzbz = 'Interessent';
+						$prestudent->datum = date('Y-m-d');
+						$prestudent->insertamum = date('Y-m-d H:i:s');
+						$prestudent->inservon = $user;
+
+					
+						if($prestudent->save_rolle(true))
 						{
-							$anzahl_uebernommen++;
-							$db->db_query('COMMIT');
+							//Andreas Koller: Angepasst! WHERE um " AND orgform_kurzbz = '$orgform_kurzbz'" ergänzt
+							//Uebernahme Datum setzen		
+							$qry = "UPDATE public.tbl_preinteressentstudiengang SET 
+									uebernahmedatum='".date('Y-m-d H:i:s')."', 
+									updateamum='".date('Y-m-d H:i:s')."', 
+									updatevon='".$user."'
+									WHERE studiengang_kz='$studiengang_kz' AND preinteressent_id='$id' AND orgform_kurzbz='$orgform_kurzbz'";
+							if($db->db_query($qry))
+							{
+								$anzahl_uebernommen++;
+								$db->db_query('COMMIT');
+							}
+							else 
+							{
+								echo "<br>Fehler beim Eintragen des Uebernahmedatums";
+								$anzahl_fehler++;
+								$db->db_query('ROLLBACK');
+							}
 						}
 						else 
 						{
-							echo "<br>Fehler beim Eintragen des Uebernahmedatums";
-							$anzahl_fehler++;
+							echo "<br>Fehler beim Anlegen der Rolle: $prestudent->errormsg";
 							$db->db_query('ROLLBACK');
+							$anzahl_fehler++;
 						}
 					}
 					else 
 					{
-						echo "<br>Fehler beim Anlegen der Rolle: $prestudent->errormsg";
+						echo "<br>Fehler beim Speichern des Prestudenteintrages: $prestudent->errormsg";
 						$db->db_query('ROLLBACK');
 						$anzahl_fehler++;
 					}
 				}
-				else 
-				{
-					echo "<br>Fehler beim Speichern des Prestudenteintrages: $prestudent->errormsg";
-					$db->db_query('ROLLBACK');
-					$anzahl_fehler++;
-				}
+				# END -- Andreas Koller -- #
 			}
 			else 
 			{
@@ -189,6 +232,7 @@ if(isset($_POST['uebertragen']))
 			}
 		}
 	}
+
 	echo "<br>Es wurde(n) <b>$anzahl_uebernommen Person(en) uebernommen</b>";
 	if($anzahl_fehler>0)
 		echo "<br>Es sind <b>$anzahl_fehler Fehler aufgetreten</b>";
@@ -227,9 +271,11 @@ if(isset($_GET['type']) && $_GET['type']=='zusammenlegung')
 			die('Fehler beim Zusammenlegen der Kontaktdaten');
 		}
 
+		//Andreas Koller: Angepasst! WHERE um " AND orgform_kurzbz = '$orgform_kurzbz'" ergänzt 
 		$qry = "UPDATE public.tbl_preinteressentstudiengang SET uebernahmedatum='".date('Y-m-d H:i:s')."',
 				updateamum='".date('Y-m-d H:i:s')."', updatevon='$user'
-				WHERE preinteressent_id='$preinteressent_id' AND studiengang_kz='".addslashes($studiengang_kz)."'";
+				WHERE preinteressent_id='$preinteressent_id' AND studiengang_kz='".addslashes($studiengang_kz)."' AND orgform_kurzbz = '$orgform_kurzbz'";
+		
 		if(!$db->db_query($qry))
 		{
 			$db->db_query('ROLLBACK');

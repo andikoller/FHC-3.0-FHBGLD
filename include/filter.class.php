@@ -3,38 +3,22 @@
  * filter.class.php
  *
  * Copyright 2014 fhcomplete.org
-<<<<<<< HEAD
  * 
-=======
- *
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
-<<<<<<< HEAD
  * 
-=======
- *
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
-<<<<<<< HEAD
  * 
-=======
- *
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301, USA.
-<<<<<<< HEAD
  * 
-=======
- *
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
  *
  * Authors: Christian Paminger <pam@technikum-wien.at
  *			Robert Hofer <robert.hofer@technikum-wien.at>
@@ -45,11 +29,7 @@ class filter extends basis_db
 {
 	private $new = true;			// boolean
 	public $result = array();		// Objekte
-<<<<<<< HEAD
 	
-=======
-
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	//Tabellenspalten
 	protected $filter_id;				// integer (PK)
 	protected $kurzbz;					// varchar(32) unique
@@ -62,15 +42,9 @@ class filter extends basis_db
 	protected $updatevon;				// varchar
 	protected $insertamum;				// timestamp
 	protected $insertvon;				// varchar
-<<<<<<< HEAD
 	
 	protected $values=array();
 	
-=======
-
-	protected $values=array();
-
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	/**
 	 * Konstruktor
 	 */
@@ -78,11 +52,7 @@ class filter extends basis_db
 	{
 		parent::__construct();
 	}
-<<<<<<< HEAD
 	
-=======
-
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	public function __set($name,$value)
 	{
 		$this->$name=$value;
@@ -92,13 +62,8 @@ class filter extends basis_db
 	{
 		return $this->$name;
 	}
-<<<<<<< HEAD
 	
 	
-=======
-
-
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	/**
 	 * Laden eines Filters
 	 * @param filter_id ID des Datensatzes, der geladen werden soll
@@ -141,11 +106,7 @@ class filter extends basis_db
 
 		return true;
 	}
-<<<<<<< HEAD
 	
-=======
-
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	/**
 	 * Laden eines Filters
 	 * @param filter_id ID des Datensatzes, der geladen werden soll
@@ -153,11 +114,7 @@ class filter extends basis_db
 	 */
 	public function loadAll()
 	{
-<<<<<<< HEAD
 		
-=======
-
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 		$qry = "SELECT * FROM public.tbl_filter;";
 
 		if($this->db_query($qry))
@@ -165,33 +122,21 @@ class filter extends basis_db
 			while($row = $this->db_fetch_object())
 			{
 				$obj = new filter();
-<<<<<<< HEAD
 				
-=======
-
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 				$obj->filter_id=$row->filter_id;
 				$obj->kurzbz=$row->kurzbz;
 				$obj->sql=$row->sql;
 				$obj->valuename=$row->valuename;
 				$obj->showvalue = $this->db_parse_bool($row->showvalue);
 				$obj->type=$row->type;
-<<<<<<< HEAD
 				$obj->htmlattr=$row->htmlattr;	
-=======
-				$obj->htmlattr=$row->htmlattr;
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 				$obj->insertamum=$row->insertamum;
 				$obj->insertvon=$row->insertvon;
 				$obj->updateamum=$row->updateamum;
 				$obj->updatevon=$row->updatevon;
 				$obj->new       = false;
 
-<<<<<<< HEAD
 				$this->result[] = $obj;			   
-=======
-				$this->result[] = $obj;
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 			}
 		}
 		else
@@ -202,11 +147,7 @@ class filter extends basis_db
 
 		return true;
 	}
-<<<<<<< HEAD
 	
-=======
-
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	/**
 	 * Suchen ob Filter vorhanden
 	 * @param kurzbz des Datensatzes, der gefunden werden soll
@@ -219,21 +160,12 @@ class filter extends basis_db
 			if ($filter->kurzbz==$kurzbz)
 				return true;
 		}
-<<<<<<< HEAD
 		
 		return false;
 	}
 	
 	/**
 	 * Ausgabe des HTML Widgets 
-=======
-
-		return false;
-	}
-
-	/**
-	 * Ausgabe des HTML Widgets
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	 * @param kurzbz des Datensatzes, der gefunden werden soll
 	 * @return boolean true wenn ok, false im Fehlerfall
 	 */
@@ -251,44 +183,25 @@ class filter extends basis_db
 						$html.='<select id="' . $filter->kurzbz . '" class="form-control" name="'.$filter->kurzbz.'[]" ';
 						$html.=$filter->htmlattr;
 						$html.=' >';
-<<<<<<< HEAD
 						$this->loadValues($filter->sql, $filter->valuename, $filter->showvalue);
 						foreach ($this->values as $value)
 							$html.="\n\t\t\t\t".'<option class="form-control" value="'.$value->value.'">'.$value->text.'</option>';
-=======
-						$user = get_uid();
-						$sql = str_replace('$user', $this->db_add_param($user), $filter->sql);
-						$this->loadValues($sql, $filter->valuename, $filter->showvalue);
-						foreach ($this->values as $value)
-							$html.="\n\t\t\t\t".'<option value="'.$value->value.'">'.$value->text.'</option>';
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 						$html.="\n\t\t\t</select>";
 						break;
 					case 'datepicker':
 						$html .= '<input type="text" id="' . $filter->kurzbz . '" name="' . $filter->kurzbz . '">';
 						$html .= '<script>';
-<<<<<<< HEAD
 						$html .= '$("#' . $filter->kurzbz . '").datepicker();';
-=======
-						$html .= '$("#' . $filter->kurzbz . '").datepicker({ dateFormat: \'yy-mm-dd\' });';
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 						$html .= '</script>';
 						break;
 				}
 				return $html;
 			}
 		}
-<<<<<<< HEAD
 		
 		return $this->errormsg;
 	}
 	
-=======
-
-		return $this->errormsg;
-	}
-
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	/**
 	 * Laden eines Filters
 	 * @param filter_id ID des Datensatzes, der geladen werden soll
@@ -324,11 +237,7 @@ class filter extends basis_db
 						$obj->text.=' - '.$row[$i];
 				}
 				//$obj->text = mb_substr($obj->text,1);
-<<<<<<< HEAD
 				$this->values[] = $obj;			   
-=======
-				$this->values[] = $obj;
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 			}
 			//var_dump($this);
 		}
@@ -340,13 +249,8 @@ class filter extends basis_db
 
 		return true;
 	}
-<<<<<<< HEAD
 	
 	
-=======
-
-
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 
 	/**
 	 * Prueft die Variablen auf Gueltigkeit
@@ -368,11 +272,7 @@ class filter extends basis_db
 			$this->errormsg = 'Kurzbz darf nicht länger als 32 Zeichen sein';
 			return false;
 		}
-<<<<<<< HEAD
 		
-=======
-
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 		//Boleanfelder prüfen
 		if(!is_bool($this->showvalue))
 		{
@@ -383,11 +283,7 @@ class filter extends basis_db
 		$this->errormsg = '';
 		return true;
 	}
-<<<<<<< HEAD
 	
-=======
-
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	/**
 	 * Speichert den aktuellen Datensatz in die Datenbank
 	 * @param neueVersion boolean default false; wenn gesetzt, dann
@@ -400,15 +296,9 @@ class filter extends basis_db
 		//Variablen pruefen
 		if(!$this->validate())
 			return false;
-<<<<<<< HEAD
 		
 		$this->db_query('BEGIN'); //Starting Transaction
 		
-=======
-
-		$this->db_query('BEGIN'); //Starting Transaction
-
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 		if($this->new)
 		{
 			//Neuen Datensatz einfuegen
@@ -430,13 +320,8 @@ class filter extends basis_db
 			{
 				$this->errormsg = 'filter_id muss eine gueltige Zahl sein';
 				return false;
-<<<<<<< HEAD
 			} 	
 			
-=======
-			}
-
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 			$qry='UPDATE public.tbl_filter SET'.
 				' kurzbz='.$this->db_add_param($this->kurzbz).', '.
 				' sql='.$this->db_add_param($this->sql).', '.
@@ -448,11 +333,7 @@ class filter extends basis_db
 		      	' updatevon='.$this->db_add_param($this->updatevon).' '.
 		      	' WHERE filter_id='.$this->db_add_param($this->filter_id, FHC_INTEGER, false).';';
 		}
-<<<<<<< HEAD
         
-=======
-
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
         if($this->db_query($qry))
 		{
 			if($this->new)
@@ -520,11 +401,7 @@ class filter extends basis_db
 			return false;
 		}
 	}
-<<<<<<< HEAD
 	
-=======
-
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	/**
 	 * Ermittelt alle POST/GET-Variablen
 	 * @return Zeichenkette fuer eine GET-Methode, false im Fehlerfall
@@ -545,9 +422,5 @@ class filter extends basis_db
 		//$vars.='&statistik_kurzbz='.$_REQUEST['statistik_kurzbz'];
 		return $vars;
 	}
-<<<<<<< HEAD
 	
-=======
-
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 }

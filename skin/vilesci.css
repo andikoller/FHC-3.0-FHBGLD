@@ -45,11 +45,6 @@ tr.liste1
 {
 	background-color: #EFEFDD;
 }
-
-table.tablesorter tr:hover td {
-	background-color: rgb(226, 255, 226) !important;
-}
-
 td.button 
 {
 	color: #000000;
@@ -105,20 +100,12 @@ a.h1:hover
 }
 a
 { 
-<<<<<<< HEAD
 	color:#00A4D2;
-=======
-	color:#0086cc;
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	text-decoration:none;
 }
 a:hover 
 { 
-<<<<<<< HEAD
 	color:#00A4D2;
-=======
-	color:#0086cc;
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	text-decoration:underline;
 	cursor:pointer;
 }
@@ -439,11 +426,7 @@ a:active
 	text-decoration: underline;
 }
 
-<<<<<<< HEAD
 a,a:link
-=======
-a:link
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 {
 	color: #0086cc;
 	text-decoration: none;
@@ -455,14 +438,11 @@ a:visited
 	text-decoration: none;
 }
 
-<<<<<<< HEAD
 a:hover
 {
 	color: #cc0000;
 	text-decoration: none;
 }
-=======
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 a.toplink, a.toplink:visited, a.toplink:active
 {
 	color: #747C82;
@@ -613,35 +593,3 @@ option.inactive
 {
 	text-decoration:line-through;
 }
-<<<<<<< HEAD
-=======
-
-html.reports, html.reports body {
-	height: 100%;
-}
-
-html.reports .icons strong {
-	font-size: 26px;
-	vertical-align: middle;
-}
-
-html.reports .icons img {
-	width: 48px;
-	vertical-align: middle;
-}
-
-#rp_main {
-	width: 100%;
-	border: 0;
-	height: 85%;
-}
-
-img.mini-icon {
-	width: 15px;
-	vertical-align: middle;
-}
-
-td.overview-id {
-	text-align: right;
-}
->>>>>>> fee287127566cd5d18c55b556d178b661711c694

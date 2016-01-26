@@ -40,11 +40,6 @@ if(isset($_GET['lehreinheit_id']) && is_numeric($_GET['lehreinheit_id']))
 else
 	$lehreinheit_id = null;
 
-<<<<<<< HEAD
-=======
-$db = new basis_db();
-
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 //Gruppen holen
 $DAO_obj = new lehreinheitgruppe();
 $DAO_obj->getLehreinheitgruppe($lehreinheit_id);
@@ -74,14 +69,7 @@ foreach ($DAO_obj->lehreinheitgruppe as $row)
 		$gruppe = new gruppe();
 		$gruppe->load($row->gruppe_kurzbz);
 		$beschreibung = $gruppe->bezeichnung;
-<<<<<<< HEAD
 		
-=======
-
-		$qry_verplant = "SELECT 1 FROM lehre.tbl_stundenplandev
-				WHERE lehreinheit_id=".$db->db_add_param($row->lehreinheit_id)."
-				AND gruppe_kurzbz=".$db->db_add_param($row->gruppe_kurzbz);
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	}
 	else
 	{
@@ -89,26 +77,7 @@ foreach ($DAO_obj->lehreinheitgruppe as $row)
 		$gruppe = new lehrverband();
 		$gruppe->load($row->studiengang_kz, $row->semester, $row->verband, $row->gruppe);
 		$beschreibung = $gruppe->bezeichnung;
-<<<<<<< HEAD
 	}
-=======
-
-		$qry_verplant = "SELECT 1 FROM lehre.tbl_stundenplandev
-				WHERE lehreinheit_id=".$db->db_add_param($row->lehreinheit_id)."
-				AND studiengang_kz=".$db->db_add_param($row->studiengang_kz)."
-				AND semester=".$db->db_add_param($row->semester)."
-				AND COALESCE(trim(verband),'')=".$db->db_add_param(trim($row->verband), FHC_STRING,false)."
-				AND COALESCE(trim(gruppe),'')=".$db->db_add_param(trim($row->gruppe), FHC_STRING, false)."
-				AND (gruppe_kurzbz is null OR gruppe_kurzbz='')";
-	}
-
-	if($result_verplant = $db->db_query($qry_verplant))
-		if($db->db_num_rows($result_verplant)>0)
-			$verplant = true;
-		else
-			$verplant = false;
-
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	?>
       <RDF:li>
          <RDF:Description  id="<?php echo $row->lehreinheitgruppe_id; ?>"  about="<?php echo $rdf_url.'/'.$row->lehreinheitgruppe_id; ?>" >
@@ -121,10 +90,6 @@ foreach ($DAO_obj->lehreinheitgruppe as $row)
             <LEHREINHEITGRUPPE:verband><![CDATA[<?php echo $row->verband; ?>]]></LEHREINHEITGRUPPE:verband>
             <LEHREINHEITGRUPPE:gruppe><![CDATA[<?php echo $row->gruppe; ?>]]></LEHREINHEITGRUPPE:gruppe>
             <LEHREINHEITGRUPPE:gruppe_kurzbz><![CDATA[<?php echo $row->gruppe_kurzbz; ?>]]></LEHREINHEITGRUPPE:gruppe_kurzbz>
-<<<<<<< HEAD
-=======
-			<LEHREINHEITGRUPPE:verplant><![CDATA[<?php echo ($verplant?'true':'false'); ?>]]></LEHREINHEITGRUPPE:verplant>
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
          </RDF:Description>
       </RDF:li>
 <?php
@@ -132,8 +97,4 @@ foreach ($DAO_obj->lehreinheitgruppe as $row)
 ?>
    </RDF:Seq>
 
-<<<<<<< HEAD
 </RDF:RDF>
-=======
-</RDF:RDF>
->>>>>>> fee287127566cd5d18c55b556d178b661711c694

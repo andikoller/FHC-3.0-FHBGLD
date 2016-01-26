@@ -26,10 +26,6 @@ require_once('../include/studiensemester.class.php');
 require_once('../include/benutzer.class.php'); 
 require_once('../include/webservicelog.class.php'); 
 require_once('../include/datum.class.php'); 
-<<<<<<< HEAD
-=======
-require_once('../include/addon.class.php');
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 require_once('../include/'.EXT_FKT_PATH.'/serviceterminal.inc.php');
 
 ini_set("soap.wsdl_cache_enabled", "0");
@@ -47,30 +43,6 @@ function getNumber($cardNr)
         return $objArray; 
     }
     
-<<<<<<< HEAD
-=======
-    $addon_externeAusweise = false;
-    $addon = new addon();
-    $addon->loadAddons();
-    foreach($addon->result as $ad)
-    {
-	if($ad->kurzbz == "externeAusweise")
-	{
-	    $addon_externeAusweise = true;
-	}
-    }
-
-    if($addon_externeAusweise)
-    {
-	require_once (dirname(__FILE__).'/../addons/externeAusweise/include/idCard.class.php');
-	$idCard = new idCard();
-	if($idCard->loadByCardnumber($cardNr))
-	{
-	   return ServiceTerminalGetDrucktext($cardNr, $cardNr);
-	} 
-    }
-    
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
     // Karte ist noch nicht ausgegeben
     $cardUser = new betriebsmittelperson(); 
     if(!$cardUser->getKartenzuordnung($cardNr))

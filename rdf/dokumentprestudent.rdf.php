@@ -33,8 +33,7 @@ require_once('../config/vilesci.config.inc.php');
 require_once('../include/dokument.class.php');
 require_once('../include/datum.class.php');
 require_once('../include/akte.class.php'); 
-require_once('../include/prestudent.class.php');
-require_once('../include/mitarbeiter.class.php');
+require_once('../include/prestudent.class.php'); 
 
 $rdf_url='http://www.technikum-wien.at/dokumentprestudent';
 	
@@ -70,9 +69,7 @@ foreach ($dok->result as $row)
 	
 	$akte = new akte(); 
 	$akte->getAkten($prestudent->person_id, $row->dokument_kurzbz); 
-	$datum=(isset($row->datum))?$date->formatDatum($row->datum, 'd.m.Y'):'';
-	$mitarbeiter = new mitarbeiter($row->mitarbeiter_uid);
-	
+	$datum=(isset($row->datum))?$date->formatDatum($row->datum, 'd.m.Y'):'';	
 	if(count($akte->result) != 0)
 	{
 		foreach($akte->result as $a)
@@ -87,7 +84,6 @@ foreach ($dok->result as $row)
 						<RDF:Description  id="'.$row->dokument_kurzbz.'/'.$a->akte_id.'"  about="'.$rdf_url.'/'.$row->dokument_kurzbz.'/'.$a->akte_id.'" >
 							<DOKUMENT:dokument_kurzbz><![CDATA['.$row->dokument_kurzbz.']]></DOKUMENT:dokument_kurzbz>
 							<DOKUMENT:bezeichnung><![CDATA['.$row->bezeichnung.']]></DOKUMENT:bezeichnung>
-							<DOKUMENT:mitarbeiter_uid><![CDATA['.$mitarbeiter->vorname." ".$mitarbeiter->nachname.']]></DOKUMENT:mitarbeiter_uid>
 							<DOKUMENT:datum>'.$datum.'</DOKUMENT:datum>
 							<DOKUMENT:datumhochgeladen>'.$datumhochgeladen.'</DOKUMENT:datumhochgeladen>
 							<DOKUMENT:nachgereicht>'.$nachgereicht.'</DOKUMENT:nachgereicht>
@@ -108,7 +104,6 @@ foreach ($dok->result as $row)
 					<RDF:Description  id="'.$row->dokument_kurzbz.'"  about="'.$rdf_url.'/'.$row->dokument_kurzbz.'" >
 						<DOKUMENT:dokument_kurzbz><![CDATA['.$row->dokument_kurzbz.']]></DOKUMENT:dokument_kurzbz>
 						<DOKUMENT:bezeichnung><![CDATA['.$row->bezeichnung.']]></DOKUMENT:bezeichnung>
-						<DOKUMENT:mitarbeiter_uid><![CDATA['.$mitarbeiter->vorname." ".$mitarbeiter->nachname.']]></DOKUMENT:mitarbeiter_uid>
 						<DOKUMENT:datum><![CDATA['.$datum.']]></DOKUMENT:datum>
 						<DOKUMENT:nachgereicht></DOKUMENT:nachgereicht>
 						<DOKUMENT:infotext></DOKUMENT:infotext>

@@ -584,6 +584,8 @@ if(isset($_POST['save']))
 		$preinteressent->insertamum = date('Y-m-d H:i:s');
 		$preinteressent->insertvon = $user;
 		$preinteressent->anmerkung = $anmerkung_preint;
+		//Andreas Koller: orgform_kurzbz hinzugefügt
+		$preinteressent->orgform_kurzbz = 'nd';
 		
 		if(!$preinteressent->save(true))
 		{
@@ -604,6 +606,8 @@ if(isset($_POST['save']))
 					$zuordnung->prioritaet = 1;
 					$zuordnung->insertamum = date('Y-m-d H:i:s');
 					$zuordnung->insertvon = $user;
+					//Andreas Koller: orgform_kurzbz hinzugefügt
+					$zuordnung->orgform_kurzbz = 'nd';
 					
 					if(!$zuordnung->saveZuordnung(true))
 					{
@@ -693,7 +697,6 @@ echo '<tr><td>SVNR</td><td><input type="text" id="svnr" size="10" maxlength="10"
 echo '<tr><td>Ersatzkennzeichen</td><td><input type="text" id="ersatzkennzeichen" size="10" maxlength="10" name="ersatzkennzeichen" value="'.$ersatzkennzeichen.'" /></td></tr>';
 echo '<tr><td>Geburtsdatum</td><td><input type="text" id="geburtsdatum" size="10" maxlength="10" name="geburtsdatum" value="'.$geburtsdatum.'" /> (Format dd.mm.JJJJ)</td></tr>';
 echo '<tr><td>Geburtsort</td><td><input type="text" id="gebort" size="30" maxlength="255" name="gebort" value="'.$gebort.'" /></td></tr>';
-<<<<<<< HEAD
 echo '<tr><td>Geburtsnation</td><td><SELECT name="geburtsnation">';
 $qry = "SELECT nation_code, kurztext FROM bis.tbl_nation ORDER BY kurztext";
 if($result = $db->db_query($qry))
@@ -723,37 +726,6 @@ foreach($sprache_obj->result as $row)
 	echo "<option value='$row->sprache' $selected>".$row->bezeichnung_arr['German']."</option>";
 }
 echo '</SELECT>';
-=======
-echo '<tr><td>Geburtsnation</td><td><SELECT name="geburtsnation">';
-$qry = "SELECT nation_code, kurztext FROM bis.tbl_nation ORDER BY kurztext";
-if($result = $db->db_query($qry))
-{
-	while($row = $db->db_fetch_object($result))
-	{
-		if($row->nation_code==$geburtsnation)
-			$selected='selected';
-		else
-			$selected='';
-
-		echo "<option value='$row->nation_code' $selected>$row->kurztext</option>";
-	}
-}
-echo '</SELECT>';
-echo '</td></tr>';
-echo '<tr><td>Sprache</td><td><SELECT name="sprache">';
-$sprache_obj = new sprache();
-$sprache_obj->getAll();
-foreach($sprache_obj->result as $row)
-{
-	if($row->sprache==$sprache)
-		$selected='selected';
-	else
-		$selected='';
-
-	echo "<option value='$row->sprache' $selected>".$row->bezeichnung_arr['German']."</option>";
-}
-echo '</SELECT>';
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 echo '</td></tr>';
 echo '<tr><td colspan="2"><fieldset><legend>Adresse</legend><table>';
 echo '<tr><td>Nation</td><td><SELECT name="adresse_nation" id="adresse_nation" onchange="loadGemeindeData()">';

@@ -1,0 +1,27 @@
+\chapter{Prüfungen}
+\label{pruefungen}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.75\textwidth]{FAS_Pruefung1.png}
+	\caption{Die Karteikarte Prüfung}
+	\label{pruefung1}
+\end{figure}
+Die Karteikarte \textit{Prüfung} (siehe Abbildung \ref{pruefung1} besteht aus einem Listenfeld auf der linken Seite und dem Detaildatenbereich auf der rechten Seite und wird für die Eintragung von (Wiederholungs-)Prüfungen verwendet.\\
+
+Wenn eine Prüfung angelegt wird, wird automatisch die Zeugnisnote aktualisiert.\\
+\textbf{Ausnahme:} Wenn das Prüfungsdatum \underline{vor} dem Benotungsdatum der Zeugnisnote liegt. Hier wird die Prüfung eingetragen die Zeugnisnote aber nicht verändert. Zusätzlich erscheint auch eine Warnmeldung, dass die Note nicht ins Zeugnis übernommen wurde.
+
+\section{Eingabe von Prüfungen}
+Ein Klick auf den Button \textit{Neu} startet den Eingabevorgang. Danach werden die Felder des \textit{Details}-Bereich befüllt:
+\begin{itemize}
+	\item Lehrveranstaltung: Die Lehrveranstaltung, in der die Prüfung erfolgt ist.
+	\item Lehreinheit: Hier wird die Lehreinheit ausgewählt, die der Student besucht hat.
+	\item Mitarbeiter: Der Mitarbeiter, der die Note vergibt.
+	\item Typ: Es gibt 3 Prüfungstypen: den 1.Termin, den 2.Termin (Wiederholung) und die kommissionelle Prüfung.
+	\item Note: Hier kann die Prüfungsnote ausgewählt werden.
+	\item Datum: Das Datum der Prüfung.
+	\item Anmerkung: Hier können zusätzliche Informationen eingegeben werden.
+\end{itemize}
+Ein Klick auf den Button \textit{Speichern} beendet mit dem Eintrag der Daten in die Datenbank die Eingabe.
+
+\idee{\textbf{Tipp} Die Prüfungsnote des Erstantritts muß im Regelfall nicht eingegeben werden. Bei der Eintragung des Zweitantritts wird der Erstantritt automatisch mit angelegt!}\\

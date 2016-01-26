@@ -26,16 +26,15 @@ $rechte->getBerechtigungen($uid);
 $studiensemester = new studiensemester();
 $aktStudiensemester = $studiensemester->getaktorNext();
 
-$method = filter_input(INPUT_POST, 'method');
+$method = isset($_REQUEST['method'])?$_REQUEST['method']:'';
 
 switch($method)
 {
 	case 'getPruefungMitarbeiter':
 	    if($rechte->isBerechtigt('lehre/pruefungsbeurteilungAdmin'))
 	    {
-		$mitarbeiter_uid = filter_input(INPUT_POST, 'mitarbeiter_uid');
+		$mitarbeiter_uid = $_REQUEST["mitarbeiter_uid"];
 	    }
-<<<<<<< HEAD
 	    else
 	    {
 		$mitarbeiter_uid = $uid;
@@ -43,131 +42,42 @@ switch($method)
 	    $data = getPruefungMitarbeiter($mitarbeiter_uid);
 	    break;
 	case 'getNoten':
-=======
-	    else if($rechte->isBerechtigt('lehre/pruefungsbeurteilung'))
-	    {
-		$mitarbeiter_uid = $uid;
-	    }
-	    else
-	    {
-		$data['result']='false';
-		$data['error']='true';
-		$data['errormsg']='Sie haben keine Berechtigung.';
-		break;
-	    }
-	    $data = getPruefungMitarbeiter($mitarbeiter_uid);
-	    break;
-	case 'getNoten':
-	    if(!($rechte->isBerechtigt('lehre/pruefungsbeurteilungAdmin')) && !($rechte->isBerechtigt('lehre/pruefungsbeurteilung')))
-	    {
-		$data['result']='false';
-		$data['error']='true';
-		$data['errormsg']='Sie haben keine Berechtigung.';
-		break;
-	    }
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	    $data = getNoten();
 	    break;
 	case 'saveBeurteilung':
-	    $lehrveranstaltung_id = filter_input(INPUT_POST, 'lehrveranstaltung_id');
-	    $student_uid = filter_input(INPUT_POST, 'student_uid');
+	    $lehrveranstaltung_id = $_REQUEST["lehrveranstaltung_id"];
+	    $student_uid = $_REQUEST["student_uid"];
 	    if($rechte->isBerechtigt('lehre/pruefungsbeurteilungAdmin'))
 	    {
-		$mitarbeiter_uid = filter_input(INPUT_POST, 'mitarbeiter_uid');
+		$mitarbeiter_uid = $_REQUEST["mitarbeiter_uid"];
 	    }
-<<<<<<< HEAD
 	    else
 	    {
 		$mitarbeiter_uid = $uid;
 	    }
-=======
-	    else if($rechte->isBerechtigt('lehre/pruefungsbeurteilung'))
-	    {
-		$mitarbeiter_uid = $uid;
-	    }
-	    else
-	    {
-		$data['result']='false';
-		$data['error']='true';
-		$data['errormsg']='Sie haben keine Berechtigung.';
-		break;
-	    }
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
-	    $note = filter_input(INPUT_POST, 'note');
-	    $pruefung_id = filter_input(INPUT_POST, 'pruefung_id');
-	    $datum = filter_input(INPUT_POST, 'datum');
-	    $anmerkung = filter_input(INPUT_POST, 'anmerkung');
-	    $pruefungsanmeldung_id = filter_input(INPUT_POST, 'pruefungsanmeldung_id');
+	    $note = $_REQUEST["note"];
+	    $pruefung_id = $_REQUEST["pruefung_id"];
+	    $datum = $_REQUEST["datum"];
+	    $anmerkung = $_REQUEST["anmerkung"];
+	    $pruefungsanmeldung_id = $_REQUEST["pruefungsanmeldung_id"];
 	    $data = saveBeurteilung($lehrveranstaltung_id, $student_uid, $mitarbeiter_uid, $note, $pruefung_id, $datum, $anmerkung, $pruefungsanmeldung_id, $uid);
 	    break;
 	case 'updateBeurteilung':
-<<<<<<< HEAD
-	    $pruefung_id = filter_input(INPUT_POST, 'pruefung_id');
-	    $note = filter_input(INPUT_POST, 'note');
-	    $anmerkung = filter_input(INPUT_POST, 'anmerkung');
-	    $data = updateBeurteilung($pruefung_id, $note, $uid, $anmerkung);
+	    $pruefung_id = $_REQUEST["pruefung_id"];
+	    $note = $_REQUEST["note"];
+	    $data = updateBeurteilung($pruefung_id, $note, $uid);
 	    break;
 	case 'loadPruefung':
-=======
-	    if($rechte->isBerechtigt('lehre/pruefungsbeurteilungAdmin'))
-	    {
-		$mitarbeiter_uid = filter_input(INPUT_POST, 'mitarbeiter_uid');
-	    }
-	    else if($rechte->isBerechtigt('lehre/pruefungsbeurteilung'))
-	    {
-		$mitarbeiter_uid = $uid;
-	    }
-	    else
-	    {
-		$data['result']='false';
-		$data['error']='true';
-		$data['errormsg']='Sie haben keine Berechtigung.';
-		break;
-	    }
-	    $pruefung_id = filter_input(INPUT_POST, 'pruefung_id');
-	    $note = filter_input(INPUT_POST, 'note');
-	    $anmerkung = filter_input(INPUT_POST, 'anmerkung');
-	    $data = updateBeurteilung($pruefung_id, $note, $mitarbeiter_uid, $anmerkung);
-	    break;
-	case 'loadPruefung':
-	    if(!($rechte->isBerechtigt('lehre/pruefungsbeurteilungAdmin')) && ($rechte->isBerechtigt('lehre/pruefungsbeurteilung')))
-	    {
-		$data['result']='false';
-		$data['error']='true';
-		$data['errormsg']='Sie haben keine Berechtigung.';
-		break;
-	    }
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
-	    $pruefung_id = filter_input(INPUT_POST, 'pruefung_id');
+	    $pruefung_id=$_REQUEST["pruefung_id"];
 	    $data = loadPruefung($pruefung_id);
 	    break;
 	case 'getBeurteilung':
-<<<<<<< HEAD
-=======
-	    if(!($rechte->isBerechtigt('lehre/pruefungsbeurteilungAdmin')) && !($rechte->isBerechtigt('lehre/pruefungsbeurteilung')))
-	    {
-		$data['result']='false';
-		$data['error']='true';
-		$data['errormsg']='Sie haben keine Berechtigung.';
-		break;
-	    }
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
-	    $pruefungsanmeldung_id = filter_input(INPUT_POST, 'pruefungsanmeldung_id');
+	    $pruefungsanmeldung_id = $_REQUEST["pruefungsanmeldung_id"];
 	    $data = getBeurteilung($pruefungsanmeldung_id);
 	    break;
 	case 'getAnmeldungenTermin':
-<<<<<<< HEAD
-=======
-	    if(!($rechte->isBerechtigt('lehre/pruefungsbeurteilungAdmin')) && !($rechte->isBerechtigt('lehre/pruefungsbeurteilung')))
-	    {
-		$data['result']='false';
-		$data['error']='true';
-		$data['errormsg']='Sie haben keine Berechtigung.';
-		break;
-	    }
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
-	    $lehrveranstaltung_id = filter_input(INPUT_POST, 'lehrveranstaltung_id');
-	    $pruefungstermin_id = filter_input(INPUT_POST, 'pruefungstermin_id');
+	    $lehrveranstaltung_id = $_REQUEST["lehrveranstaltung_id"];
+	    $pruefungstermin_id = $_REQUEST["pruefungstermin_id"];
 	    $data = getAnmeldungenTermin($lehrveranstaltung_id, $pruefungstermin_id);
 	    break;
 	default:
@@ -261,51 +171,40 @@ function saveBeurteilung($lehrveranstaltung_id, $student_uid, $mitarbeiter_uid, 
     $lehreinheiten = $lehrveranstaltung->getLehreinheitenOfLv($lehrveranstaltung_id, $student_uid);
     $pruefung = new pruefung();
     $pruefung->new = true;
-    if(!empty($lehreinheiten))
+    $pruefung->lehreinheit_id = $lehreinheiten[0];
+    $pruefung->student_uid = $student_uid;
+    $pruefung->mitarbeiter_uid = $mitarbeiter_uid;
+    $pruefung->note = $note;
+    $pruefung->pruefungstyp_kurzbz = $pruefungCis->pruefungstyp_kurzbz;
+    $pruefung->datum = $datum;
+    $pruefung->anmerkung = $anmerkung;
+    $pruefung->pruefungsanmeldung_id = $pruefungsanmeldung_id;
+    $pruefung->insertvon = $uid;
+    $pruefung->insertamum = date('Y-m-d H:i:s');
+    
+    $pruefungsanmeldung = new pruefungsanmeldung($pruefungsanmeldung_id);
+    $pruefungstermin = new pruefungstermin($pruefungsanmeldung->pruefungstermin_id);
+
+    $datum = new datum();
+    if($datum->between("", date("Y-m-d", time()), $pruefungstermin->von))
     {
-	$pruefung->lehreinheit_id = $lehreinheiten[0];
-	$pruefung->student_uid = $student_uid;
-	$pruefung->mitarbeiter_uid = $mitarbeiter_uid;
-	$pruefung->note = $note;
-	$pruefung->pruefungstyp_kurzbz = $pruefungCis->pruefungstyp_kurzbz;
-	$pruefung->datum = $datum;
-	$pruefung->anmerkung = $anmerkung;
-	$pruefung->pruefungsanmeldung_id = $pruefungsanmeldung_id;
-	$pruefung->insertvon = $uid;
-	$pruefung->insertamum = date('Y-m-d H:i:s');
-
-	$pruefungsanmeldung = new pruefungsanmeldung($pruefungsanmeldung_id);
-	$pruefungstermin = new pruefungstermin($pruefungsanmeldung->pruefungstermin_id);
-
-	$datum = new datum();
-//	var_dump(date("Y-m-d", time()));
-//	var_dump($pruefungstermin->von);
-	if($datum->between("", date("Y-m-d", time()), $pruefungstermin->von))
+	if($pruefung->save())
 	{
-	    if($pruefung->save())
-	    {
-		$data['result']=$pruefung->pruefung_id;
-		$data['error']='false';
-		$data['errormsg']='';
-	    }
-	    else
-	    {
-		$data['error']='true';
-		$data['errormsg']=$pruefung->errormsg;
-	    }
+	    $data['result']=$pruefung->pruefung_id;
+	    $data['error']='false';
+	    $data['errormsg']='';
 	}
 	else
 	{
 	    $data['error']='true';
-	    $data['errormsg']="Prüfungstermin liegt nicht in der Vergangenheit.";
+	    $data['errormsg']=$pruefung->errormsg;
 	}
     }
-    else	
+    else
     {
 	$data['error']='true';
-	$data['errormsg']="Keine Lehreinheiten vorhanden.";
+	$data['errormsg']="Prüfungstermin liegt nicht in der Vergangenheit.";
     }
-    
     return $data;
 }
 
@@ -316,12 +215,11 @@ function saveBeurteilung($lehrveranstaltung_id, $student_uid, $mitarbeiter_uid, 
  * @param String $uid UID des aktuellen Benutzers
  * @return Array
  */
-function updateBeurteilung($pruefung_id, $note, $uid, $anmerkung)
+function updateBeurteilung($pruefung_id, $note, $uid)
 {
     $pruefung = new pruefung($pruefung_id);
     $pruefung->new = FALSE;
     $pruefung->note = $note;
-    $pruefung->anmerkung = $anmerkung;
     $pruefung->updatevon = $uid;
     $pruefung->updateamum = date('Y-m-d H:i:s');
     if($pruefung->save())

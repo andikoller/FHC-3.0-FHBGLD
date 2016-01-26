@@ -25,21 +25,24 @@
  *
  */
 require_once('../../config/vilesci.config.inc.php');
-require_once('../../include/functions.inc.php');
-require_once('../../include/benutzerberechtigung.class.php');
 require_once('../../include/basis_db.class.php');
-require_once('../../include/studiensemester.class.php');
+require_once('../../include/benutzerberechtigung.class.php');
+require('../../include/studiensemester.class.php');
 
 if (!$db = new basis_db())
 	die('Es konnte keine Verbindung zum Server aufgebaut werden.');
+	
+//Andreas Koller:
+$user = get_uid();
+loadVariables($user);
 
-$uid = get_uid();
 $rechte = new benutzerberechtigung();
-$rechte->getBerechtigungen($uid);
+$rechte->getBerechtigungen($user);
 
-if(!$rechte->isBerechtigt('mitarbeiter/stammdaten', null,'suid'))
-	die('Sie haben keine Berechtigung für diese Seite');
+if(!$rechte->isBerechtigt('basis/vilesci'))
+	die('Sie haben keine Berechtigung fuer diese Seite');
 
+	
 $error_log='';
 $fehler=0;
 

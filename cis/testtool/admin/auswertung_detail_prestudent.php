@@ -45,13 +45,9 @@ echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//DE" "http://www
 		<script type="text/javascript" src="../../../include/js/jquery.js"></script> 
 	</head>
 	<body class="Background_main">
-	<h2>Auswertung Reihungstest Detailergebnis PrestudentIn '.$db->convert_html_chars($_GET['prestudent_id']).'</h2>';
+	<h2>Auswertung Reihungstest Detailergebnis PrestudentIn '.$_GET['prestudent_id'].'</h2>';
 
-<<<<<<< HEAD
 if(!$rechte->isBerechtigt('basis/testtool', null, 'suid'))
-=======
-if(!$rechte->isBerechtigt('lehre/reihungstest', null, 's'))
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 		die('Sie haben keine Berechtigung fuer diese Seite');
 
 // Testergebnisse anzeigen
@@ -69,7 +65,7 @@ if(isset($_GET['prestudent_id']))
 				JOIN testtool.tbl_pruefling_frage ON (tbl_pruefling.pruefling_id=tbl_pruefling_frage.pruefling_id AND tbl_frage.frage_id =tbl_pruefling_frage.frage_id)
 				JOIN public.tbl_prestudent USING (prestudent_id)
 				JOIN public.tbl_person USING (person_id)
-				WHERE prestudent_id=".$db->db_add_param($_GET['prestudent_id'], FHC_INTEGER)."
+				WHERE prestudent_id='".$_GET['prestudent_id']."'
 				ORDER BY kurzbz,tbl_pruefling_frage.begintime,nummer";
 		if($result = $db->db_query($qry))
 		{

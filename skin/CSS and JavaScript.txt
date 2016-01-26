@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 CSS FILES
 *****************************
 in einzubindender Reihenfolge
@@ -25,32 +24,4 @@ jquery.js
  ->autocomplete
  ->datepicker
  ->tablesorter
-=======
-CSS FILES
-*****************************
-in einzubindender Reihenfolge
-Alle CSS Files im Ordner trunk/skin
-
-jquery.css
- ->autocomplete
- ->datepicker
-
-tabelsort.css
- ->tablesort
- 
-fhcomplete.css
-
-wawi/cis/fas.css
-
-
-JS FILES
-*****************************
-in einzubindender Reihenfolge
-Alle JS Files im Ordner trunk/include/js
-
-jquery.js
- ->autocomplete
- ->datepicker
- ->tablesorter
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
  ->Deutsches Schema f�r datepicker

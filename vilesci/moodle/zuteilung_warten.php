@@ -25,35 +25,31 @@
 *   Dieses Programm listet nach Selektinskreterien alle Moodelkurse zu einem Studiengang oder Lehreinheit auf.
 *   Jede MoodleID kann invididuell zu einem Studiengang oder Lehreinheit zugeteilt werden.
 */
-header('Content-Type: text/html;charset=UTF-8');
+   header('Content-Type: text/html;charset=UTF-8');
    // Ohne einer Moodlekurs ID hier beenden
    $mdl_course_id=(isset($_REQUEST['mdl_course_id'])?trim($_REQUEST['mdl_course_id']):'');
    $entfernen=(isset($_REQUEST['entfernen'])?trim($_REQUEST['entfernen']):'');
    if (empty($mdl_course_id) && !$entfernen)
 	exit();
 
-require_once('../../config/vilesci.config.inc.php');
-require_once('../../include/functions.inc.php');
-require_once('../../include/globals.inc.php');
-require_once('../../include/studiengang.class.php');
-require_once('../../include/studiensemester.class.php');
-require_once('../../include/lehrveranstaltung.class.php');
-require_once('../../include/lehreinheit.class.php');
-require_once('../../include/lehreinheitgruppe.class.php');
-require_once('../../include/lehreinheitmitarbeiter.class.php');
-require_once('../../include/moodle19_course.class.php');
-require_once('../../include/benutzerberechtigung.class.php');
+// ***********************************************************************************************
+// Include Dateien
+// ***********************************************************************************************
+        require_once('../../config/vilesci.config.inc.php');
+        include_once('../../include/basis_db.class.php');
+        if (!$db = new basis_db())
+	         die('Fehler beim Oeffnen der Datenbankverbindung');
 
-if (!$db = new basis_db())
-     die('Fehler beim Oeffnen der Datenbankverbindung');
-
-$user = get_uid();
-
-$rechte = new benutzerberechtigung();
-$rechte->getBerechtigungen($user);
-
-if(!$rechte->isBerechtigt('basis/moodle'))
-	die('Sie haben keine Berechtigung für diese Seite');
+// ---------------- Standart Include Dateien einbinden
+       require_once('../../include/functions.inc.php');
+       require_once('../../include/globals.inc.php');
+       require_once('../../include/studiengang.class.php');
+       require_once('../../include/studiensemester.class.php');
+       require_once('../../include/lehrveranstaltung.class.php');
+       require_once('../../include/lehreinheit.class.php');
+       require_once('../../include/lehreinheitgruppe.class.php');
+       require_once('../../include/lehreinheitmitarbeiter.class.php');
+       include_once('../../include/moodle19_course.class.php');
 
 // ***********************************************************************************************
 //      Datenbankverbindungen zu Moodle und Vilesci und Classen

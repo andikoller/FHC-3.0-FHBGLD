@@ -78,29 +78,15 @@ if (isset($_REQUEST["xmlformat"]) && $_REQUEST["xmlformat"] == "xml")
 			$angerechnete_sws=60;
 		else 
 			$angerechnete_sws=0;
-<<<<<<< HEAD
 			
 		$studiengang_kz = sprintf("%04s",   $row->studiengang_kz); 
-=======
-		
-		//Wenn Lehrgang, dann Erhalter-KZ vor die Studiengangs-Kz hängen
-		if ($row->studiengang_kz<0)
-		{
-			$stg = new studiengang();
-			$stg->load($row->studiengang_kz);
-			
-			$studiengang_kz = sprintf("%03s", $stg->erhalter_kz).sprintf("%04s", abs($row->studiengang_kz));
-		}
-		else
-			$studiengang_kz = sprintf("%04s", abs($row->studiengang_kz));
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 		echo '	<supplement>';
 		echo '		<nachname><![CDATA['.$row->nachname.']]></nachname>';
 		echo '		<vorname><![CDATA['.$row->vorname.']]></vorname>';
 		echo '		<vornamen><![CDATA['.$row->vornamen.']]></vornamen>';
         echo '      <name><![CDATA['.$row->vorname.' '.$row->nachname.']]></name>';
 		echo '		<geburtsdatum><![CDATA['.$datum->convertISODate($row->gebdatum).']]></geburtsdatum>';
-		echo '		<matrikelnummer>'.TRIM($row->matrikelnr).'</matrikelnummer>';
+		echo '		<matrikelnummer>'.$row->matrikelnr.'</matrikelnummer>';
 		echo '		<studiengang_kz>'.$studiengang_kz.'</studiengang_kz>';
 		echo '		<studiengang_bezeichnung_deutsch><![CDATA['.$row->bezeichnung.']]></studiengang_bezeichnung_deutsch>';
 		echo '		<studiengang_bezeichnung_englisch><![CDATA['.$row->english.']]></studiengang_bezeichnung_englisch>';
@@ -201,24 +187,9 @@ if (isset($_REQUEST["xmlformat"]) && $_REQUEST["xmlformat"] == "xml")
 		}
 		echo '		<sprache_deutsch>'.$sprache_deutsch.'</sprache_deutsch>';
 		echo '		<sprache_englisch>'.$sprache_englisch.'</sprache_englisch>';
-<<<<<<< HEAD
 		echo '		<semester>'.$row->max_semester.'</semester>';
 		echo '		<jahre>'.($row->max_semester/2.0).'</jahre>';
 		echo '		<ects>'.($row->max_semester*30+$angerechnete_sws).'</ects>';
-=======
-		//Wenn Lehrgang, kommen die max-semester nicht aus tbl_studiengang, sondern aus dem höchsten prestudent-status-semester
-		if($row->studiengang_kz<0)
-		{
-			$lastPrestudentSemester=new prestudent();
-			$lastPrestudentSemester->getLastStatus($row->prestudent_id,null,'Student');
-			$maxsemester=$lastPrestudentSemester->ausbildungssemester;
-		}
-		else 
-			$maxsemester=$row->max_semester;
-		echo '		<semester>'.$maxsemester.'</semester>';
-		echo '		<jahre>'.($maxsemester/2.0).'</jahre>';
-		echo '		<ects>'.($maxsemester*30+$angerechnete_sws).'</ects>';
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 		if($angerechnete_sws!=0)
 			echo '		<ects_angerechnet>('.$angerechnete_sws.' ECTS angerechnet/credited)</ects_angerechnet>';
 		else
@@ -247,18 +218,10 @@ if (isset($_REQUEST["xmlformat"]) && $_REQUEST["xmlformat"] == "xml")
 		
 		if($row->typ=='d')
         {
-<<<<<<< HEAD
 			echo '		<zulassungsvoraussetzungen_deutsch><![CDATA[Allgemeine Universitätsreife (vgl. §4 Abs. 3 FHStG idgF), Berufsreifeprüfung bzw. Studienberechtigungsprüfung oder einschlägige berufliche Qualifikation (Lehrabschluss bzw. Abschluss einer berufsbildenden mittleren Schule mit Zusatzprüfungen). Die Aufnahme erfolgt auf Basis eines Auswahlverfahrens (Werdegang, Eignungstest, Bewerbungsgespräch).]]></zulassungsvoraussetzungen_deutsch>';
 			echo '		<zulassungsvoraussetzungen_englisch><![CDATA[Austrian or equivalent foreign school leaving certificate (Reifeprüfung), university entrance examination certificate (Studienberechtigungsprüfung), certificate or equivalent relevant professional qualification (Berufsreifeprüfung) plus entrance examination equal to the university entrance examination. Admission is on the basis of a selection process (including entrance exam and interview, professional background is considered).]]></zulassungsvoraussetzungen_englisch>';
 			echo '		<anforderungen_deutsch><![CDATA[Das Studium erfordert die positive Absolvierung von Lehrveranstaltungen (Vorlesungen, Übungen, Seminaren, Projekten, integrierten Lehrveranstaltungen) im Ausmaß von jeweils 30 ECTS pro Semester gemäß dem vorgeschriebenen Studienplan. Die Ausbildung integriert technische, wirtschaftliche, organisatorische und persönlichkeitsbildende Elemente. Das Studium beinhaltet ein facheinschlägiges Berufpraktikum. Im Rahmen des Studiums ist eine Diplomarbeit zu verfassen und eine abschließende Prüfung (Diplomprüfung) zu absolvieren. Der Studiengang (Kennzahl '.sprintf('%04s', $row->studiengang_kz).') ist von der AQ Austria akkreditiert.]]></anforderungen_deutsch>';
 			echo '		<anforderungen_englisch><![CDATA[The program requires the positive completion of all courses (lectures, labs, seminars, project work, and integrated courses) to the extend of 30 ECTS per semester according to the curriculum. The program integrates technical, economical, management and personal study elements. Included in the program is a relevant work placement. The degree is awarded upon the successful completion of a diploma theses and the final examination. The program (classification number '.sprintf('%04s', $row->studiengang_kz).') is accredited by AQ Austria.]]></anforderungen_englisch>';
-=======
-			echo '		<niveau_code>UNESCO ISCED 5A</niveau_code>';
-			echo '		<zulassungsvoraussetzungen_deutsch><![CDATA[Allgemeine Universitätsreife (vgl. §4 Abs. 3 FHStG idgF), Berufsreifeprüfung bzw. Studienberechtigungsprüfung oder einschlägige berufliche Qualifikation (Lehrabschluss bzw. Abschluss einer berufsbildenden mittleren Schule mit Zusatzprüfungen). Die Aufnahme erfolgt auf Basis eines Auswahlverfahrens (Werdegang, Eignungstest, Bewerbungsgespräch).]]></zulassungsvoraussetzungen_deutsch>';
-			echo '		<zulassungsvoraussetzungen_englisch><![CDATA[Austrian or equivalent foreign school leaving certificate (Reifeprüfung), university entrance examination certificate (Studienberechtigungsprüfung), certificate or equivalent relevant professional qualification (Berufsreifeprüfung) plus entrance examination equal to the university entrance examination. Admission is on the basis of a selection process (including entrance exam and interview, professional background is considered).]]></zulassungsvoraussetzungen_englisch>';
-			echo '		<anforderungen_deutsch><![CDATA[Das Studium erfordert die positive Absolvierung von Lehrveranstaltungen (Vorlesungen, Übungen, Seminaren, Projekten, integrierten Lehrveranstaltungen) im Ausmaß von jeweils 30 ECTS pro Semester gemäß dem vorgeschriebenen Studienplan. Die Ausbildung integriert technische, wirtschaftliche, organisatorische und persönlichkeitsbildende Elemente. Das Studium beinhaltet ein facheinschlägiges Berufpraktikum. Im Rahmen des Studiums ist eine Diplomarbeit zu verfassen und eine abschließende Prüfung (Diplomprüfung) zu absolvieren. Der Studiengang (Kennzahl '.$studiengang_kz.') ist von der AQ Austria akkreditiert.]]></anforderungen_deutsch>';
-			echo '		<anforderungen_englisch><![CDATA[The program requires the positive completion of all courses (lectures, labs, seminars, project work, and integrated courses) to the extend of 30 ECTS per semester according to the curriculum. The program integrates technical, economical, management and personal study elements. Included in the program is a relevant work placement. The degree is awarded upon the successful completion of a diploma theses and the final examination. The program (classification number '.$studiengang_kz.') is accredited by AQ Austria.]]></anforderungen_englisch>';
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 			echo '		<zugangsberechtigung_deutsch><![CDATA[Der Abschluss des Diplomstudiengangs berechtigt zu einem facheinschlägigen Doktoratsstudium, Magister- bzw. Master-Studium oder postgradualen Studium (mit eventuellen Zusatzprüfungen). Die Qualifikation entspricht einem Master of Science in Engineering, MSc.]]></zugangsberechtigung_deutsch>';
 			echo '		<zugangsberechtigung_englisch><![CDATA[The successful completion of the Diploma Degree Program qualifies the graduate to apply for admission to a relevant Doctoral Degree Program, Master Degree Program or postgraduate studies (additional qualifying exams may be required). The Diploma Degree Program is a graduate program, the qualification is equivalent to Master of Science in Engineering, MSc.]]></zugangsberechtigung_englisch>';
 			echo '		<niveau_deutsch>Diplomstudium (UNESCO ISCED 5A)</niveau_deutsch>';
@@ -266,18 +229,10 @@ if (isset($_REQUEST["xmlformat"]) && $_REQUEST["xmlformat"] == "xml")
 		}
 		elseif($row->typ=='m')
 		{
-<<<<<<< HEAD
 			echo '		<zulassungsvoraussetzungen_deutsch><![CDATA[Die fachliche Zugangsvoraussetzung (vgl. §4 Abs. 2 FHStG idgF) zu einem FH-Masterstudiengang ist ein abgeschlossener facheinschlägiger FH-Bachelorstudiengang oder der Abschluss eines gleichwertigen Studiums an einer anerkannten inländischen oder ausländischen postsekundären Bildungseinrichtung. Die Aufnahme in den Studiengang erfolgt auf Basis eines Auswahlverfahrens.]]></zulassungsvoraussetzungen_deutsch>';
 			echo '		<zulassungsvoraussetzungen_englisch><![CDATA[ Admission to the master\'s degree program is granted on the basis of the successful completion of a relevant bachelor\'s degree program or a  comparable Austrian or foreign post-secondary degree acknowledged to be its equivalent. Admission is on the basis of a selection process. ]]></zulassungsvoraussetzungen_englisch>';
 			echo '		<anforderungen_deutsch><![CDATA[Das Studium erfordert die positive Absolvierung von Lehrveranstaltungen (Vorlesungen, Übungen, Seminaren, Projekten, integrierten Lehrveranstaltungen) im Ausmaß von jeweils 30 ECTS pro Semester gemäß dem vorgeschriebenen Studienplan. Die Ausbildung integriert technische, wirtschaftliche, organisatorische und persönlichkeitsbildende Elemente. Im Rahmen des Studiums ist eine Master Thesis zu verfassen und eine abschließende Prüfung (Masterprüfung) zu absolvieren. Der Studiengang (Kennzahl '.sprintf('%04s', $row->studiengang_kz).') ist von der AQ Austria akkreditiert.]]></anforderungen_deutsch>';
 			echo '		<anforderungen_englisch><![CDATA[The program requires the positive completion of all courses (lectures, labs, seminars, project work, and integrated courses) to the extend of 30 ECTS per semester according to the curriculum.  The program integrates technical, economical, management and personal study elements. The degree is awarded upon the successful completion of a Master´s Thesis and the final examination. The program (classification number '.sprintf('%04s', $row->studiengang_kz).') is accredited by AQ Austria.]]></anforderungen_englisch>';
-=======
-			echo '		<niveau_code>UNESCO ISCED 5A</niveau_code>';
-			echo '		<zulassungsvoraussetzungen_deutsch><![CDATA[Die fachliche Zugangsvoraussetzung (vgl. §4 Abs. 2 FHStG idgF) zu einem FH-Masterstudiengang ist ein abgeschlossener facheinschlägiger FH-Bachelorstudiengang oder der Abschluss eines gleichwertigen Studiums an einer anerkannten inländischen oder ausländischen postsekundären Bildungseinrichtung. Die Aufnahme in den Studiengang erfolgt auf Basis eines Auswahlverfahrens.]]></zulassungsvoraussetzungen_deutsch>';
-			echo '		<zulassungsvoraussetzungen_englisch><![CDATA[ Admission to the master\'s degree program is granted on the basis of the successful completion of a relevant bachelor\'s degree program or a  comparable Austrian or foreign post-secondary degree acknowledged to be its equivalent. Admission is on the basis of a selection process. ]]></zulassungsvoraussetzungen_englisch>';
-			echo '		<anforderungen_deutsch><![CDATA[Das Studium erfordert die positive Absolvierung von Lehrveranstaltungen (Vorlesungen, Übungen, Seminaren, Projekten, integrierten Lehrveranstaltungen) im Ausmaß von jeweils 30 ECTS pro Semester gemäß dem vorgeschriebenen Studienplan. Die Ausbildung integriert technische, wirtschaftliche, organisatorische und persönlichkeitsbildende Elemente. Im Rahmen des Studiums ist eine Master Thesis zu verfassen und eine abschließende Prüfung (Masterprüfung) zu absolvieren. Der Studiengang (Kennzahl '.$studiengang_kz.') ist von der AQ Austria akkreditiert.]]></anforderungen_deutsch>';
-			echo '		<anforderungen_englisch><![CDATA[The program requires the positive completion of all courses (lectures, labs, seminars, project work, and integrated courses) to the extend of 30 ECTS per semester according to the curriculum.  The program integrates technical, economical, management and personal study elements. The degree is awarded upon the successful completion of a Master´s Thesis and the final examination. The program (classification number '.$studiengang_kz.') is accredited by AQ Austria.]]></anforderungen_englisch>';
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 			echo '		<zugangsberechtigung_deutsch><![CDATA[Der Abschluss des Masterstudiengangs berechtigt zu einem facheinschlägigen Doktoratsstudium an einer Universität (mit eventuellen Zusatzprüfungen).]]></zugangsberechtigung_deutsch>';
 			echo '		<zugangsberechtigung_englisch><![CDATA[The successful completion of the Master Degree Program qualifies the graduate to apply for admission to a relevant Doctoral Degree Program at a University (additional qualifying exams may be required).    ]]></zugangsberechtigung_englisch>';
 			echo '		<niveau_deutsch>Masterstudium (UNESCO ISCED 5A)</niveau_deutsch>';
@@ -285,45 +240,16 @@ if (isset($_REQUEST["xmlformat"]) && $_REQUEST["xmlformat"] == "xml")
 		}
 		elseif($row->typ=='b')
 		{
-<<<<<<< HEAD
 			echo '		<zulassungsvoraussetzungen_deutsch><![CDATA[Allgemeine Universitätsreife (vgl. §4 Abs. 3 FHStG idgF), Berufsreifeprüfung bzw. Studienberechtigungsprüfung oder einschlägige berufliche Qualifikation (Lehrabschluss bzw. Abschluss einer berufsbildenden mittleren Schule mit Zusatzprüfungen). Die Aufnahme erfolgt auf Basis eines Auswahlverfahrens (Werdegang, Eignungstest, Bewerbungsgespräch).]]></zulassungsvoraussetzungen_deutsch>';
 			echo '		<zulassungsvoraussetzungen_englisch><![CDATA[Austrian or equivalent foreign school leaving certificate (Reifeprüfung), university entrance examination certificate (Studienberechtigungsprüfung), certificate or equivalent relevant professional qualification (Berufsreifeprüfung) plus entrance examination equal to the university entrance examination. Admission is  on the basis of a selection process. (including entrance exam and interview, professional background is considered).]]></zulassungsvoraussetzungen_englisch>';
 			echo '		<anforderungen_deutsch><![CDATA[Das Studium erfordert die positive Absolvierung von Lehrveranstaltungen (Vorlesungen, Übungen, Seminaren, Projekten, integrierten Lehrveranstaltungen) im Ausmaß von jeweils 30 ECTS pro Semester gemäß dem vorgeschriebenen Studienplan. Die Ausbildung integriert technische, wirtschaftliche, organisatorische und persönlichkeitsbildende Elemente. Das Studium beinhaltet ein facheinschlägiges Berufpraktikum. Im Rahmen des Studiums sind zwei Bachelorarbeiten zu verfassen und eine abschließende Prüfung (Bachelorprüfung) zu absolvieren. Der Studiengang (Kennzahl '.sprintf('%04s', $row->studiengang_kz).') ist von der AQ Austria akkreditiert.]]></anforderungen_deutsch>';
 			echo '		<anforderungen_englisch><![CDATA[The program requires the positive completion of all courses (lectures, labs, seminars, project work, and integrated courses) to the extend of 30 ECTS per semester according to the curriculum. The program integrates technical, economical, management and personal study elements. Included in the program is a relevant work placement. The degree is awarded upon the successful completion of 2 bachelor theses and the final examination. The program (classification number '.sprintf('%04s', $row->studiengang_kz).') is accredited by AQ Austria.]]></anforderungen_englisch>';
-=======
-			echo '		<niveau_code>UNESCO ISCED 5A</niveau_code>';
-			echo '		<zulassungsvoraussetzungen_deutsch><![CDATA[Allgemeine Universitätsreife (vgl. §4 Abs. 3 FHStG idgF), Berufsreifeprüfung bzw. Studienberechtigungsprüfung oder einschlägige berufliche Qualifikation (Lehrabschluss bzw. Abschluss einer berufsbildenden mittleren Schule mit Zusatzprüfungen). Die Aufnahme erfolgt auf Basis eines Auswahlverfahrens (Werdegang, Eignungstest, Bewerbungsgespräch).]]></zulassungsvoraussetzungen_deutsch>';
-			echo '		<zulassungsvoraussetzungen_englisch><![CDATA[Austrian or equivalent foreign school leaving certificate (Reifeprüfung), university entrance examination certificate (Studienberechtigungsprüfung), certificate or equivalent relevant professional qualification (Berufsreifeprüfung) plus entrance examination equal to the university entrance examination. Admission is  on the basis of a selection process. (including entrance exam and interview, professional background is considered).]]></zulassungsvoraussetzungen_englisch>';
-			echo '		<anforderungen_deutsch><![CDATA[Das Studium erfordert die positive Absolvierung von Lehrveranstaltungen (Vorlesungen, Übungen, Seminaren, Projekten, integrierten Lehrveranstaltungen) im Ausmaß von jeweils 30 ECTS pro Semester gemäß dem vorgeschriebenen Studienplan. Die Ausbildung integriert technische, wirtschaftliche, organisatorische und persönlichkeitsbildende Elemente. Das Studium beinhaltet ein facheinschlägiges Berufpraktikum. Im Rahmen des Studiums sind zwei Bachelorarbeiten zu verfassen und eine abschließende Prüfung (Bachelorprüfung) zu absolvieren. Der Studiengang (Kennzahl '.$studiengang_kz.') ist von der AQ Austria akkreditiert.]]></anforderungen_deutsch>';
-			echo '		<anforderungen_englisch><![CDATA[The program requires the positive completion of all courses (lectures, labs, seminars, project work, and integrated courses) to the extend of 30 ECTS per semester according to the curriculum. The program integrates technical, economical, management and personal study elements. Included in the program is a relevant work placement. The degree is awarded upon the successful completion of 2 bachelor theses and the final examination. The program (classification number '.$studiengang_kz.') is accredited by AQ Austria.]]></anforderungen_englisch>';
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 			echo '		<zugangsberechtigung_deutsch><![CDATA[Der Abschluss des Bachelorstudiengangs berechtigt zu einem facheinschlägigen Magister- bzw. Master-Studium an einer fachhochschulischen Einrichtung oder Universität (mit eventuellen Zusatzprüfungen).]]></zugangsberechtigung_deutsch>';
 			echo '		<zugangsberechtigung_englisch><![CDATA[The successful completion of the Bachelor Degree Program qualifies the graduate to apply for admission to a relevant Master Degree Program at a University of Applied Sciences or a University (additional qualifying exams may be required).]]></zugangsberechtigung_englisch>';
 			echo '		<niveau_deutsch>Bachelorstudium (UNESCO ISCED 5A)</niveau_deutsch>';
 			echo '		<niveau_englisch>Bachelor degree program (UNESCO ISCED 5A)</niveau_englisch>';
 			
 		}
-<<<<<<< HEAD
-=======
-		elseif($row->typ=='r')
-		{
-			echo '		<niveau_code>UNESCO ISCED 6</niveau_code>';
-			echo '		<niveau_deutsch>Doktoratsstudium (UNESCO ISCED 6)</niveau_deutsch>';
-			echo '		<niveau_englisch>University doctoral studies (UNESCO ISCED 6)</niveau_englisch>';
-			
-		}
-		elseif($row->typ=='l' || $row->typ=='k')
-		{
-			echo '		<niveau_code>UNESCO ISCED 5A</niveau_code>';
-			echo '		<niveau_deutsch>Lehrgang zur Weiterbildung nach §9 FHStG idgF.</niveau_deutsch>';
-			echo '		<niveau_englisch>Certificate Program for Further Education subjected to § 9 FHStG</niveau_englisch>';
-			echo '		<zulassungsvoraussetzungen_deutsch><![CDATA[Facheinschlägiger Studienabschluss oder einschlägige Berufserfahrung]]></zulassungsvoraussetzungen_deutsch>';
-			echo '		<zulassungsvoraussetzungen_englisch><![CDATA[Appropriate university degree or appropriate work experience]]></zulassungsvoraussetzungen_englisch>';
-			echo '		<anforderungen_deutsch><![CDATA[Das Studium erfordert die positive Absolvierung von Lehrveranstaltungen (Vorlesungen, Übungen, Seminaren, Projekten, integrierten Lehrveranstaltungen) im Ausmaß der laut Studienplan vorgeschriebenen ECTS. Die Ausbildung integriert technische, wirtschaftliche, organisatorische und persönlichkeitsbildende Elemente. Im Rahmen des Master-Lehrgangs ist eine Master Thesis zu verfassen und eine abschließende Prüfung  (Masterprüfung) zu absolvieren. Der Lehrgang ist vom Kollegium der FH Technikum  Wien genehmigt und der AQ Austria (Kennzahl '.$studiengang_kz.') gemeldet.]]></anforderungen_deutsch>';
-			echo '		<anforderungen_englisch><![CDATA[The program requires the positive completion of all courses (lectures, labs, seminars, project work, and integrated courses) to the ECTS according to the curriculum. The program integrates technical, economical, management and personal study elements. The degree for the Master Course is awarded upon the successful completion of a Master´s Thesis and the final examination. The program is accredited by the Council of the University of Applied Sciences Technikum Wien and reported to AQ Austria (classification number '.$studiengang_kz.')]]></anforderungen_englisch>';
-				
-		}
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 		
 		$akadgrad_id='';
 		$qry = "SELECT bezeichnung, akadgrad_id, bezeichnung_english FROM lehre.tbl_abschlusspruefung JOIN lehre.tbl_abschlussbeurteilung USING(abschlussbeurteilung_kurzbz) WHERE student_uid='".$uid_arr[$i]."' ORDER BY datum DESC LIMIT 1";
@@ -351,13 +277,8 @@ if (isset($_REQUEST["xmlformat"]) && $_REQUEST["xmlformat"] == "xml")
 			{
 				if($row_titel = $db->db_fetch_object())
 				{
-<<<<<<< HEAD
 					$titel_de = $row_titel->titel.', ('.$row_titel->akadgrad_kurzbz.')';
 					$titel_en = $row_titel->titel.', ('.$row_titel->akadgrad_kurzbz.')';
-=======
-					$titel_de = $row_titel->titel.($row_titel->akadgrad_kurzbz!=''?', ('.$row_titel->akadgrad_kurzbz.')':'');
-					$titel_en = $row_titel->titel.($row_titel->akadgrad_kurzbz!=''?', ('.$row_titel->akadgrad_kurzbz.')':'');
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 				}
 			}
 		}
@@ -414,9 +335,6 @@ if (isset($_REQUEST["xmlformat"]) && $_REQUEST["xmlformat"] == "xml")
         // Hole Datum der Sponsion -> wenn keine vorhanden nimm aktuelles datum
         $qry = "SELECT sponsion, tbl_abschlussbeurteilung.bezeichnung_english,datum FROM lehre.tbl_abschlusspruefung JOIN lehre.tbl_abschlussbeurteilung USING(abschlussbeurteilung_kurzbz) WHERE student_uid='".$uid_arr[$i]."' ORDER BY datum DESC LIMIT 1";
         $sponsion_datum = date('d.m.Y');
-        $abschlusspruefungsdatum = '';
-        $abschlussbeurteilung='';
-        
         if($db->db_query($qry))
         {
             if($row1= $db->db_fetch_object())
@@ -467,11 +385,7 @@ if (isset($_REQUEST["xmlformat"]) && $_REQUEST["xmlformat"] == "xml")
 		WHERE lehrveranstaltung_id 
 			IN(select distinct(lehrveranstaltung_id) FROM lehre.tbl_lehreinheit 
 			JOIN lehre.tbl_lehrveranstaltung USING (lehrveranstaltung_id)
-<<<<<<< HEAD
 		 	WHERE studiensemester_kurzbz IN ('$lastStatusSemester','$studiensemesterPrev') and studiengang_kz = '$studiengang_kz') 
-=======
-		 	WHERE studiensemester_kurzbz IN ('$lastStatusSemester','$studiensemesterPrev') and studiengang_kz = '$row->studiengang_kz') 
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 		 AND studiensemester_kurzbz IN ('$lastStatusSemester','$studiensemesterPrev') group by note order by note";
 		if($result_prevYear = $db->db_query($qry_prevYear))
 		{
@@ -491,10 +405,6 @@ if (isset($_REQUEST["xmlformat"]) && $_REQUEST["xmlformat"] == "xml")
 		$noten_anzahl += $noteArrayPrev[7];
 		$noten_anzahl += $noteArrayPrev[12];
 
-		// Division durch 0 verhindern
-		if($noten_anzahl==0)
-			$noten_anzahl=1;
-		
 		// Noten: 1-5, angerechnet, nicht beurteilt, erfolgreich absolviert anzeigen
 		echo "  <gradeLastYear1>".sprintf("%01.1f",($noteArrayPrev[1]/$noten_anzahl*100))."</gradeLastYear1>";
 		echo "  <gradeLastYear2>".sprintf("%01.1f",($noteArrayPrev[2]/$noten_anzahl*100))."</gradeLastYear2>";
@@ -513,11 +423,7 @@ if (isset($_REQUEST["xmlformat"]) && $_REQUEST["xmlformat"] == "xml")
 		WHERE lehrveranstaltung_id 
 			IN(select distinct(lehrveranstaltung_id) FROM lehre.tbl_lehreinheit 
 			JOIN lehre.tbl_lehrveranstaltung USING (lehrveranstaltung_id)
-<<<<<<< HEAD
 		 	WHERE studiensemester_kurzbz IN ('$lastStatusSemester','$studiensemesterPrev') and studiengang_kz = '$studiengang_kz') 
-=======
-		 	WHERE studiensemester_kurzbz IN ('$lastStatusSemester','$studiensemesterPrev') and studiengang_kz = '$row->studiengang_kz') 
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 		 AND studiensemester_kurzbz IN ('$lastStatusSemester','$studiensemesterPrev') group by note order by note";
 		if($result_prevYear = $db->db_query($qry_prevYear))
 			{
@@ -537,10 +443,6 @@ if (isset($_REQUEST["xmlformat"]) && $_REQUEST["xmlformat"] == "xml")
 		$noten_anzahl += $noteArrayPrev[7];
 		$noten_anzahl += $noteArrayPrev[12];
 
-		// Division durch 0 verhindern
-		if($noten_anzahl==0)
-			$noten_anzahl=1;
-		
 		// Noten: 1-5, angerechnet, nicht beurteilt, erfolgreich absolviert anzeigen
 		echo "  <gradePrevLastYear1>".sprintf("%01.1f",($noteArrayPrev[1]/$noten_anzahl*100))."</gradePrevLastYear1>";
 		echo "  <gradePrevLastYear2>".sprintf("%01.1f",($noteArrayPrev[2]/$noten_anzahl*100))."</gradePrevLastYear2>";
@@ -596,7 +498,7 @@ if (isset($_REQUEST["xmlformat"]) && $_REQUEST["xmlformat"] == "xml")
 			where student_uid = ".$db->db_add_param($uid_arr[$i])." AND
             zeugnis = true AND
 			status.ausbildungssemester = ".$db->db_add_param($start)." AND
-            status.status_kurzbz NOT IN('Unterbrecher', 'Interessent','Bewerber','Aufgenommener','Abgewiesener','Wartender')
+            status.status_kurzbz NOT IN('Unterbrecher', 'Interessent','Bewerber','Aufgenommener','Abgewiesener')
             ORDER BY datum ASC";
 			
            $semester_kurzbz = array(); 
@@ -937,27 +839,12 @@ if (isset($_REQUEST["xmlformat"]) && $_REQUEST["xmlformat"] == "xml")
                             $datum = new datum(); 
                             $datum_von = $datum->formatDatum($row_outgoing->von, 'Y.m.d');
                             $datum_bis = $datum->formatDatum($row_outgoing->bis, 'Y.m.d'); 
-                            $auslandssemester_start = 'th'; //Zur englischen Nummerierung der Semester (1st, 2nd, 3rd, 4th, ...)
+                            
                             
                             $sws = number_format(sprintf('%.1F',($row_outgoing->semesterstunden/$wochen)),2); 
                             if($sws == '0.0')
                                 $sws = '';
-	                        switch ($start) 
-					        {
-					            case '1':
-					                $auslandssemester_start = 'st';
-					                break;
-					            case '2':
-					                $auslandssemester_start = 'nd';
-					                break;
-					            case '3':
-					                $auslandssemester_start = 'rd';
-					                break;
-					            default:
-					                $auslandssemester_start = 'th';
-					                break;
-					        }
-                            	
+                            
                             echo '<lv>
                                 <lehrform_kurzbz></lehrform_kurzbz>
                                 <benotungsdatum>'.$benotungsdatum_outgoing.'</benotungsdatum>
@@ -966,7 +853,7 @@ if (isset($_REQUEST["xmlformat"]) && $_REQUEST["xmlformat"] == "xml")
                                 <kurzbz>'.$lehrform_kurzbz_outgoing.'</kurzbz>
                                 <stsem></stsem>
                                 <bezeichnung><![CDATA[]]></bezeichnung>
-                                <bezeichnung_englisch><![CDATA[International Semester Abroad: '.$datum_von.'-'.$datum_bis.', at '.$row_outgoing->ort.', '.$row_outgoing->universitaet.'. All credits earned during the International Semester Abroad (ISA) are fully credited for the '.$start.$auslandssemester_start.' semester at the UAS Technikum Wien.]]></bezeichnung_englisch>
+                                <bezeichnung_englisch><![CDATA[International Semester Abroad: '.$datum_von.'-'.$datum_bis.', at '.$row_outgoing->ort.', '.$row_outgoing->universitaet.'. All credits earned during the International Semester Abroad (ISA) are fully credited for the '.$start.'th semester at the UAS Fachhochschule Technikum Wien.]]></bezeichnung_englisch>
                                 <ects>'.$row_outgoing->ects.'</ects>
                                 <semesterstunden>'.$row_outgoing->semesterstunden.'</semesterstunden>
                                 <note>'.$note_outgoing.'</note>

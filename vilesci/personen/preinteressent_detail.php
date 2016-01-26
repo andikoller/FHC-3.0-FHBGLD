@@ -369,6 +369,8 @@ if(isset($_GET['action']) && $_GET['action']=='neuezuordnung')
 		$zuordnung->prioritaet = $_POST['prioritaet'];
 		$zuordnung->insertamum = date('Y-m-d H:i:s');
 		$zuordnung->insertvon = $user;
+		//Andreas Koller: Damit ein Studiengang ohne Fehlermeldung geändert werden kann, wurde hier die orgform hinzugefügt
+		$zuordnung->orgform_kurzbz = 'nd';
 		
 		if(!$zuordnung->saveZuordnung(true))
 			echo "<b>Fehler beim Speichern: $zuordnung->errormsg</b>";

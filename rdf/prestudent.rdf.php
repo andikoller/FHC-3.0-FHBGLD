@@ -66,23 +66,12 @@ if(isset($_GET['prestudent_id']) && is_numeric($_GET['prestudent_id']))
 				<PRESTD:zgv_code><![CDATA[<?php echo $prestd->zgv_code;  ?>]]></PRESTD:zgv_code>
 				<PRESTD:zgvort><![CDATA[<?php echo $prestd->zgvort;  ?>]]></PRESTD:zgvort>
 				<PRESTD:zgvdatum_iso><![CDATA[<?php echo $prestd->zgvdatum;  ?>]]></PRESTD:zgvdatum_iso>
-<<<<<<< HEAD
 				<PRESTD:zgvdatum><![CDATA[<?php echo $datum->convertISODate($prestd->zgvdatum);  ?>]]></PRESTD:zgvdatum>
 				<PRESTD:zgvmas_code><![CDATA[<?php echo $prestd->zgvmas_code;  ?>]]></PRESTD:zgvmas_code>
 				<PRESTD:zgvmaort><![CDATA[<?php echo $prestd->zgvmaort;  ?>]]></PRESTD:zgvmaort>
 				<PRESTD:zgvmadatum_iso><![CDATA[<?php echo $prestd->zgvmadatum;  ?>]]></PRESTD:zgvmadatum_iso>
 				<PRESTD:zgvmadatum><![CDATA[<?php echo $datum->convertISODate($prestd->zgvmadatum);  ?>]]></PRESTD:zgvmadatum>
 				<PRESTD:aufnahmeschluessel><![CDATA[<?php echo $prestd->aufnahmeschluessel;  ?>]]></PRESTD:aufnahmeschluessel>
-=======
-                <PRESTD:zgvdatum><![CDATA[<?php echo $datum->convertISODate($prestd->zgvdatum);  ?>]]></PRESTD:zgvdatum>
-                <PRESTD:zgvnation><![CDATA[<?php echo $prestd->zgvnation;  ?>]]></PRESTD:zgvnation>
-                <PRESTD:zgvmas_code><![CDATA[<?php echo $prestd->zgvmas_code;  ?>]]></PRESTD:zgvmas_code>
-				<PRESTD:zgvmaort><![CDATA[<?php echo $prestd->zgvmaort;  ?>]]></PRESTD:zgvmaort>
-				<PRESTD:zgvmadatum_iso><![CDATA[<?php echo $prestd->zgvmadatum;  ?>]]></PRESTD:zgvmadatum_iso>
-                <PRESTD:zgvmadatum><![CDATA[<?php echo $datum->convertISODate($prestd->zgvmadatum);  ?>]]></PRESTD:zgvmadatum>
-                <PRESTD:zgvmanation><![CDATA[<?php echo $prestd->zgvmanation;  ?>]]></PRESTD:zgvmanation>
-                <PRESTD:aufnahmeschluessel><![CDATA[<?php echo $prestd->aufnahmeschluessel;  ?>]]></PRESTD:aufnahmeschluessel>
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 				<PRESTD:facheinschlberuf><![CDATA[<?php echo ($prestd->facheinschlberuf?'true':'false');  ?>]]></PRESTD:facheinschlberuf>
 				<PRESTD:reihungstest_id><![CDATA[<?php echo $prestd->reihungstest_id;  ?>]]></PRESTD:reihungstest_id>
 				<PRESTD:anmeldungreihungstest_iso><![CDATA[<?php echo $prestd->anmeldungreihungstest;  ?>]]></PRESTD:anmeldungreihungstest_iso>
@@ -91,7 +80,6 @@ if(isset($_GET['prestudent_id']) && is_numeric($_GET['prestudent_id']))
 				<PRESTD:punkte><![CDATA[<?php echo $prestd->punkte;  ?>]]></PRESTD:punkte>
 				<PRESTD:bismelden><![CDATA[<?php echo ($prestd->bismelden?'true':'false');  ?>]]></PRESTD:bismelden>
 				<PRESTD:anmerkung><![CDATA[<?php echo $prestd->anmerkung;  ?>]]></PRESTD:anmerkung>
-				<PRESTD:mentor><![CDATA[<?php echo $prestd->mentor;  ?>]]></PRESTD:mentor>
 	      	</RDF:Description>
 	      </RDF:li>
 <?php

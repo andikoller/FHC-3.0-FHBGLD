@@ -161,27 +161,17 @@ function loadampel()
 <td class="boxshadow">
 	<table cellspacing="0" cellpadding="0" class="header">
 		<tr>
-<<<<<<< HEAD
 		<td valign="top" align="left">
 		<a href="index.php"><img class="header_logo" src="../skin/images/logo.png" alt="logo"></a>
 		<img class="header_left" src="../skin/images/header_left.png" alt="header_links">
 		<img class="header_right" src="../skin/images/header_right.png" alt="header_rechts">   	 	
-=======
-		<td valign="top" align="left" style="background-image: url(<?php echo APP_ROOT.'skin/styles/'.DEFAULT_STYLE.'/header.png'; ?>); background-position: top; background-repeat: repeat-x;">
-		<a href="index.php"><img class="header_logo" src="<?php echo APP_ROOT.'skin/styles/'.DEFAULT_STYLE.'/logo_250x130.png'; ?>" alt="logo"></a>
-		<!--<img class="header" src="<?php echo APP_ROOT.'skin/styles/'.DEFAULT_STYLE.'/header.png'; ?>" alt="header">-->  	 	
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	   	 	<table class="header_content" cellpadding="0">
 		   	  <tr>
 		   	    <td width="20%" align="center">&nbsp;
 		        </td>
 		         <td valign="middle" align="center">
 					<form name="searchform" action="private/tools/suche.php" method="GET" target="content" style="display:inline">				
-<<<<<<< HEAD
 		        	<input id="globalsearch" type="search" size="55" name="search" placeholder=" <?php echo $p->t('menu/suchePersonOrtDokumentInhalt');?> ..."/>
-=======
-		        	<input id="globalsearch" type="search" size="55" name="search" placeholder=" <?php echo $p->t('menu/suchePersonOrtDokumentInhalt');?> ..." title="<?php echo $p->t('menu/suchePersonOrtDokumentInhaltLang');?>"/>
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 		        	<img src="../skin/images/search.png" onclick="document.searchform.submit()" class="suchicon"/>
 		        	</form>
 		        </td>

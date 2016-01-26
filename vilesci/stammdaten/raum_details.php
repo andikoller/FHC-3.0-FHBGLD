@@ -36,7 +36,7 @@
 	$rechte = new benutzerberechtigung();
 	$rechte->getBerechtigungen($user);
 	
-	if(!$rechte->isBerechtigt('basis/ort',null,'s'))
+	if(!$rechte->isBerechtigt('basis/ort',null,'suid'))
 		die('Sie haben keine Berechtigung fuer diese Seite');
 	
 	$reloadstr = '';  // neuladen der liste im oberen frame
@@ -63,12 +63,6 @@
 	$telefonklappe = '';
 	$content_id='';
 	$ort_kurzbz_old = '';
-<<<<<<< HEAD
-=======
-	$oe_kurzbz='';
-	$gebteil='';
-	$m2='';
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	
 	$neu = "true";
 	
@@ -91,12 +85,6 @@
 		$content_id = $_POST['content_id'];
 		$ort_kurzbz_old = $_POST["ort_kurzbz_old"];
 		
-<<<<<<< HEAD
-=======
-		$m2 = str_replace(',','.',$_POST["m2"]);
-		$oe_kurzbz = $_POST["oe_kurzbz"];
-		$gebteil = $_POST["gebteil"];
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 		
 		$sg_update = new ort();
 		$sg_update->ort_kurzbz = $ort_kurzbz;
@@ -115,13 +103,7 @@
 		$sg_update->standort_id = $standort_id;
 		$sg_update->content_id = $content_id;
 		$sg_update->ort_kurzbz_old = $ort_kurzbz_old;
-<<<<<<< HEAD
 
-=======
-		$sg_update->m2 = $m2;
-		$sg_update->gebteil = $gebteil;
-		$sg_update->oe_kurzbz = $oe_kurzbz;
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 		
 		if ($_POST["neu"] == "true")
 			$sg_update->new = 1;
@@ -158,12 +140,6 @@
 		$standort_id = $sg->standort_id;
 		$telefonklappe = $sg->telefonklappe;
 		$content_id = $sg->content_id;
-<<<<<<< HEAD
-=======
-		$gebteil = $sg->gebteil;
-		$m2 = $sg->m2;
-		$oe_kurzbz = $sg->oe_kurzbz;
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 		$neu = "false";
 	}
 
@@ -178,9 +154,6 @@
 
 		if(isset($_GET['method']))
 		{
-			if(!$rechte->isBerechtigt('basis/ort',null,'suid'))
-				die('Sie haben keine Berechtigung fuer diese Seite');
-
 			switch($_GET['method'])
 			{
 				case 'delete':
@@ -325,13 +298,8 @@
 		$htmlstr .= '
 							</SELECT>
 						</td>
-<<<<<<< HEAD
 						<td>Telefonklappe</td>
 						<td><input class="detail" type="text" name="telefonklappe" size="3" maxlength="8" value="'.$telefonklappe.'" onchange="submitable()"></td>
-=======
-						<td>Gebäudeteil</td>
-						<td><input class="detail" type="text" name="gebteil" size="5" maxlength="32" value="'.$gebteil.'" onchange="submitable()"></td>					
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 					</tr>
 					<tr>
 						<td valign="top">Lehre</td>
@@ -369,34 +337,6 @@
 		$htmlstr .= '<input type="checkbox" name="aktiv" value="t"'.$chk3.' onchange="submitable()"></td>
 					</tr>
 					<tr>
-<<<<<<< HEAD
-=======
-						<td>Quadratmeter</td>
-						<td><input class="detail" type="text" name="m2" size="6" maxlength="9" value="'.$m2.'" onchange="submitable()"></td>
-						<td>Organisationseinheit</td>
-						<td colspan="3">';
-		$oe=new organisationseinheit();
-		$oe->getAll();
-		$htmlstr.='<select name="oe_kurzbz">';
-		$htmlstr.='<option value="">-- keine Auswahl --</option>';
-		foreach($oe->result as $row_oe)
-		{
-			if($row_oe->oe_kurzbz==$oe_kurzbz)
-				$selected='selected';
-			else
-				$selected='';
-			$htmlstr.='<option value="'.$row_oe->oe_kurzbz.'" '.$selected.'>'.$row_oe->organisationseinheittyp_kurzbz.' '.$row_oe->bezeichnung.'</option>';
-		}
-		$htmlstr.='</select>';
-		$htmlstr.='
-						</td>						
-					</tr>
-					<tr>
-						<td>Telefonklappe</td>
-						<td><input class="detail" type="text" name="telefonklappe" size="3" maxlength="8" value="'.$telefonklappe.'" onchange="submitable()"></td>
-					</tr>
-					<tr>
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 						<td valign="top">Lageplan</td>
 						<td><textarea name="lageplan" cols="37" rows="5" onchange="submitable()">'.$lageplan.'</textarea></td>
 						<td valign="top">Ausstattung</td>

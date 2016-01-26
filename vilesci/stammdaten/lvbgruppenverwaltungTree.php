@@ -60,11 +60,7 @@ if ($semResult != false) {
 					<a href='javascript:void(0);' onclick='changeState(\"pic_".$studiengang_kz.$sem.$s["aktiv"]."\",$studiengang_kz,\"" . $sem . "\",\" \",\" \",\"" .$s["aktiv"]. "\")'>
 						<img id='pic_".$studiengang_kz.$sem.$s["aktiv"]."' src='../../skin/images/" . ($s["aktiv"] == 't' ? 'true.png' : 'false.png') . "' aktiv='".$s["aktiv"]."' height='20'>
 					</a>
-<<<<<<< HEAD
 					<a href='javascript:void(0);' onclick='getGruppenDetails(\"edit\",\"\",$studiengang_kz,\"" . $sem . "\",\" \",\" \",\"".$s["aktiv"]."\")'>
-=======
-					<a name='$studiengang_kz$sem' href='javascript:void(0);' onclick='getGruppenDetails(\"edit\",\"\",$studiengang_kz,\"" . $sem . "\",\" \",\" \",\"".$s["aktiv"]."\")'>
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 						Semester " . $s["semester"] . "
 					</a>";
 
@@ -79,11 +75,7 @@ if ($semResult != false) {
 								<a href='javascript:void(0);' onclick='changeState(\"pic_".$studiengang_kz.$sem.$verb."\",$studiengang_kz,\"" . $sem . "\",\"" . $verb . "\",\" \",\"" . $v["aktiv"] . "\")'>
 									<img id='pic_".$studiengang_kz.$sem.$verb."' src='../../skin/images/" . ($v["aktiv"] == 't' ? 'true.png' : 'false.png') . "' aktiv='".$v["aktiv"]."' height='20'>
 								</a>
-<<<<<<< HEAD
 								<a href='javascript:void(0);' onclick='getGruppenDetails(\"edit\",\"\",$studiengang_kz,\"" . $sem . "\",\"" . $verb . "\",\" \",\"".$v["aktiv"]."\")'>
-=======
-								<a name='$studiengang_kz$sem$verb' href='javascript:void(0);' onclick='getGruppenDetails(\"edit\",\"\",$studiengang_kz,\"" . $sem . "\",\"" . $verb . "\",\" \",\"".$v["aktiv"]."\")'>
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 									Verband " . $verb . ($v["bezeichnung"] != '' ? " (" . $v["bezeichnung"] . ")" : '' ) . "
 								</a>";
 					//Gruppen des Verbandes holen und ausgeben
@@ -99,11 +91,7 @@ if ($semResult != false) {
 												<a href='javascript:void(0);' onclick='changeState(\"pic_".$studiengang_kz.$sem.$verb.$grp."\",$studiengang_kz,\"" . $sem . "\",\"" . $verb . "\",\"" . $grp . "\",\"" . $g["aktiv"] . "\")'>
 													<img id='pic_".$studiengang_kz.$sem.$verb.$grp."' src='../../skin/images/" . ($g["aktiv"] == 't' ? 'true.png' : 'false.png') . "' aktiv='".$g["aktiv"]."' height='20'>
 												</a>
-<<<<<<< HEAD
 												<a href='javascript:void(0);' onclick='getGruppenDetails(\"edit\",\"\",$studiengang_kz,\"" . $sem . "\",\"" . $verb . "\",\"" . $grp . "\",\"".$g["aktiv"]."\")'>
-=======
-												<a name='$studiengang_kz$sem$verb$grp' href='javascript:void(0);' onclick='getGruppenDetails(\"edit\",\"\",$studiengang_kz,\"" . $sem . "\",\"" . $verb . "\",\"" . $grp . "\",\"".$g["aktiv"]."\")'>
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 													Gruppe " . $grp . ($grpBez != '' ? " (" . $grpBez . ")" : '' ) . "
 												</a>
 											</li>";
@@ -156,11 +144,7 @@ if ($semResult != false) {
 						<a href='javascript:void(0);' onclick='changeState(\"pic_".$studiengang_kz.$sem.$kurzBz."\",$studiengang_kz,\"" . $sem . "\",\" \",\" \",\"". $state."\",\"".$kurzBz."\")'>
 							<img id='pic_".$studiengang_kz.$sem.$kurzBz."' src='../../skin/images/" . ($spezGroup->aktiv == 't' ? 'true.png' : 'false.png') . "' aktiv='".$state."' height='20'>
 						</a>
-<<<<<<< HEAD
 						<a href='javascript:void(0);' onclick='getGruppenDetails(\"edit\",\"" . $kurzBz . "\",$studiengang_kz,\"" . $sem . "\")'>
-=======
-						<a name='".$kurzBz."' href='javascript:void(0);' onclick='getGruppenDetails(\"edit\",\"" . $kurzBz . "\",$studiengang_kz,\"" . $sem . "\")'>
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 							" . $kurzBz . ($spezGroup->bezeichnung != '' ? "(" . $spezGroup->bezeichnung . ")" : '')."
 						</a>
 					</li>";

@@ -168,11 +168,7 @@ if ($insert)
 				if($db->db_num_rows($result_stplcheck)==0)
 				{
 					$qry="INSERT INTO lehre.$stpl_table (datum,stunde,ort_kurzbz,unr,mitarbeiter_uid,studiengang_kz,
-<<<<<<< HEAD
 							semester,verband,gruppe,gruppe_kurzbz,lehreinheit_id, insertvon)
-=======
-							semester,verband,gruppe,gruppe_kurzbz,lehreinheit_id, updatevon, insertvon)
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 							VALUES (".$db->db_add_param($row->datum).",".
 							$db->db_add_param($row->stunde).",".
 							$db->db_add_param($row_ort->ort_kurzbz).",".
@@ -188,11 +184,7 @@ if ($insert)
 					else
 						$qry.="NULL,";
 
-<<<<<<< HEAD
 					$qry.=$db->db_add_param($leid, FHC_INTEGER).",'LVPlanCheck');";
-=======
-					$qry.=$db->db_add_param($leid, FHC_INTEGER).",'".$user."','".$user."');";
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 
 					if(!$result_insert=$db->db_query($qry))
 						die ("DB Fehler $qry" .' '.$db->db_last_error());

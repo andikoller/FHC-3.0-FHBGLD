@@ -1,0 +1,12 @@
+\chapter{BIS-Meldung}
+\section{Mitarbeiter}
+\subsection{Ablauf}
+Es gibt die Möglichkeit, die BIS-Meldung des Vorjahres zu importieren. Dies ist Hilfreich, wenn die Meldung zum Ersten mal mit dem FAS erstellt wird, damit die Daten nicht händisch eingetragen werden müssen. Dies geschieht über den Menüpunkt BIS->Mitarbeiter->Import.\\
+\\
+Über den Menüpunkt BIS->Mitarbetier->checkVerwendung kann geprüft werden, ob alle Mitarbeiter eine gültige BIS-Verwendung eingetragen haben. Die aufscheinenden Fehler sollten vor der BIS-Meldung bereinigt werden.\\
+\\
+Wenn die Fehler in checkVerwendung behoben wurden, kann checkFunktion aufgerufen werden. Dieses Script erstellt die BIS-Funktionen. Hierbei wird die Anzahl der Stunden anhand der Lehraufträge zu den Verwendungen hinzugefügt.\\
+\\
+Nach diesen Schritten, kann die Meldung über den den Menüpunkt 'Meldung generieren' erstellt werden.
+\subsection{Inaktive Studiengänge}
+Bei der Personalmeldung dürfen keine Studiengangsleiter von Studiengängen gemeldet werden, die keinen Unterricht mehr haben. Diese Studiengänge können aber nicht immer deaktiviert werden (z.B. wenn noch Diplomanden vorhanden sind ohne Abschlussprüfung). Diese Studiengänge müssen in der Datei /vilesci/bis/personalmeldung.php in das Array \$nichtmelden eingetragen werden.

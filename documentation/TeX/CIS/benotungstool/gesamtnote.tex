@@ -1,0 +1,131 @@
+\section{Gesamtnote}
+\label{gesamtnote}
+Wählen Sie unter \url{https://cis.technikum-wien.at} -$>$ Mein Cis -$>$ Meine LV eine Lehrveranstaltung aus. Auf der Übersichtsseite klicken Sie das Symbol 'Gesamtnote' um zur Benotungsseite zu gelangen.
+
+\subsection{Eintragen der Note}
+\subsubsection{Manuelle Eintragung der Gesamtnote}
+\label{ben}
+
+\begin{enumerate}
+\item Tragen Sie die Noten ein (1) und übernehmen Sie diese mit dem '-$>$' - Knopf
+\item Nachdem Sie alle Noten eingetragen haben, können Sie diese Freigeben siehe Kap. \ref{freigabe} auf S. \pageref{freigabe}\\
+\end{enumerate}
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=1.0\textwidth]{benotungstool_benotung_lv.png}
+\end{center}
+\caption{Benotung Lehrveranstaltung}\label{benotung_lv}
+\end{figure}
+
+\subsubsection{Noten aus Übungstool (Kreuzerltool) übernehmen}
+\label{ben}
+
+Wenn eine Übung im Übungstool (Kreuzerltool) angelegt und benotet wurde, scheint die Note in der Gesamtbeurteilung auf.
+Wenn mehrere Lehreinheiten zu dieser Lehrveranstaltung vorhanden sind, wird das mittel aller Noten als Gesamtnote vorgeschlagen.
+
+Die Notenfelder sind bereits vorausgefüllt. Übernehmen Sie diese mit dem '-$>$' - Knopf.
+
+\subsubsection{Noten aus Moodle übernehmen}
+\label{ben}
+
+Wenn ein Moodle-Kurs angelegt und benotet wurde, scheint die Note automatisch in der Gesamtbeurteilung auf.
+Wenn mehrere Kurse zu dieser Lehrveranstaltung vorhanden sind, wird das Mittel aller Noten als Gesamtnote vorgeschlagen.
+Die Notenfelder sind bereits vorausgefüllt. Übernehmen Sie diese mit dem '-$>$' - Knopf.
+
+\subsubsection{Notenimport aus Excel}
+\label{ben}
+
+Es besteht die Möglichkeit, Noten aus einem Excel-File zu importieren. Folgende Schritte sind dazu nötig:
+
+\begin{enumerate}
+\item Laden Sie sich die Excel-Notenliste unter CIS -$>$ Lehrveranstaltungen -$>$ Anwesenheits- und Notenlisten -$>$ Notenliste herunter
+\item Tragen Sie im Excel-File die Noten ein
+\item Markieren Sie im Excel die beiden Spalten Matrikelnummer und Note für jene Studenten für die Sie die Noten importieren möchten. (ohne Überschrift)
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=1.0\textwidth]{CIS_Gesamtnote_Excelimport.png}
+\end{center}
+\caption{Excelimport}\label{excelimport}
+\end{figure}
+\item Kopieren Sie die markierten Spalten mittels $<$strg$>$+$<$c$>$ oder Bearbeiten-$>$Kopieren in die Zwischenablage
+\item Mit einem Klick auf den Knopf 'Import' werden die Noten übernommen.
+\end{enumerate}
+\achtung {Bestehende Noten werden ohne Nachfrage überschrieben}
+Damit der Notenimport funktioniert müssen im Browser einige Sicherheitseinstellungen vorgenommen werden:
+
+\begin{enumerate}
+\item Firefox / Mozilla
+	\begin{enumerate}
+	\item öffnen Sie ein neues Browserfenster
+	\item geben sie 'about:config' in die Adressleiste ein. 
+	(Möglicherweise erscheint hier eine Warnmeldung die Sie mit einem klick auf den angezeigten Knopf überspringen)
+	\item Suchen sie den Eintrag 'signed.applets.codebase\_principal\_support'
+	\item mit einem Doppelklick muss diese Einstellung auf 'true' gesetzt werden
+	\end{enumerate}
+	\achtung {Durch die Aktivierung dieses Eintrages wird ein Sicherheitsloch geöffnet. Wir empfehlen daher diese Einstellung nach dem
+	Import wieder zurückzusetzen.}
+\item InternetExplorer
+	\begin{enumerate}
+	\item Beim IE müssen keine Einstellungen vorgenommen werden. Wenn auf 'Import' geklickt wird erscheint (bei IE7) eine Warnungmeldung die sie mit 'Zugriff zulassen' bestätigen müssen.
+	\end{enumerate}
+\item Safari, Opera
+	\begin{enumerate}
+	\item Mit den Browsern Safari und Opera kann der Notenimport NICHT verwendet werden. Bitte verwenden Sie Firefox oder den InternetExplorer
+	\end{enumerate}
+\end{enumerate}
+
+\subsection{Freigabe der Noten}
+\label{freigabe}
+
+Wenn Sie alle Noten eingetragen haben, die  Sie zu diesem Zeitpunkt
+eintragen wollen (Sie können jederzeit Noten nachtragen!) können Sie diese
+über den Knopf 'Freigabe' (im Tabellenkopf) für die AssistentIn freigeben.
+(2)
+
+\info {
+ACHTUNG!! aus Gründen der erhöhten Sicherheit ist bei der Freigabe der Noten
+die Eingabe Ihres Passwortes erforderlich.\footnote{Es handelt sich dabei um Ihr
+TW-Passwort, mit dem sie sich auch auf der CIS-Seite authentifizieren oder auf
+unseren Rechnern einloggen}
+}
+
+\begin{itemize}
+	\item Zulässige Noten: 1-5, 7 (nicht beurteilt), 8 (teilgenommen)
+	\item Bei der Freigabe wird ein Info-Email an Sie und die zuständige
+	Studiengangs\-assistentIn geschickt. Enthalten sind Mat. Nr., Vorname,
+	Nachname und Note der neuen oder geänderten Einträge.
+	\item Freigegebene Einträge sind mit einem grünen Kreis mit Häkchen gekennzeichnet.
+	\item Wenn Sie bereits freigegebene Noten verändern, werden diese mit einem grauen Kreis mit Häkchen markiert (als Hinweis für Sie, dass die AssistentIn darüber noch nicht per Mail informiert wurde. Sie sieht allerdings diese neue Note sofort in ihrer Oberfläche)
+	\item Die freigegebenen Noten kann die AssistentIn nun als Zeugnisnote übernehmen, die dann im nächsten Feld für Sie zur Kontrolle angezeigt wird.
+	\item Wenn sich die Zeugnisnote von der von Ihnen freigegebenen Note unterscheidet wird erstere rot umrandet markiert.
+\end{itemize}
+
+\subsection{Eintragen einer Nachprüfung (2. Termin)}
+\label{nachpruefung}
+
+Sobald Sie eine LV-Note eingetragen und haben erscheint (bei Neuladen der
+Seite, etwa durch die Freigabe der Noten) rechts neben der Zeugnisnote ein
+Knopf zum Anlegen einer Nachprüfung. Sobald eine solche angelegt ist sehen Sie
+Datum und Note, sowie einen Editier-Knopf (s. Abb.
+\ref{benotung_lv_nachpruefung_quick} (1),(2)).
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=1.0\textwidth]{benotungstool_benotung_lv_nachpruefung.png}
+\end{center}
+\caption{Benotung LV Nachprüfung}\label{benotung_lv_nachpruefung_quick}
+\end{figure}
+
+Klicken Sie auf den jeweiligen Button, um eine Nachprüfung anzulegen oder zu
+editieren. Es öffnet sich eine Eingabemaske (3) wo Sie Datum und Note eingeben und
+mit Klick auf den 'speichern'-Knopf übernehmen.
+
+\begin{itemize}
+    \item Beachten Sie bei der Einagbe bitte das Datumsformat: JJJJ-MM-DD
+    \item Als Notenwerte sind wieder 1-5, 7 (nicht beurteilt), 8
+    (teilgenommen) und hier zusätzlich 9 (noch nicht eingetragen) zulässig. 
+    Wenn Sie das Notenfeld leer lassen, wird dies als 9 interpretiert.
+    \item Vergessen Sie nicht nach dem Eintragen neuer Noten diese erneut
+    mithilfe des Buttons 'Freigabe' freizugeben (4).
+\end{itemize}

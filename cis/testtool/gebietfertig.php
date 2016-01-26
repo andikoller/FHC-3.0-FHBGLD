@@ -16,72 +16,25 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
  *
  * Authors: Christian Paminger <christian.paminger@technikum-wien.at>,
- *          Andreas Oesterreicher <andreas.oesterreicher@technikum-wien.at> ,
- *          Rudolf Hangl <rudolf.hangl@technikum-wien.at>,
- *          Manfred Kindl <manfred.kindl@technikum-wien.at>
+ *          Andreas Oesterreicher <andreas.oesterreicher@technikum-wien.at> and
+ *          Rudolf Hangl <rudolf.hangl@technikum-wien.at>.
  */
-
-require_once('../../config/cis.config.inc.php');
-require_once('../../include/basis_db.class.php');
-require_once('../../include/sprache.class.php');
-require_once '../../include/phrasen.class.php';
-
-  if (!$db = new basis_db())
-      die('Fehler beim Oeffnen der Datenbankverbindung');
-
-function getSpracheUser()
-{
-	if(isset($_SESSION['sprache_user']))
-	{
-		$sprache_user=$_SESSION['sprache_user'];
-	}
-	else
-	{
-		if(isset($_COOKIE['sprache_user']))
-		{
-			$sprache_user=$_COOKIE['sprache_user'];
-		}
-		else
-		{
-			$sprache_user=DEFAULT_LANGUAGE;
-		}
-		setSpracheUser($sprache_user);
-	}
-	return $sprache_user;
-}
-
-function setSpracheUser($sprache)
-{
-	$_SESSION['sprache_user']=$sprache;
-	setcookie('sprache_user',$sprache,time()+60*60*24*30,'/');
-}
-
-if(isset($_GET['sprache_user']))
-{
-	$sprache_user = new sprache();
-	if($sprache_user->load($_GET['sprache_user']))
-	{
-		setSpracheUser($_GET['sprache_user']);
-	}
-	else
-		setSpracheUser(DEFAULT_LANGUAGE);
-}
-
-$sprache_user = getSpracheUser(); 
-$p = new phrasen($sprache_user);
 
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link href="../../skin/style.css.php" rel="stylesheet" type="text/css">
+<link href="../../../skin/style.css.php" rel="stylesheet" type="text/css">
 
 </head>
 
 <body>
-<br><br><br><br><br>
-<center><h2><?php echo $p->t('testtool/zeitAbgelaufen');?></h2>
-</center>
+<br><br><br>
+<center><b>Die Maximalzeit für dieses Gebiet ist abgelaufen, oder alle Fragen wurden beantwortet.
+<br>_____________________________
+<br>
+<br>
+The time for this part has expired or you have answered all the questions.</b></center>
 </body>
 </html>

@@ -1,0 +1,13 @@
+Order deny,allow
+Deny from all
+Allow from 192.168.9.13
+
+AuthBasicProvider ldap
+AuthType Basic
+AuthName "FH-Burgenland"
+AuthLDAPURL ldap://EFSADS001.fhbgld.at:3268/dc=fhbgld,dc=at?sAMAccountName?sub
+AuthLDAPBindDN "CN=fhcomplete,OU=FHComplete,OU=Users,OU=Technik,DC=fhbgld,DC=at"
+AuthLDAPBindPassword "w7dn2XcvWPB2Il8QdoQY"
+require valid-user
+
+satisfy any

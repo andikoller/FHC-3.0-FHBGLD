@@ -34,6 +34,11 @@ $db = new basis_db();
 $rechte = new benutzerberechtigung();
 $rechte->getBerechtigungen(get_uid());
 
+//Andreas Koller:
+if(!$rechte->isBerechtigt('basis/vilesci'))
+	die('Sie haben keine Berechtigung fuer diese Seite');
+	
+
 echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 	<html>
 	<head>
@@ -142,8 +147,8 @@ if($stsem!='')
 				studiengang_kz>0 AND studiengang_kz<10000 AND aktiv $stgwhere
 			ORDER BY kurzbzlang; ";
 	if($db->db_query($qry))
-	{ ?>
-		<table class='liste table-autosort:0 table-stripeclass:alternate table-autostripe'>
+	{
+		echo "<table class='liste table-autosort:0 table-stripeclass:alternate table-autostripe'>
 				<thead>
 					<tr>
 						<th></th>
@@ -170,27 +175,28 @@ if($stsem!='')
 					</tr>
 				</thead>
 				<tbody>
+			 ";
 		
-		<?php while($row = $db->db_fetch_object())
-		{ ?>
-			<tr>
-				<td><?php echo strtoupper($row->typ.$row->kurzbz)?> (<?php echo $row->kurzbzlang ?>)</td>
-				<td align='center'><?php echo $row->abgewiesene_maennlich ?></td>
-				<td align='center'><?php echo $row->abgewiesene_weiblich ?></td>
-				<td align='center'><?php echo $row->abgewiesene ?></td>
-				<td align='center'><?php echo $row->abbrecher_maennlich ?></td>
-				<td align='center'><?php echo $row->abbrecher_weiblich ?></td>
-				<td align='center'><?php echo $row->abbrecher ?></td>
-				<td align='center'><?php echo $row->unterbrecher_maennlich ?></td>
-				<td align='center'><?php echo $row->unterbrecher_weiblich ?></td>
-				<td align='center'><?php echo $row->unterbrecher ?></td>
-				<td align='center'><?php echo $row->absolvent_maennlich ?></td>
-				<td align='center'><?php echo $row->absolvent_weiblich ?></td>
-				<td align='center'><?php echo $row->absolvent ?></td>
-			</tr>
-		<?php } ?>
-		</tbody></table>
-	<?php }
+		while($row = $db->db_fetch_object())
+		{
+			echo '<tr>';
+			echo "<td>".strtoupper($row->typ.$row->kurzbz)." ($row->kurzbzlang)</td>";
+			echo "<td align='center'>$row->abgewiesene_maennlich</td>";
+			echo "<td align='center'>$row->abgewiesene_weiblich</td>";
+			echo "<td align='center'>$row->abgewiesene</td>";
+			echo "<td align='center'>$row->abbrecher_maennlich</td>";
+			echo "<td align='center'>$row->abbrecher_weiblich</td>";
+			echo "<td align='center'>$row->abbrecher</td>";
+			echo "<td align='center'>$row->unterbrecher_maennlich</td>";
+			echo "<td align='center'>$row->unterbrecher_weiblich</td>";
+			echo "<td align='center'>$row->unterbrecher</td>";
+			echo "<td align='center'>$row->absolvent_maennlich</td>";
+			echo "<td align='center'>$row->absolvent_weiblich</td>";
+			echo "<td align='center'>$row->absolvent</td>";
+			echo "</tr>";
+		}
+		echo '</tbody></table>';
+	}
 }
 ?>
 </body>

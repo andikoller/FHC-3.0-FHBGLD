@@ -212,16 +212,42 @@ if (isset($_REQUEST["xmlformat"]) && $_REQUEST["xmlformat"] == "xml")
 		$obj = new zeugnisnote();
 		$obj->load($lehrveranstaltung_id, $uid_arr[$i], $studiensemester_kurzbz);
 
+		//Andreas Koller: die IF-Bedingung wurde an die Gegebenheiten der FH-Burgenland angepasst.
+		//Da die FHB auch eine Note "0" hat, wurde ein "else if" hinzugefügt, welches zusätzlich auf "0" prüft
+		//Hinweis: if($obj->note) gibt FALSE wenn der Wert der Note 0 ist, deshalb das zusätzliche "else if"
+		//Da 7 und 8 auch nicht im Zertifikat ausgegeben werden, wird die Note auf 1 bzw. 5 gesetzt und die Bezeichnung dementsprechend richtig gesetzt.
+		//Obwohl der nachfolgende Code etwas stinkt, scheint es die bessere Lösung zu sein, da so in den Klassendateien "zeugnisnote.class.php" und "note.class.php"
+		//nichts geändert werden muss und sich die Anpassungen rein auf das Zertifikat auswirken.
+
 		if ($obj->note)
 		{
 			$note = $note_arr[$obj->note];
 			$note_bezeichnung = $note_bezeichnung_arr[$obj->note];
+		
+			if ($obj->note == "7")
+			{
+				$note = "1";
+				$note_bezeichnung = "mit Erfolg teilgenommen";
+			}
+			
+			if ($obj->note == "8")
+			{
+				$note = "5";
+				$note_bezeichnung = "ohne Erfolg teilgenommen";
+			}
+			
+		}
+		else if ($obj->note == "0")
+		{
+			$note = "1";
+			$note_bezeichnung = "Sehr Gut / A";
 		}
 		else
 		{
 			$note = "";
 			$note_bezeichnung = "";
 		}		
+				
 		$note2=$note;
 		
 		$stg = new studiengang();

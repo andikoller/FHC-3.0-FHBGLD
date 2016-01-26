@@ -1,0 +1,56 @@
+\chapter{Berechtigung}
+\label{Berechtigung}
+Seit FHComplete 2.0 gibt es ein neues Berechtigungskonzept. Berechtigungen werden nun auf Organisationseinheiten aufgehängt.
+Wenn Personen Rechte auf eine Organisationseinheit zugeteilt bekommen, gelten diese auch
+automatisch für die untergeordneten Organisationseinheiten. 
+\section{Einzelberechtigungen}
+Die Zuteilung der Berechtigungen für Personen erfolgt auf der Vilesci Seite unter Stammdaten->Berechtigungen\\
+Berechtigungen können den Personen direkt zugeordnet werden. Hierbei muessen folgende Attribute ausgefuellt werden:\\
+- berechtigung\_kurzbz\\
+- uid\\
+- oe\_kurzbz\\
+- art\\
+In diesem Fall bleiben die Felder rolle\_kurzbz und funktion\_kurzbz leer
+\section{Rollenberechtigung}
+Berechtigungen können zu Rollen zusammengefasst werden, um eine leichtere Verwaltung zu ermöglichen. (Assistenz, Adminstrator)
+bei der Zuteilung einer Berechtigung zu einer Rolle muss die Art (in tbl\_rolleberechtigung) eingetragen werden. Die Tatsächlich 
+verwendete Art, ist die Schnittmenge aus tbl\_rolleberechtigung.art und tbl\_benutzerrolle.art.\\
+\\
+Bei der Zuteilung von Rollen zu Personen sind folgende Felder auszufüllen:\\
+- rolle\_kurzbz\\
+- uid\\
+- oe\_kurzbz\\
+Die Felder berechtigung\_kurzbz und funktion\_kurzbz bleiben leer.
+\section{Funktionsberechtigung}
+Zusätzlich können Rechte Aufgrund von Benutzerfunktionen vergeben werden, um Beispielsweise alle Fachbereichskoordinatoren
+bestimmte Rechte zuzuordnen.
+Hier muss statt der UID die funktion\_kurzbz eingetragen werden. Das Feld oe\_kurzbz bleibt leer.
+Bei der Prüfung der Rechte, wird die oe\_kurzbz aus der Tabelle tbl\_benutzerfunktion herangezogen. Die Funktionen Mitarbeiter und Student sind nicht
+extra in der Tabelle benutzerfunktion eingetragen sondern werden automatisch zugewiesen.\\
+Die Zuteilung der Funktionsberechtigungen erfolgt auf der Vilesci Seite unter Personen->Funktionen->Berechtigung\\
+\section{Negativrechte}
+Alle Berechtigungen und Rollen können auch als Negativrecht eingetragen werden. Hierbei muss das Feld negativ auf true gesetzt werden.
+Dies kann dazu benützt werden, um bei der Zuteilung einer gesamten Rolle, der Person wieder einzelne Rechte zu entziehen.
+
+\section{Aufbau}
+Berechtigungen sind nach einem bestimmten Schema aufgebaut:\\
+\textbf{lehre/lehrveranstaltung}\\
+\textbf{lehre/lehrveranstaltung:begrenzt}\\
+Zuerst wird das Modul genannt in dem die Berechtigung zum Tragen kommt. Durch einen '/' getrennt folgt der Name der Berechtigung. Die Berechtigung kann durch ':' in Unterberechtigungen unterteilt werden. 
+
+\achtung{\textbf{Wichtig} Wenn eine Person die Berechtigung für 'lehre/lehrveranstaltung' hat, dann hat sie auch automatisch die Rechte für die Berechtigung 'lehre/lehrveranstaltung:begrenzt'.}\\
+
+\section{Webservice/SOAP Schnittstellen}
+Da die Webserivce Schnittstellen auch für Studierendenprojekte verwendet werden, können hier die Rechte noch detaillierter verwaltet werden.
+Die Leserechte der Webservices können auf einzlene Attribute eingeschränkt werden.
+Die Zugriffssteuerung dazu erfolgt in der Datenbank über die Tabelle system.tbl\_webservicerecht.
+Hier kann folgendes angegeben werden:\\
+\\
+- Für welche Berechtigung wird das Webservicerecht erteilt (berechtigung\_kurzbz)\\
+- Welche Webservice Methode betrifft das Recht (methode)\\
+- Welches Attribut dieser Methode darf angezeigt werden (attribut)\\
+\\
+Für jedes Attribut das angezeigt werden soll, ist eine eigene Zeile in die Tabelle einzufügen.
+Attribute die nicht in dieser Tabelle aufscheinen, werden aus dem Webservice Response entfernt.\\
+Auf diese Weise können eigene eingeschränkte Berechtigungen auf Webservices erstellt werden.\\
+\\

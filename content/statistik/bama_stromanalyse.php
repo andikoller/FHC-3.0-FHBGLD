@@ -38,6 +38,18 @@ $ausgabe='';
 $summe=0;
 $rest=0;
 
+
+//Andreas Koller:
+$user = get_uid();
+loadVariables($user);
+
+$rechte = new benutzerberechtigung();
+$rechte->getBerechtigungen($user);
+
+if(!$rechte->isBerechtigt('basis/vilesci'))
+	die('Sie haben keine Berechtigung fuer diese Seite');
+
+
 $studiensemester_kurzbz='';
 
 $studiensemester_kurzbz = (isset($_REQUEST['studiensemester_kurzbz'])?$_REQUEST['studiensemester_kurzbz']:'-1');
@@ -61,11 +73,7 @@ if($studiensemester_kurzbz != -1)
 		FROM public.tbl_person JOIN public.tbl_prestudent ON(public.tbl_person.person_id=public.tbl_prestudent.person_id) 
 		JOIN public.tbl_prestudentstatus ON(public.tbl_prestudent.prestudent_id=public.tbl_prestudentstatus.prestudent_id) 
 		JOIN public.tbl_studiengang USING(studiengang_kz) 
-<<<<<<< HEAD
 		WHERE status_kurzbz='Absolvent' AND typ!='m'
-=======
-		WHERE status_kurzbz='Absolvent' AND typ!='m' AND studiengang_kz<10000 
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 			AND public.tbl_person.person_id IN(SELECT public.tbl_person.person_id FROM public.tbl_person 
 			JOIN public.tbl_prestudent ON(public.tbl_person.person_id=public.tbl_prestudent.person_id) 
 			JOIN public.tbl_prestudentstatus ON(public.tbl_prestudent.prestudent_id=public.tbl_prestudentstatus.prestudent_id) 

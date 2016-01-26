@@ -28,22 +28,11 @@ header("Content-type: application/xhtml+xml");
 require_once('../config/vilesci.config.inc.php');
 require_once('../include/functions.inc.php');
 require_once('../include/basis_db.class.php');
-require_once('../include/benutzerberechtigung.class.php');
 
 if(isset($_GET['uid']))
 	$uid = $_GET['uid'];
 else 
 	die('UID muss uebergeben werden');
-
-if(isset($_SERVER['REMOTE_USER']))
-{
-	// Wenn das Script direkt aufgerufen wird muss es ein Admin sein
-	$user=get_uid();
-	$berechtigung = new benutzerberechtigung();
-	$berechtigung->getBerechtigungen($user);
-	if(!$berechtigung->isBerechtigt('admin'))
-		die('Sie haben keine Berechtigung fuer diese Seite');
-}
 
 $uid_arr = explode(";",$uid);
 	
@@ -60,7 +49,7 @@ foreach ($uid_arr as $uid)
 	if(check_lektor($uid))
 	{
 		//Mitarbeiter
-		$qry = "SELECT vorname, nachname, uid, gebdatum, aktivierungscode,alias FROM campus.vw_mitarbeiter WHERE uid=".$db->db_add_param($uid);
+		$qry = "SELECT vorname, nachname, uid, gebdatum, aktivierungscode,alias FROM campus.vw_mitarbeiter WHERE uid='".addslashes($uid)."'";
 		if($db->db_query($qry))
 		{
 			if($row = $db->db_fetch_object())
@@ -73,19 +62,48 @@ foreach ($uid_arr as $uid)
 				$gebdatum = $row->gebdatum;
 			}
 			else 
-				die("User nicht gefunden");
+				die("User $uid nicht gefunden");
 		}
 		else 
-			die("User nicht gefunden");
+			die("User $uid nicht gefunden");
 		
 		$fileserver = 'fhe.'.DOMAIN;
+		
+		/*
+		$password=strtoupper(substr($vorname,strlen($vorname)-1,1));
+		$password=$password.substr($row->gebdatum,8,1);
+		$password=$password.strtolower(substr($nachname,1,1));
+		$password=$password.strtolower(substr($vorname,1,1));
+		$password=$password.substr($row->gebdatum,9,1);
+		$password=$password.strtoupper(substr($nachname,strlen($nachname)-1,1)); 
+		*/
+			
+		//Andreas Koller: Passwort auslesen
+		$qry ="SELECT passwd
+			   FROM public.tbl_benutzer WHERE uid='".addslashes($uid)."'";
+		if($db->db_query($qry))
+		{
+			if($row = $db->db_fetch_object())
+			{
+				$password = ($row->passwd);
+			}
+			else 
+				die("User $uid nicht gefunden");
+		}
+		else
+		{
+			die("User $uid nicht gefunden");
+		}
+		
+		//$password = "test";
+		
 		$studiengang='';
 	}
 	else 
 	{	
 		//Student
 		$qry ="SELECT vorname, nachname, matrikelnr, uid, tbl_studiengang.bezeichnung, aktivierungscode, alias
-		       FROM campus.vw_student JOIN public.tbl_studiengang USING(studiengang_kz) WHERE uid=".$db->db_add_param($uid);
+		       FROM campus.vw_student JOIN public.tbl_studiengang USING(studiengang_kz) WHERE uid='".addslashes($uid)."'";
 		if($db->db_query($qry))
 		{
 			if($row = $db->db_fetch_object())
@@ -105,21 +123,51 @@ foreach ($uid_arr as $uid)
 			die("User $uid nicht gefunden");		
 		
 		$fileserver = 'stud'.substr($matrikelnr,0,2).'.'.DOMAIN;
+		
+		/*
+		$password=strtoupper(substr($vorname,strlen($vorname)-1,1));
+		$password=$password.substr($matrikelnr,8,1);
+		$password=$password.strtolower(substr($nachname,1,1));
+		$password=$password.strtolower(substr($vorname,1,1));
+		$password=$password.substr($matrikelnr,9,1);
+		$password=$password.strtoupper(substr($nachname,strlen($nachname)-1,1));
+		*/
 	}
+
+	/*
+	$password=str_replace("l","L",$password);
+	$password=str_replace("O","o",$password);
+	$password=str_replace("I","i",$password); 
+	*/
+	
+	//Andreas Koller: Passwort auslesen
+	$qry ="SELECT passwd
+		   FROM public.tbl_benutzer WHERE uid='".addslashes($uid)."'";
+	if($db->db_query($qry))
+	{
+		if($row = $db->db_fetch_object())
+		{
+			$password = ($row->passwd);
+		}
+		else 
+			die("User $uid nicht gefunden");
+	}
+	else
+	{
+		die("User $uid nicht gefunden");
+	}
+	
 
 	echo "\n		<infoblatt>";
 	echo "\n			<name><![CDATA[".$vorname1.' '.$nachname1."]]></name>";
 	echo "\n			<account><![CDATA[".$uid."]]></account>";
+	echo "\n			<passwort><![CDATA[".$password."]]></passwort>";
 	echo "\n			<aktivierungscode><![CDATA[".$row->aktivierungscode."]]></aktivierungscode>";
-	if($row->alias!='')
-		echo "\n			<alias><![CDATA[".$row->alias.'@'.DOMAIN."]]></alias>";
-	else
-		echo "\n			<alias><![CDATA[]]></alias>";
+	echo "\n			<alias><![CDATA[".$row->alias.'@'.DOMAIN."]]></alias>";
 	if($studiengang!='')
 		echo "\n			<bezeichnung><![CDATA[".$studiengang."]]></bezeichnung>";
 	echo "\n			<email><![CDATA[".$uid.'@'.DOMAIN."]]></email>";
 	echo "\n			<fileserver><![CDATA[".$fileserver."]]></fileserver>";
-	echo "\n			<logopath>".DOC_ROOT."skin/styles/".EXT_FKT_PATH."/</logopath>";
 	echo "\n		</infoblatt>";
 }
 echo '</accountinfoblaetter>';

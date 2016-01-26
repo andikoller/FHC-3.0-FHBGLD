@@ -1,5 +1,5 @@
 <?php 
-//@version $Id$
+//@version $Id: kurs_verwaltung24.php 5806 2013-04-15 11:53:05Z burkhart $
 /* Copyright (C) 2008 Technikum-Wien
  *
  * This program is free software; you can redistribute it and/or modify
@@ -24,24 +24,17 @@
 *   Fuer jede MoodleID werden die Anzahl Benotungen, und erfassten sowie angelegte Zusaetze angezeigt.
 *	Jeder der angezeigten Moodle IDs kann geloescht werden nach bestaetigung eines PopUp Fenster.
 */
-require_once('../../config/vilesci.config.inc.php');	
-require_once('../../include/functions.inc.php');
-require_once('../../include/globals.inc.php');
-include_once('../../include/moodle.class.php');
-require_once('../../include/studiensemester.class.php');
-require_once('../../include/studiengang.class.php');	
-require_once('../../include/lehrveranstaltung.class.php'); 
-require_once('../../include/lehreinheit.class.php'); 
-require_once('../../include/moodle24_course.class.php'); 
-require_once('../../include/benutzerberechtigung.class.php');
 
-$user = get_uid();
+	require_once('../../config/vilesci.config.inc.php');	
+	require_once('../../include/functions.inc.php');
+	require_once('../../include/globals.inc.php');
+	include_once('../../include/moodle.class.php');
 
-$rechte = new benutzerberechtigung();
-$rechte->getBerechtigungen($user);
-
-if(!$rechte->isBerechtigt('basis/moodle'))
-	die('Sie haben keine Berechtigung für diese Seite');
+	require_once('../../include/studiensemester.class.php');
+	require_once('../../include/studiengang.class.php');	
+    require_once('../../include/lehrveranstaltung.class.php'); 
+    require_once('../../include/lehreinheit.class.php'); 
+    require_once('../../include/moodle24_course.class.php'); 
 
     $message = ''; 
 	$stsem = new studiensemester();

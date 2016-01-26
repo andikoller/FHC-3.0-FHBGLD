@@ -8,10 +8,6 @@ $this->phrasen['tools/studienbeitragFuerSSNochNichtBezahlt']='Studienbeitrag fü
 $this->phrasen['tools/studienerfolgsbestaetigung']='Studienerfolgsbestätigung';
 $this->phrasen['tools/studiensemesterAuswaehlen']='Bitte wählen Sie das entsprechende Studiensemester aus';
 $this->phrasen['tools/vorlageWohnsitzfinanzamt']='zur Vorlage beim Wohnsitzfinanzamt';
-<<<<<<< HEAD
-=======
-$this->phrasen['tools/studienbuchblatt']='Studienbuchblatt';
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 
 //Leistungsbeurteilung
 $this->phrasen['tools/leistungsbeurteilung']='Leistungsbeurteilung';

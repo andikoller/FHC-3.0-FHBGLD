@@ -5,11 +5,8 @@ body
 	background-color: white;	
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 13px;
-	width: 100%;
-<<<<<<< HEAD
-=======
 	height: 100%;
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
+	width: 100%;
 	margin:0px;
 	border-width:0px;
 	border-style:none;
@@ -156,6 +153,15 @@ input.search input.text
 	border-color: #A5AFB6;
 	height: 25px;
 }
+/* Formularfelder Bewerberportal */
+input.input_bewerbung					
+{
+	background-color: #E9ECEE;
+	border-width: 1px;
+	border-style:solid;
+	border-color: #A5AFB6;
+	height: 20px;
+}
 /* Login-Button CIS-Seite */
 input.cis_login
 {
@@ -210,7 +216,6 @@ a:hover /*link ohne Item-Definition*/
 }
 a.ItemTesttool
 {
-<<<<<<< HEAD
 	color: #008381;
 	line-height:25px;
 	display:block;
@@ -219,35 +224,6 @@ a:hover.ItemTesttool
 {
 	color: black;
 	line-height:25px;
-=======
-	color: #000;
-	line-height: 25px;
-	display:block;
-	padding: 0 10px 0 10px;
-}
-a.ItemTesttoolAktiv
-{
-	color: #000;
-	line-height: 25px;
-	display:block;
-	padding: 0 10px 0 10px;
-}
-a.ItemTesttoolBeendet
-{
-	color: #C7C8C9;
-	line-height: 25px;
-	display:block;
-	padding: 0 10px 0 10px;
-	cursor: default; 
-	text-decoration: none;
-}
-a:hover.ItemTesttool
-{
-	color: #0086CC;
-	line-height: 25px;
-	text-decoration: none;
-	padding: 0 10px 0 10px;
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 }
 a.HyperItem /* ? */
 {
@@ -442,7 +418,6 @@ td.Inaktiv  /*fuer Inaktive Items bei der Raumbeschreibung */
 }
 td.ItemTesttool /*fuer die Button-Optik beim Testtool*/
 {
-<<<<<<< HEAD
 	color: #008381;
 	line-height:25px;
 	background-image: url(../skin/images/testtool_button.png);
@@ -472,37 +447,6 @@ td:hover.ItemTesttool
 	background-image: url(../skin/images/testtool_button_hover.png);
 	background-position:center;
 	background-repeat:repeat-x;
-=======
-	color: #000;
-	background-color: #DEE1E2;
-	white-space:nowrap;
-	box-shadow: inset 0 0 5px #888;
-}
-td.ItemTesttoolAktiv /*fuer die Button-Optik beim Testtool*/
-{
-	color: #000;
-	background-color: #DEE1E2;
-	padding: 0 10px 0 10px;
-	white-space:nowrap;
-	box-shadow: 0px 0px 5px 5px #888888;
-}
-td.ItemTesttoolBeendet /*fuer die Button-Optik beim Testtool*/
-{
-	background-color: #EAECED;
-	white-space:nowrap;
-}
-td:hover.ItemTesttool
-{
-	color: white;
-	background-color: #fff;
-	box-shadow: 0px 0px 5px 5px #888888;
-}
-td:hover.ItemTesttoolBeendet
-{
-	color: #C7C8C9;
-	background-color: #EAECED;
-	white-space:nowrap;
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 }
 td.tdwidth10
 {
@@ -741,11 +685,7 @@ img.lv
 	height: 40px;
 	padding-bottom: 5px;
 }
-<<<<<<< HEAD
 img.header_left
-=======
-/*img.header_left
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 {
 	position: absolute;
 	left: 0px;
@@ -760,22 +700,14 @@ img.header_right
 	z-index: 2;
 	max-width: 100%;
 	height: 16%;
-<<<<<<< HEAD
 }
-=======
-}*/
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 img.header_logo
 {
 	position: absolute;
 	left: 16px;
 	top: 3%;
 	z-index: 5000;
-<<<<<<< HEAD
 	height: 7%;
-=======
-	height: 8%;
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 }
 img.screenshot_boxshadow
 {
@@ -1039,117 +971,3 @@ table.hoverbox
 	border-color:grey;
 }
 */
-
-body.bewerbung table,
-body.anwesenheit table {
-	border-collapse: collapse;
-	width: 100%;
-}
-
-body.bewerbung table.reihungstest,
-body.anwesenheit table {
-	table-layout: fixed;
-}
-
-body.bewerbung table th,
-body.bewerbung table td,
-body.anwesenheit table th,
-body.anwesenheit table td {
-	padding: 3px;
-	border: 1px solid black;
-	text-align: center;
-}
-
-body.bewerbung table.reihungstest td:nth-child(5) {
-	text-align: left;
-}
-
-body.bewerbung .ui-tabs-vertical .ui-tabs-panel {
-	width: 75em;
-}
-
-body.bewerbung table.reihungstest th:nth-child(1),
-body.bewerbung table.reihungstest th:nth-child(2),
-body.bewerbung table.reihungstest th:nth-child(3),
-body.bewerbung table.reihungstest th:nth-child(4),
-body.bewerbung table.reihungstest th:nth-child(6) {
-	width: 10%;
-}
-
-body.bewerbung table.reihungstest th:nth-child(5) {
-	width: 50%;
-}
-
-body.anwesenheit {
-	padding-bottom: 20px;
-}
-
-body.anwesenheit div.lv {
-	margin: 10px;
-	padding-top: 10px;
-<<<<<<< HEAD
-}
-
-body.anwesenheit div.lv + div.lv {
-	border-top: 1px dashed rgb(193,193,193);
-=======
-	padding-left: 10px;
-	background-color: #f2f8ff;
-	border: 1px solid #2353b2;
-}
-
-body.anwesenheit div.lv + div.lv {
-/*	border-top: 1px dashed rgb(193,193,193);*/
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
-}
-
-body.anwesenheit div.lv > div {
-	width: 300px;
-	display: inline-block;
-	vertical-align: middle;
-}
-
-body.anwesenheit div.progress-wrapper {
-	border: 1px solid black;
-}
-
-body.anwesenheit div.progress {
-	height: 20px;
-}
-
-body.anwesenheit div.progress.green {
-<<<<<<< HEAD
-	background-color: lightgreen;
-}
-
-body.anwesenheit div.progress.yellow {
-	background-color: yellow;
-}
-
-body.anwesenheit div.progress.red {
-	background-color: red;
-=======
-	background-color: #008000;
-}
-
-body.anwesenheit div.progress.yellow {
-	background-color: #ffa500;
-}
-
-body.anwesenheit div.progress.red {
-	background-color: #dc143c;
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
-}
-
-body.anwesenheit span.fehlstunden-details {
-	cursor: pointer;
-	font-weight: bold;
-}
-
-body.anwesenheit table {
-	margin: 5px;
-}
-
-body.anwesenheit form {
-	margin: 10px;
-}

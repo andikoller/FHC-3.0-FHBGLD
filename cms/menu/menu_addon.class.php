@@ -121,7 +121,6 @@ class menu_addon extends basis_db
 		if($menu || $child)
 			echo '<ul class="menu">';
 		else
-<<<<<<< HEAD
 			echo '<ul>';
 			
 		foreach($item as $row)
@@ -130,22 +129,11 @@ class menu_addon extends basis_db
 				echo '<li>';
 			else
 				echo '<li style="margin:0px">';
-=======
-			echo '<ul>';
-			
-		foreach($item as $row)
-		{
-			if($menu || $child)
-				echo '<li>';
-			else
-				echo '<li style="margin:0px">';
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 		
 			if(isset($row['childs']))
 				$class='item2';
 			else
 				$class='leaf';
-<<<<<<< HEAD
 			
 			echo '<a class="'.$class.' " title="'.$row['title'].'" href="'.$row['link'].'" target="'.$row['target'].'">'.$row['name'].'</a>';
 			
@@ -155,17 +143,6 @@ class menu_addon extends basis_db
 			}
 			echo '	</li>';
 		}
-=======
-			
-			echo '<a class="'.$class.' " title="'.$row['title'].'" href="'.$row['link'].'" target="'.$row['target'].'">'.$row['name'].'</a>';
-			
-			if(isset($row['childs']))
-			{
-				$this->outputItems1($row['childs'],true);
-			}
-			echo '	</li>';
-		}
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 		echo '</ul>';
 	}
 	

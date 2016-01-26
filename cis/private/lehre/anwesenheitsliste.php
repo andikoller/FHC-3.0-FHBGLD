@@ -87,6 +87,9 @@
 	  	$aw_content='';
 	  	$awbild_content='';
 	  	$nt_content='';
+		
+		//Andreas Koller - Array für Prüfung ob doppelte Einträge vorhanden sind -> Für Ausgabe im CIS
+		$aw_content_check_array = array();
 
 	  	//Content fuer Anwesenheitslisten erstellen
 	  	$stg_arr = array();
@@ -140,12 +143,35 @@
 			  					}
 			  				}
 			  				
-			  				$aw_content .= "<tr><td><a class='Item' href='anwesenheitsliste.pdf.php?stg=$stg_kz&sem=$sem&lvid=$lvid&lehreinheit_id=$lastlehreinheit&stsem=$stsem'>&nbsp;&nbsp;&nbsp;<img src='../../../skin/images/haken.gif' />$kurzbz - $lehrform - $gruppen ($lektoren)</a></td></tr>";
-			  				$awbild_content .= "<tr><td><a class='Item' href='anwesenheitsliste_bilder.pdf.php?stg=$stg_kz&sem=$sem&lvid=$lvid&lehreinheit_id=$lastlehreinheit&stsem=$stsem'>&nbsp;&nbsp;&nbsp;<img src='../../../skin/images/haken.gif' />$kurzbz - $lehrform - $gruppen ($lektoren)</a></td></tr>";
-			  				$nt_content .= "<tr><td><a class='Item' href='notenliste.xls.php?stg=$stg_kz&sem=$sem&lvid=$lvid&lehreinheit_id=$lastlehreinheit&stsem=$stsem'>&nbsp;&nbsp;&nbsp;<img src='../../../skin/images/haken.gif' />$kurzbz - $lehrform - $gruppen ($lektoren)</a></td></tr>";
-			  
-			  				$lastlehreinheit = $row->lehreinheit_id;
-			  				$gruppen='';
+							//Andreas Koller:
+							//Temporäres Array zur Überprüfung ob die gleiche Kombination aus Kurzbz, lehrform, gruppe und lektoren bereits vorhanden ist, falls ja - dann soll
+							//$aw-content nicht noch einmal damit befüllt werden
+								
+							//Prüfe ob aktuelle Kombi bereits im Array vorhanden
+							
+							//Aktuelle Kombi erstellen
+							$needle = $kurzbz.$lehrform.$gruppen.$lektoren;
+
+							
+							//Falls Kombi bereits vorhanden - mache nichts (Im CIS soll keine Ausgabe erscheinen)
+							if (in_array($needle, $aw_content_check_array) || $lehrform == 'EX')
+							{
+								//do nothing
+							}
+							//Falls Kombi noch nicht vorhanden
+							else
+							{
+								//Füge Kombi dem Array hinzu
+								$aw_content_check_array[] = $needle;
+								
+								//Gib $aw_content, $awbild_content und $nt_content aus
+								$aw_content .= "<tr><td><a class='Item' href='anwesenheitsliste.pdf.php?stg=$stg_kz&sem=$sem&lvid=$lvid&lehreinheit_id=$lastlehreinheit&stsem=$stsem'>&nbsp;&nbsp;&nbsp;<img src='../../../skin/images/haken.gif' />$kurzbz - $lehrform - $gruppen ($lektoren)</a></td></tr>";
+								$awbild_content .= "<tr><td><a class='Item' href='anwesenheitsliste_bilder.pdf.php?stg=$stg_kz&sem=$sem&lvid=$lvid&lehreinheit_id=$lastlehreinheit&stsem=$stsem'>&nbsp;&nbsp;&nbsp;<img src='../../../skin/images/haken.gif' />$kurzbz - $lehrform - $gruppen ($lektoren)</a></td></tr>";
+								$nt_content .= "<tr><td><a class='Item' href='notenliste.xls.php?stg=$stg_kz&sem=$sem&lvid=$lvid&lehreinheit_id=$lastlehreinheit&stsem=$stsem'>&nbsp;&nbsp;&nbsp;<img src='../../../skin/images/haken.gif' />$kurzbz - $lehrform - $gruppen ($lektoren)</a></td></tr>";
+							}
+							$lastlehreinheit = $row->lehreinheit_id;
+							$gruppen='';
+
 		  				}
 		  				else 
 		  					$lastlehreinheit = $row->lehreinheit_id;
@@ -175,9 +201,31 @@
 					}
 				}
 				
-				$aw_content .= "<tr><td><a class='Item' href='anwesenheitsliste.pdf.php?stg=$stg_kz&sem=$sem&lvid=$lvid&lehreinheit_id=$lastlehreinheit&stsem=$stsem'>&nbsp;&nbsp;&nbsp;<img src='../../../skin/images/haken.gif' />$kurzbz - $lehrform - $gruppen ($lektoren)</a></td></tr>";
-				$awbild_content .= "<tr><td><a class='Item' href='anwesenheitsliste_bilder.pdf.php?stg=$stg_kz&sem=$sem&lvid=$lvid&lehreinheit_id=$lastlehreinheit&stsem=$stsem'>&nbsp;&nbsp;&nbsp;<img src='../../../skin/images/haken.gif' />$kurzbz - $lehrform - $gruppen ($lektoren)</a></td></tr>";
-				$nt_content .= "<tr><td><a class='Item' href='notenliste.xls.php?stg=$stg_kz&sem=$sem&lvid=$lvid&lehreinheit_id=$lastlehreinheit&stsem=$stsem'>&nbsp;&nbsp;&nbsp;<img src='../../../skin/images/haken.gif' />$kurzbz - $lehrform - $gruppen ($lektoren)</a></td></tr>";
+				//Andreas Koller:
+				//Temporäres Array zur Überprüfung ob die gleiche Kombination aus Kurzbz, lehrform, gruppe und lektoren bereits vorhanden ist, falls ja - dann soll
+				//$aw-content nicht noch einmal damit befüllt werden
+					
+				//Prüfe ob aktuelle Kombi bereits im Array vorhanden
+				
+				//Aktuelle Kombi erstellen
+				$needle = $kurzbz.$lehrform.$gruppen.$lektoren;
+
+				//Falls Kombi bereits vorhanden - mache nichts (Im CIS soll keine Ausgabe erscheinen)
+				if (in_array($needle, $aw_content_check_array) || $lehrform == 'EX')
+				{
+					//do nothing
+				}
+				//Falls Kombi noch nicht vorhanden
+				else
+				{
+					//Füge Kombi dem Array hinzu
+					$aw_content_check_array[] = $needle;
+					
+					//Gib $aw_content, $awbild_content und $nt_content aus
+					$aw_content .= "<tr><td><a class='Item' href='anwesenheitsliste.pdf.php?stg=$stg_kz&sem=$sem&lvid=$lvid&lehreinheit_id=$lastlehreinheit&stsem=$stsem'>&nbsp;&nbsp;&nbsp;<img src='../../../skin/images/haken.gif' />$kurzbz - $lehrform - $gruppen ($lektoren)</a></td></tr>";
+					$awbild_content .= "<tr><td><a class='Item' href='anwesenheitsliste_bilder.pdf.php?stg=$stg_kz&sem=$sem&lvid=$lvid&lehreinheit_id=$lastlehreinheit&stsem=$stsem'>&nbsp;&nbsp;&nbsp;<img src='../../../skin/images/haken.gif' />$kurzbz - $lehrform - $gruppen ($lektoren)</a></td></tr>";
+					$nt_content .= "<tr><td><a class='Item' href='notenliste.xls.php?stg=$stg_kz&sem=$sem&lvid=$lvid&lehreinheit_id=$lastlehreinheit&stsem=$stsem'>&nbsp;&nbsp;&nbsp;<img src='../../../skin/images/haken.gif' />$kurzbz - $lehrform - $gruppen ($lektoren)</a></td></tr>";
+				}
 	  		}
 	  	}
 
@@ -206,17 +254,10 @@
 
 			if(defined('CIS_ANWESENHEITSLISTE_NOTENLISTE_ANZEIGEN') && !CIS_ANWESENHEITSLISTE_NOTENLISTE_ANZEIGEN)
 				$nt_content='';
-<<<<<<< HEAD
-=======
-			if(defined('CIS_ANWESENHEITSLISTE_ANWESENHEITSLISTE_ANZEIGEN') && !CIS_ANWESENHEITSLISTE_ANWESENHEITSLISTE_ANZEIGEN)
-				$aw_content='';
-
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 		  	echo "<table cellpadding='0' cellspacing='0'>
 		  		
 		  		<tr>
 		  		   <td>$aw_content</td>
-<<<<<<< HEAD
 		  		   <td width='15'>&nbsp;</td>
 		  		   <td>$nt_content</td>
 		  		</tr>
@@ -230,16 +271,6 @@
 		  			<td>&nbsp;</td>
 		  			<td></td>
 		  		</tr>
-=======
-		  		</tr>
-		  		<tr>
-		  			<td>$awbild_content</td>
-		  		</tr>
-				<tr>
-		  		   <td>$nt_content</td>
-		  		</tr>
-		  		
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 		  		</table>";
 	  	}
 	}

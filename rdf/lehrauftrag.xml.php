@@ -31,18 +31,6 @@ require_once('../include/lehreinheit.class.php');
 require_once('../include/fachbereich.class.php');
 require_once('../include/mitarbeiter.class.php');
 
-<<<<<<< HEAD
-=======
-if(isset($_SERVER['REMOTE_USER']))
-{
-	// Wenn das Script direkt aufgerufen wird muss es ein Admin sein
-	$user=get_uid();
-	$berechtigung = new benutzerberechtigung();
-	$berechtigung->getBerechtigungen($user);
-	if(!$berechtigung->isBerechtigt('admin'))
-		die('Sie haben keine Berechtigung fuer diese Seite');
-}
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 
 // header für no cache
 header("Cache-Control: no-cache");
@@ -93,17 +81,10 @@ $studiengang = new studiengang($studiengang_kz);
 
 //Fachbereiche laden
 $fb_arr = array();
-<<<<<<< HEAD
 	$fachbereich_obj = new fachbereich();
 	$fachbereich_obj->getAll();
 	foreach ($fachbereich_obj->result as $fb)
 		$fb_arr[$fb->fachbereich_kurzbz] = $fb->bezeichnung;
-=======
-$fachbereich_obj = new fachbereich();
-$fachbereich_obj->getAll();
-foreach ($fachbereich_obj->result as $fb)
-	$fb_arr[$fb->fachbereich_kurzbz] = $fb->bezeichnung;
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 		
 //Studiengangsleiter holen
 $stgl='';
@@ -133,13 +114,8 @@ if($uid==null)
 					WHERE
 						tbl_lehreinheitmitarbeiter.lehreinheit_id=tbl_lehreinheit.lehreinheit_id AND
 						tbl_lehreinheit.lehrveranstaltung_id=tbl_lehrveranstaltung.lehrveranstaltung_id AND
-<<<<<<< HEAD
 						tbl_lehrveranstaltung.studiengang_kz='".addslashes($studiengang_kz)."' AND
 						tbl_lehreinheit.studiensemester_kurzbz='".addslashes($ss)."'
-=======
-						tbl_lehrveranstaltung.studiengang_kz=".$db->db_add_param($studiengang_kz, FHC_INTEGER)." AND
-						tbl_lehreinheit.studiensemester_kurzbz=".$db->db_add_param($ss)."
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 					UNION
 					SELECT
 						tbl_benutzer.uid as mitarbeiter_uid
@@ -152,15 +128,9 @@ if($uid==null)
 						student_uid=vw_student.uid AND
 						tbl_benutzer.uid = tbl_mitarbeiter.mitarbeiter_uid AND
 						tbl_lehreinheit.lehreinheit_id=tbl_projektarbeit.lehreinheit_id AND
-<<<<<<< HEAD
 						tbl_lehreinheit.studiensemester_kurzbz='".addslashes($ss)."' AND
 						tbl_lehreinheit.lehrveranstaltung_id = tbl_lehrveranstaltung.lehrveranstaltung_id AND
 						tbl_lehrveranstaltung.studiengang_kz=".addslashes($studiengang_kz)." AND
-=======
-						tbl_lehreinheit.studiensemester_kurzbz=".$db->db_add_param($ss)." AND
-						tbl_lehreinheit.lehrveranstaltung_id = tbl_lehrveranstaltung.lehrveranstaltung_id AND
-						tbl_lehrveranstaltung.studiengang_kz=".$db->db_add_param($studiengang_kz, FHC_INTEGER)." AND
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 						tbl_projektbetreuer.stunden!='0'
 					) as mitarbeiter ORDER BY mitarbeiter_uid";
 	
@@ -185,11 +155,6 @@ function drawLehrauftrag($uid)
 	global $stgl;
 	global $ANZAHL_ZEILEN_PRO_SEITE;
 	
-<<<<<<< HEAD
-=======
-	$db = new basis_db();
-	
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	$xml.='<lehrauftrag>
 		<studiengang>FH-';
 	//Studiengang
@@ -202,10 +167,6 @@ function drawLehrauftrag($uid)
 		$xml.= 'Bachelor-';
 	
 	$xml.= 'Studiengang '.$studiengang->bezeichnung.'</studiengang>';
-<<<<<<< HEAD
-=======
-	$xml.= '<studiengang_bezeichnung> '.$studiengang->bezeichnung.'</studiengang_bezeichnung>';
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	
 	//Studiensemester
 	if(substr($ss,0,2)=='WS')
@@ -216,14 +177,9 @@ function drawLehrauftrag($uid)
 		<studiensemester>$studiensemester</studiensemester>";
 	
 	//Lektor
-<<<<<<< HEAD
 	$qry = "SELECT * FROM campus.vw_mitarbeiter LEFT JOIN public.tbl_adresse USING(person_id) WHERE uid='".addslashes($uid)."'
 			ORDER BY zustelladresse DESC, firma_id LIMIT 1";
 	$db = new basis_db();
-=======
-	$qry = "SELECT * FROM campus.vw_mitarbeiter LEFT JOIN public.tbl_adresse USING(person_id) WHERE uid=".$db->db_add_param($uid)."
-			ORDER BY zustelladresse DESC, firma_id LIMIT 1";
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	
 	if($result = $db->db_query($qry))
 	{
@@ -233,11 +189,7 @@ function drawLehrauftrag($uid)
 			if($row->firma_id!='')
 			{
 				$qry ="SELECT tbl_firma.name, tbl_adresse.strasse, tbl_adresse.plz, tbl_adresse.ort FROM public.tbl_firma JOIN public.tbl_adresse USING(firma_id) 
-<<<<<<< HEAD
 						WHERE tbl_firma.firma_id='$row->firma_id' AND person_id='$row->person_id' LIMIT 1";
-=======
-						WHERE tbl_firma.firma_id=".$db->db_add_param($row->firma_id)." AND person_id=".$db->db_add_param($row->person_id)." LIMIT 1";
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 				if($result_firma = $db->db_query($qry))
 				{
 					if($row_firma = $db->db_fetch_object($result_firma))
@@ -262,7 +214,6 @@ function drawLehrauftrag($uid)
 			}
 			$xml.='
 		<mitarbeiter>
-<<<<<<< HEAD
 			<titelpre>'.$row->titelpre.'</titelpre>
 			<vorname>'.$row->vorname.'</vorname>
 			<familienname>'.$row->nachname.'</familienname>
@@ -274,36 +225,16 @@ function drawLehrauftrag($uid)
 			<ort>'.$ort.'</ort>
 			<svnr>'.$row->svnr.'</svnr>
 			<personalnummer>'.$row->personalnummer.'</personalnummer>
-=======
-			<titelpre><![CDATA['.$row->titelpre.']]></titelpre>
-			<vorname><![CDATA['.$row->vorname.']]></vorname>
-			<familienname><![CDATA['.$row->nachname.']]></familienname>
-			<titelpost><![CDATA['.$row->titelpost.']]></titelpost>
-			<anschrift><![CDATA['.$strasse.']]></anschrift>
-			<name_gesamt><![CDATA['.$name_gesamt.']]></name_gesamt>
-			<zuhanden><![CDATA['.$zuhanden.']]></zuhanden>
-			<plz><![CDATA['.$plz.']]></plz>
-			<ort><![CDATA['.$ort.']]></ort>
-			<svnr><![CDATA['.$row->svnr.']]></svnr>
-			<personalnummer><![CDATA['.$row->personalnummer.']]></personalnummer>
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 		</mitarbeiter>';
 		}
 	}
 	
 	//Lehreinheiten
-<<<<<<< HEAD
 	$qry = "SELECT * FROM campus.vw_lehreinheit WHERE mitarbeiter_uid='".addslashes($uid)."' AND studiensemester_kurzbz='$ss'";
 
 	if($studiengang_kz!='') //$studiengang_kz!='0' && 
 		$qry .= "AND lv_studiengang_kz='".addslashes($studiengang_kz)."'";
 	//$qry.=" ORDER BY lehreinheit_id";
-=======
-	$qry = "SELECT * FROM campus.vw_lehreinheit WHERE mitarbeiter_uid=".$db->db_add_param($uid)." AND studiensemester_kurzbz=".$db->db_add_param($ss);
-
-	if($studiengang_kz!='') //$studiengang_kz!='0' && 
-		$qry .= "AND lv_studiengang_kz=".$db->db_add_param($studiengang_kz);
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	$qry.=" ORDER BY lv_orgform_kurzbz, lv_bezeichnung, lehreinheit_id";
 	$lv = array();
 	$anzahl_lvs=0;
@@ -331,7 +262,6 @@ function drawLehrauftrag($uid)
 				$lv[$anzahl_lvs]['faktor'] = ($faktor!=''?$faktor:' ');
 				$lv[$anzahl_lvs]['brutto'] = number_format($brutto,2,',','.');
 				$anzahl_lvs++;
-<<<<<<< HEAD
 				/*$xml.='
 					<lehreinheit>
 						<lehreinheit_id>'.$lehreinheit_id.'</lehreinheit_id>
@@ -343,8 +273,6 @@ function drawLehrauftrag($uid)
 						<faktor>'.$faktor.'</faktor>
 						<brutto>'.number_format($brutto,2,',','.').'</brutto>
 					</lehreinheit>';*/
-=======
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	
 				$gesamtkosten = $gesamtkosten + $brutto;
 				$gesamtstunden = $gesamtstunden + $stunden;
@@ -389,7 +317,6 @@ function drawLehrauftrag($uid)
 			$lv[$anzahl_lvs]['faktor'] = (isset($faktor)?$faktor:' ');
 			$lv[$anzahl_lvs]['brutto'] = (isset($brutto)?number_format($brutto,2,',','.'):' ');
 			$anzahl_lvs++;
-<<<<<<< HEAD
 			/*
 		$xml.='
 			<lehreinheit>
@@ -403,8 +330,6 @@ function drawLehrauftrag($uid)
 				<brutto>'.(isset($brutto)?number_format($brutto,2,',','.'):'').'</brutto>
 			</lehreinheit>';
 			*/
-=======
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 			
 			if(isset($brutto))
 				$gesamtkosten = $gesamtkosten + $brutto;
@@ -448,7 +373,6 @@ function drawLehrauftrag($uid)
 				$lv[$anzahl_lvs]['faktor'] = (isset($row->faktor)?$row->faktor:'');
 				$lv[$anzahl_lvs]['brutto'] = (isset($brutto)?number_format($brutto,2,',','.'):' ');
 				$anzahl_lvs++;
-<<<<<<< HEAD
 				/*
 				$xml.='
 					<lehreinheit>
@@ -462,9 +386,6 @@ function drawLehrauftrag($uid)
 						<brutto>'.(isset($brutto)?number_format($brutto,2,',','.'):'').'</brutto>
 					</lehreinheit>';
 				*/
-=======
-				
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 				$gesamtkosten = $gesamtkosten + $brutto;
 				$gesamtstunden = $gesamtstunden + $row->stunden;
 			}
@@ -485,7 +406,6 @@ function drawLehrauftrag($uid)
 		}
 			$xml.='
 				<lehreinheit>
-<<<<<<< HEAD
 					<lehreinheit_id>'.$lv_row['lehreinheit_id'].'</lehreinheit_id>
 					<lehrveranstaltung><![CDATA['.$lv_row['lehrveranstaltung'].']]></lehrveranstaltung>
 					<fachbereich>'.$lv_row['fachbereich'].'</fachbereich>
@@ -494,16 +414,6 @@ function drawLehrauftrag($uid)
 					<satz>'.$lv_row['satz'].'</satz>
 					<faktor>'.$lv_row['faktor'].'</faktor>
 					<brutto>'.$lv_row['brutto'].'</brutto>
-=======
-					<lehreinheit_id><![CDATA['.$lv_row['lehreinheit_id'].']]></lehreinheit_id>
-					<lehrveranstaltung><![CDATA['.$lv_row['lehrveranstaltung'].']]></lehrveranstaltung>
-					<fachbereich><![CDATA['.$lv_row['fachbereich'].']]></fachbereich>
-					<gruppe><![CDATA['.$lv_row['gruppe'].']]></gruppe>
-					<stunden><![CDATA['.$lv_row['stunden'].']]></stunden>
-					<satz><![CDATA['.$lv_row['satz'].']]></satz>
-					<faktor><![CDATA['.$lv_row['faktor'].']]></faktor>
-					<brutto><![CDATA['.$lv_row['brutto'].']]></brutto>
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 				</lehreinheit>';
 		$anz++;
 	}
@@ -512,7 +422,6 @@ function drawLehrauftrag($uid)
 		
 	// Gesamtstunden und Gesamtkosten
 	$xml.="
-<<<<<<< HEAD
 		<gesamtstunden>".number_format($gesamtstunden,2)."</gesamtstunden>
 		<gesamtbetrag>".number_format($gesamtkosten,2,',','.')."</gesamtbetrag>";
 	
@@ -522,17 +431,6 @@ function drawLehrauftrag($uid)
 	
 	$xml.= '
 		<datum>'.date('d.m.Y').'</datum>
-=======
-		<gesamtstunden><![CDATA[".number_format($gesamtstunden,2)."]]></gesamtstunden>
-		<gesamtbetrag><![CDATA[".number_format($gesamtkosten,2,',','.')."]]></gesamtbetrag>";
-	
-	
-	$xml.="
-		<studiengangsleiter><![CDATA[$stgl]]></studiengangsleiter>";
-	
-	$xml.= '
-		<datum><![CDATA['.date('d.m.Y').']]></datum>
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 	</lehrauftrag>
 	';
 }

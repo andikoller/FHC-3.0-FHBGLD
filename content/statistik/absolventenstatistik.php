@@ -33,6 +33,16 @@ require_once('../../include/studiensemester.class.php');
 require_once('../../include/benutzerberechtigung.class.php');
 require_once('../../include/functions.inc.php');
 
+$user = get_uid();
+loadVariables($user);
+
+$rechte = new benutzerberechtigung();
+$rechte->getBerechtigungen($user);
+
+if(!$rechte->isBerechtigt('basis/vilesci'))
+	die('Sie haben keine Berechtigung fuer diese Seite');
+	
+
 if(isset($_GET['stsem']))
 	$stsem = $_GET['stsem'];
 else

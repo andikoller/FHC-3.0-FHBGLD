@@ -1,0 +1,60 @@
+\chapter{Stammdaten}
+\label{details}
+\section{Die Karteikarte Details}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.75\textwidth]{FAS_Details1.png}
+	\caption{Die Karteikarte Details}
+	\label{Details1}
+\end{figure}
+\begin{itemize}
+	\item Bereich Person:
+	\begin{itemize}
+		\item Anrede: Die Anrede der Person findet Verwendung in Ausdrucken wie etwa in Briefköpfen.
+		\item TitelPre: Akademische Titel, die \textbf{vor} dem Name geführt werden. (Um ein hochgestelltes 'a' zu erzeugen halten Sie die <Alt>-Taste gedrückt und tippen sie 0170 am Ziffernblick der Tastatur. z.B. für Magª)
+		\item TitelPost: Akademische Titel, die \textbf{nach} dem Name geführt werden.
+		\item Nachname: Nachname der Person.
+		\item Vorname: Vorname der Person.
+		\item Vornamen: Weitere Vornamen der Person.
+		\item Geburtsdatum: Das Geburtsdatum wird als Entscheidungskriterium für die Zusammenlegung von Personendatensätzen herangezogen, wenn die Sozialversicherung noch nicht eingegeben ist wie es z.B. bei Interessenten vorkommt. Eine Zusammenlegung von Personendatensätzen wird vorgenommen, damit eine Person nur einmal in der Datenbank abgebildet ist und Redundanzprobleme vermieden werden.
+		\item Geburtsort
+		\item Geburtsnation
+		\item SVNR: Die Sozialversicherungsnummer wird hauptsächlich für die BIS-Meldung benötigt.
+		\item Ersatzkennzeichen: Das Ersatzkennzeichen ist eine Ersatznummer für die Sozialversicherungsnummer als Übergangslösung bis die Sozialversicherungsnummer vergeben wurde.
+		\item Geburtszeit 
+		\item Staatsbürgerschaft: Die Staatsbürgerschaft wird für die BIS-Meldung benötigt.
+		\item Sprache
+		\item Geschlecht 
+		\item Familienstand
+		\item Anzahl der Kinder
+		\item Foto: Die Taste \textsl{Upload} startet einen Dialog zum Einfügen eines Bildes der Person.
+		\item Anmerkung: Hier können zusätzliche Informationen eingegeben werden.
+		\item Homepage: URL einer Homepage der Person.
+	\end{itemize}
+	\item Bereich Student:
+	\begin{itemize}
+		\item UID: Wird bei der Inskription automatisch vergeben, wird vom Personenkennzeichen abgeleitet.
+		\item Personenkennzeichen: Eindeutige Identifikationsnummer für Studenten. Wird ebenfalls bei der Inskription automatisch vergeben. \\
+		Aufbau:
+	\begin{itemize}
+		\item 2-stellige Jahreszahl der Inskription.
+		\item Semesterkennung: 1 für WS, 2 für SS, 0 für Incomingstudenten
+		\item 4-stellige Studienkennzahl
+		\item 3-stellige laufende Nummer 
+	\end{itemize}
+		\item Aktiv: Das Häkchen ist standardmäßig gesetzt und gibt an, ob diese Person aktiv studiert und somit ins nächste Semester vorgerückt wird oder nicht.
+		\item Semester: Ausbildungssemester in dem sich der Student während des ausgewählten Studiensemesters befindet.
+		\item Verband: Unterteilung des Ausbildungssemesters.
+		\item Gruppe: Unterteilung des Verbands.
+		\item Alias: Alternative Emailadresse für Studenten. Wird in der Regel automatisch generiert. Regeln: Der Aufbau muß nach dem Schema \textsl{vorname.nachname} ohne Umlaute erfolgen. Vorname und Nachname müssen zumindest je einen Buchstaben lang sein. \textsl{@technikum-wien.at} wird automatisch hinzugefügt.
+	\end{itemize}
+\end{itemize}
+\newpage
+\label{pflichtstamm}
+\section{Pflichtfelder}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.75\textwidth]{FAS_Pflichtfelder_Stammdaten.png}
+	\caption{Die Pflichtfelder des Karteireiters Stammdaten}
+	\label{Bild_Pflichtstamm}
+\end{figure}

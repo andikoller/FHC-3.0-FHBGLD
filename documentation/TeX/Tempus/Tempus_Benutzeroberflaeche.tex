@@ -1,0 +1,133 @@
+\chapter{Die Benutzeroberfläche}
+\label{Kapitel Benutzeroberfläche}
+
+\begin {figure}
+	\centering
+	\includegraphics[width=1.0\textwidth]{Tempus_Oberfläche_Beschriftet}
+	\caption{Gliederung der Benutzeroberfläche}
+	\label{Benutzeroberfläche}
+\end {figure}
+
+\section{Hauptmenü}
+\includegraphics{eins}
+Im Hauptmenü können Sie die grundlegenden Einstellungen vornehmen.
+Im Punkt ''Einstellungen'' wählen Sie das Studiensemester, das Sie bearbeiten möchten.
+Hier können Sie auch auf die Onlinetabelle (Stundenplan) wechseln, in der Änderungen sofort auf dem Studentenplan sichtbar werden.
+Außerdem können Sie hier die drei verschiedenen Kollisionsüberprüfungen aktivieren und deaktivieren. (siehe Kapitel \ref{Kapitel Kollisionen})
+
+\info{Das aktuell eingestellte Studiensemester und die aktuell aktive Datenbanktabelle werden im Fenster ganz links unten angezeigt.}
+
+\section{Quellmenü}
+\includegraphics{zwei}
+Hier können Sie zwischen dem Lehrverband, dem Ort und dem Lektor wählen, 
+welcher im Hauptfenster (4) angezeigt werden soll.
+Das Quellmenü ist als Baumstruktur aufgebaut. Durch Klicken auf die kleinen Pfeile blenden Sie eine untergeordnete Gruppe ein und können diese damit auch wieder ausblenden.
+Eine ausgewählte Zeile wird \colorbox{yellow}{gelb} markiert, was sich auch nach Wechsel des Karteireiters nicht ändert. Der Inhalt des Hauptfensters wird an die gewählte Zeile angepasst.
+
+\info{Wenn Sie den Karteireiter im Quellmenü wechseln und wiederholt einen anderen Karteireiter aufrufen, müssen Sie erneut auf die gelb unterlegte Zeile klicken, um die Ansicht im Hauptfenster zu aktualisieren.}
+
+\idee{TIPP	Sie brauchen nicht die lange Liste an Lektoren händisch durchscrollen. Markieren Sie einen beliebigen Lektor und geben Sie den Namen des gesuchten Lektors auf der Tastatur ein.}
+
+\includegraphics{Listenfeld_ConfigButton}...Dieser Button blendet zusätzliche Details im jeweiligen Karteireiter ein.
+
+\section{Ansicht}
+\includegraphics{drei}
+Wählen Sie hier die Ansicht, die im Hauptfenster dargestellt werden soll.
+Beim Start wird standardmäßig der Wochenplan aus der aktuellen Kalenderwoche angezeigt.
+
+Die Ansicht ist an das Quellmenü gekoppelt.
+Um beispielsweise den entsprechenden Studiengang in der Registerkarte ''Wochenplan'' anzeigen zu können, muss im Quellmenü ein Lehrverband ausgewählt werden.
+
+Die Registerkarten der Ansicht, werden ab Kapitel \ref{Kapitel Semesterplan} näher beschrieben.
+Die Registerkarte ''Lehrveranstaltung'' wird in Kapitel \ref{Kapitel Lehreinheit} genau behandelt.
+
+\section{Blättern/Aktualisieren/Aktuelle KW}
+\includegraphics{vier}
+In den Kalenderwochen wird mittels der Pfeile vor- und zurückgeblättert. Die Doppelpfeile blättern 4 Kalenderwochen vor bzw. zurück. Der Dreifach-Pfeil blättert 16 Kalenderwochen (1 Semester) vor bzw. zurück. Der rechte Button aktualisiert den Bildschirm und dessen Inhalt.
+Um auf die aktuelle KW (heute) zu springen klicken Sie auf die Abkürzung ''KW''.
+
+\section{Hauptfenster}
+\includegraphics{fünf}
+Das Hauptfenster zeigt die ausgewählte Ansicht an und bietet die Möglichkeit, Stunden aus der Lehrfächerverteilung einzuteilen bzw. vorhandene Stunden zu verschieben oder zu löschen. Wird im Hauptfenster die Lektorenansicht ausgewählt, ist durch die Farben im Hintergrund (Grün bis Rot) der Zeitwunsch des Lektors dargestellt.
+Feiertage bzw. studiengangsspezifische freie Tage und Ferien werden im Hauptfenster gelb angezeigt.
+Eine blinkende Lehrveranstaltung zeigt an, dass eine Kollision/Doppelbelegung vorhanden ist.
+Kommt der Cursor längere Zeit auf einer verplanten Einheit zu stehen, werden im Quickinfo allfällige Anmerkungen und das Änderungsdatum der Einheit, sowie der Benutzer, der die Änderung durchgeführt hat, angezeigt.
+
+\section{Balken}
+\includegraphics{sechs}
+Die Breite und Höhe der einzelnen Frames in der Benutzeroberfläche kann mit den Balken beliebig verschoben werden. Durch einen einfachen Klick in der Mitte eines Balkens können diese auch aus-/eingeblendet werden.
+
+\section{Detailansichtsfenster}
+\includegraphics{sieben}
+Wird im Hauptfenster einmalig auf eine Lehrveranstaltung geklickt, erscheinen im Detailfenster Informationen wie die Unterrichtsnummer oder die Langbezeichnung des Lehrfachs.
+
+\includegraphics{Listenfeld_ConfigButton}...Dieser Button blendet zusätzliche Spalten im Detailfenster ein.
+
+Im Detailansichtsfenster werden die Datensätze so detailliert aufgeschlüsselt, wie sie auch in der Datenbank vorliegen.
+So wird zum Beispiel jeder teilnehmende Lektor oder jede Gruppe in einer eigenen Zeile angezeigt.
+
+Wenn Sie ein Zeile mit Ihrer rechten Maustaste anklicken, erscheint ein Kontextmenü in dem Sie zwei Optionen haben: Bearbeiten oder Entfernen.
+
+Durch klicken auf ''Entfernen'' wird der Datensatz gelöscht. Zuvor wird noch einmal nachgefragt.
+
+Ein Klick auf ''Bearbeiten'' öffnet ein Formularfeld, in dem Sie einige Parameter ändern können. Unter anderem können Sie der Lehreinheit einen Titel geben (der im Quickinfo angezeigt wird), die UNR ändern oder Ort und Datum adaptieren.
+
+\achtung{Achtung: Es erfolgt dabei KEINE Kollisionsüberprüfung!}
+
+\section{Lehreinheiten}
+\includegraphics{acht}
+Hier können Stunden aus der Lehrfächerverteilung im Hauptfenster verplant werden.
+Die angezeigten Lehreinheiten ergeben sich aus der Auswahl im Quellmenü.
+Wird beispielsweise der gesamte Studiengang im Quellmenü ausgewählt, werden alle Lehrveranstaltungen aller Semester angezeigt.
+Die Lehreinheiten werden zusätzlich durch die Auswahl eines Semesters, Verbandes, einer Gruppe oder einer Spezialgruppe gefiltert.
+Wird ein Lektor im Quellmenü ausgewählt, werden alle ihm/ihr zugeordneten Lehrveranstaltungen angezeigt. (deshalb partizipierende LV's mit mehreren Lektoren nur über die Verbandsansicht verplanen)
+
+Welche Informationen in den einzelnen Lehreinheiten angezeigt werden, entnehmen Sie bitte der Abbildung \ref{LE_Details}:
+
+\begin {figure}
+	\centering
+	\includegraphics[width=1.0\textwidth]{Tempus_LE_Details}
+	\caption{Bedeutung der angezeigten Attribute in den Lehreinheiten}
+	\label{LE_Details}
+\end {figure}
+
+Die Lehreinheiten werden standardmäßig in der folgenden Hierarchie sortiert:
+
+1. Offene Stunden\\
+2. Alphabetisch nach Kurzbezeichnung der Lehreinheit\\
+3. Alphabetisch nach Kurzbezeichnung der Gruppe\\
+4. Alphabetisch nach Kurzbezeichnung des Lektors\\
+\\
+Durch die Symbole am unteren Rand kann die Sortierung geändert werden.\\
+\\
+Um schneller die gewünschte Lehreinheit zu finden, kann die Liste gefiltert werden. Geben sie dazu in das darüberstehende Textfeld den gewünschten Suchbegriff ein.\\
+
+\includegraphics{single_week}...Vorschlag/Setzen SingleWeek:
+Einmaliges verplanen einer Lehreinheit \textit{(in der im Hauptfenster angezeigten Kalenderwoche)}. Ein einmaliger Klick zeigt Raumvorschläge unter Berücksichtigung der Blockung und etwaiger Kollisionen im Hauptfenster an. Per Drag\&Drop kann die Lehreinheit dann in den gewünschten Raum gezogen werden und wird dort mit der eingestellten Blockung verplant.\\
+Es ist auch möglich, ohne Raumvorschlag die Lehreinheit direkt in einen Raum zu ziehen.\\
+Wählen Sie dazu erst den Verband oder Lektor aus und wechseln Sie auf einen Raum im Quellmenü. Die angezeigten Lehreinheiten werden sich nicht verändern und Sie können eine Lehreinheit direkt in einen freien Termin ziehen.
+Noch einfacher ist die Verplanung über ein zweites Fenster, in welchem Sie einen Raum auswählen und die Lehreinheit aus dem ersten Fenster per Drag\&Drop setzen. Ein Raumvorschlag ist in diesem Fall nicht notwendig.
+
+\includegraphics{multi_week}...Vorschlag/Setzen MultiWeek:
+Lehreinheit über das ganze Semester verplanen \textit{(beginnend bei der im Hauptfenster angezeigten Kalenderwoche)}. Ein einmaliger Klick zeigt Raumvorschläge unter Berücksichtigung der Blockung und etwaiger Kollisionen (über das ganze restliche Semester gesehen) im Hauptfenster an. Per Drag\&Drop kann die Lehreinheit dann in den gewünschten Raum gezogen werden und wird dann mit der eingestellten Blockung im vorgegebenen Wochenrhythmus verplant. Dabei werden (vorher definierte) Feiertage und Ferien ausgelassen.\\
+Neben dem Raumvorschlag wird in Klammer die Anzahl der Kollisionen angezeigt die durch die Verplanung entstehen würde. 
+Über den Menüpunkt Einstellungen->max\_kollision kann festgelegt werden, wie viele kollisionen maximal vorkommen dürfen damit der Raum vorgeschlagen wird.
+
+\includegraphics{delete_single_week}...Löschen SingleWeek:
+Einmaliges entfernen einer Lehreinheit \textit{(aus der im Hauptfenster angezeigten Kalenderwoche)}. Dieser Button löscht alle betreffenden Lehreinheiten aus der aktuellen Woche aus dem Plan. Davor wird allerdings noch in einem Dialogfeld nachgefragt.
+
+\includegraphics{delete_multi_week}...Löschen MultiWeek:
+Entfernen aller verplanten Lehreinheiten \textit{(beginnend bei der im Hauptfenster angezeigten Kalenderwoche bis zum Ende des Semesters)}.
+Dieser Button löscht alle betreffenden Lehreinheiten über das ganze restliche Semester aus dem LV-Plan. Davor wird allerdings noch in einem Dialogfeld nachgefragt.
+
+\includegraphics{icon_aktualisieren}...Aktualisiert die angezeigten Lehreinheiten bzw. lädt die Ansicht neu. Damit kann auch (nach dem Raumvorschlag) die Aktion Vorschlag/Setzen Single/MultiWeek abgebrochen werden.
+
+\section{Statusleiste}
+\includegraphics{neun}
+In der Statusleiste werden das aktuelle Studiensemester, die Tabelle an der gerade gearbeitet wird, sowie aktuelle Meldungen ausgegeben.
+
+Um das Wechseln zwischen den Semestern zu erleichtern, finden Sie links in der Statusleiste 3 Buttons um das Studiensemester umzuschalten.
+Die zwei Pfeile links und rechts, blättern jeweils ein Studiensemester vor bzw. zurück.
+
+In der Mitte steht das aktuelle Semester.
+Sollten zwei oder mehr Tempus\raisebox{1ex}{\tiny \copyright}-Fenster geöffnet sein, erwirkt dieser Button, dass das Fenster - mit dem aktuell eingestellten Studiensemester - neu geladen wird.

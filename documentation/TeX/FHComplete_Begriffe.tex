@@ -1,0 +1,154 @@
+\chapter{Begriffserklärung, Features und verwendete Abkürzungen}
+\label{Kapitel Begriffe}
+
+	\minisec{Einheit}
+...siehe Lehreinheit.
+	
+	\minisec{Fachbereich}
+...siehe Institut.
+
+	\minisec{Institut}
+Ein Institut ist die zuständige Stelle für die Vergabe von Lektoren an die einzelnen Studiengänge und Lehrfächer.
+Ein Beispiel ist das Institut ''Sprachen'', der für alle sprachbezogenen Lehrfächer zuständig ist. (Englisch, Französisch, Japanisch,...)
+
+	\minisec{Kollision}
+TEMPUS\raisebox{1ex}{\tiny \copyright} 2.0 überprüft bei Eintragungen und Verschiebungen im LV-Plan die Verfügbarkeit von Lektoren, Studenten und Räumen, sowie Zeitsperren der Lektoren und Reservierungen. Sollte es zu einer Terminkollision mit einem der drei Pläne kommen, erscheint eine Fehlermeldung und die Aktion wird abgebrochen.
+Durch Deaktivieren der Kollisionsüberprüfung im Menüpunkt ''Einstellungen'' kann jedoch eine Kollision erzwungen werden. Dies sollte jedoch stets nach Gebrauch wieder deaktiviert werden, da es sonst leicht zu Fehlplanungen kommen kann. (siehe Kapitel \ref{Kapitel Kollisionen})
+
+	\minisec{KW...Kalenderwoche}
+Das Jahr umfasst mindestens 52 durchnummerierte Kalenderwochen (KW). Die erste Woche des Jahres nach DIN 1355 / ISO 8601 ist die erste Woche, in die mindestens vier Tage des neuen Jahres fallen. 
+
+	\minisec{Kollegium}
+Das Kollegium setzt sich aus allen StudiengangsleiterInnen sowie VertreterInnen der Lehrenden, FachbereichsleiterInnen und StudentInnen zusammen und trifft wichtige strategische Entscheidungen für die Fachhochschule Technikum Wien.
+	
+	\minisec{LE...Lehreinheit}
+In der Lehreinheit verschmelzen die wesentlichen, veränderlichen Daten um mit der Planung fortfahren zu können. Die Daten in den Lehreinheiten dienen speziell für die LV-Planung und auch als Datenquelle für die CIS-Seite. Lehraufträge werden auch auf Basis dieser Daten erstellt. 
+
+Die Lehreinheit führt Lektoren, Studenten, Lehrfächer usw. zusammen und muss jedes Semester überarbeitet werden.
+
+Eine detailierte Beschreibung finden Sie in Kapitel \ref{Kapitel Lehreinheiten}
+
+Siehe zum Vergleich ''LV...Lehrveranstaltung''
+
+	\minisec{Lehreinheit\_ID}
+Die Lehreinheit\_ID ist eine interne Nummer, die vom System eindeutig jeder Lehreinheit zugeteilt wird.
+Die meisten Tabellen der Datenbank sind mit der Lehreinheit\_ID verknüpft
+
+	\minisec{Lehrfach}
+Ein Lehrfach bestimmt den Inhalt einer Lehreinheit. (z.B. Mathematik)
+
+In ihr definiert sind der verantwortliche Fachbereich, die Farbe (die im Stundenplan angezeigt wird) und die Unterrichtssprache. Ein Lehrfach wird für jeden Studiengang und jedes dazugehörige Semester angelegt. Die Kurzbezeichnung des Lehrfachs wird gemeinsam mit der Lehrform an erster Stelle im Lehrveranstaltungsplan angezeigt. 
+Die Lehrform des Unterrichts (Übung, Vorlesung, ILV, ...) wird hier jedoch nicht bestimmt.
+
+	\minisec{Lehrform}
+Die Lehrform beschreibt das Lehrfach detaillierter, indem sie angibt, in welchem Stil der Unterricht stattfindet. 
+
+Eine Lehrform kann Beispielsweise die Vorlesung (-VO) sein. Dies beschreibt einen Frontalunterricht ohne selbstständige Übungen. 
+
+Andere Beispiele sind Übung (-UE), Integrative Lehrveranstaltung (-ILV), Laborstunden (-LAB) oder Tutorien (-TUT)
+
+	\minisec{Lehrveranstaltungsplan (=Stundenplan)}
+Der Lehrveranstaltungsplan (kurz ''LV-Plan'') ist die Oberfläche auf der graphisch die Lehreinheiten mit den unterrichtenden Lektoren, dem Lehrverband und dem Raum farblich dargestellt werden. 
+
+Am LV-Plan kann durch die Räume und die Unterrichtswochen geblättert werden und der LV-Plan kann dort auch für diverse andere Anwendungen exportiert werden.
+
+	\minisec{Lehrverband}
+Der Lehrverband bezeichnet die Gliederung der Studenten in Studiengang, Semester, Verbände und Gruppen. 
+
+Er dient der Schlichtung und Aufteilung größerer Studentenzahlen um kleinere und übersichtlichere Gruppen zu schaffen. 
+
+Ein Beispiel an der FH Technikum-Wien wäre: BEL-2A1. (Studiengang Bachelor Elektronik, 2. Semester, Verband A, Gruppe 1) 
+
+	\minisec{LFVT...Lehrfächerverteilung}
+Die Lehrfächerverteilung ist die gesamte Liste aller Lehreinheiten, die in einem Semester eines Studienganges zu verplanen sind.
+
+	\minisec{LV...Lehrveranstaltung}
+Als Lehrveranstaltung wird im Gesamtsystem das gleiche verstanden, wie im Antrag des Studiengangs. In ihr enthalten sind die grundlegenden Stammdaten. Im Gegensatz zu der Lehreinheit enthält die Lehrveranstaltung Daten, die im Wesentlichen von Jahr zu Jahr unverändert bleiben. Sie bildet das Grundgerüst auf dem alle anderen Tabellen aufbauen.\\
+Die Lehrveranstaltung wird immer aus Sicht eines Studiengangs oder aus der Sicht des Studenten gesehen. Der Titel der Lehrveranstaltung findet sich im Zeugnis und im Lehre-Bereich im CIS wieder. Nicht zu verwechseln ist die Lehrveranstaltung mit dem Lehrfach oder der Lehreinheit (siehe eigene Begriffserklärungen).\\
+Einmal verwendete Lehrveranstaltungen können nicht mehr entfernt sondern nur deaktiviert werden, da Notenzuordnungen verloren gehen würden.
+
+Attribute der Lehrveranstaltung sind beispielsweise die Kurzbezeichnung, der Studiengang, das Semester in dem diese unterrichtet wird, die Sprache, die ECTS-Punkte oder die Semesterstunden.
+
+	\minisec{Module, Spezialgruppen}
+Neben den regulären Lehrverbandsgruppen gibt es Module und Spezialgruppen, die unterschiedliche Studenten beherbergen können.
+Es ist damit möglich, Studenten aus verschiedenen Lehrverbandsgruppen innerhalb eines Semesters aber auch semester- und studiengangsübergreifend zusammenzufassen. Da eine Kollisionsprüfung und korrekte Verplanung durch Spezialgruppen aber erheblich erschwert wird, sollten Spezialgruppen möglichst vermieden werden.
+
+	\minisec{Quickinfo}
+Eine Quickinfo erscheint, wenn der Mauszeiger längere Zeit ohne zu klicken über einem Element steht.
+
+	\minisec{Raumtyp}
+Um die verschiedenen Unterrichtsräume zusammenzufassen, wird das Attribut ''Raumtyp'' verwendet.
+Ein Raumtyp wäre beispielsweise ''Seminarraum''. Dieser fasst beliebig viele, einzelne Räume zu einer Gesamtheit zusammen.
+Das Attribut dient hauptsächlich dazu, um bei der Stundenverplanung eine übersichtliche Menge an Raumvorschlägen für eine Lehreinheit zu erhalten.
+
+	\minisec{Reservierung}
+Der Lehrveranstaltungsplan bietet Lektoren und Angestellten die Möglichkeit der Reservierung, um sich mittelfristig einen Raum zu sichern und für die Lehrveranstaltungsplanung und andere Mitarbeiter zu sperren.
+Die Reservierung eines Raumes ist in einem vordefinierten Zeitfenster möglich. Eine getätigte Reservierung hat normalerweise Vorrang vor dem regulären Unterricht.
+
+Dies stellt sich in der Praxis aber als äußerst hinderlich dar. Oft sind externe Veranstaltungen, Gastvorträge, Feiern und Sponsionen ein Grund für unangenehme Verschiebungen und Raumzuteilungen. Jene irregulären Veranstaltungen sind aber ein wichtiger Teil des Fachhochschulbetriebs und so wird sich vermutlich keine angenehmere Lösung finden lassen, als solchen Veranstaltungen Vorrang zu geben.
+
+	\minisec{Semester (Jahrgang)}
+Ein Semester (von lat.: sex=sechs; mensis=Monat) ist ein Studienhalbjahr an einer Hochschule. Dabei sind die Semesterferien (=vorlesungsfreie Zeit) einbezogen.
+Für gewöhnlich sind ungerade Semester (1,3,5,...) im Wintersemester (von September bis Februar) und gerade Semester (2,4,6,...) im Sommersemester (von März bis August) 
+
+	\minisec{Spezialgruppen}
+...siehe Module
+
+	\minisec{Studiengang}
+Ein Studiengang ist ein, hinsichtlich eines Studienabschlusses eines wissenschaftlichen Studienfaches, angebotener Lerninhalt an einer Hochschule. 
+
+Das Curriculum eines Studienganges wird durch die Studienordnung, die Prüfungsleistungen und den Abschluss durch die Prüfungsordnung definiert. 
+
+Ein Studiengang schließt mit einem akademischen Grad zum Beispiel Diplom, Bachelor oder Master ab.
+
+	\minisec{Studiensemester}
+Das Studiensemester ist eine eindeutige Zuordnung zu einem Semester und einem Kalenderjahr.
+Demnach ist ''WS2007'' das Wintersemester im Jahr 2007.
+
+	\minisec{Stundenblockung}
+Die Stundenblockung gibt an, wie viele Einheiten am Stück (also direkt hintereinander) verplant werden sollen. Da (bei Einheiten zu 45 Minuten) eine Einzelstunde oft unzureichend ist, wird die Stundenblockung in den meisten Fällen zumindest ''2'' betragen.
+
+	\minisec{Stundenplan}
+...siehe Lehrveranstaltungsplan
+
+	\minisec{UNR...Unterrichtsnummer}
+Die Unterrichtnummer ist eine fortlaufende Zahl, die vom System automatisch generiert wird und hauptsächlich für Abläufe im Hintergrund relevant ist. Normalerweise wird die UNR gleichgesetzt mit der Lehreinheit\_ID. 
+Wichtig zu wissen ist, dass die Kollisionsüberprüfung des LV-Plans anhand der UNR erfolgt. Lehreinheiten mit der gleichen UNR können also parallel verplant werden, ohne dass eine Fehlermeldung erfolgt.
+
+	\minisec{Unterrichtseinheit}
+Ein Tag kann in beliebig viele Unterrichtseinheiten mit einer Beginn- und Endzeit aufgeteilt werden. Dabei dürfen sich allerdings die Beginnzeiten nicht überschneiden.
+Am Beispiel Technikum-Wien erfolgt die Unterteilung in 16 Einheiten zu je 45 Minuten, beginnend mit 08:00 Uhr.
+
+	\minisec{Wochenrhythmus}
+Wird eine Lehrveranstaltung in regelmäßigen Abständen über das Semester verteilt, kann beim Attribut ''Wochenrhythmus'' das Intervall angegeben werden.
+Ein Wochenrhythmus ''2'' bedeutet demnach, dass die LV alle 2 Wochen stattfinden soll.
+
+	\minisec{Zeitsperre}
+Die Zeitsperre ist eine Erweiterung des Features ''Zeitwunsch'', um detailliertere Informationen zur Verfügbarkeit eines Lektors zu bekommen.
+Der/DIe LektorIn erhält dadurch die Möglichkeit, unbegrenzt viele Termine punktuell zu sperren (Beispielsweise wegen Konferenzen, Auslandsaufenthalten, Urlaub oder Schulungen). Eine Zeitsperre wird im LV-Plan dunkelrot hervorgehoben und erzeugt beim verplanen eine Kollision. (siehe Kapitel \ref{Kapitel Kollisionen})
+
+	\minisec{Zeitwunsch}
+Jedem/Jeder LektorIn wird in seinem Profil die Möglichkeit gegeben, Zeitpräferenzen für seinen Unterricht anhand eines Normwochenrasters einzutragen. Der Lektor kann für jeden Tag und jede Unterrichtseinheit einer Woche Gewichtungen von -2 bis +2 geben um so seine Verfügbarkeit anzugeben. Dieses Muster wird dann für alle Wochen eines Semesters übernommen.
+Die Zeitwünsche sollen nach dem Fairplay-Prinzip gewählt werden, so dass mindestens doppelt so viele positiv bewertete Einheiten vorhanden sind, wie laut Lehrauftrag zu unterrichten wären.
+
+\begin{tabular}{rll}
++2&...&hier möchte ich unterrichten\\
++1&...&hier kann ich unterrichten\\
+-1&...&hier nur in Notfällen\\
+-2&...&hier kann ich gar nicht unterrichten\\
+\end{tabular}
+
+Die Werte werden durch ein Farbsystem (von Rot bis Grün) im Hintergrund angezeigt. Die Standardeinstellung ist +1. 
+
+Die Praxis zeigt aber, dass Lektoren dieses Feature oft nicht in Anspruch nehmen oder derart in der Flexibilität eingeschränkt sind, dass eine reibungsfreie Planung nicht möglich ist. In Einzelfällen werden sogar weniger Einheiten positiv bewertet, als pro Woche zu unterrichten sind.
+Außerdem werden die Zeitwünsche selten auf den neuesten Stand gebracht, was wiederum zu nachträglichen Änderungen führt.
+Ein disziplinierter Gebrauch der Zeitwünsche ist also ein wesentlicher Stützpunkt für eine effektive Lehrveranstaltungsplanung.
+
+Im Programm TEMPUS\raisebox{1ex}{\tiny \copyright} wird der Zeitwunsch bei Auswahl eines Lektors oder beim setzen einer Lehreinheit durch die Hintergrundfarbe angedeutet.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.8\textwidth]{Tempus_Beispiel_Zeitwunsch}
+	\caption{Beispiel eines Zeitwunsches mit allen vier Werten und einer Zeitsperre (Dunkelrot) am Freitag}
+	\label{Zeitwunsch}
+\end{figure}

@@ -79,29 +79,17 @@
 								<xsl:text>die/der</xsl:text>
 							</xsl:otherwise>
 						</xsl:choose>
-<<<<<<< HEAD
 						<xsl:text> den Lehrgang zur Weiterbildung</xsl:text>
-=======
-						<xsl:text> den Lehrgang zur Weiterbildung nach §9 FHStG idgF</xsl:text>
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 					</fo:block>
 				</fo:block-container>
 
 				<fo:block-container position="absolute" top="138mm" left="16mm" height="10mm">
 					<fo:block text-align="center" line-height="20pt" font-family="arial" font-size="16pt">
-<<<<<<< HEAD
 						<xsl:value-of select="stg_bezeichnung" />
 					</fo:block>
 					<fo:block text-align="center" line-height="10pt" font-family="arial" font-size="10pt" padding-top="5pt">
 						<xsl:text>(Lehrgangsnummer 0050</xsl:text>
 						<xsl:value-of select="translate(studiengang_kz, '-','')" />
-=======
-						Social Media Management
-					</fo:block>
-					<fo:block text-align="center" line-height="10pt" font-family="arial" font-size="10pt" padding-top="5pt">
-						<xsl:text>(Lehrgangsnummer 0050005</xsl:text>
-						<!-- <xsl:value-of select="translate(studiengang_kz, '-','')" />-->
->>>>>>> fee287127566cd5d18c55b556d178b661711c694
 						<xsl:text>)</xsl:text>
 					</fo:block>
 				</fo:block-container>
